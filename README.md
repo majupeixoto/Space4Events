@@ -5,4 +5,4 @@ nossa ideia é uma plataforma de aluguel de espaços para eventos, uma aplicaç�
 </h4>
 <br>
 <h2 align="center"> Equipe </h2>
-Maria Júlia Peixoto; Rafaela Vidal; Thaís Helena; Luana Falcão; Gabriel Ken; Paulo Ricardo.
+<br><sub>Maria Júlia Peixoto</sub>(https://github.com/majupeixoto) | <br><sub>Rafaela Vidal</sub>(https://github.com/Rafabvidal) | <br><sub>Thaís Helena</sub>(https://github.com/aguiarth) | <br><sub>Luana Falcão</sub>(https://github.com/lua-mf) | <br><sub>Gabriel Ken</sub>(https://github.com/dekenner) | <br><sub>Paulo Ricardo</sub>(https://github.com/paulo-rago)
