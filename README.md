@@ -6,7 +6,6 @@
 
 Nossa plataforma é uma aplicação web com design adaptável que conecta proprietários de espaços disponíveis a organizadores de eventos. Desenvolvida em Python com o framework Django, a aplicação oferece diversas funcionalidades aos usuários, de modo que os organizadores podem buscar e reservar espaços de acordo com suas necessidades e os proprietários podem listar seus espaços disponíveis.
 
-
 ### Objetivo de Desenvolvimento Sustentável
 
 Este projeto contribui para o **Objetivo de Desenvolvimento Sustentável 11: Cidades e Comunidades Sustentáveis**, promovendo o uso eficiente dos recursos urbanos e fortalecendo a coesão social através do acesso a espaços para eventos.
