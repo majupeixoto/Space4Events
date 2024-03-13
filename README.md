@@ -15,8 +15,8 @@ Este projeto contribui para o **Objetivo de Desenvolvimento Sustentável 11: Cid
 
 - **Framework de Desenvolvimento** = O desenvolvimento é realizado com Django, mas deixamos de usar Generic Views e Django Forms para maior controle e customização.
 - **Organização** = uso do Jira para organização da equipe e aplicação de princípios de desenvolvimento de software.
-- **Banco de Dados**: Utilizamos SQLite/PostgreSQL para persistência de dados, garantindo segurança e escalabilidade conforme necessário.
-- **Hospedagem na Azure**: O produto final será hospedado na plataforma Azure, garantindo confiabilidade e escalabilidade.
+- **Banco de Dados** = Utilizamos SQLite/PostgreSQL para persistência de dados, garantindo segurança e escalabilidade conforme necessário.
+- **Hospedagem na Azure** = O produto final será hospedado na plataforma Azure, garantindo confiabilidade e escalabilidade.
 
 ## Como Contribuir
 
