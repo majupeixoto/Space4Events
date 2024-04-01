@@ -1,0 +1,17 @@
+# o que colocar no .gitignore do projeto fds (até o momento)
+
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+venv
+env
+db.sqlite3
+*.env
+
+__pycache__
+
+db.sqlite3
+db copy.sqlite3
