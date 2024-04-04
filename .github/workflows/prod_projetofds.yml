@@ -37,7 +37,7 @@ jobs:
           cd Projeto/
           zip release.zip ./* -r
           cd ..
-          mv SEUPROJETODJANGO/release.zip .
+          mv Projeto/release.zip .
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v3
