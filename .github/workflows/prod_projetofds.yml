@@ -51,7 +51,7 @@ jobs:
         with:
           name: python-app
           path: |
-            Projeto
+            release.zip
             !venv/
 
   deploy:
@@ -68,7 +68,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: python-app
-          path: .
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
