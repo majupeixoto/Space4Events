@@ -15,3 +15,11 @@ venv.bak/
 # Python #
 *.py[cod]
 *$py.class
+
+# VS Code
+.vscode/* 
+!.vscode/settings.json 
+!.vscode/tasks.json 
+!.vscode/launch.json 
+!.vscode/extensions.json 
+.history
