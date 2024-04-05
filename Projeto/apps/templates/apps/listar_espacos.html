@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Espaços Disponíveis</h1>
+<h1>Lista de Espaços</h1>
 <ul>
     {% for espaco in espacos %}
     <li><a href="{% url 'detalhes_espaco' espaco.id %}">{{ espaco.nome }}</a></li>
