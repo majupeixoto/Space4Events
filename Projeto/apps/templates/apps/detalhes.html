@@ -1,7 +1,55 @@
-<!-- Usar as linhas abaixo para puxar o template base.html nos templates adicionais --> 
+<!-- Usar as linhas abaixo para puxar o template base.html nos templates adicionais -->
 {% extends 'apps/base.html' %}
 {% load static %}
 
 {% block content %}
+<div class="container my-5"> <!-- Adicionando classe 'my-5' para adicionar padding vertical -->
+    <div class="row">
+        <!-- Carrossel de Imagens -->
+        <div class="col-md-6">
+            <div id="carouselExampleIndicators" class="carousel slide">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="..." class="d-block w-100" alt="Imagem 1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="..." class="d-block w-100" alt="Imagem 2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="..." class="d-block w-100" alt="Imagem 3">
+                    </div>
+                </div>
+                <!-- Botões de Rolagem das Imagens -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Detalhes do Espaço -->
+        <div class="col-md-6">
+            <h2>{{ espaco.nome }}</h2>
+            <p>{{ espaco.descricao }}</p>
+            <br>
+            <p>R$ {{ espaco.preco_por_noite }}</p>
+
+            <h3></h3>
+            <!-- Botões para Reservar e Favoritar -->
+            <button class="btn btn-primary">Reservar</button>
+            <button class="btn btn-secondary">Favoritar</button>
+            <p>Dono: {{ espaco.dono }}</p>
+        </div>
+    </div>
+</div>
 
 {% endblock content %}
