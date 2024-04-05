@@ -5,15 +5,14 @@
 <h1>Reservar Espaço: {{ espaco.nome }}</h1>
 <form method="post">
     {% csrf_token %}
-    <input type="hidden" id="espaco_id" name="espaco_id" value="{{ espaco.id }}">
     <label for="hospede_nome">Nome do Hóspede:</label><br>
-    <input type="text" id="hospede_nome" name="hospede_nome" required><br>
+    <input type="text" id="hospede_nome" name="hospede_nome"><br>
     <label for="data_check_in">Data de Check-in:</label><br>
-    <input type="date" id="data_check_in" name="data_check_in" required><br>
+    <input type="date" id="data_check_in" name="data_check_in"><br>
     <label for="data_check_out">Data de Check-out:</label><br>
-    <input type="date" id="data_check_out" name="data_check_out" required><br>
+    <input type="date" id="data_check_out" name="data_check_out"><br>
     <label for="numero_de_hospedes">Número de Hóspedes:</label><br>
-    <input type="number" id="numero_de_hospedes" name="numero_de_hospedes" min="1" required><br><br>
+    <input type="number" id="numero_de_hospedes" name="numero_de_hospedes"><br><br>
     <input type="submit" value="Reservar">
 </form>
 {% endblock %}

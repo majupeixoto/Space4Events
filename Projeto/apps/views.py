@@ -13,49 +13,18 @@ def listar_espacos(request):
     espacos = Espaco.objects.all()
     return render(request, 'apps/listar_espacos.html', {'espacos': espacos})
 
-def cadastrar_espaco(request):
-    if request.method == 'POST':
-        proprietario_nome = request.POST['proprietario_nome']
-        nome = request.POST['nome']
-        descricao = request.POST['descricao']
-        preco_por_noite = request.POST['preco_por_noite']
-        endereco = request.POST['endereco']
-        cidade = request.POST['cidade']
-        estado = request.POST['estado']
-        pais = request.POST['pais']
-        numero_de_quartos = request.POST['numero_de_quartos']
-        numero_de_banheiros = request.POST['numero_de_banheiros']
-        numero_de_hospedes = request.POST['numero_de_hospedes']
-        foto_principal = request.FILES.get('foto_principal', None)
-
-        novo_espaco = Espaco(
-            proprietario_nome=proprietario_nome,
-            nome=nome,
-            descricao=descricao,
-            preco_por_noite=preco_por_noite,
-            endereco=endereco,
-            cidade=cidade,
-            estado=estado,
-            pais=pais,
-            numero_de_quartos=numero_de_quartos,
-            numero_de_banheiros=numero_de_banheiros,
-            numero_de_hospedes=numero_de_hospedes,
-            foto_principal=foto_principal
-        )
-        novo_espaco.save()
-
-        return redirect('detalhes_espaco', espaco_id=novo_espaco.id)
-    else:
-        return render(request, 'apps/cadastrar_espaco.html')
-
-def reservar_espaco(request, espaco_id):
-    espaco = get_object_or_404(Espaco, id=espaco_id)
-
+def criar_reserva(request, espaco_id):
     if request.method == 'POST':
         hospede_nome = request.POST.get('hospede_nome')
         data_check_in = request.POST.get('data_check_in')
         data_check_out = request.POST.get('data_check_out')
         numero_de_hospedes = int(request.POST.get('numero_de_hospedes'))
+
+        # Verificação - espaço existe?
+        try:
+            espaco = Espaco.objects.get(id=espaco_id)
+        except Espaco.DoesNotExist:
+            return HttpResponse("Espaço não encontrado")
 
         # Verificação - espaço comporta o número de pessoas?
         if espaco.numero_de_hospedes < numero_de_hospedes:
@@ -72,13 +41,13 @@ def reservar_espaco(request, espaco_id):
             return HttpResponse("Espaço já reservado para as datas solicitadas!")
 
         # Criar a reserva
-        reserva = Reserva( espaco_proprietario_nome=espaco.proprietario_nome, espaco_nome=espaco.nome, hospede_nome=hospede_nome, data_check_in=data_check_in, data_check_out=data_check_out, numero_de_hospedes=numero_de_hospedes )
+        reserva = Reserva(espaco_proprietario_nome=espaco.proprietario_nome, espaco_nome=espaco.nome, hospede_nome=hospede_nome, data_check_in=data_check_in, data_check_out=data_check_out, numero_de_hospedes=numero_de_hospedes)
         reserva.save()
         
         return redirect('detalhes_espaco', espaco_id=espaco_id)
     else:
         espaco = Espaco.objects.get(id=espaco_id)
-        return render(request, 'apps/reservar_espaco.html', {'espaco': espaco})
+        return render(request, 'reservar_espaco.html', {'espaco': espaco})
 
 def visualizar_reservas(request):
     reservas = Reserva.objects.all()
