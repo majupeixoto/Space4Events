@@ -64,6 +64,41 @@ def meus_espacos(request):
     # espacos = Espaco.objects.filter(proprietario_nome=request.user.username)
     return render(request, 'apps/meus_espacos.html', {'espacos': espacos})
 
+def cadastrar_espaco(request):
+    if request.method == 'POST':
+        proprietario_nome = request.POST['proprietario_nome']
+        nome = request.POST['nome']
+        descricao = request.POST['descricao']
+        preco_por_noite = request.POST['preco_por_noite']
+        endereco = request.POST['endereco']
+        cidade = request.POST['cidade']
+        estado = request.POST['estado']
+        pais = request.POST['pais']
+        numero_de_quartos = request.POST['numero_de_quartos']
+        numero_de_banheiros = request.POST['numero_de_banheiros']
+        numero_de_hospedes = request.POST['numero_de_hospedes']
+        foto_principal = request.FILES.get('foto_principal', None)
+
+        novo_espaco = Espaco(
+            proprietario_nome=proprietario_nome,
+            nome=nome,
+            descricao=descricao,
+            preco_por_noite=preco_por_noite,
+            endereco=endereco,
+            cidade=cidade,
+            estado=estado,
+            pais=pais,
+            numero_de_quartos=numero_de_quartos,
+            numero_de_banheiros=numero_de_banheiros,
+            numero_de_hospedes=numero_de_hospedes,
+            foto_principal=foto_principal
+        )
+        novo_espaco.save()
+
+        return redirect('detalhes_espaco', espaco_id=novo_espaco.id)
+    else:
+        return render(request, 'apps/cadastrar_espaco.html')
+
 def favoritos(request):
     # Supondo que já há uma maneira de obter os favoritos do usuário atual
     # Substituir pelo método adequado para obter os favoritos do usuário autenticado
