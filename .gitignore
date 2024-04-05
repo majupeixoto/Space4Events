@@ -17,6 +17,7 @@ venv.bak/
 *$py.class
 
 # VS Code
+.vscode/
 .vscode/* 
 !.vscode/settings.json 
 !.vscode/tasks.json 
