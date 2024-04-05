@@ -7,3 +7,6 @@ def home(request):
 def detalhes(request):
     return render(request, 'apps/detalhes.html')
 
+# def nome_da_historia(request):
+    # return render(request, 'apps/nome_da_historia.html')
+
