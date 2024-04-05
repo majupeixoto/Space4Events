@@ -89,7 +89,8 @@ def selecionar_espaco_para_reserva(request):
     return render(request, 'selecionar_espaco_para_reserva.html', {'espacos': espacos})
 
 def meus_espacos(request):
-    # Supondo que já exista uma maneira de obter os espaços de um proprietário específico
+    # SUPONDO proprietário específico
+    espacos = Espaco.objects.filter(proprietario_nome='João da Silva')
     # Substituir pelo método adequado para obter os espaços do proprietário atualmente autenticado
     espacos = Espaco.objects.filter(proprietario_nome=request.user.username)
     return render(request, 'apps/meus_espacos.html', {'espacos': espacos})
