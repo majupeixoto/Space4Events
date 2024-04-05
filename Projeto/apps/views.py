@@ -49,6 +49,10 @@ def visualizar_reservas(request):
     reservas = Reserva.objects.all()
     return render(request, 'apps/visualizar_reservas.html', {'reservas': reservas})
 
+def selecionar_espaco_para_reserva(request):
+    espacos = Espaco.objects.all()
+    return render(request, 'selecionar_espaco_para_reserva.html', {'espacos': espacos})
+
 # def nome_da_historia(request):
     # return render(request, 'apps/nome_da_historia.html')
 
