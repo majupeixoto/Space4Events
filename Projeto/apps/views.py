@@ -46,9 +46,7 @@ def cadastrar_espaco(request):
 
         return redirect('detalhes_espaco', espaco_id=novo_espaco.id)
     else:
-        return render(request, 'cadastrar_espaco.html')
-
-
+        return render(request, 'apps/cadastrar_espaco.html')
 
 def reservar_espaco(request, espaco_id):
     espaco = get_object_or_404(Espaco, id=espaco_id)
