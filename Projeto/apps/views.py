@@ -47,7 +47,7 @@ def criar_reserva(request, espaco_id):
         return redirect('detalhes_espaco', espaco_id=espaco_id)
     else:
         espaco = Espaco.objects.get(id=espaco_id)
-        return render(request, 'reservar_espaco.html', {'espaco': espaco})
+        return render(request, 'apps/reservar_espaco.html', {'espaco': espaco})
 
 def visualizar_reservas(request):
     reservas = Reserva.objects.all()

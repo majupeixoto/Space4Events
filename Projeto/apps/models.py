@@ -17,6 +17,10 @@ class Espaco(models.Model):
     numero_de_hospedes = models.PositiveIntegerField(default=1)
     foto_principal = models.ImageField(upload_to='fotos/', null=True, blank=True)
 
+    @classmethod
+    def meus_espacos(cls, proprietario_nome):
+        return cls.objects.filter(proprietario_nome=proprietario_nome)
+
     def __str__(self):
         return self.nome
 
