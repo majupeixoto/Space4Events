@@ -103,7 +103,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 's4e.wsgi.application'
+WSGI_APPLICATION = 's4e.wsgi.application'# oi
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
