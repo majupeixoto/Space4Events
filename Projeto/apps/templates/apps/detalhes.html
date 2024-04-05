@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 <!-- Usar as linhas abaixo para puxar o template base.html nos templates adicionais -->
+=======
+>>>>>>> 44b4e306dfff326cc02ae66bbe3a6c3370e271c2
 {% extends 'apps/base.html' %}
 {% load static %}
 
 {% block content %}
+<<<<<<< HEAD
 <div class="container my-5"> <!-- Adicionando classe 'my-5' para adicionar padding vertical -->
     <div class="row">
         <!-- Carrossel de Imagens -->
@@ -51,5 +55,31 @@
         </div>
     </div>
 </div>
+=======
+<div class="container">
+    <h1>Detalhes do Espaço: {{ espaco.nome }}</h1>
+    <p><strong>Proprietário:</strong> {{ espaco.proprietario_nome }}</p>
+    <p><strong>Descrição:</strong> {{ espaco.descricao }}</p>
+    <p><strong>Preço por Noite:</strong> R$ {{ espaco.preco_por_noite }}</p>
+    <p><strong>Endereço:</strong> {{ espaco.endereco }}, {{ espaco.cidade }}, {{ espaco.estado }}, {{ espaco.pais }}</p>
+    <p><strong>Número de Quartos:</strong> {{ espaco.numero_de_quartos }}</p>
+    <p><strong>Número de Banheiros:</strong> {{ espaco.numero_de_banheiros }}</p>
+    <p><strong>Número de Hóspedes:</strong> {{ espaco.numero_de_hospedes }}</p>
+    <!-- Adicione mais campos conforme necessário -->
+>>>>>>> 44b4e306dfff326cc02ae66bbe3a6c3370e271c2
 
-{% endblock content %}
+    <!-- Formulário para fazer reserva deste espaço -->
+    <form method="post" action="{% url 'reservar_espaco' espaco_id=espaco.id %}">
+        {% csrf_token %}
+        <label for="hospede_nome">Nome do Hóspede:</label><br>
+        <input type="text" id="hospede_nome" name="hospede_nome"><br>
+        <label for="data_check_in">Data de Check-in:</label><br>
+        <input type="date" id="data_check_in" name="data_check_in"><br>
+        <label for="data_check_out">Data de Check-out:</label><br>
+        <input type="date" id="data_check_out" name="data_check_out"><br>
+        <label for="numero_de_hospedes">Número de Hóspedes:</label><br>
+        <input type="number" id="numero_de_hospedes" name="numero_de_hospedes"><br><br>
+        <input type="submit" value="Reservar">
+    </form>
+</div>
+{% endblock %}
