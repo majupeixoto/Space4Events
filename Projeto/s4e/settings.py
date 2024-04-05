@@ -70,8 +70,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'whitenoise.runserver_nostatic',
     'Box',
-    'whitenoise.runserver_nostatic'
 ]
 
 MIDDLEWARE = [
