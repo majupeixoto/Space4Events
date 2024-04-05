@@ -18,6 +18,7 @@
                 <th>Quartos</th>
                 <th>Banheiros</th>
                 <th>Hóspedes</th>
+                <th>Foto Principal</th>
             </tr>
         </thead>
         <tbody>
@@ -34,6 +35,13 @@
                 <td>{{ espaco.numero_de_quartos }}</td>
                 <td>{{ espaco.numero_de_banheiros }}</td>
                 <td>{{ espaco.numero_de_hospedes }}</td>
+                <td>
+                    {% if espaco.foto_principal %}
+                        <img src="{{ espaco.foto_principal.url }}" alt="Foto Principal">
+                    {% else %}
+                        Sem foto disponível
+                    {% endif %}
+                </td>
             </tr>
             {% endfor %}
         </tbody>
