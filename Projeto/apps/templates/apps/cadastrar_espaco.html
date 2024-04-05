@@ -1,0 +1,37 @@
+{% extends "apps/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h1>Cadastrar Espaço</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="proprietario_nome">Nome do Proprietário:</label><br>
+        <input type="text" id="proprietario_nome" name="proprietario_nome"><br>
+        <label for="nome">Nome do Espaço:</label><br>
+        <input type="text" id="nome" name="nome"><br>
+        <label for="descricao">Descrição:</label><br>
+        <textarea id="descricao" name="descricao" rows="4" cols="50"></textarea><br>
+        <label for="preco_por_noite">Preço por Noite:</label><br>
+        <input type="number" id="preco_por_noite" name="preco_por_noite"><br>
+        <label for="endereco">Endereço:</label><br>
+        <input type="text" id="endereco" name="endereco"><br>
+        <label for="cidade">Cidade:</label><br>
+        <input type="text" id="cidade" name="cidade"><br>
+        <label for="estado">Estado:</label><br>
+        <input type="text" id="estado" name="estado"><br>
+        <label for="pais">País:</label><br>
+        <input type="text" id="pais" name="pais"><br>
+        <label for="numero_de_quartos">Número de Quartos:</label><br>
+        <input type="number" id="numero_de_quartos" name="numero_de_quartos"><br>
+        <label for="numero_de_banheiros">Número de Banheiros:</label><br>
+        <input type="number" id="numero_de_banheiros" name="numero_de_banheiros"><br>
+        <label for="numero_de_hospedes">Número de Hóspedes:</label><br>
+        <input type="number" id="numero_de_hospedes" name="numero_de_hospedes"><br>
+        <label for="foto_principal">Foto Principal:</label><br>
+        <input type="file" id="foto_principal" name="foto_principal"><br>
+        <br>
+        <input type="submit" value="Cadastrar">
+    </form>
+</div>
+{% endblock %}
