@@ -19,6 +19,10 @@ class Espaco(models.Model):
 
     def __str__(self):
         return self.nome
+    
+    @classmethod
+    def meus_espacos(cls, proprietario_nome):
+        return cls.objects.filter(proprietario_nome=proprietario_nome)
 
 class Favorito(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)  # Relacionamento com o modelo de usuário (autenticação)
