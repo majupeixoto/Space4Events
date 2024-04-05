@@ -8,6 +8,7 @@ venv
 venv/
 .venv
 venv.bak/
+staticfiles
 
 # Backup files #
 *.bak
