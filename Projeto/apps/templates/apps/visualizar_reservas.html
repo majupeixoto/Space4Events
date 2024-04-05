@@ -1,4 +1,3 @@
-<!-- Usar as linhas abaixo para puxar o template base.html nos templates adicionais --> 
 {% extends "apps/base.html" %}
 {% load static %}
 
@@ -14,6 +13,7 @@
                 <th>Data de Check-in</th>
                 <th>Data de Check-out</th>
                 <th>Número de Hospedes</th>
+                <th>Foto Principal</th>
             </tr>
         </thead>
         <tbody>
@@ -25,6 +25,13 @@
                 <td>{{ reserva.data_check_in }}</td>
                 <td>{{ reserva.data_check_out }}</td>
                 <td>{{ reserva.numero_de_hospedes }}</td>
+                <td>
+                    {% if reserva.espaco_foto_principal %}
+                        <img src="{{ reserva.espaco_foto_principal.url }}" alt="Foto Principal">
+                    {% else %}
+                        Sem foto disponível
+                    {% endif %}
+                </td>
             </tr>
             {% endfor %}
         </tbody>
