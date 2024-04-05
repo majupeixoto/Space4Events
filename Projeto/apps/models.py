@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -14,11 +15,17 @@ class Espaco(models.Model):
     numero_de_quartos = models.PositiveIntegerField(default=1)
     numero_de_banheiros = models.PositiveIntegerField(default=1)
     numero_de_hospedes = models.PositiveIntegerField(default=1)
-    # foto_principal = models.ImageField(upload_to='fotos/', null=True, blank=True)
+    foto_principal = models.ImageField(upload_to='fotos/', null=True, blank=True)
 
     def __str__(self):
         return self.nome
 
+class Favorito(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)  # Relacionamento com o modelo de usuário (autenticação)
+    espaco = models.ForeignKey(Espaco, on_delete=models.CASCADE)  # Relacionamento com o modelo Espaco
+
+    def __str__(self):
+        return f'{self.usuario.username} - {self.espaco.nome}'  # Representação em string do favorito
 class Reserva(models.Model):
     espaco_proprietario_nome = models.CharField(max_length=100)
     espaco_nome = models.CharField(max_length=100, default='Nome do Espaço Padrão')
