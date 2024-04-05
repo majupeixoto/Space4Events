@@ -13,6 +13,43 @@ def listar_espacos(request):
     espacos = Espaco.objects.all()
     return render(request, 'apps/listar_espacos.html', {'espacos': espacos})
 
+def cadastrar_espaco(request):
+    if request.method == 'POST':
+        proprietario_nome = request.POST['proprietario_nome']
+        nome = request.POST['nome']
+        descricao = request.POST['descricao']
+        preco_por_noite = request.POST['preco_por_noite']
+        endereco = request.POST['endereco']
+        cidade = request.POST['cidade']
+        estado = request.POST['estado']
+        pais = request.POST['pais']
+        numero_de_quartos = request.POST['numero_de_quartos']
+        numero_de_banheiros = request.POST['numero_de_banheiros']
+        numero_de_hospedes = request.POST['numero_de_hospedes']
+        foto_principal = request.FILES.get('foto_principal', None)
+
+        novo_espaco = Espaco(
+            proprietario_nome=proprietario_nome,
+            nome=nome,
+            descricao=descricao,
+            preco_por_noite=preco_por_noite,
+            endereco=endereco,
+            cidade=cidade,
+            estado=estado,
+            pais=pais,
+            numero_de_quartos=numero_de_quartos,
+            numero_de_banheiros=numero_de_banheiros,
+            numero_de_hospedes=numero_de_hospedes,
+            foto_principal=foto_principal
+        )
+        novo_espaco.save()
+
+        return redirect('detalhes_espaco', espaco_id=novo_espaco.id)
+    else:
+        return render(request, 'cadastrar_espaco.html')
+
+
+
 def reservar_espaco(request, espaco_id):
     espaco = get_object_or_404(Espaco, id=espaco_id)
 
@@ -52,6 +89,18 @@ def visualizar_reservas(request):
 def selecionar_espaco_para_reserva(request):
     espacos = Espaco.objects.all()
     return render(request, 'selecionar_espaco_para_reserva.html', {'espacos': espacos})
+
+def meus_espacos(request):
+    # Supondo que já exista uma maneira de obter os espaços de um proprietário específico
+    # Substituir pelo método adequado para obter os espaços do proprietário atualmente autenticado
+    espacos = Espaco.objects.filter(proprietario_nome=request.user.username)
+    return render(request, 'meus_espacos.html', {'espacos': espacos})
+
+def favoritos(request):
+    # Supondo que já há uma maneira de obter os favoritos do usuário atual
+    # Substituir pelo método adequado para obter os favoritos do usuário autenticado
+    favoritos = Favorito.objects.filter(usuario=request.user)
+    return render(request, 'favoritos.html', {'favoritos': favoritos})
 
 # def nome_da_historia(request):
     # return render(request, 'apps/nome_da_historia.html')

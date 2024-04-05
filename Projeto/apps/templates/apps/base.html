@@ -24,10 +24,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="#">Cadastrar Espaço</a>
-                    <a class="nav-link" href="#">Favoritos</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'cadastrar_espaco' %}">Cadastrar Espaço</a>
+                    <a class="nav-link" href="{% url 'favoritos' %}">Favoritos</a>
                     <a class="nav-link" href="{% url 'visualizar_reservas' %}">Minhas Reservas</a>
-                    <a class="nav-link" href="#">Meus Espaços</a>
+                    <a class="nav-link" href="{% url 'meus_espacos' %}">Meus Espaços</a>
                     <a class="nav-link" href="{% url 'listar_espacos' %}">Lista de Espaços</a>
                     {% comment %} <a class="nav-link" href="{% url 'selecionar_espaco_para_reserva' %}">Fazer uma reserva</a> {% endcomment %}
                 </div>

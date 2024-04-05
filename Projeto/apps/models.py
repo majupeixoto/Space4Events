@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -18,6 +19,13 @@ class Espaco(models.Model):
 
     def __str__(self):
         return self.nome
+
+class Favorito(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)  # Relacionamento com o modelo de usuário (autenticação)
+    espaco = models.ForeignKey(Espaco, on_delete=models.CASCADE)  # Relacionamento com o modelo Espaco
+
+    def __str__(self):
+        return f'{self.usuario.username} - {self.espaco.nome}'  # Representação em string do favorito
 
 class Reserva(models.Model):
     espaco_proprietario_nome = models.CharField(max_length=100)
