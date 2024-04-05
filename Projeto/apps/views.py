@@ -11,7 +11,7 @@ def detalhes(request):
 
 def listar_espacos(request):
     espacos = Espaco.objects.all()
-    return render(request, 'listar_espacos.html', {'espacos': espacos})
+    return render(request, 'apps/listar_espacos.html', {'espacos': espacos})
 
 def criar_reserva(request, espaco_id):
     if request.method == 'POST':
