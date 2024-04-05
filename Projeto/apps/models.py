@@ -29,3 +29,13 @@ class Reserva(models.Model):
 
     def __str__(self):
         return f"Reserva de {self.espaco_nome} por {self.hospede_nome}"
+
+
+class Espaco(models.Model): #talvez seja descartado
+    imagem = ...
+    nome = models.CharField(max_length=255)
+
+class Detalhes(models.Model):
+    espaco = models.ForeignKey(Espaco, on_delete=models.CASCADE)
+    descricao = models.CharField(max_length=300)
+    sinal_reserva = models.DecimalField(max_digits=6, decimal_places=2)
