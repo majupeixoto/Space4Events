@@ -1,6 +1,33 @@
 <!-- Usar as linhas abaixo para puxar o template base.html nos templates adicionais --> 
-{% extends 'apps/base.html' %}
+{% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-
-{% endblock content %}
+<div class="container">
+    <h1>Minhas Reservas</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome do Espaço</th>
+                <th>Proprietário</th>
+                <th>Data de Check-in</th>
+                <th>Data de Check-out</th>
+                <th>Número de Hospedes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reserva in reservas %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ reserva.espaco_nome }}</td>
+                <td>{{ reserva.espaco_proprietario_nome }}</td>
+                <td>{{ reserva.data_check_in }}</td>
+                <td>{{ reserva.data_check_out }}</td>
+                <td>{{ reserva.numero_de_hospedes }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
