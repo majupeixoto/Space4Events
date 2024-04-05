@@ -92,7 +92,7 @@ def meus_espacos(request):
     # Supondo que já exista uma maneira de obter os espaços de um proprietário específico
     # Substituir pelo método adequado para obter os espaços do proprietário atualmente autenticado
     espacos = Espaco.objects.filter(proprietario_nome=request.user.username)
-    return render(request, 'meus_espacos.html', {'espacos': espacos})
+    return render(request, 'apps/meus_espacos.html', {'espacos': espacos})
 
 def favoritos(request):
     # Supondo que já há uma maneira de obter os favoritos do usuário atual
