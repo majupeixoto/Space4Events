@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h1>Criar Reserva</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            {{ form.espaco_nome.label_tag }}
+            {{ form.espaco_nome }}
+        </div>
+        <div class="mb-3">
+            {{ form.hospede_nome.label_tag }}
+            {{ form.hospede_nome }}
+        </div>
+        <div class="mb-3">
+            {{ form.data_check_in.label_tag }}
+            {{ form.data_check_in }}
+        </div>
+        <div class="mb-3">
+            {{ form.data_check_out.label_tag }}
+            {{ form.data_check_out }}
+        </div>
+        <div class="mb-3">
+            {{ form.numero_de_hospedes.label_tag }}
+            {{ form.numero_de_hospedes }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enviar Reserva</button>
+    </form>
+</div>
+{% endblock %}
