@@ -24,6 +24,7 @@ def cadastro(request):
         
     return render(request, 'apps/cadastro.html')
 
+@login_required
 def cadastrar_espaco(request):
     if request.method == 'POST':
         proprietario_nome = request.POST['proprietario_nome']
