@@ -40,13 +40,12 @@ class Espaco(models.Model):
 
     def __str__(self):
         return self.nome
-
 class Favorito(models.Model):
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)  # Relacionamento com o modelo de usuário (autenticação)
-    espaco = models.ForeignKey(Espaco, on_delete=models.CASCADE)  # Relacionamento com o modelo Espaco
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    espaco = models.ForeignKey(Espaco, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.usuario.username} - {self.espaco.nome}'  # Representação em string do favorito
+        return f'{self.usuario.username} - {self.espaco.nome}'
 class Reserva(models.Model):
     espaco_proprietario_nome = models.CharField(max_length=100)
     espaco_nome = models.CharField(max_length=100, default='Nome do Espaço Padrão')
