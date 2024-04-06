@@ -139,14 +139,14 @@ def meus_espacos(request):
     espacos = Espaco.objects.filter(proprietario_nome=request.user.username)
     return render(request, 'apps/meus_espacos.html', {'espacos': espacos})
 
-def selecionar_espaco_para_reserva(request):
-    espacos = Espaco.objects.all()
-    return render(request, 'selecionar_espaco_para_reserva.html', {'espacos': espacos})
-
 @login_required
 def minhas_reservas(request):
     reservas = Reserva.objects.filter(proprietario_nome=request.user.username)
     return render(request, 'apps/minhas_reservas.html', {'reservas': reservas})
+
+def selecionar_espaco_para_reserva(request):
+    espacos = Espaco.objects.all()
+    return render(request, 'selecionar_espaco_para_reserva.html', {'espacos': espacos})
 
 # def nome_da_historia(request):
     # return render(request, 'apps/nome_da_historia.html')
