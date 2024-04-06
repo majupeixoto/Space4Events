@@ -3,6 +3,24 @@ from .models import *
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 
+def cadastro(request):
+    if request.method == 'POST':
+        tipo_cadastro = request.POST.get('tipo_cadastro')
+        nome = request.POST.get('nome')
+        email = request.POST.get('email')
+        telefone = request.POST.get('telefone')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        usuario = Usuario.objects.create(nome=nome, email=email, telefone=telefone, username=username)
+        usuario.set_password(password)
+        usuario.save()
+
+        return redirect('apps/login.html')
+        
+    else:
+        return render(request, 'apps/cadastro.html')
+
 def cadastrar_espaco(request):
     if request.method == 'POST':
         proprietario_nome = request.POST['proprietario_nome']
@@ -93,17 +111,16 @@ def listar_espacos(request):
     espacos = Espaco.objects.all()
     return render(request, 'apps/listar_espacos.html', {'espacos': espacos})
 
-def login_view(request):
+def login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(username=username, password=password)
         if user is not None:
-            login(request, user)
+            auth_login(request, user)
             return redirect('apps/home.html')
         else:
-            error_message = "Nome de usuário ou senha incorretos."
-            return render(request, 'apps/login.html', {'error_message': error_message})
+            return render(request, 'apps/login.html', {'error_message': 'Nome de usuário ou senha incorretos.'})
     else:
         return render(request, 'apps/login.html')
 
