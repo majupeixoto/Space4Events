@@ -16,10 +16,27 @@ class Espaco(models.Model):
     numero_de_banheiros = models.PositiveIntegerField(default=1)
     numero_de_hospedes = models.PositiveIntegerField(default=1)
     foto_principal = models.ImageField(upload_to='fotos/', null=True, blank=True)
+    sinal_reserva = models.DecimalField(max_digits=6, decimal_places=2, default=0)
 
     @classmethod
     def meus_espacos(cls, proprietario_nome):
         return cls.objects.filter(proprietario_nome=proprietario_nome)
+
+    def detalhes(self):
+        return {
+            'nome': self.nome,
+            'descricao': self.descricao,
+            'preco_por_noite': self.preco_por_noite,
+            'endereco': self.endereco,
+            'cidade': self.cidade,
+            'estado': self.estado,
+            'pais': self.pais,
+            'numero_de_quartos': self.numero_de_quartos,
+            'numero_de_banheiros': self.numero_de_banheiros,
+            'numero_de_hospedes': self.numero_de_hospedes,
+            'sinal_reserva': self.sinal_reserva,
+            'foto_principal': self.foto_principal.url if self.foto_principal else None
+        }
 
     def __str__(self):
         return self.nome
@@ -41,7 +58,3 @@ class Reserva(models.Model):
     def __str__(self):
         return f"Reserva de {self.espaco_nome} por {self.hospede_nome}"
 
-class Detalhes(models.Model):
-    espaco = models.ForeignKey(Espaco, on_delete=models.CASCADE)
-    descricao = models.CharField(max_length=300)
-    sinal_reserva = models.DecimalField(max_digits=6, decimal_places=2)
