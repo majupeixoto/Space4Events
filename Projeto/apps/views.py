@@ -102,9 +102,25 @@ def detalhes(request, espaco_id):
     return render(request, 'apps/detalhes.html', {'detalhes_do_espaco': detalhes_do_espaco})
 
 @login_required
-def favoritos(request):
-    favoritos = Favoritos.objects.filter(proprietario_nome=request.user.username)
-    return render(request, 'favoritos.html', {'favoritos': favoritos})
+def favoritar(request, espaco_id):
+    espaco = get_object_or_404(Espaco, id=espaco_id)
+    favorito, created = Favorito.objects.get_or_create(usuario=request.user, espaco=espaco)
+    if not created:
+        favorito.delete() # Remove o favorito se existir
+    return redirect('lista_favoritos')
+
+@login_required
+def desfavoritar(request, espaco_id):
+    espaco = get_object_or_404(Espaco, id=espaco_id)
+    favorito = Favorito.objects.filter(usuario=request.user, espaco=espaco).first()
+    if favorito:
+        favorito.delete()  # Remove o favorito se existir
+    return redirect('lista_favoritos')
+
+@login_required
+def lista_favoritos(request):
+    favoritos = Favorito.objects.filter(usuario=request.user)
+    return render(request, 'apps/favoritos.html', {'favoritos': favoritos})
 
 def home(request):
     espacos = Espaco.objects.all()
