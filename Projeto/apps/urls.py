@@ -11,5 +11,5 @@ urlpatterns = [
     path('listar_espacos/', views.listar_espacos, name='listar_espacos'),
     path('login/', views.login, name='login'),
     path('meus_espacos/', views.meus_espacos, name='meus_espacos'),
-    path('visualizar_reservas/', views.visualizar_reservas, name='visualizar_reservas'),
+    path('minhas_reservas/', views.minhas_reservas, name='minhas_reservas'),
 ]

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
 def cadastro(request):
@@ -99,10 +100,9 @@ def detalhes(request, espaco_id):
     detalhes_do_espaco = espaco.detalhes()
     return render(request, 'apps/detalhes.html', {'detalhes_do_espaco': detalhes_do_espaco})
 
+@login_required
 def favoritos(request):
-    # Supondo que já há uma maneira de obter os favoritos do usuário atual
-    # Substituir pelo método adequado para obter os favoritos do usuário autenticado
-    favoritos = Favorito.objects.filter(usuario=request.user)
+    favoritos = Favoritos.objects.filter(proprietario_nome=request.user.username)
     return render(request, 'favoritos.html', {'favoritos': favoritos})
 
 def home(request):
@@ -128,25 +128,24 @@ def login(request):
     return render(request, 'apps/login.html')
 
 def logout(request):
-    
+    logout(request)
     if "usuario" in request.session:
         del request.session["usuario"]
     return redirect(home)
 
+@login_required
 def meus_espacos(request):
-    # SUPONDO proprietário específico
-    espacos = Espaco.objects.filter(proprietario_nome='João da Silva')
-    # Substituir pelo método adequado para obter os espaços do proprietário atualmente autenticado
-    # espacos = Espaco.objects.filter(proprietario_nome=request.user.username)
+    espacos = Espaco.objects.filter(proprietario_nome=request.user.username)
     return render(request, 'apps/meus_espacos.html', {'espacos': espacos})
 
 def selecionar_espaco_para_reserva(request):
     espacos = Espaco.objects.all()
     return render(request, 'selecionar_espaco_para_reserva.html', {'espacos': espacos})
 
-def visualizar_reservas(request):
-    reservas = Reserva.objects.all()
-    return render(request, 'apps/visualizar_reservas.html', {'reservas': reservas})
+@login_required
+def minhas_reservas(request):
+    reservas = Reserva.objects.filter(proprietario_nome=request.user.username)
+    return render(request, 'apps/minhas_reservas.html', {'reservas': reservas})
 
 # def nome_da_historia(request):
     # return render(request, 'apps/nome_da_historia.html')
