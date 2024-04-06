@@ -4,7 +4,8 @@ from django.http import HttpResponse
 from datetime import datetime
 
 def home(request):
-    return render(request, 'apps/home.html')
+    espacos = Espaco.objects.all()
+    return render(request, 'apps/home.html', {'espacos': espacos})
 
 def detalhes(request):
     return render(request, 'apps/detalhes.html')
