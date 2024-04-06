@@ -4,6 +4,7 @@ from . import views
 # concentrar todos os views nesta pasta box, listar abaixo
 urlpatterns = [
     path('', views.home, name = 'home'),
+    path('cadastro/', views.cadastro, name="cadastro"),
     path('cadastrar_espaco/', views.cadastrar_espaco, name='cadastrar_espaco'),
     path('detalhes/<int:id>/', views.detalhes, name='detalhes'),
     path('favoritos/', views.favoritos, name='favoritos'),
