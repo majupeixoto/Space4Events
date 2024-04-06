@@ -1,3 +1,4 @@
+<!-- BASE.HTML -->
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-br" data-bs-theme="light">
@@ -31,12 +32,9 @@
                     <a class="nav-link" href="{% url 'listar_espacos' %}">Lista de Espaços</a>
                 </div>
             </div>
-        
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Nome de usuário" aria-label="Search">
-                <input class="form-control me-2" type="password" placeholder="Senha" aria-label="Password">
-                <button class="btn btn-outline-success" type="submit">Entrar</button>
-            </form>
+            
+            <!-- Adicionando o link para a página de login -->
+            <a class="nav-link" href="{% url 'login' %}">Login</a>
         </div>
     </nav>
 
