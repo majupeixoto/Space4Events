@@ -3,7 +3,7 @@ from .models import *
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AnonymousUser
 
 def cadastro(request):
     if request.method == 'POST':
@@ -24,7 +24,7 @@ def cadastro(request):
         
     return render(request, 'apps/cadastro.html')
 
-@login_required
+# @login_required
 def cadastrar_espaco(request):
     if request.method == 'POST':
         proprietario_nome = request.POST['proprietario_nome']
@@ -101,27 +101,47 @@ def detalhes(request, espaco_id):
     detalhes_do_espaco = espaco.detalhes()
     return render(request, 'apps/detalhes.html', {'detalhes_do_espaco': detalhes_do_espaco})
 
-@login_required
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import AnonymousUser
+
+# @login_required
 def favoritar(request, espaco_id):
     espaco = get_object_or_404(Espaco, id=espaco_id)
-    favorito, created = Favorito.objects.get_or_create(usuario=request.user, espaco=espaco)
-    if not created:
-        favorito.delete() # Remove o favorito se existir
-    return redirect('lista_favoritos')
+    
+    if request.user.is_authenticated:
+        favorito, created = Favorito.objects.get_or_create(usuario=request.user, espaco=espaco)
+        if not created:
+            favorito.delete() # Remove o favorito se existir
+        return redirect('lista_favoritos')
+    else:
+        # Temporário
+        return render(request, 'apps/favoritos.html')
 
-@login_required
+# @login_required
 def desfavoritar(request, espaco_id):
     espaco = get_object_or_404(Espaco, id=espaco_id)
-    favorito = Favorito.objects.filter(usuario=request.user, espaco=espaco).first()
-    if favorito:
-        favorito.delete()  # Remove o favorito se existir
-    return redirect('lista_favoritos')
+    
+    if request.user.is_authenticated:
+        favorito = Favorito.objects.filter(usuario=request.user, espaco=espaco).first()
+        if favorito:
+            favorito.delete()  # Remove o favorito se existir
+        return redirect('lista_favoritos')
+    else:
+        # Temporário
+        return render(request, 'apps/favoritos.html')
 
-@login_required
+# @login_required
 def lista_favoritos(request):
-    favoritos = Favorito.objects.filter(usuario=request.user)
+    if request.user.is_authenticated:
+        favoritos = Favorito.objects.filter(usuario=request.user)
+        return render(request, 'apps/favoritos.html', {'favoritos': favoritos})
+    else:
+        # Temporário
+        favoritos = None
     return render(request, 'apps/favoritos.html', {'favoritos': favoritos})
 
+# @login_required
 def home(request):
     espacos = Espaco.objects.all()
     return render(request, 'apps/home.html', {'espacos': espacos})
@@ -150,15 +170,27 @@ def logout(request):
         del request.session["usuario"]
     return redirect(home)
 
-@login_required
-def meus_espacos(request):
-    espacos = Espaco.objects.filter(proprietario_nome=request.user.username)
-    return render(request, 'apps/meus_espacos.html', {'espacos': espacos})
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import AnonymousUser
+from .models import Espaco, Reserva
 
-@login_required
+# @login_required
+def meus_espacos(request):
+    if request.user.is_authenticated:
+        espacos = Espaco.objects.filter(proprietario_nome=request.user.username)
+        return render(request, 'apps/meus_espacos.html', {'espacos': espacos})
+    else: # TEMPORÁRIO:
+        return render(request, 'apps/meus_espacos.html')
+
+# @login_required
 def minhas_reservas(request):
-    reservas = Reserva.objects.filter(proprietario_nome=request.user.username)
-    return render(request, 'apps/minhas_reservas.html', {'reservas': reservas})
+    if request.user.is_authenticated:
+        reservas = Reserva.objects.filter(proprietario_nome=request.user.username)
+        return render(request, 'apps/minhas_reservas.html', {'reservas': reservas})
+    else:
+        # TEMPORÁRIO: 
+        return render(request, 'apps/minhas_reservas.html')
+
 
 def selecionar_espaco_para_reserva(request):
     espacos = Espaco.objects.all()
