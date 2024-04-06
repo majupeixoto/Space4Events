@@ -70,8 +70,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Box',
-    'whitenoise.runserver_nostatic'
+    'whitenoise.runserver_nostatic',
+    'apps.apps.AppsConfig',
 ]
 
 MIDDLEWARE = [
@@ -87,10 +87,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 's4e.urls'
 
+LOGIN_URL = 'login'
+LOGOUT_REDIRECT_URL = 'home'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -8,6 +8,7 @@ venv
 venv/
 .venv
 venv.bak/
+staticfiles
 
 # Backup files #
 *.bak
@@ -15,3 +16,12 @@ venv.bak/
 # Python #
 *.py[cod]
 *$py.class
+
+# VS Code
+.vscode/
+.vscode/* 
+!.vscode/settings.json 
+!.vscode/tasks.json 
+!.vscode/launch.json 
+!.vscode/extensions.json 
+.history

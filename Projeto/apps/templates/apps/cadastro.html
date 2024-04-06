@@ -1,0 +1,74 @@
+{% extends 'apps/base.html' %}
+{% block content %}
+<div class="body">
+    <div class="container-fluid py-5 text-center">
+        <div class="center-wrapper">
+            <div class="wrapper">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <h1>Cadastro</h1>
+                
+                    <div class="input-box">
+                        <input 
+                            type="text" 
+                            placeholder="Usuário" 
+                            id="username"
+                            name="username"
+                            value="{{username}}"
+                            required>
+                        <i class='bx bx-user'></i>
+                    </div>
+                
+                    <div class="input-box">
+                        <input 
+                            type="text"
+                            placeholder="Nome"
+                            id="name"
+                            name="name"
+                            value="{{name}}"
+                            required>
+                        <i class='bx bx-edit-alt'></i>
+                    </div>
+                
+                    <div class="input-box">
+                        <input 
+                            type="email"
+                            placeholder="Email"
+                            id="email"
+                            name="email"
+                            value="{{email}}"
+                            required>
+                        <i class='bx bxs-envelope' ></i>
+                    </div>
+                
+                    <div class="input-box">
+                        <input 
+                            type="password"
+                            placeholder="Senha"
+                            id="password"
+                            name="password"
+                            value="{{password}}"
+                            required>
+                        <i class='bx bxs-lock-alt' ></i>
+                    </div>
+                
+                    {% if erro %}
+                        <p class="erro">{{ erro }}</p>
+                    {% endif %}
+                
+                    <button 
+                        type="submit" 
+                        class="btn"
+                        name="login"
+                        >Registrar</button>
+                
+                    <div class="register-link">
+                        <a href="{% url 'login' %}">Já possui uma conta? Faça login aqui.</a>
+                    </div>
+                
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

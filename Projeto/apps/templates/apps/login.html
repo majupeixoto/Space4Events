@@ -1,0 +1,27 @@
+{% extends "apps/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="center">
+    <form class="login" method="post">
+        {% csrf_token %}
+        <h2>{{ title }}</h2>
+
+        <div class="box-user">
+            <input type="text" name="username" required>
+            <label>Nome de usuário</label>
+        </div>
+
+        <div class="box-user">
+            <input type="password" name="password" required>
+            <label>Senha</label>
+        </div>
+
+        <div>
+            <p>Não tem cadastro? <a href="{% url 'cadastro' %}" class="forget">Crie sua conta</a>.</p>
+        </div>
+
+        <button type="submit" class="btn btn-light">Entrar</button>
+    </form>
+</div>
+{% endblock content %}

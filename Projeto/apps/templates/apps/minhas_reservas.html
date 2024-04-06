@@ -1,0 +1,40 @@
+{% extends "apps/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h1>Minhas Reservas</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome do Espaço</th>
+                <th>Proprietário</th>
+                <th>Data de Check-in</th>
+                <th>Data de Check-out</th>
+                <th>Número de Hospedes</th>
+                <th>Foto Principal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reserva in reservas %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ reserva.espaco_nome }}</td>
+                <td>{{ reserva.espaco_proprietario_nome }}</td>
+                <td>{{ reserva.data_check_in }}</td>
+                <td>{{ reserva.data_check_out }}</td>
+                <td>{{ reserva.numero_de_hospedes }}</td>
+                <td>
+                    {% if reserva.espaco_foto_principal %}
+                        <img src="{{ reserva.espaco_foto_principal.url }}" alt="Foto Principal">
+                    {% else %}
+                        Sem foto disponível
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "apps/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h1>Meus Favoritos</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome do Espaço</th>
+                <th>Proprietário</th>
+                <th>Preço por Noite</th>
+                <th>Número de Quartos</th>
+                <th>Número de Banheiros</th>
+                <th>Número de Hospedes</th>
+                <th>Foto Principal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for favorito in favoritos %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ favorito.espaco.nome }}</td>
+                <td>{{ favorito.espaco.proprietario_nome }}</td>
+                <td>{{ favorito.espaco.preco_por_noite }}</td>
+                <td>{{ favorito.espaco.numero_de_quartos }}</td>
+                <td>{{ favorito.espaco.numero_de_banheiros }}</td>
+                <td>{{ favorito.espaco.numero_de_hospedes }}</td>
+                <td>
+                    {% if favorito.espaco.foto_principal %}
+                        <img src="{{ favorito.espaco.foto_principal.url }}" alt="Foto Principal">
+                    {% else %}
+                        Sem foto disponível
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
