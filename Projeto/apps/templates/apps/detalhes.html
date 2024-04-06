@@ -1,33 +1,37 @@
 <!-- Usar as linhas abaixo para puxar o template base.html nos templates adicionais -->
-=======
->>>>>>> 44b4e306dfff326cc02ae66bbe3a6c3370e271c2
-{% extends 'apps/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
-{% block content %}
-<div class="container">
-    <h1>Detalhes do Espaço: {{ espaco.nome }}</h1>
-    <p><strong>Proprietário:</strong> {{ espaco.proprietario_nome }}</p>
-    <p><strong>Descrição:</strong> {{ espaco.descricao }}</p>
-    <p><strong>Preço por Noite:</strong> R$ {{ espaco.preco_por_noite }}</p>
-    <p><strong>Endereço:</strong> {{ espaco.endereco }}, {{ espaco.cidade }}, {{ espaco.estado }}, {{ espaco.pais }}</p>
-    <p><strong>Número de Quartos:</strong> {{ espaco.numero_de_quartos }}</p>
-    <p><strong>Número de Banheiros:</strong> {{ espaco.numero_de_banheiros }}</p>
-    <p><strong>Número de Hóspedes:</strong> {{ espaco.numero_de_hospedes }}</p>
-    <!-- Adicione mais campos conforme necessário -->
 
-    <!-- Formulário para fazer reserva deste espaço -->
-    <form method="post" action="{% url 'reservar_espaco' espaco_id=espaco.id %}">
-        {% csrf_token %}
-        <label for="hospede_nome">Nome do Hóspede:</label><br>
-        <input type="text" id="hospede_nome" name="hospede_nome"><br>
-        <label for="data_check_in">Data de Check-in:</label><br>
-        <input type="date" id="data_check_in" name="data_check_in"><br>
-        <label for="data_check_out">Data de Check-out:</label><br>
-        <input type="date" id="data_check_out" name="data_check_out"><br>
-        <label for="numero_de_hospedes">Número de Hóspedes:</label><br>
-        <input type="number" id="numero_de_hospedes" name="numero_de_hospedes"><br><br>
-        <input type="submit" value="Reservar">
-    </form>
+{% block content %}
+<div class="container mt-5">
+    <h2>{{ detalhes_do_espaco.nome }}</h2>
+
+    <img src="{{ detalhes_do_espaco.foto_principal }}" alt="{{ detalhes_do_espaco.nome }}" class="img-fluid mt-4 mb-4">
+
+    <h5>Descrição:</h5>
+    <p>{{ detalhes_do_espaco.descricao }}</p>
+
+    <h5>Preço por Noite:</h5>
+    <p>R$ {{ detalhes_do_espaco.preco_por_noite }}</p>
+
+    <h5>Endereço:</h5>
+    <p>{{ detalhes_do_espaco.endereco }}, {{ detalhes_do_espaco.cidade }}, {{ detalhes_do_espaco.estado }}, {{
+        detalhes_do_espaco.pais }}</p>
+
+    <h5>Número de Quartos:</h5>
+    <p>{{ detalhes_do_espaco.numero_de_quartos }}</p>
+
+    <h5>Número de Banheiros:</h5>
+    <p>{{ detalhes_do_espaco.numero_de_banheiros }}</p>
+
+    <h5>Número de Hóspedes:</h5>
+    <p>{{ detalhes_do_espaco.numero_de_hospedes }}</p>
+
+    <h5>Sinal de Reserva:</h5>
+    <p>R$ {{ detalhes_do_espaco.sinal_reserva }}</p>
+
+    <!-- Aqui você pode adicionar mais informações conforme necessário -->
+
 </div>
 {% endblock %}

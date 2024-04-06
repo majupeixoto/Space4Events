@@ -7,8 +7,10 @@ def home(request):
     espacos = Espaco.objects.all()
     return render(request, 'apps/home.html', {'espacos': espacos})
 
-def detalhes(request):
-    return render(request, 'apps/detalhes.html')
+def detalhes(request, espaco_id):
+    espaco = get_object_or_404(Espaco, id=espaco_id)
+    detalhes_do_espaco = espaco.detalhes()
+    return render(request, 'apps/detalhes.html', {'detalhes_do_espaco': detalhes_do_espaco})
 
 def listar_espacos(request):
     espacos = Espaco.objects.all()
