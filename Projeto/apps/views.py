@@ -1,25 +1,27 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.http import HttpResponse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 
 def cadastro(request):
     if request.method == 'POST':
-        tipo_cadastro = request.POST.get('tipo_cadastro')
-        nome = request.POST.get('nome')
-        email = request.POST.get('email')
-        telefone = request.POST.get('telefone')
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-
-        usuario = Usuario.objects.create(nome=nome, email=email, telefone=telefone, username=username)
-        usuario.set_password(password)
-        usuario.save()
-
-        return redirect('apps/login.html')
+        username = request.POST['username']
+        name = request.POST['name']
+        email = request.POST['email']
+        password = request.POST['password']
         
-    else:
-        return render(request, 'apps/cadastro.html')
+        if User.objects.filter(username=username).exists():
+            return render(request, 'apps/cadastro.html', {"erro": "Usuário já existe"})
+        elif User.objects.filter(email=email).exists():
+            return render(request, 'apps/cadastro.html', {"erro": "Email já cadastrado"})
+
+        user = User.objects.create_user(username=username, password=password, email=email, first_name=name)
+        login(request, user)
+        request.session["usuario"] = username
+        return redirect(home)
+        
+    return render(request, 'apps/cadastro.html')
 
 def cadastrar_espaco(request):
     if request.method == 'POST':
@@ -113,16 +115,23 @@ def listar_espacos(request):
 
 def login(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(username=username, password=password)
+        username = request.POST['username']
+        password = request.POST['password']
+        
+        user = authenticate(request, username=username, password=password)
         if user is not None:
-            auth_login(request, user)
-            return redirect('apps/home.html')
+            login(request, user)
+            request.session["usuario"] = username
+            return redirect(home)
         else:
-            return render(request, 'apps/login.html', {'error_message': 'Nome de usuário ou senha incorretos.'})
-    else:
-        return render(request, 'apps/login.html')
+            return render(request, 'apps/login.html', {"erro": "Usuário não encontrado"})
+    return render(request, 'apps/login.html')
+
+def logout(request):
+    
+    if "usuario" in request.session:
+        del request.session["usuario"]
+    return redirect(home)
 
 def meus_espacos(request):
     # SUPONDO proprietário específico
