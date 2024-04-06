@@ -1,15 +1,15 @@
-# Aluguel de Espaços para Eventos
+# Aluguel de Espaços
 
 *Projeto em construção*
 
 ## Descrição do Projeto
 
-Nossa plataforma é uma aplicação web com design adaptável que conecta proprietários de espaços disponíveis a organizadores de eventos. Desenvolvida em Python com o framework Django, a aplicação oferece diversas funcionalidades aos usuários, de modo que os organizadores podem buscar e reservar espaços de acordo com suas necessidades e os proprietários podem listar seus espaços disponíveis.
+Nossa plataforma é uma aplicação web com design adaptável que conecta proprietários de espaços disponíveis a hóspedes. Desenvolvida em Python com o framework Django, a aplicação oferece diversas funcionalidades aos usuários, de modo que os organizadores podem buscar e reservar espaços de acordo com suas necessidades e os proprietários podem listar seus espaços disponíveis.
 Este projeto é parte da disciplina de Fundamentos de Desenvolvimento de Software (FDS).
 
 ### Objetivo de Desenvolvimento Sustentável
 
-Este projeto contribui para o **Objetivo de Desenvolvimento Sustentável 11: Cidades e Comunidades Sustentáveis**, promovendo o uso eficiente dos recursos urbanos e fortalecendo a coesão social através do acesso a espaços para eventos.
+Este projeto contribui para o **Objetivo de Desenvolvimento Sustentável 11: Cidades e Comunidades Sustentáveis**, promovendo o uso eficiente dos recursos urbanos e fortalecendo a coesão social através do acesso a espaços.
 
 ### Tecnologias Utilizadas
 
@@ -34,19 +34,32 @@ Para mais informações sobre nosso projeto, entre em contato com nossa equipe:
 - [Thaís Aguiar](https://github.com/aguiarth) - [thcba@cesar.school](mailto:thcba@cesar.school)
 
 ## Links importantes
-- Jira -> [Link do Jira](https://maju-peixoto.atlassian.net/jira/software/projects/SCRUM/boards/1)
-- Figma -> [Link do protótipo Lo-Fi](https://www.figma.com/file/6g9unwhO2bWTmB8S6fohp9/Protótipo-de-baixa---aluguel-de-espaços-parra-eventos?type=design&node-id=0-1&mode=design&t=f0NfWiHp1qN8510g-0)
 
-## Entrega 1
+- [Jira](https://maju-peixoto.atlassian.net/jira/software/projects/SCRUM/boards/1)
+- [Figma - Protótipo Lo-Fi](https://www.figma.com/file/6g9unwhO2bWTmB8S6fohp9/Protótipo-de-baixa---aluguel-de-espaços-parra-eventos?type=design&node-id=0-1&mode=design&t=f0NfWiHp1qN8510g-0)
 
-### Print do do quadro e do backlog(JIRA)
-- Becklog
-![print becklog](https://github.com/majupeixoto/projeto-fds/assets/143026488/f632cefa-fbb1-4fbb-83da-835a36a4b273)
-<br>
+## Entregas
 
-- Quadro
+### Entrega 01
+
+- Backlog - Jira
+![print backlog](https://github.com/majupeixoto/projeto-fds/assets/143026488/f632cefa-fbb1-4fbb-83da-835a36a4b273)
+
+- Quadro - Jira
 ![print pendentes](https://github.com/majupeixoto/projeto-fds/assets/143026488/b9f25bfe-4e09-4def-b73e-47914578b2c5)
 
-### Apresentação do protótipo de baixa fidelidade
-- [Vídeo da apresentação](https://github.com/majupeixoto/projeto-fds/assets/143026488/168da132-1e74-42b1-bce8-006fa86edc23)
+- [Apresentação do protótipo de baixa fidelidade](https://github.com/majupeixoto/projeto-fds/assets/143026488/168da132-1e74-42b1-bce8-006fa86edc23)
 
+## Entrega 02
+
+- [Apresentação do Protótipo](https://github.com/majupeixoto/projeto-fds/assets/143026488/168da132-1e74-42b1-bce8-006fa86edc23)
+- [Relato de programação em pares](https://docs.google.com/document/d/1PcKfgogE4qWRXL9YISL22YJB1P-tKE4KTtRZ1IFrNqk/)
+- Protótipo no Figma - COLOCAR LINK
+- Diagrama de Atividades - COLOCAR LINK
+- Screencast - Uso do Sistema - COLOCAR LINK
+- Backlog - Jira
+![print backlog](https://github.com/majupeixoto/projeto-fds/assets/143026488/f632cefa-fbb1-4fbb-83da-835a36a4b273)
+<br>
+
+- Quadro - Jira
+![print pendentes](https://github.com/majupeixoto/projeto-fds/assets/143026488/b9f25bfe-4e09-4def-b73e-47914578b2c5)
