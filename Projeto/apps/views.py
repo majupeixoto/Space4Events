@@ -1,20 +1,42 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.http import HttpResponse
-from datetime import datetime
+from django.contrib.auth.models import authenticate, login
 
-def home(request):
-    espacos = Espaco.objects.all()
-    return render(request, 'apps/home.html', {'espacos': espacos})
+def cadastrar_espaco(request):
+    if request.method == 'POST':
+        proprietario_nome = request.POST['proprietario_nome']
+        nome = request.POST['nome']
+        descricao = request.POST['descricao']
+        preco_por_noite = request.POST['preco_por_noite']
+        endereco = request.POST['endereco']
+        cidade = request.POST['cidade']
+        estado = request.POST['estado']
+        pais = request.POST['pais']
+        numero_de_quartos = request.POST['numero_de_quartos']
+        numero_de_banheiros = request.POST['numero_de_banheiros']
+        numero_de_hospedes = request.POST['numero_de_hospedes']
+        foto_principal = request.FILES.get('foto_principal', None)
 
-def detalhes(request, espaco_id):
-    espaco = get_object_or_404(Espaco, id=espaco_id)
-    detalhes_do_espaco = espaco.detalhes()
-    return render(request, 'apps/detalhes.html', {'detalhes_do_espaco': detalhes_do_espaco})
+        novo_espaco = Espaco(
+            proprietario_nome=proprietario_nome,
+            nome=nome,
+            descricao=descricao,
+            preco_por_noite=preco_por_noite,
+            endereco=endereco,
+            cidade=cidade,
+            estado=estado,
+            pais=pais,
+            numero_de_quartos=numero_de_quartos,
+            numero_de_banheiros=numero_de_banheiros,
+            numero_de_hospedes=numero_de_hospedes,
+            foto_principal=foto_principal
+        )
+        novo_espaco.save()
 
-def listar_espacos(request):
-    espacos = Espaco.objects.all()
-    return render(request, 'apps/listar_espacos.html', {'espacos': espacos})
+        return redirect('detalhes_espaco', espaco_id=novo_espaco.id)
+    else:
+        return render(request, 'apps/cadastrar_espaco.html')
 
 def criar_reserva(request, espaco_id):
     if request.method == 'POST':
@@ -52,13 +74,38 @@ def criar_reserva(request, espaco_id):
         espaco = Espaco.objects.get(id=espaco_id)
         return render(request, 'apps/reservar_espaco.html', {'espaco': espaco})
 
-def visualizar_reservas(request):
-    reservas = Reserva.objects.all()
-    return render(request, 'apps/visualizar_reservas.html', {'reservas': reservas})
+def detalhes(request, espaco_id):
+    espaco = get_object_or_404(Espaco, id=espaco_id)
+    detalhes_do_espaco = espaco.detalhes()
+    return render(request, 'apps/detalhes.html', {'detalhes_do_espaco': detalhes_do_espaco})
 
-def selecionar_espaco_para_reserva(request):
+def favoritos(request):
+    # Supondo que já há uma maneira de obter os favoritos do usuário atual
+    # Substituir pelo método adequado para obter os favoritos do usuário autenticado
+    favoritos = Favorito.objects.filter(usuario=request.user)
+    return render(request, 'favoritos.html', {'favoritos': favoritos})
+
+def home(request):
     espacos = Espaco.objects.all()
-    return render(request, 'selecionar_espaco_para_reserva.html', {'espacos': espacos})
+    return render(request, 'apps/home.html', {'espacos': espacos})
+
+def listar_espacos(request):
+    espacos = Espaco.objects.all()
+    return render(request, 'apps/listar_espacos.html', {'espacos': espacos})
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('apps/home.html')
+        else:
+            error_message = "Nome de usuário ou senha incorretos."
+            return render(request, 'apps/login.html', {'error_message': error_message})
+    else:
+        return render(request, 'apps/login.html')
 
 def meus_espacos(request):
     # SUPONDO proprietário específico
@@ -67,46 +114,13 @@ def meus_espacos(request):
     # espacos = Espaco.objects.filter(proprietario_nome=request.user.username)
     return render(request, 'apps/meus_espacos.html', {'espacos': espacos})
 
-def cadastrar_espaco(request):
-    if request.method == 'POST':
-        proprietario_nome = request.POST['proprietario_nome']
-        nome = request.POST['nome']
-        descricao = request.POST['descricao']
-        preco_por_noite = request.POST['preco_por_noite']
-        endereco = request.POST['endereco']
-        cidade = request.POST['cidade']
-        estado = request.POST['estado']
-        pais = request.POST['pais']
-        numero_de_quartos = request.POST['numero_de_quartos']
-        numero_de_banheiros = request.POST['numero_de_banheiros']
-        numero_de_hospedes = request.POST['numero_de_hospedes']
-        foto_principal = request.FILES.get('foto_principal', None)
+def selecionar_espaco_para_reserva(request):
+    espacos = Espaco.objects.all()
+    return render(request, 'selecionar_espaco_para_reserva.html', {'espacos': espacos})
 
-        novo_espaco = Espaco(
-            proprietario_nome=proprietario_nome,
-            nome=nome,
-            descricao=descricao,
-            preco_por_noite=preco_por_noite,
-            endereco=endereco,
-            cidade=cidade,
-            estado=estado,
-            pais=pais,
-            numero_de_quartos=numero_de_quartos,
-            numero_de_banheiros=numero_de_banheiros,
-            numero_de_hospedes=numero_de_hospedes,
-            foto_principal=foto_principal
-        )
-        novo_espaco.save()
-
-        return redirect('detalhes_espaco', espaco_id=novo_espaco.id)
-    else:
-        return render(request, 'apps/cadastrar_espaco.html')
-
-def favoritos(request):
-    # Supondo que já há uma maneira de obter os favoritos do usuário atual
-    # Substituir pelo método adequado para obter os favoritos do usuário autenticado
-    favoritos = Favorito.objects.filter(usuario=request.user)
-    return render(request, 'favoritos.html', {'favoritos': favoritos})
+def visualizar_reservas(request):
+    reservas = Reserva.objects.all()
+    return render(request, 'apps/visualizar_reservas.html', {'reservas': reservas})
 
 # def nome_da_historia(request):
     # return render(request, 'apps/nome_da_historia.html')

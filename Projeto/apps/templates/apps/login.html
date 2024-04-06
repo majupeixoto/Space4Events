@@ -1,0 +1,30 @@
+{% extends "apps/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="center">
+    <form class="login" method="post">
+        {% csrf_token %}
+        <h2>{{title}}</h2>
+
+        <div class="box-user">
+            <input type="text" name="username" required>
+            <label>Nome de usuário</label>
+        </div>
+
+        <div class="box-user">
+            <input type="password" name="password" required>
+            <label>Senha</label>
+        </div>
+
+        <div>
+            {% for link in links %}
+            <a href="{% url link.ref %}" class="forget">{{link.title}}</a>
+            <br>
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="btn btn-light">Entrar</button>
+    </form>
+</div>
+{% endblock content %}
