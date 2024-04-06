@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.http import HttpResponse
-from django.contrib.auth.models import authenticate, login
+from django.contrib.auth import authenticate, login
 
 def cadastrar_espaco(request):
     if request.method == 'POST':
