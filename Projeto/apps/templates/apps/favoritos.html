@@ -3,33 +3,33 @@
 
 {% block content %}
 <div class="container">
-    <h1>Meus Favoritos</h1>
-    <table class="table">
+    <h1 style="font-family: Helvetica, sans-serif; font-weight: bold;">Meus Favoritos</h1>
+    <table class="table" style="width: 100%; border-collapse: collapse; border: 1px solid #ddd; font-family: Helvetica, sans-serif;">
         <thead>
             <tr>
-                <th>#</th>
-                <th>Nome do Espaço</th>
-                <th>Proprietário</th>
-                <th>Preço por Noite</th>
-                <th>Número de Quartos</th>
-                <th>Número de Banheiros</th>
-                <th>Número de Hospedes</th>
-                <th>Foto Principal</th>
+                <th style="padding: 8px; text-align: left;">#</th>
+                <th style="padding: 8px; text-align: left;">Nome do Espaço</th>
+                <th style="padding: 8px; text-align: left;">Proprietário</th>
+                <th style="padding: 8px; text-align: left;">Preço por Noite</th>
+                <th style="padding: 8px; text-align: left;">Número de Quartos</th>
+                <th style="padding: 8px; text-align: left;">Número de Banheiros</th>
+                <th style="padding: 8px; text-align: left;">Número de Hospedes</th>
+                <th style="padding: 8px; text-align: left;">Foto Principal</th>
             </tr>
         </thead>
         <tbody>
             {% for favorito in favoritos %}
             <tr>
-                <td>{{ forloop.counter }}</td>
-                <td>{{ favorito.espaco.nome }}</td>
-                <td>{{ favorito.espaco.proprietario_nome }}</td>
-                <td>{{ favorito.espaco.preco_por_noite }}</td>
-                <td>{{ favorito.espaco.numero_de_quartos }}</td>
-                <td>{{ favorito.espaco.numero_de_banheiros }}</td>
-                <td>{{ favorito.espaco.numero_de_hospedes }}</td>
-                <td>
+                <td style="padding: 8px;">{{ forloop.counter }}</td>
+                <td style="padding: 8px;"><span class="hover-blue" style="font-family: Helvetica, sans-serif;">{{ favorito.espaco.nome }}</span></td>
+                <td style="padding: 8px;"><span class="hover-blue" style="font-family: Helvetica, sans-serif;">{{ favorito.espaco.proprietario_nome }}</span></td>
+                <td style="padding: 8px;"><span class="hover-blue" style="font-family: Helvetica, sans-serif;">{{ favorito.espaco.preco_por_noite }}</span></td>
+                <td style="padding: 8px;"><span class="hover-blue" style="font-family: Helvetica, sans-serif;">{{ favorito.espaco.numero_de_quartos }}</span></td>
+                <td style="padding: 8px;"><span class="hover-blue" style="font-family: Helvetica, sans-serif;">{{ favorito.espaco.numero_de_banheiros }}</span></td>
+                <td style="padding: 8px;"><span class="hover-blue" style="font-family: Helvetica, sans-serif;">{{ favorito.espaco.numero_de_hospedes }}</span></td>
+                <td style="padding: 8px;">
                     {% if favorito.espaco.foto_principal %}
-                        <img src="{{ favorito.espaco.foto_principal.url }}" alt="Foto Principal">
+                        <img src="{{ favorito.espaco.foto_principal.url }}" alt="Foto Principal" style="max-width: 100px; max-height: 100px;">
                     {% else %}
                         Sem foto disponível
                     {% endif %}
@@ -40,3 +40,10 @@
     </table>
 </div>
 {% endblock %}
+
+<style>
+    .hover-blue:hover {
+        color: blue;
+        cursor: pointer; /* Opcional: altera o cursor para indicar que o texto é clicável */
+    }
+</style>
