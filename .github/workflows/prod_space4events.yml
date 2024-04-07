@@ -29,6 +29,13 @@ jobs:
       
       - name: Install dependencies
         run: pip install -r Projeto/requirements.txt
+
+      - name: Cleaning testing files
+        run: |
+          cd Projeto/
+          rm db.sqlite3
+          rm .env
+          cd ..
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
@@ -69,9 +76,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_57930B0B82E34ED09148AE01FAD1D662 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_7BE298B38BB14807AF4E73818CCA8265 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_CA10B2DB4DBD4A3CA361C6F42196ADEE }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_9580AE21A3924EA0956BFFA033689B4A }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_30EF002CEE5347B1AF22D1A2788BF974 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_1B20415C6A9D471DBFDF524A8EDE8C42 }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
@@ -79,11 +86,4 @@ jobs:
         with:
           app-name: 'Space4Events'
           slot-name: 'Production'
-
-      - name: Cleaning testing files
-        run: |
-          cd Projeto/
-          rm db.sqlite3
-          rm .env
-          cd ..
           
