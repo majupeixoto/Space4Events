@@ -45,15 +45,13 @@ jobs:
           zip release.zip ./* -r
           cd ..
           mv Projeto/release.zip .
-
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v3
         with:
           name: python-app
           path: |
-            Projeto
+            release.zip
             !venv/
-
   deploy:
     runs-on: ubuntu-latest
     needs: build
@@ -86,4 +84,3 @@ jobs:
         with:
           app-name: 'Space4Events'
           slot-name: 'Production'
-          
