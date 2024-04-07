@@ -174,23 +174,21 @@ def logout(request):
         del request.session["usuario"]
     return redirect(home)
 
-# @login_required
+@login_required
 def meus_espacos(request):
     if request.user.is_authenticated:
         espacos = Espaco.objects.filter(proprietario_nome=request.user.username)
         return render(request, 'apps/meus_espacos.html', {'espacos': espacos})
-    else: # TEMPORÁRIO:
-        return render(request, 'apps/meus_espacos.html')
+    else:
+        return redirect('login')
 
-# @login_required
+@login_required
 def minhas_reservas(request):
     if request.user.is_authenticated:
-        reservas = Reserva.objects.filter(proprietario_nome=request.user.username)
+        reservas = Reserva.objects.filter(espaco_proprietario_nome=request.user.username)
         return render(request, 'apps/minhas_reservas.html', {'reservas': reservas})
     else:
-        # TEMPORÁRIO: 
-        return render(request, 'apps/minhas_reservas.html')
-
+        return redirect('login')
 
 def selecionar_espaco_para_reserva(request):
     espacos = Espaco.objects.all()
