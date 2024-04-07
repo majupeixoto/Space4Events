@@ -100,7 +100,8 @@ def criar_reserva(request, espaco_id):
 def detalhes(request, espaco_id):
     espaco = get_object_or_404(Espaco, id=espaco_id)
     detalhes_do_espaco = espaco.detalhes()
-    return render(request, 'apps/detalhes.html', {'detalhes_do_espaco': detalhes_do_espaco})
+    return render(request, 'apps/detalhes.html', {'espaco': espaco, 'detalhes_do_espaco': detalhes_do_espaco})
+
 
 @login_required
 def desfavoritar(request, espaco_id):
