@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, AnonymousUser
+from django.urls import reverse
 import json
 
 def cadastro(request):
@@ -120,18 +121,18 @@ def desfavoritar(request, espaco_id):
 def favoritar(request, espaco_id):
     espaco = get_object_or_404(Espaco, id=espaco_id)
     
-    if request.method == 'POST':
+    if request.method == 'POST' or request.method == 'GET':
         usuario = request.user
         
         favorito_existente = Favorito.objects.filter(usuario=usuario, espaco=espaco).exists()
         
         if not favorito_existente:
             Favorito.objects.create(usuario=usuario, espaco=espaco)
-            return JsonResponse({'mensagem': "Espaço favoritado!"})
+            return HttpResponseRedirect(reverse('detalhes', args=[espaco_id]))
         else:
-            return JsonResponse({'mensagem': 'Espaço já foi favoritado.'}, status=302)
+            return HttpResponseRedirect(reverse('detalhes', args=[espaco_id]))
         
-    return JsonResponse({'mensagem': 'Requisição inválida.'}, status=400)
+    # return JsonResponse({'mensagem': 'Requisição inválida.'}, status=400)
 
 
 def home(request):
