@@ -23,24 +23,33 @@
 
         /* Estilo para a navbar */
         .navbar {
-            background-color: #007bf5; /* Cor de fundo da navbar */
-            padding: 10px 20px; /* Espaçamento interno */
-            border-bottom: 1px solid #ced4da; /* Borda inferior */
+            background-color: #007bf5;
+            /* Cor de fundo da navbar */
+            padding: 10px 20px;
+            /* Espaçamento interno */
+            border-bottom: 1px solid #ced4da;
+            /* Borda inferior */
         }
 
         .navbar-brand {
-            font-size: 1.5rem; /* Tamanho da fonte */
-            font-weight: bold; /* Negrito */
-            color: #000000; /* Cor do texto */
+            font-size: 1.5rem;
+            /* Tamanho da fonte */
+            font-weight: bold;
+            /* Negrito */
+            color: #000000;
+            /* Cor do texto */
         }
 
         .navbar-nav .nav-link {
-            color: #343a40; /* Cor do texto dos links */
-            margin-right: 10px; /* Espaçamento direito entre os links */
+            color: #343a40;
+            /* Cor do texto dos links */
+            margin-right: 10px;
+            /* Espaçamento direito entre os links */
         }
 
         .navbar-nav .nav-link:hover {
-            color: #007bff; /* Cor do texto dos links ao passar o mouse */
+            color: #007bff;
+            /* Cor do texto dos links ao passar o mouse */
         }
 
         .navbar-toggler-icon {
@@ -49,23 +58,27 @@
 
         /* Estilo para o conteúdo */
         .container {
-            padding: 20px; /* Espaçamento interno */
+            padding: 20px;
+            /* Espaçamento interno */
         }
 
         /* Estilo para o link de login */
         .nav-link.login {
-            margin-left: auto; /* Alinha o link à direita */
+            margin-left: auto;
+            /* Alinha o link à direita */
         }
 
         /* Estilo para links ativos */
         .nav-link.active {
-            font-weight: bold; /* Negrito */
+            font-weight: bold;
+            /* Negrito */
         }
 
         /* Estilo para os butões */
         .button {
             background-color: #343a40;
-            color: #fff; /* Cor do texto */
+            color: #fff;
+            /* Cor do texto */
         }
     </style>
 </head>
@@ -87,20 +100,27 @@
                     <a class="nav-link" href="{% url 'meus_espacos' %}">Meus Espaços</a>
                 </div>
             </div>
-            
+
+            <!-- Movendo a estrutura condicional para fora do bloco if principal -->
+
             {% if user.is_authenticated %}
-                <!-- Adicionando o botão de logout -->
-                <a class="nav-link login" href="{% url 'logout' %}">Logout</a>
+            <!-- Adicionando o botão de logout -->
+            <form method="POST" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="nav-link login">Logout</button>
+            </form>
             {% else %}
-                <!-- Adicionando o link para a página de login -->
-                <a class="nav-link login" href="{% url 'login' %}">Login</a>
+            <!-- Adicionando o link para a página de login -->
+            <a class="nav-link login" href="{% url 'login' %}">Login</a>
             {% endif %}
         </div>
     </nav>
 
     {% block content %} {% endblock %}
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" 
-        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
