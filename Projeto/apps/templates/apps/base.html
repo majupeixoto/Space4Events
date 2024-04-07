@@ -12,6 +12,62 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Pasta CSS -->
     <link rel="stylesheet" href="{% static 'apps/main.css' %}">
+    <style>
+        /* Estilo para o body */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        /* Estilo para a navbar */
+        .navbar {
+            background-color: #007bf5; /* Cor de fundo da navbar */
+            padding: 10px 20px; /* Espaçamento interno */
+            border-bottom: 1px solid #ced4da; /* Borda inferior */
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem; /* Tamanho da fonte */
+            font-weight: bold; /* Negrito */
+            color: #000000; /* Cor do texto */
+        }
+
+        .navbar-nav .nav-link {
+            color: #343a40; /* Cor do texto dos links */
+            margin-right: 10px; /* Espaçamento direito entre os links */
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #007bff; /* Cor do texto dos links ao passar o mouse */
+        }
+
+        .navbar-toggler-icon {
+            background-image: url('data:image/svg+xml;charset=UTF-8,<svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><path stroke="rgba(0, 0, 0, 0.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/></svg>');
+        }
+
+        /* Estilo para o conteúdo */
+        .container {
+            padding: 20px; /* Espaçamento interno */
+        }
+
+        /* Estilo para o link de login */
+        .nav-link.login {
+            margin-left: auto; /* Alinha o link à direita */
+        }
+
+        /* Estilo para links ativos */
+        .nav-link.active {
+            font-weight: bold; /* Negrito */
+        }
+
+        /* Estilo para os butões */
+        .button {
+            background-color: #343a40;
+            color: #fff; /* Cor do texto */
+        }
+    </style>
 </head>
 
 <body>
@@ -42,5 +98,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" 
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
-
 </html>
