@@ -3,14 +3,11 @@
 
 {% block content %}
 <style>
-    /* Estilizando a tabela */
-
     .table {
         width: 100%;
         border-collapse: collapse;
     }
 
-    /* Estilizando as células da tabela */
     .table th,
     .table td {
         border: 1px solid #ddd;
@@ -18,17 +15,14 @@
         text-align: left;
     }
 
-    /* Estilizando o cabeçalho da tabela */
     .table th {
         background-color: #bbb9b9d1;
     }
 
-    /* Estilizando as células de dados alternadas */
     .table tbody tr:nth-child(even) {
         background-color: #f2f2f2;
     }
 
-    /* Estilizando a imagem dentro da tabela */
     .table img {
         max-width: 100px;
         height: auto;
@@ -36,37 +30,42 @@
 </style>
 <div class="container">
     <h1>Minhas Reservas</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Nome do Espaço</th>
-                <th>Proprietário</th>
-                <th>Data de Check-in</th>
-                <th>Data de Check-out</th>
-                <th>Número de Hospedes</th>
-                <th>Foto Principal</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for reserva in reservas %}
-            <tr>
-                <td>{{ forloop.counter }}</td>
-                <td>{{ reserva.espaco_nome }}</td>
-                <td>{{ reserva.espaco_proprietario_nome }}</td>
-                <td>{{ reserva.data_check_in }}</td>
-                <td>{{ reserva.data_check_out }}</td>
-                <td>{{ reserva.numero_de_hospedes }}</td>
-                <td>
-                    {% if reserva.espaco_foto_principal %}
-                        <img src="{{ reserva.espaco_foto_principal.url }}" alt="Foto Principal">
-                    {% else %}
-                        Sem foto disponível
-                    {% endif %}
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    {% if user.is_authenticated %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nome do Espaço</th>
+                    <th>Proprietário</th>
+                    <th>Data de Check-in</th>
+                    <th>Data de Check-out</th>
+                    <th>Número de Hospedes</th>
+                    <th>Foto Principal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reserva in reservas %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ reserva.espaco_nome }}</td>
+                        <td>{{ reserva.espaco_proprietario_nome }}</td>
+                        <td>{{ reserva.data_check_in }}</td>
+                        <td>{{ reserva.data_check_out }}</td>
+                        <td>{{ reserva.numero_de_hospedes }}</td>
+                        <td>
+                            {% if reserva.espaco_foto_principal %}
+                                <img src="{{ reserva.espaco_foto_principal.url }}" alt="Foto Principal">
+                            {% else %}
+                                Sem foto disponível
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Por favor, faça login para ver suas reservas.</p>
+        <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+    {% endif %}
 </div>
 {% endblock %}
