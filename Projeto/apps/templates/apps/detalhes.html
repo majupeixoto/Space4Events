@@ -74,11 +74,13 @@
 
                 <div class="btn-group">
                     {% if user.is_authenticated %}
-                        <a href="{% url 'favoritar' espaco.id %}" class="btn btn-sm btn-outline-secondary">Favoritar</a>
+                        {% if espaco %}
+                            <a href="{% url 'favoritar' espaco.id %}" class="btn btn-sm btn-outline-secondary">Favoritar</a>
+                        {% endif %}
                     {% else %}
                         <a href="{% url 'login' %}" class="btn btn-sm btn-outline-secondary">Favoritar</a>
                     {% endif %}
-                </div>
+                </div>                
             </div>
         </div>
     </div>
