@@ -87,10 +87,13 @@
                     <a class="nav-link" href="{% url 'meus_espacos' %}">Meus Espaços</a>
                 </div>
             </div>
-            
+            <!-- Movendo a estrutura condicional para fora do bloco if principal -->
             {% if user.is_authenticated %}
                 <!-- Adicionando o botão de logout -->
-                <a class="nav-link login" href="{% url 'logout' %}">Logout</a>
+                <form method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="nav-link login">Logout</button>
+                </form>
             {% else %}
                 <!-- Adicionando o link para a página de login -->
                 <a class="nav-link login" href="{% url 'login' %}">Login</a>
