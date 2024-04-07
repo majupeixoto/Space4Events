@@ -11,6 +11,7 @@ urlpatterns = [
     path('favoritar/<int:espaco_id>', views.favoritar, name='favoritar'),
     path('listar_espacos/', views.listar_espacos, name='listar_espacos'),
     path('login/', views.login_view, name='login'),
+    path('login/', views.logout, name='logout'),
     path('meus_espacos/', views.meus_espacos, name='meus_espacos'),
     path('minhas_reservas/', views.minhas_reservas, name='minhas_reservas'),
 ]
