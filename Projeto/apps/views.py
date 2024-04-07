@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, AnonymousUser
+import json
 
 def cadastro(request):
     if request.method == 'POST':
@@ -113,19 +114,24 @@ def desfavoritar(request, espaco_id):
     else:
         # Temporário
         return render(request, 'apps/favoritos.html')
-    
+
 @login_required
 def favoritar(request, espaco_id):
     espaco = get_object_or_404(Espaco, id=espaco_id)
     
-    if request.user.is_authenticated:
-        favorito, created = Favorito.objects.get_or_create(usuario=request.user, espaco=espaco)
-        if not created:
-            favorito.delete() # Remove o favorito se existir
-        return redirect('lista_favoritos')
-    else:
-        favoritos = Favorito.objects.filter(usuario=request.user)
-        return render(request, 'apps/favoritos.html', {'favoritos': favoritos})
+    if request.method == 'POST':
+        usuario = request.user
+        
+        favorito_existente = Favorito.objects.filter(usuario=usuario, espaco=espaco).exists()
+        
+        if not favorito_existente:
+            Favorito.objects.create(usuario=usuario, espaco=espaco)
+            return JsonResponse({'mensagem': "Espaço favoritado!"})
+        else:
+            return JsonResponse({'mensagem': 'Espaço já foi favoritado.'}, status=302)
+        
+    return JsonResponse({'mensagem': 'Requisição inválida.'}, status=400)
+
 
 def home(request):
     espacos = Espaco.objects.all()
