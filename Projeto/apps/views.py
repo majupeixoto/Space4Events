@@ -105,7 +105,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser
 
-# @login_required
+@login_required
 def favoritar(request, espaco_id):
     espaco = get_object_or_404(Espaco, id=espaco_id)
     
@@ -115,8 +115,8 @@ def favoritar(request, espaco_id):
             favorito.delete() # Remove o favorito se existir
         return redirect('lista_favoritos')
     else:
-        # Temporário
-        return render(request, 'apps/favoritos.html')
+        favoritos = Favorito.objects.filter(usuario=request.user)
+        return render(request, 'apps/favoritos.html', {'favoritos': favoritos})
 
 # @login_required
 def desfavoritar(request, espaco_id):
@@ -150,7 +150,7 @@ def listar_espacos(request):
     espacos = Espaco.objects.all()
     return render(request, 'apps/listar_espacos.html', {'espacos': espacos})
 
-def login(request):
+def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
