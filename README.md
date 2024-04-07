@@ -69,10 +69,5 @@ Para mais informações sobre nosso projeto, entre em contato com nossa equipe:
 
 - Screencast - Uso do Sistema - COLOCAR LINK
 
-
-- [Issue e bug tracker](https://github.com/majupeixoto/Space4Events/issues):
-- issues abertas:
-![alt text](image.png)
-- issues fechadas:
-![alt text](image-1.png)
-![alt text](image-2.png)
+- Issue/Bug Tracker Atualizado
+  ![image](https://github.com/majupeixoto/Space4Events/assets/143026488/1c793e48-e46d-4428-b82d-e62b44e4a0f3)
