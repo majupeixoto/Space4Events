@@ -27,7 +27,7 @@ def cadastro(request):
         
     return render(request, 'apps/cadastro.html')
 
-@login_required
+# @login_required
 def cadastrar_espaco(request):
     if request.method == 'POST':
         proprietario_nome = request.POST['proprietario_nome']
@@ -182,9 +182,6 @@ def minhas_reservas(request):
         return render(request, 'apps/minhas_reservas.html', {'reservas': reservas})
     else:
         return redirect('login')
-
-def profile(request):
-    return redirect('home')
 
 def selecionar_espaco_para_reserva(request):
     espacos = Espaco.objects.all()
