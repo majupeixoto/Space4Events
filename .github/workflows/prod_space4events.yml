@@ -28,12 +28,23 @@ jobs:
           source venv/bin/activate
       
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r Projeto/requirements.txt
+
+      - name: Cleaning testing files
+        run: |
+          cd Projeto/
+          rm db.sqlite3
+          rm .env
+          cd ..
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
       - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+        run: |
+          cd Projeto/
+          zip release.zip ./* -r
+          cd ..
+          mv Projeto/release.zip .
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v3
