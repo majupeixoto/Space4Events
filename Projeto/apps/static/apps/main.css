@@ -1,0 +1,72 @@
+/* Estilo para o body */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+/* Estilo para a navbar */
+.navbar {
+    background-color: #007bf5;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ced4da;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff; /* Alterado para branco */
+}
+
+.navbar-nav .nav-link {
+    color: #ffffff; /* Alterado para branco */
+    margin-right: 10px;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ffffff; /* Alterado para branco */
+}
+
+.navbar-toggler-icon {
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><path stroke="rgba(255, 255, 255, 0.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/></svg>');
+}
+
+/* Estilo para o conteúdo */
+.container {
+    padding: 20px;
+}
+
+/* Estilo para o link de login */
+.nav-link.login {
+    margin-left: auto;
+}
+
+/* Estilo para links ativos */
+.nav-link.active {
+    font-weight: bold;
+}
+
+/* Estilo para os botões */
+.button {
+    background-color: #343a40;
+    color: #fff;
+    padding: 8px 16px; /* Aumentando o padding para um visual mais atraente */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Estilo para o botão de logout */
+.nav-link.login {
+    background-color: #dc3545; /* Cor de fundo alterada para vermelho */
+    padding: 8px 16px;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.nav-link.login:hover {
+    background-color: #c82333; /* Cor de fundo alterada para vermelho mais escuro no hover */
+}
