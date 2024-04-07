@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, AnonymousUser
+import json
 
 def cadastro(request):
     if request.method == 'POST':
@@ -101,24 +102,7 @@ def detalhes(request, espaco_id):
     detalhes_do_espaco = espaco.detalhes()
     return render(request, 'apps/detalhes.html', {'detalhes_do_espaco': detalhes_do_espaco})
 
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import AnonymousUser
-
 @login_required
-def favoritar(request, espaco_id):
-    espaco = get_object_or_404(Espaco, id=espaco_id)
-    
-    if request.user.is_authenticated:
-        favorito, created = Favorito.objects.get_or_create(usuario=request.user, espaco=espaco)
-        if not created:
-            favorito.delete() # Remove o favorito se existir
-        return redirect('lista_favoritos')
-    else:
-        favoritos = Favorito.objects.filter(usuario=request.user)
-        return render(request, 'apps/favoritos.html', {'favoritos': favoritos})
-
-# @login_required
 def desfavoritar(request, espaco_id):
     espaco = get_object_or_404(Espaco, id=espaco_id)
     
@@ -131,38 +115,58 @@ def desfavoritar(request, espaco_id):
         # Temporário
         return render(request, 'apps/favoritos.html')
 
-# @login_required
+@login_required
+def favoritar(request, espaco_id):
+    espaco = get_object_or_404(Espaco, id=espaco_id)
+    
+    if request.method == 'POST':
+        usuario = request.user
+        
+        favorito_existente = Favorito.objects.filter(usuario=usuario, espaco=espaco).exists()
+        
+        if not favorito_existente:
+            Favorito.objects.create(usuario=usuario, espaco=espaco)
+            return JsonResponse({'mensagem': "Espaço favoritado!"})
+        else:
+            return JsonResponse({'mensagem': 'Espaço já foi favoritado.'}, status=302)
+        
+    return JsonResponse({'mensagem': 'Requisição inválida.'}, status=400)
+
+
+def home(request):
+    espacos = Espaco.objects.all()
+    return render(request, 'apps/home.html', {'espacos': espacos})
+
+@login_required
 def lista_favoritos(request):
     if request.user.is_authenticated:
         favoritos = Favorito.objects.filter(usuario=request.user)
         return render(request, 'apps/favoritos.html', {'favoritos': favoritos})
     else:
-        # Temporário
-        favoritos = None
-    return render(request, 'apps/favoritos.html', {'favoritos': favoritos})
-
-# @login_required
-def home(request):
-    espacos = Espaco.objects.all()
-    return render(request, 'apps/home.html', {'espacos': espacos})
+        return redirect('login')
 
 def listar_espacos(request):
     espacos = Espaco.objects.all()
     return render(request, 'apps/listar_espacos.html', {'espacos': espacos})
 
+def home(request):
+    espacos = Espaco.objects.all()
+    return render(request, 'apps/home.html', {'espacos': espacos})
+
 def login_view(request):
+    title = "Login"
+    next_url = request.GET.get('next', '')
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
+        username = request.POST.get('username')
+        password = request.POST.get('password')
         
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            request.session["usuario"] = username
-            return redirect(home)
+            return redirect(next_url or 'home')
         else:
             return render(request, 'apps/login.html', {"erro": "Usuário não encontrado"})
-    return render(request, 'apps/login.html')
+    return render(request, 'apps/login.html', {'next': next_url})
 
 def logout(request):
     logout(request)
@@ -170,27 +174,21 @@ def logout(request):
         del request.session["usuario"]
     return redirect(home)
 
-from django.shortcuts import render, redirect
-from django.contrib.auth.models import AnonymousUser
-from .models import Espaco, Reserva
-
-# @login_required
+@login_required
 def meus_espacos(request):
     if request.user.is_authenticated:
         espacos = Espaco.objects.filter(proprietario_nome=request.user.username)
         return render(request, 'apps/meus_espacos.html', {'espacos': espacos})
-    else: # TEMPORÁRIO:
-        return render(request, 'apps/meus_espacos.html')
+    else:
+        return redirect('login')
 
-# @login_required
+@login_required
 def minhas_reservas(request):
     if request.user.is_authenticated:
-        reservas = Reserva.objects.filter(proprietario_nome=request.user.username)
+        reservas = Reserva.objects.filter(espaco_proprietario_nome=request.user.username)
         return render(request, 'apps/minhas_reservas.html', {'reservas': reservas})
     else:
-        # TEMPORÁRIO: 
-        return render(request, 'apps/minhas_reservas.html')
-
+        return redirect('login')
 
 def selecionar_espaco_para_reserva(request):
     espacos = Espaco.objects.all()
