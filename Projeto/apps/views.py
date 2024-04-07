@@ -105,19 +105,6 @@ def detalhes(request, espaco_id):
 
 
 @login_required
-def desfavoritar(request, espaco_id):
-    espaco = get_object_or_404(Espaco, id=espaco_id)
-    
-    if request.user.is_authenticated:
-        favorito = Favorito.objects.filter(usuario=request.user, espaco=espaco).first()
-        if favorito:
-            favorito.delete()  # Remove o favorito se existir
-        return redirect('lista_favoritos')
-    else:
-        # Temporário
-        return render(request, 'apps/favoritos.html')
-
-@login_required
 def favoritar(request, espaco_id):
     espaco = get_object_or_404(Espaco, id=espaco_id)
     
@@ -130,9 +117,11 @@ def favoritar(request, espaco_id):
             Favorito.objects.create(usuario=usuario, espaco=espaco)
             return HttpResponseRedirect(reverse('detalhes', args=[espaco_id]))
         else:
+            favorito = Favorito.objects.filter(usuario=usuario, espaco=espaco).first()
+            favorito.delete()  # Remove o favorito se existir
             return HttpResponseRedirect(reverse('detalhes', args=[espaco_id]))
         
-    # return JsonResponse({'mensagem': 'Requisição inválida.'}, status=400)
+    return JsonResponse({'mensagem': 'Requisição inválida.'}, status=400)
 
 
 def home(request):
