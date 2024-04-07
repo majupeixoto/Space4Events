@@ -60,13 +60,13 @@ Para mais informações sobre nosso projeto, entre em contato com nossa equipe:
   ![image](https://github.com/majupeixoto/Space4Events/assets/143026488/a75f5556-4657-4f7a-a902-b550b1c4d914)
 
 - [Apresentação do Protótipo](https://github.com/majupeixoto/projeto-fds/assets/143026488/168da132-1e74-42b1-bce8-006fa86edc23)
-- 
+
 - [Relato de programação em pares](https://docs.google.com/document/d/1PcKfgogE4qWRXL9YISL22YJB1P-tKE4KTtRZ1IFrNqk/)
-- 
+
 - [Protótipo no Figma](https://www.figma.com/file/6g9unwhO2bWTmB8S6fohp9/Protótipo-de-baixa---aluguel-de-espaços-parra-eventos?type=design&node-id=0-1&mode=design&t=f0NfWiHp1qN8510g-0)
-- 
+
 - [Diagrama de Atividades](https://drive.google.com/drive/folders/1b-1jfi9s1rpmG0BFbpcquMNLnV8OfBfs)
-- 
+
 - Screencast - Uso do Sistema - COLOCAR LINK
 
 
