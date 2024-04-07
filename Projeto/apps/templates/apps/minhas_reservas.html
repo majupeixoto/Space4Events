@@ -2,6 +2,38 @@
 {% load static %}
 
 {% block content %}
+<style>
+    /* Estilizando a tabela */
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    /* Estilizando as células da tabela */
+    .table th,
+    .table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    /* Estilizando o cabeçalho da tabela */
+    .table th {
+        background-color: #bbb9b9d1;
+    }
+
+    /* Estilizando as células de dados alternadas */
+    .table tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    /* Estilizando a imagem dentro da tabela */
+    .table img {
+        max-width: 100px;
+        height: auto;
+    }
+</style>
 <div class="container">
     <h1>Minhas Reservas</h1>
     <table class="table">
