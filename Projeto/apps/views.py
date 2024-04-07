@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, AnonymousUser
@@ -157,8 +156,7 @@ def login_view(request):
             login(request, user)
             return redirect(next_url or 'home')
         else:
-            messages.error(request, "Usuário ou senha incorretos. Por favor, tente novamente.")
-            return redirect('login')
+            return render(request, 'apps/login.html', {"erro": "Usuário não encontrado"})
     return render(request, 'apps/login.html', {'next': next_url})
 
 def logout(request):
@@ -182,6 +180,9 @@ def minhas_reservas(request):
         return render(request, 'apps/minhas_reservas.html', {'reservas': reservas})
     else:
         return redirect('login')
+
+def profile(request):
+    return redirect('home')
 
 def selecionar_espaco_para_reserva(request):
     espacos = Espaco.objects.all()
