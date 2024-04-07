@@ -54,12 +54,16 @@ Para mais informações sobre nosso projeto, entre em contato com nossa equipe:
 
 - [Apresentação do Protótipo](https://github.com/majupeixoto/projeto-fds/assets/143026488/168da132-1e74-42b1-bce8-006fa86edc23)
 - [Relato de programação em pares](https://docs.google.com/document/d/1PcKfgogE4qWRXL9YISL22YJB1P-tKE4KTtRZ1IFrNqk/)
-- Protótipo no Figma - COLOCAR LINK
-- Diagrama de Atividades - COLOCAR LINK
+- [Protótipo no Figma](https://www.figma.com/file/6g9unwhO2bWTmB8S6fohp9/Protótipo-de-baixa---aluguel-de-espaços-parra-eventos?type=design&node-id=0-1&mode=design&t=f0NfWiHp1qN8510g-0)
+- [Diagrama de Atividades](https://drive.google.com/drive/folders/1b-1jfi9s1rpmG0BFbpcquMNLnV8OfBfs)
 - Screencast - Uso do Sistema - COLOCAR LINK
 - Backlog - Jira
 ![print backlog](https://github.com/majupeixoto/projeto-fds/assets/143026488/f632cefa-fbb1-4fbb-83da-835a36a4b273)
-<br>
-
 - Quadro - Jira
 ![print pendentes](https://github.com/majupeixoto/projeto-fds/assets/143026488/b9f25bfe-4e09-4def-b73e-47914578b2c5)
+- [Issue e bug tracker](https://github.com/majupeixoto/Space4Events/issues):
+- issues abertas:
+![alt text](image.png)
+- issues fechadas:
+![alt text](image-1.png)
+![alt text](image-2.png)

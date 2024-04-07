@@ -8,7 +8,6 @@
     .table {
         width: 100%;
         border-collapse: collapse;
-        font-family: Helvetica, sans-serif; /* Definindo fonte para todo o conteúdo da tabela */
     }
 
     /* Estilizando as células da tabela */
@@ -17,13 +16,11 @@
         border: 1px solid #ddd;
         padding: 8px;
         text-align: left;
-        font-family: Helvetica, sans-serif; /* Definindo fonte para todo o conteúdo da tabela */
     }
 
     /* Estilizando o cabeçalho da tabela */
     .table th {
         background-color: #bbb9b9d1;
-        font-family: Helvetica, sans-serif; /* Definindo fonte para todo o conteúdo da tabela */
     }
 
     /* Estilizando as células de dados alternadas */
@@ -35,12 +32,6 @@
     .table img {
         max-width: 100px;
         height: auto;
-    }
-
-    /* Estilizando o texto clicável */
-    .hover-blue:hover {
-        color: blue;
-        cursor: pointer; /* Opcional: altera o cursor para indicar que o texto é clicável */
     }
 </style>
 <div class="container">
@@ -66,16 +57,16 @@
             {% for espaco in espacos %}
             <tr>
                 <td>{{ forloop.counter }}</td>
-                <td><span class="hover-blue">{{ espaco.nome }}</span></td>
-                <td><span class="hover-blue">{{ espaco.descricao }}</span></td>
-                <td><span class="hover-blue">{{ espaco.preco_por_noite }}</span></td>
-                <td><span class="hover-blue">{{ espaco.endereco }}</span></td>
-                <td><span class="hover-blue">{{ espaco.cidade }}</span></td>
-                <td><span class="hover-blue">{{ espaco.estado }}</span></td>
-                <td><span class="hover-blue">{{ espaco.pais }}</span></td>
-                <td><span class="hover-blue">{{ espaco.numero_de_quartos }}</span></td>
-                <td><span class="hover-blue">{{ espaco.numero_de_banheiros }}</span></td>
-                <td><span class="hover-blue">{{ espaco.numero_de_hospedes }}</span></td>
+                <td>{{ espaco.nome }}</td>
+                <td>{{ espaco.descricao }}</td>
+                <td>{{ espaco.preco_por_noite }}</td>
+                <td>{{ espaco.endereco }}</td>
+                <td>{{ espaco.cidade }}</td>
+                <td>{{ espaco.estado }}</td>
+                <td>{{ espaco.pais }}</td>
+                <td>{{ espaco.numero_de_quartos }}</td>
+                <td>{{ espaco.numero_de_banheiros }}</td>
+                <td>{{ espaco.numero_de_hospedes }}</td>
                 <td>
                     {% if espaco.foto_principal %}
                         <img src="{{ espaco.foto_principal.url }}" alt="Foto Principal">
