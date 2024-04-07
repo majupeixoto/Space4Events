@@ -71,14 +71,6 @@
         <input type="hidden" name="next" value="{{ next }}">
         <h2>{{ title }}</h2>
 
-        {% if messages %}
-            <div class="error-message">
-                {% for message in messages %}
-                    <p>{{ message }}</p>
-                {% endfor %}
-            </div>
-        {% endif %}
-
         <div class="box-user">
             <input type="text" name="username" required>
             <label>Nome de usuário</label>
