@@ -58,10 +58,10 @@ Para mais informações sobre nosso projeto, entre em contato com nossa equipe:
 - [Diagrama de Atividades](https://drive.google.com/drive/folders/1b-1jfi9s1rpmG0BFbpcquMNLnV8OfBfs)
 - Screencast - Uso do Sistema - COLOCAR LINK
 - Backlog - Jira
-![print backlog](![image](https://github.com/majupeixoto/Space4Events/assets/143026488/76e81683-ca85-409f-8576-b328547a709c)
+  (![image](https://github.com/majupeixoto/Space4Events/assets/143026488/76e81683-ca85-409f-8576-b328547a709c)
 - Quadro - Jira
-![print pendentes](![image](https://github.com/majupeixoto/Space4Events/assets/143026488/3ab53543-7f72-4869-9b2c-ff46fc6a8488)
-![image](https://github.com/majupeixoto/Space4Events/assets/143026488/a75f5556-4657-4f7a-a902-b550b1c4d914)
+  ![image](https://github.com/majupeixoto/Space4Events/assets/143026488/3ab53543-7f72-4869-9b2c-ff46fc6a8488)
+  ![image](https://github.com/majupeixoto/Space4Events/assets/143026488/a75f5556-4657-4f7a-a902-b550b1c4d914)
 
 - [Issue e bug tracker](https://github.com/majupeixoto/Space4Events/issues):
 - issues abertas:
