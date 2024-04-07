@@ -88,8 +88,13 @@
                 </div>
             </div>
             
-            <!-- Adicionando o link para a página de login -->
-            <a class="nav-link" href="{% url 'login' %}">Login</a>
+            {% if user.is_authenticated %}
+                <!-- Adicionando o botão de logout -->
+                <a class="nav-link login" href="{% url 'logout' %}">Logout</a>
+            {% else %}
+                <!-- Adicionando o link para a página de login -->
+                <a class="nav-link login" href="{% url 'login' %}">Login</a>
+            {% endif %}
         </div>
     </nav>
 
