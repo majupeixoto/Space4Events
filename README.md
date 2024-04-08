@@ -35,6 +35,7 @@ Para mais informações sobre nosso projeto, entre em contato com nossa equipe:
 
 ## Links importantes
 
+- [Link do projeto na Azure](https://space4events.azurewebsites.net)
 - [Jira](https://maju-peixoto.atlassian.net/jira/software/projects/SCRUM/boards/1)
 - [Figma - Protótipo Lo-Fi](https://www.figma.com/file/6g9unwhO2bWTmB8S6fohp9/Protótipo-de-baixa---aluguel-de-espaços-parra-eventos?type=design&node-id=0-1&mode=design&t=f0NfWiHp1qN8510g-0)
 
