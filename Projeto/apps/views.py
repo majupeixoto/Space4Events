@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User, AnonymousUser
+from django.contrib.auth.models import User
 from django.urls import reverse
-import json
 
 def cadastro(request):
     if request.method == 'POST':
@@ -58,7 +58,7 @@ def cadastrar_espaco(request):
         )
         novo_espaco.save()
 
-        return redirect('detalhes_espaco', espaco_id=novo_espaco.id)
+        return redirect('detalhes', espaco_id=novo_espaco.id)
     else:
         return render(request, 'apps/cadastrar_espaco.html')
 
@@ -115,13 +115,15 @@ def favoritar(request, espaco_id):
         
         if not favorito_existente:
             Favorito.objects.create(usuario=usuario, espaco=espaco)
+            messages.success(request, 'Espaço favoritado com sucesso!')
             return HttpResponseRedirect(reverse('detalhes', args=[espaco_id]))
         else:
             favorito = Favorito.objects.filter(usuario=usuario, espaco=espaco).first()
             favorito.delete()  # Remove o favorito se existir
+            messages.success(request, 'Espaço removido dos favoritos.')
             return HttpResponseRedirect(reverse('detalhes', args=[espaco_id]))
         
-    return JsonResponse({'mensagem': 'Requisição inválida.'}, status=400)
+    return HttpResponseRedirect(reverse('detalhes', args=[espaco_id]))
 
 
 def home(request):
