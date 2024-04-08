@@ -67,7 +67,13 @@ Para mais informações sobre nosso projeto, entre em contato com nossa equipe:
 
 - Issues/Bug Tracker atualizado
   - Open issues:
-  ![image](https://github.com/majupeixoto/Space4Events/assets/143026488/1c793e48-e46d-4428-b82d-e62b44e4a0f3)
+  ![image](https://github.com/majupeixoto/Space4Events/assets/142419595/0b30cb63-4941-42f5-abae-009fb9676e94)
+
 
   - Closed issues:
-    ![image](https://github.com/majupeixoto/Space4Events/assets/143026488/3241ff19-1c77-4a33-bb98-efef3bb0a9d0)
+    ![image](https://github.com/majupeixoto/Space4Events/assets/142419595/06ff1259-a3f4-49b9-9215-68bc0b980abd)
+    ![image](https://github.com/majupeixoto/Space4Events/assets/142419595/e6f0d3a1-3fec-403a-8dcf-c27cfaca5460)
+
+
+    
+
