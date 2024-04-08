@@ -1,8 +1,102 @@
 {% extends 'apps/base.html' %}
 {% block content %}
+<style>
+    .body {
+        background-color: #f0f0f0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .form-container {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        max-width: 400px;
+        width: 100%;
+    }
+
+    .center-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    .wrapper {
+        width: 100%;
+    }
+
+    form {
+        text-align: center;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    .input-box {
+        margin-bottom: 20px;
+    }
+
+    .input-box input {
+        width: calc(100% - 40px);
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .input-box i {
+        margin-left: -30px; /* Ajusta o ícone para a esquerda */
+        margin-top: 15px; /* Ajusta o ícone para cima */
+        font-size: 20px;
+        color: #777;
+    }
+
+    /*Estiliza o botão de envio*/
+    .btn {
+        background-color: #007bff;
+        color: #fff;/*cor do texto*/
+        /*a borda e o raio da borda*/
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s;/*efeito de transição ao passar o mouse*/
+    }
+
+    /*altera a cor de fundo do botão quando o mouse passa por cima*/
+    .btn:hover {
+        background-color: #0056b3;
+    }
+
+    /*Estiliza o link "Já possui uma conta? Faça login aqui.", adicionando margem na parte superior para separá-lo do botão.*/
+    .register-link {
+        margin-top: 20px;
+    }
+
+    /*Estiliza o link, definindo a cor e removendo o sublinhado*/
+    .register-link a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    /*quando o mouse passa por cima o link é sublinhado*/
+    .register-link a:hover {
+        text-decoration: underline;
+    }
+
+    /*Estiliza a mensagem de erro*/
+    .erro {
+        color: red;
+        margin-bottom: 10px;/*margem na parte inferior.*/
+    }
+</style>
 <div class="body">
-    <div class="container-fluid py-5 text-center">
-        <div class="center-wrapper">
+    <div class="center-wrapper">
+        <div class="form-container py-5 text-center"> <!-- Alterado o nome da classe para .form-container -->
             <div class="wrapper">
                 <form action="" method="post">
                     {% csrf_token %}

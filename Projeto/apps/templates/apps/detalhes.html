@@ -2,8 +2,27 @@
 {% load static %}
 
 {% block content %}
+<style>
+    /* Estilizando o conteúdo do carrossel */
+    #carouselExampleIndicators .carousel-item img {
+        object-fit: cover;
+        height: 100%; /* Ajustando a altura das imagens para ocupar todo o espaço disponível */
+        width: 100%;
+    }
+
+    /* Estilizando a área à direita */
+    .collums {
+        padding: 0 20px;
+    }
+
+    /* Aplicando a fonte Helvetica para todo o conteúdo */
+    #carouselExampleIndicators,
+    .collums {
+        font-family: Helvetica, sans-serif;
+    }
+</style>
 <div class="container mt-5">
-    <div class="row">
+    <div class="row align-items-center"> <!-- Centralizando verticalmente -->
         <!-- Carrossel à esquerda -->
         <div class="col-md-6">
             <div id="carouselExampleIndicators" class="carousel slide">
@@ -22,7 +41,7 @@
                     </div>
                     {% else %}
                     <div class="carousel-item active">
-                        <svg class="bd-placeholder-img d-block w-100" width="100%" height="225"
+                        <svg class="bd-placeholder-img d-block w-100" width="100%" height="500"
                             xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
                             preserveAspectRatio="xMidYMid slice" focusable="false">
                             <title>Placeholder</title>
@@ -48,7 +67,7 @@
         <!-- Conteúdo à direita -->
         <div class="col-md-6">
             <div class="collums">
-                <h2>{{ detalhes_do_espaco.nome }}</h2>
+                <h2 style="font-weight: bold; font-size: 50px;">{{ detalhes_do_espaco.nome }}</h2>
 
                 <h5>Descrição:</h5>
                 <p>{{ detalhes_do_espaco.descricao }}</p>
@@ -74,11 +93,13 @@
 
                 <div class="btn-group">
                     {% if user.is_authenticated %}
-                        <a href="{% url 'favoritar' espaco.id %}" class="btn btn-sm btn-outline-secondary">Favoritar</a>
+                        {% if espaco %}
+                            <a href="{% url 'favoritar' espaco.id %}" class="btn btn-lg btn-outline-secondary">Favoritar</a>
+                        {% endif %}
                     {% else %}
-                        <a href="{% url 'login' %}" class="btn btn-sm btn-outline-secondary">Favoritar</a>
+                        <a href="{% url 'login' %}" class="btn btn-lg btn-outline-secondary">Favoritar</a>
                     {% endif %}
-                </div>
+                </div>      
             </div>
         </div>
     </div>

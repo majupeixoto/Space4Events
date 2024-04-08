@@ -2,9 +2,73 @@
 {% load static %}
 
 {% block content %}
+<style>
+    .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    }
+    
+    .login {
+        width: 300px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    .login h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .box-user {
+        margin-bottom: 20px;
+    }
+
+    .box-user input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    .box-user label {
+        font-size: 14px;
+        color: #333;
+    }
+
+    .btn {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        border: none;
+        border-radius: 3px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+    }
+
+    .forget {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .forget:hover {
+        text-decoration: underline;
+    }
+</style>
 <div class="center">
     <form class="login" method="post">
         {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
         <h2>{{ title }}</h2>
 
         <div class="box-user">
