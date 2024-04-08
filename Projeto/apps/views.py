@@ -26,10 +26,10 @@ def cadastro(request):
         
     return render(request, 'apps/cadastro.html')
 
-# @login_required
+@login_required
 def cadastrar_espaco(request):
     if request.method == 'POST':
-        proprietario_nome = request.POST['proprietario_nome']
+        proprietario_nome = request.POST.get('proprietario_nome', request.user.username)
         nome = request.POST['nome']
         descricao = request.POST['descricao']
         preco_por_noite = request.POST['preco_por_noite']
@@ -170,7 +170,8 @@ def logout(request):
 @login_required
 def meus_espacos(request):
     if request.user.is_authenticated:
-        espacos = Espaco.objects.filter(proprietario_nome=request.user.username)
+        usuario = request.user
+        espacos = Espaco.objects.filter(proprietario_nome=usuario)
         return render(request, 'apps/meus_espacos.html', {'espacos': espacos})
     else:
         return redirect('login')
