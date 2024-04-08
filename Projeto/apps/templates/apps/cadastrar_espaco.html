@@ -66,8 +66,8 @@
     <h1>Cadastrar Espaço</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <label for="proprietario_nome">Nome do Proprietário:</label><br>
-        <input type="text" id="proprietario_nome" name="proprietario_nome"><br>
+        {% comment %} <label for="proprietario_nome">Nome do Proprietário:</label><br> {% endcomment %}
+        {% comment %} <input type="text" id="proprietario_nome" name="proprietario_nome"><br> {% endcomment %}
         <label for="nome">Nome do Espaço:</label><br>
         <input type="text" id="nome" name="nome"><br>
         <label for="descricao">Descrição:</label><br>
