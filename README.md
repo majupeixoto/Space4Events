@@ -56,7 +56,8 @@ Para mais informações sobre nosso projeto, entre em contato com nossa equipe:
 - [Relato de programação em pares](https://docs.google.com/document/d/1PcKfgogE4qWRXL9YISL22YJB1P-tKE4KTtRZ1IFrNqk/)
 - [Protótipo no Figma](https://www.figma.com/file/6g9unwhO2bWTmB8S6fohp9/Protótipo-de-baixa---aluguel-de-espaços-parra-eventos?type=design&node-id=0-1&mode=design&t=f0NfWiHp1qN8510g-0)
 - [Diagrama de Atividades](https://drive.google.com/drive/folders/1b-1jfi9s1rpmG0BFbpcquMNLnV8OfBfs)
-- **Screencast e uso do sistema - COLOCAR LINK RAFA**
+  
+- Screencast e uso do sistema - https://drive.google.com/file/d/14dnRwFptK7naG2Nvrwu4XnS-qJz1hGn1/view?usp=drive_link
 
 - Backlog - Jira
   ![image](https://github.com/majupeixoto/Space4Events/assets/142419595/8002f3a6-2c4c-44d5-913c-6506b6373fac)
