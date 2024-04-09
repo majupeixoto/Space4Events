@@ -59,11 +59,11 @@ Para mais informações sobre nosso projeto, entre em contato com nossa equipe:
 - **Screencast e uso do sistema - COLOCAR LINK RAFA**
 
 - Backlog - Jira
-  ![image](https://github.com/majupeixoto/Space4Events/assets/143026488/76e81683-ca85-409f-8576-b328547a709c)
+  ![image](https://github.com/majupeixoto/Space4Events/assets/142419595/8002f3a6-2c4c-44d5-913c-6506b6373fac)
+
 
 - Quadro - Jira
-  ![image](https://github.com/majupeixoto/Space4Events/assets/143026488/3ab53543-7f72-4869-9b2c-ff46fc6a8488)
-  ![image](https://github.com/majupeixoto/Space4Events/assets/143026488/a75f5556-4657-4f7a-a902-b550b1c4d914)
+  ![image](https://github.com/majupeixoto/Space4Events/assets/142419595/c47f75cc-b61c-48db-982e-2ae7c889da1a)
 
 - Issues/Bug Tracker atualizado
   - Open issues:
