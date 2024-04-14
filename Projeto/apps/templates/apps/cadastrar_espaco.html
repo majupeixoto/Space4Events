@@ -61,6 +61,20 @@
         color: #dc3545;
         font-size: 12px;
     }
+
+    .input-group {
+    display: flex;
+    align-items: center;
+    }
+
+.input-prefix {
+    margin-right: 5px; /* Espaçamento entre o símbolo e o input */
+    font-weight: bold; /* Opcional: para dar destaque ao símbolo de moeda */
+}
+
+input[type="number"] {
+    flex-grow: 1; /* O input ocupa o restante do espaço disponível */
+}
 </style>
 
 
@@ -75,7 +89,9 @@
         <textarea id="descricao" name="descricao" rows="4" cols="50"></textarea><br>
 
         <label for="preco_por_noite">Preço por Noite:</label>
-        <input type="number" id="preco_por_noite" name="preco_por_noite"><br>
+        <div class="input-wrapper">
+            <input type="number" id="preco_por_noite" name="preco_por_noite" placeholder="R$">
+        </div><br><br>
 
         <label for="cep">CEP:</label>
         <input type="text" id="cep" name="cep" placeholder="Digite o CEP" onblur="fetchAddress()"><br>
@@ -83,14 +99,14 @@
         <label for="endereco">Endereço:</label>
         <input type="text" id="endereco" name="endereco" readonly><br>
 
+        <label for="bairro">Bairro:</label>
+        <input type="text" id="bairro" name="bairro" readonly><br>
+
         <label for="cidade">Cidade:</label>
         <input type="text" id="cidade" name="cidade" readonly><br>
 
         <label for="estado">Estado:</label>
-        <input type="text" id="estado" name="estado" readonly><br>
-
-        <label for="pais">País:</label>
-        <input type="text" id="pais" name="pais" value="Brasil" readonly><br>
+        <input type="text" id="estado" name="estado" readonly><br><br><br>
 
         <label for="numero_de_quartos">Número de Quartos:</label>
         <input type="number" id="numero_de_quartos" name="numero_de_quartos"><br>
@@ -124,16 +140,16 @@
                 if (data.erro) throw new Error('CEP não encontrado.');
                 document.getElementById('endereco').value = data.logradouro || '';
                 document.getElementById('cidade').value = data.localidade || '';
+                document.getElementById('bairro').value = data.bairro || ''; // Adiciona o bairro
                 document.getElementById('estado').value = data.uf || '';
-                document.getElementById('pais').value = 'Brasil';
             })
             .catch(error => {
                 console.error('Fetch error:', error);
                 alert(error.message);
                 document.getElementById('endereco').value = '';
                 document.getElementById('cidade').value = '';
+                document.getElementById('bairro').value = '';
                 document.getElementById('estado').value = '';
-                document.getElementById('pais').value = 'Brasil';
             });
         } else {
             alert("Digite um CEP válido com 8 dígitos.");
