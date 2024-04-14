@@ -3,95 +3,96 @@
 
 {% block content %}
 <style>
-    .container {
-        max-width: 600px;
-        margin: 0 auto;
+    .container { max-width: 600px; margin: 0 auto; }
+    h1 { font-size: 24px; margin-bottom: 20px; }
+    form { margin-bottom: 20px; }
+    label { display: block; margin-bottom: 5px; font-weight: bold; }
+    input[type="text"], input[type="number"], textarea, input[type="file"] {
+        width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;
     }
-
-    h1 {
-        font-size: 24px;
-        margin-bottom: 20px;
-    }
-
-    form {
-        margin-bottom: 20px;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-    }
-
-    input[type="text"],
-    input[type="number"],
-    textarea,
-    input[type="file"] {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-
-    input[type="submit"] {
-        background-color: #007bff;
-        color: #fff;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    input[type="submit"]:hover {
-        background-color: #0056b3;
-    }
-
-    /* Estilo para erros de validação */
-    input:invalid,
-    textarea:invalid {
-        border-color: #dc3545;
-    }
-
-    input[type="text"]:invalid + span,
-    input[type="number"]:invalid + span,
-    textarea:invalid + span,
-    input[type="file"]:invalid + span {
-        color: #dc3545;
-        font-size: 12px;
+    input[type="submit"] { background-color: #007bff; color: #fff; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; }
+    input[type="submit"]:hover { background-color: #0056b3; }
+    input:invalid, textarea:invalid { border-color: #dc3545; }
+    input[type="text"]:invalid + span, input[type="number"]:invalid + span, textarea:invalid + span, input[type="file"]:invalid + span {
+        color: #dc3545; font-size: 12px;
     }
 </style>
+
 <div class="container">
     <h1>Cadastrar Espaço</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {% comment %} <label for="proprietario_nome">Nome do Proprietário:</label><br> {% endcomment %}
-        {% comment %} <input type="text" id="proprietario_nome" name="proprietario_nome"><br> {% endcomment %}
-        <label for="nome">Nome do Espaço:</label><br>
+        <label for="nome">Nome do Espaço:</label>
         <input type="text" id="nome" name="nome"><br>
-        <label for="descricao">Descrição:</label><br>
+
+        <label for="descricao">Descrição:</label>
         <textarea id="descricao" name="descricao" rows="4" cols="50"></textarea><br>
-        <label for="preco_por_noite">Preço por Noite:</label><br>
+
+        <label for="preco_por_noite">Preço por Noite:</label>
         <input type="number" id="preco_por_noite" name="preco_por_noite"><br>
-        <label for="endereco">Endereço:</label><br>
-        <input type="text" id="endereco" name="endereco"><br>
-        <label for="cidade">Cidade:</label><br>
-        <input type="text" id="cidade" name="cidade"><br>
-        <label for="estado">Estado:</label><br>
-        <input type="text" id="estado" name="estado"><br>
-        <label for="pais">País:</label><br>
-        <input type="text" id="pais" name="pais"><br>
-        <label for="numero_de_quartos">Número de Quartos:</label><br>
+
+        <label for="cep">CEP:</label>
+        <input type="text" id="cep" name="cep" placeholder="Digite o CEP" onblur="fetchAddress()"><br>
+
+        <label for="endereco">Endereço:</label>
+        <input type="text" id="endereco" name="endereco" readonly><br>
+
+        <label for="cidade">Cidade:</label>
+        <input type="text" id="cidade" name="cidade" readonly><br>
+
+        <label for="estado">Estado:</label>
+        <input type="text" id="estado" name="estado" readonly><br>
+
+        <label for="pais">País:</label>
+        <input type="text" id="pais" name="pais" value="Brasil" readonly><br>
+
+        <label for="numero_de_quartos">Número de Quartos:</label>
         <input type="number" id="numero_de_quartos" name="numero_de_quartos"><br>
-        <label for="numero_de_banheiros">Número de Banheiros:</label><br>
+
+        <label for="numero_de_banheiros">Número de Banheiros:</label>
         <input type="number" id="numero_de_banheiros" name="numero_de_banheiros"><br>
-        <label for="numero_de_hospedes">Número de Hóspedes:</label><br>
+
+        <label for="numero_de_hospedes">Número de Hóspedes:</label>
         <input type="number" id="numero_de_hospedes" name="numero_de_hospedes"><br>
-        <label for="foto_principal">Foto Principal:</label><br>
+
+        <label for="foto_principal">Foto Principal:</label>
         <input type="file" id="foto_principal" name="foto_principal"><br>
         <br>
         <input type="submit" value="Cadastrar">
     </form>
 </div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    function fetchAddress() {
+        const cepField = document.getElementById('cep');
+        let cep = cepField.value.trim().replace(/\D/g, ''); // Remove tudo que não é dígito
+        if (cep.length === 8) {
+            fetch(`https://viacep.com.br/ws/${cep}/json/`)
+            .then(response => {
+                if (!response.ok) throw new Error('Erro ao buscar o CEP: ' + response.status);
+                return response.json();
+            })
+            .then(data => {
+                if (data.erro) throw new Error('CEP não encontrado.');
+                document.getElementById('endereco').value = data.logradouro || '';
+                document.getElementById('cidade').value = data.localidade || '';
+                document.getElementById('estado').value = data.uf || '';
+                document.getElementById('pais').value = 'Brasil';
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+                alert(error.message);
+                document.getElementById('endereco').value = '';
+                document.getElementById('cidade').value = '';
+                document.getElementById('estado').value = '';
+                document.getElementById('pais').value = 'Brasil';
+            });
+        } else {
+            alert("Digite um CEP válido com 8 dígitos.");
+        }
+    }
+    </script>
+    
 {% endblock %}
