@@ -1,0 +1,23 @@
+{% extends 'apps/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Filtrar Espaços por Cidade</h1>
+    <form method="get" action="{% url 'filtrar_espacos_por_cidade' %}">
+        <input type="text" name="cidade" placeholder="Digite a cidade" aria-label="Cidade">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+
+    {% if espacos %}
+    <div class="list-group">
+        {% for espaco in espacos %}
+        <a href="{% url 'detalhes' espaco.id %}" class="list-group-item list-group-item-action">
+            {{ espaco.nome }} - {{ espaco.endereco }}
+        </a>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>Nenhum espaço encontrado para a cidade informada.</p>
+    {% endif %}
+</div>
+{% endblock %}
