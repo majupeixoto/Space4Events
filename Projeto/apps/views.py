@@ -194,3 +194,7 @@ def selecionar_espaco_para_reserva(request):
 # def nome_da_historia(request):
     # return render(request, 'apps/nome_da_historia.html')
 
+def filtrar_espacos_por_cidade(request):
+    cidade_query = request.GET.get('cidade')
+    espacos = Espaco.objects.filter(cidade__iexact=cidade_query) if cidade_query else None
+    return render(request, 'apps/filtrar_espacos_por_cidade.html', {'espacos': espacos})
