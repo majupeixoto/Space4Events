@@ -1,0 +1,19 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+    <h1>Pagar Sinal de Reserva</h1>
+    <p>Por favor, forneça as informações de pagamento para completar a reserva.</p>
+    <form method="post" action="{% url 'pagamento_reserva' reserva_id %}">
+        {% csrf_token %}
+        <label for="numero_cartao">Número do Cartão:</label><br>
+        <input type="text" id="numero_cartao" name="numero_cartao" required><br><br>
+        
+        <label for="data_validade">Data de Validade:</label><br>
+        <input type="text" id="data_validade" name="data_validade" placeholder="MM/AA" required><br><br>
+        
+        <label for="cvv">CVV:</label><br>
+        <input type="text" id="cvv" name="cvv" required><br><br>
+        
+        <input type="submit" value="Pagar">
+    </form>
+{% endblock %}
