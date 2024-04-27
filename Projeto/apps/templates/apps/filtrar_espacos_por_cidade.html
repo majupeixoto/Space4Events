@@ -1,0 +1,97 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    .card-title {
+        margin: 0;
+        color: #333333;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .card-text {
+        color: #666666;
+        font-size: 14px;
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
+
+    .btn-primary, .btn-outline-secondary {
+        color: #fff;
+        background-color: #333333;
+        border-color: #333333;
+    }
+
+    .btn-primary:hover, .btn-outline-secondary:hover {
+        background-color: #555;
+        color: white;
+    }
+
+    .form-control {
+        width: calc(100% - 30px); /* Ajusta para 100% com margem interna */
+        margin-bottom: 15px; /* Espaçamento inferior para a caixa de texto */
+    }
+
+    form {
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .list-group-item:hover {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<div class="container">
+    <h1>Filtrar Espaços por Cidade</h1>
+    <form method="get" action="{% url 'filtrar_espacos_por_cidade' %}" class="mb-3">
+        <input type="text" name="cidade" placeholder="Digite a cidade" aria-label="Cidade" class="form-control mb-2">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+
+    {% if espacos %}
+    <div style="width: 100%;">
+        {% for espaco in espacos %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ espaco.nome }}</h5>
+                <p class="card-text">{{ espaco.endereco }}</p>
+                <a href="{% url 'detalhes' espaco.id %}" class="btn btn-sm btn-outline-secondary">Ver mais</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>Nenhum espaço encontrado para a cidade informada.</p>
+    {% endif %}
+</div>
+{% endblock %}
