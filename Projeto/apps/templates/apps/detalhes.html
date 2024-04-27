@@ -98,7 +98,16 @@
                     {% else %}
                         <a href="{% url 'login' %}" class="btn btn-lg btn-outline-secondary">Favoritar</a>
                     {% endif %}
-                </div>      
+                </div>
+                <div class="btn-group">
+                    {% if user.is_authenticated %}
+                        {% if espaco %}
+                            <a href="{% url 'reservar_espaco' espaco.id %}" class="btn btn-lg btn-outline-secondary">Quero reservar!</a>
+                        {% endif %}
+                    {% else %}
+                        <a href="{% url 'login' %}" class="btn btn-lg btn-outline-secondary">Quero reservar!</a>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>

@@ -187,7 +187,7 @@ def minhas_reservas(request):
 def profile(request):
     return redirect('home')
 
-def selecionar_espaco_para_reserva(request):
+#def selecionar_espaco_para_reserva(request):
     espacos = Espaco.objects.all()
     return render(request, 'selecionar_espaco_para_reserva.html', {'espacos': espacos})
 
