@@ -85,17 +85,17 @@ def criar_reserva(request, espaco_id):
         if reservas_conflitantes.exists():
             return HttpResponse("Espaço já reservado para as datas solicitadas!", status=400)
 
-        # Armazena os detalhes da reserva na sessão
-        request.session['reserva_details'] = {
-            'espaco_id': espaco_id,
-            'hospede_nome': hospede_nome,
-            'data_check_in': data_check_in,
-            'data_check_out': data_check_out,
-            'numero_de_hospedes': numero_de_hospedes
-        }
+        else:# Armazena os detalhes da reserva na sessão
+            request.session['reserva_details'] = {
+                'espaco_id': espaco_id,
+                'hospede_nome': hospede_nome,
+                'data_check_in': data_check_in,
+                'data_check_out': data_check_out,
+                'numero_de_hospedes': numero_de_hospedes
+            }
         
         # Redireciona para a página de pagamento
-        HttpResponse('pagamento_reserva')
+        return redirect('pagamento_reserva')
     
     else:
         espaco = get_object_or_404(Espaco, id=espaco_id)
@@ -104,7 +104,7 @@ def criar_reserva(request, espaco_id):
 
 @login_required
 def pagamento_reserva(request):
-    if request.method == 'POST' or request.method == 'GET':
+    if request.method == 'POST':
         # Recupera os detalhes da reserva da sessão
         reserva_details = request.session.get('reserva_details')
 
@@ -135,8 +135,6 @@ def pagamento_reserva(request):
 
                 # Redireciona para a página de sucesso
                 return redirect('minhas_reservas', reserva_id=reserva.id)
-            else:
-                messages.error(request, "Falha no pagamento. Verifique os detalhes do seu cartão.")
         else:
             # Se os detalhes da reserva não estiverem na sessão, redirecione para uma página de erro
             return HttpResponse("Detalhes da reserva não encontrados na sessão.")
