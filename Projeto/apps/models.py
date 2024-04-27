@@ -3,6 +3,12 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+# lembrando: SEMPRE que modificar ou acrescentar uma models a gnt tem q fazer os comandos:
+# python manage.py makemigrations
+# e em seguida:
+# python manage.py migrate
+# python manage.py runserver
+
 class Espaco(models.Model):
     proprietario_nome = models.CharField(max_length=100)
     nome = models.CharField(max_length=100)
@@ -53,6 +59,7 @@ class Reserva(models.Model):
     data_check_in = models.DateField()
     data_check_out = models.DateField()
     numero_de_hospedes = models.PositiveIntegerField(default=1)
+    espaco = models.ForeignKey(Espaco, on_delete=models.PROTECT)
 
     def __str__(self):
         return f"Reserva de {self.espaco_nome} por {self.hospede_nome}"

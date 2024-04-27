@@ -62,6 +62,7 @@ def cadastrar_espaco(request):
     else:
         return render(request, 'apps/cadastrar_espaco.html')
 
+@login_required
 def criar_reserva(request, espaco_id):
     if request.method == 'POST':
         hospede_nome = request.POST.get('hospede_nome')
@@ -69,17 +70,14 @@ def criar_reserva(request, espaco_id):
         data_check_out = request.POST.get('data_check_out')
         numero_de_hospedes = int(request.POST.get('numero_de_hospedes'))
 
-        # Verificação - espaço existe?
         try:
             espaco = Espaco.objects.get(id=espaco_id)
         except Espaco.DoesNotExist:
             return HttpResponse("Espaço não encontrado")
 
-        # Verificação - espaço comporta o número de pessoas?
         if espaco.numero_de_hospedes < numero_de_hospedes:
             return HttpResponse("Número de hóspedes excede a capacidade do espaço")
 
-        # Verificação - espaço disponível e não reservado por outro usuário?
         reservas_conflitantes = Reserva.objects.filter(
             espaco_nome=espaco.nome,
             data_check_in__lte=data_check_out,
@@ -93,10 +91,36 @@ def criar_reserva(request, espaco_id):
         reserva = Reserva(espaco_proprietario_nome=espaco.proprietario_nome, espaco_nome=espaco.nome, hospede_nome=hospede_nome, data_check_in=data_check_in, data_check_out=data_check_out, numero_de_hospedes=numero_de_hospedes)
         reserva.save()
         
-        return redirect('detalhes_espaco', espaco_id=espaco_id)
+        # Redirecionar para a página de pagamento com o ID da reserva
+        return redirect('pagamento_reserva', id=reserva.id)
+    
     else:
-        espaco = Espaco.objects.get(id=espaco_id)
+        espaco = get_object_or_404(Espaco, id=espaco_id)
         return render(request, 'apps/reservar_espaco.html', {'espaco': espaco})
+
+
+@login_required
+def pagamento_reserva(request, reserva_id):
+    reserva = get_object_or_404(Reserva, id=reserva_id)
+    
+    if request.method == 'POST' or request.method == 'GET':
+        usuario = request.user
+
+        numero_cartao = request.POST.get('numero_cartao')
+        data_validade = request.POST.get('data_validade')
+        cvv = request.POST.get('cvv')
+
+        if len(numero_cartao) >= 12 and '/' in data_validade and len(cvv) == 3:
+            # Lógica de pagamento simulado
+            messages.success(request, "Pagamento do sinal efetuado com sucesso!")
+            return render(request, 'apps/pagamento_reserva.html')
+        else:
+            messages.error(request, "Falha no pagamento. Verifique os detalhes do seu cartão.")
+            return render(request, 'apps/pagamento_reserva.html', {'reserva': reserva})
+    
+    else:
+        # Se a solicitação não for do tipo POST, redirecione para uma página de erro.
+        return HttpResponse("Método de requisição inválido.")
 
 def detalhes(request, espaco_id):
     espaco = get_object_or_404(Espaco, id=espaco_id)
@@ -178,8 +202,9 @@ def meus_espacos(request):
 
 @login_required
 def minhas_reservas(request):
-    if request.user.is_authenticated:
-        reservas = Reserva.objects.filter(espaco_proprietario_nome=request.user.username)
+    user = request.user
+    if user.is_authenticated:
+        reservas = Reserva.objects.get(hospede_nome=user)
         return render(request, 'apps/minhas_reservas.html', {'reservas': reservas})
     else:
         return redirect('login')
@@ -198,3 +223,24 @@ def filtrar_espacos_por_cidade(request):
     cidade_query = request.GET.get('cidade')
     espacos = Espaco.objects.filter(cidade__iexact=cidade_query) if cidade_query else None
     return render(request, 'apps/filtrar_espacos_por_cidade.html', {'espacos': espacos})
+
+# def pagamento_reserva(request, espaco_id):
+    espaco = get_object_or_404(Espaco, id=espaco_id)
+    
+    if request.method == 'POST' or request.method == 'GET':
+        usuario = request.user
+
+        numero_cartao = request.POST.get('numero_cartao')
+        data_validade = request.POST.get('data_validade')
+        cvv = request.POST.get('cvv')
+
+        if len(numero_cartao) >= 12 and '/' in data_validade and len(cvv) == 3:
+            # Lógica de pagamento simulado
+            messages.success(request, "Pagamento do sinal efetuado com sucesso!")
+            return render(request, 'apps/pagamento_reserva.html')
+        else:
+            messages.error(request, "Falha no pagamento. Verifique os detalhes do seu cartão.")
+            return render(request, 'apps/pagamento_reserva.html', {'espaco': espaco})
+    else:
+        # Se a solicitação não for do tipo POST, redirecione para uma página de erro.
+        return HttpResponse("Método de requisição inválido.")
