@@ -62,37 +62,40 @@ def cadastrar_espaco(request):
     else:
         return render(request, 'apps/cadastrar_espaco.html')
 
+
 @login_required
 def criar_reserva(request, espaco_id):
+    espaco = get_object_or_404(Espaco, id=espaco_id)
     if request.method == 'POST':
         hospede_nome = request.POST.get('hospede_nome')
         data_check_in = request.POST.get('data_check_in')
         data_check_out = request.POST.get('data_check_out')
         numero_de_hospedes = int(request.POST.get('numero_de_hospedes'))
 
-        try:
-            espaco = Espaco.objects.get(id=espaco_id)
-        except Espaco.DoesNotExist:
-            return HttpResponse("Espaço não encontrado")
-
         if espaco.numero_de_hospedes < numero_de_hospedes:
-            return HttpResponse("Número de hóspedes excede a capacidade do espaço")
+            return HttpResponse("Número de hóspedes excede a capacidade do espaço", status=400)
 
+        # Filtra as reservas conflitantes pelo espaço e datas
         reservas_conflitantes = Reserva.objects.filter(
-            espaco_nome=espaco.nome,
+            espaco=espaco,
             data_check_in__lte=data_check_out,
             data_check_out__gte=data_check_in
         )
 
         if reservas_conflitantes.exists():
-            return HttpResponse("Espaço já reservado para as datas solicitadas!")
+            return HttpResponse("Espaço já reservado para as datas solicitadas!", status=400)
 
-        # Criar a reserva
-        reserva = Reserva(espaco_proprietario_nome=espaco.proprietario_nome, espaco_nome=espaco.nome, hospede_nome=hospede_nome, data_check_in=data_check_in, data_check_out=data_check_out, numero_de_hospedes=numero_de_hospedes)
-        reserva.save()
+        # Armazena os detalhes da reserva na sessão
+        request.session['reserva_details'] = {
+            'espaco_id': espaco_id,
+            'hospede_nome': hospede_nome,
+            'data_check_in': data_check_in,
+            'data_check_out': data_check_out,
+            'numero_de_hospedes': numero_de_hospedes
+        }
         
-        # Redirecionar para a página de pagamento com o ID da reserva
-        return redirect('pagamento_reserva', id=reserva.id)
+        # Redireciona para a página de pagamento
+        HttpResponse('pagamento_reserva')
     
     else:
         espaco = get_object_or_404(Espaco, id=espaco_id)
@@ -100,27 +103,46 @@ def criar_reserva(request, espaco_id):
 
 
 @login_required
-def pagamento_reserva(request, reserva_id):
-    reserva = get_object_or_404(Reserva, id=reserva_id)
-    
+def pagamento_reserva(request):
     if request.method == 'POST' or request.method == 'GET':
-        usuario = request.user
+        # Recupera os detalhes da reserva da sessão
+        reserva_details = request.session.get('reserva_details')
 
-        numero_cartao = request.POST.get('numero_cartao')
-        data_validade = request.POST.get('data_validade')
-        cvv = request.POST.get('cvv')
+        if reserva_details:
+            espaco_id = reserva_details['espaco_id']
+            hospede_nome = reserva_details['hospede_nome']
+            data_check_in = reserva_details['data_check_in']
+            data_check_out = reserva_details['data_check_out']
+            numero_de_hospedes = reserva_details['numero_de_hospedes']
 
-        if len(numero_cartao) >= 12 and '/' in data_validade and len(cvv) == 3:
-            # Lógica de pagamento simulado
-            messages.success(request, "Pagamento do sinal efetuado com sucesso!")
-            return render(request, 'apps/pagamento_reserva.html')
+            numero_cartao = request.POST.get('numero_cartao')
+            data_validade = request.POST.get('data_validade')
+            cvv = request.POST.get('cvv')
+
+            if numero_cartao and data_validade and cvv:
+                espaco = get_object_or_404(Espaco, id=espaco_id)
+                reserva = Reserva.objects.create(
+                    espaco_proprietario_nome=espaco.proprietario_nome,
+                    espaco_nome=espaco.nome,
+                    hospede_nome=hospede_nome,
+                    data_check_in=data_check_in,
+                    data_check_out=data_check_out,
+                    numero_de_hospedes=numero_de_hospedes,
+                    espaco=espaco
+                )
+                # Limpa os detalhes da reserva da sessão
+                del request.session['reserva_details']
+
+                # Redireciona para a página de sucesso
+                return redirect('minhas_reservas', reserva_id=reserva.id)
+            else:
+                messages.error(request, "Falha no pagamento. Verifique os detalhes do seu cartão.")
         else:
-            messages.error(request, "Falha no pagamento. Verifique os detalhes do seu cartão.")
-            return render(request, 'apps/pagamento_reserva.html', {'reserva': reserva})
-    
+            # Se os detalhes da reserva não estiverem na sessão, redirecione para uma página de erro
+            return HttpResponse("Detalhes da reserva não encontrados na sessão.")
     else:
         # Se a solicitação não for do tipo POST, redirecione para uma página de erro.
-        return HttpResponse("Método de requisição inválido.")
+        return render(request, 'apps/pagamento_reserva.html')
 
 def detalhes(request, espaco_id):
     espaco = get_object_or_404(Espaco, id=espaco_id)
@@ -202,12 +224,13 @@ def meus_espacos(request):
 
 @login_required
 def minhas_reservas(request):
-    user = request.user
-    if user.is_authenticated:
-        reservas = Reserva.objects.get(hospede_nome=user)
-        return render(request, 'apps/minhas_reservas.html', {'reservas': reservas})
-    else:
+    usuario = request.user
+    if request.user.is_anonymous:
         return redirect('login')
+    else:
+        usuario = request.user
+        reservas = Reserva.objects.filter(hospede_nome=usuario.username)
+        return render(request, 'apps/minhas_reservas.html', {'reservas': reservas})
 
 def profile(request):
     return redirect('home')
