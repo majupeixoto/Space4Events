@@ -94,7 +94,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / 'base'
+            BASE_DIR / 'base',
+            # ... outras pastas de templates, se necessário
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -107,6 +108,8 @@ TEMPLATES = [
         },
     },
 ]
+
+
 
 WSGI_APPLICATION = 's4e.wsgi.application'
 
