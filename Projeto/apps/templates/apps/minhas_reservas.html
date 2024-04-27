@@ -49,15 +49,15 @@
                 {% for reserva in reservas %}
                 <tr>
                     <td style="padding: 8px;">{{ forloop.counter }}</td>
-                    <td style="padding: 8px;"><span class="hover-blue" style="font-family: Helvetica, sans-serif;">{{ reserva.espaco.nome }}</span></td>
-                    <td style="padding: 8px;"><span class="hover-blue" style="font-family: Helvetica, sans-serif;">{{ reserva.espaco.proprietario_nome }}</span></td>
-                    <td style="padding: 8px;"><span class="hover-blue" style="font-family: Helvetica, sans-serif;">{{ reserva.espaco.preco_por_noite }}</span></td>
-                    <td style="padding: 8px;"><span class="hover-blue" style="font-family: Helvetica, sans-serif;">{{ reserva.espaco.numero_de_quartos }}</span></td>
-                    <td style="padding: 8px;"><span class="hover-blue" style="font-family: Helvetica, sans-serif;">{{ reserva.espaco.numero_de_banheiros }}</span></td>
-                    <td style="padding: 8px;"><span class="hover-blue" style="font-family: Helvetica, sans-serif;">{{ reserva.espaco.numero_de_hospedes }}</span></td>
+                    <td style="padding: 8px;"><span class="hover-blue" style="font-family: Helvetica, sans-serif;">{{ espaco.nome }}</span></td>
+                    <td style="padding: 8px;"><span class="hover-blue" style="font-family: Helvetica, sans-serif;">{{ espaco.proprietario_nome }}</span></td>
+                    <td style="padding: 8px;"><span class="hover-blue" style="font-family: Helvetica, sans-serif;">{{ espaco.preco_por_noite }}</span></td>
+                    <td style="padding: 8px;"><span class="hover-blue" style="font-family: Helvetica, sans-serif;">{{ espaco.numero_de_quartos }}</span></td>
+                    <td style="padding: 8px;"><span class="hover-blue" style="font-family: Helvetica, sans-serif;">{{ espaco.numero_de_banheiros }}</span></td>
+                    <td style="padding: 8px;"><span class="hover-blue" style="font-family: Helvetica, sans-serif;">{{ espaco.numero_de_hospedes }}</span></td>
                     <td style="padding: 8px;">
-                        {% if reserva.espaco.foto_principal %}
-                            <img src="{{ reserva.espaco.foto_principal.url }}" alt="Foto Principal" style="max-width: 100px; max-height: 100px;">
+                        {% if espaco.foto_principal %}
+                            <img src="{{ espaco.foto_principal.url }}" alt="Foto Principal" style="max-width: 100px; max-height: 100px;">
                         {% else %}
                             Sem foto disponível
                         {% endif %}

@@ -134,7 +134,7 @@ def pagamento_reserva(request):
                 del request.session['reserva_details']
 
                 # Redireciona para a página de sucesso
-                return redirect('minhas_reservas', reserva_id=reserva.id)
+                return redirect('minhas_reservas')
         else:
             # Se os detalhes da reserva não estiverem na sessão, redirecione para uma página de erro
             return HttpResponse("Detalhes da reserva não encontrados na sessão.")
@@ -222,12 +222,11 @@ def meus_espacos(request):
 
 @login_required
 def minhas_reservas(request):
-    usuario = request.user
     if request.user.is_anonymous:
         return redirect('login')
     else:
         usuario = request.user
-        reservas = Reserva.objects.filter(hospede_nome=usuario.username)
+        reservas = Reserva.objects.filter(hospede_nome=usuario)
         return render(request, 'apps/minhas_reservas.html', {'reservas': reservas})
 
 def profile(request):
