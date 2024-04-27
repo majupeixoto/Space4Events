@@ -3,7 +3,7 @@
 {% block content %}
     <h1>Pagar Sinal de Reserva</h1>
     <p>Por favor, forneça as informações de pagamento para completar a reserva.</p>
-    <form method="post" action="{% url 'pagamento_reserva' reserva_id %}">
+    <form method="post" action="{% url 'pagamento_reserva' %}">
         {% csrf_token %}
         <label for="numero_cartao">Número do Cartão:</label><br>
         <input type="text" id="numero_cartao" name="numero_cartao" required><br><br>
