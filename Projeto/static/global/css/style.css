@@ -278,6 +278,11 @@
     text-decoration: underline;
 }
 
+.corpo h1{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 /*css home*/
 .card {
     background-color: #ffffff;
