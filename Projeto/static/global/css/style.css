@@ -30,6 +30,9 @@ body {
     flex-grow: 1;
 }
 
+.corpo{
+    flex: 1;
+}
 
 /* Estilo para o rodapé */
 .site-footer {
