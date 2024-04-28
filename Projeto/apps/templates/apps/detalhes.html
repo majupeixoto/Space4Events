@@ -15,9 +15,10 @@
                         aria-label="Slide 3"></button>
                 </div>
                 <div class="carousel-inner">
-                    {% if espaco.foto_principal %}
+                    {% if detalhes_do_espaco.foto_principal_url %}
                     <div class="carousel-item active">
-                        <img src="{{ espaco.foto_principal.url }}" class="d-block w-100" alt="{{ espaco.nome }}">
+                        <img src="{{ detalhes_do_espaco.foto_principal_url }}" class="d-block w-100"
+                            alt="{{ detalhes_do_espaco.nome }}">
                     </div>
                     {% else %}
                     <div class="carousel-item active">
@@ -104,4 +105,5 @@
 </script>
 
 {% endblock %}
+
 
