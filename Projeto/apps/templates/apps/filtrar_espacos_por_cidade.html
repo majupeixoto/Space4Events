@@ -14,7 +14,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ espaco.nome }}</h5>
                 <p class="card-text">{{ espaco.endereco }}</p>
-                <a href="{% url 'detalhes' espaco.id %}" class="btn btn-sm btn-outline-secondary">Ver mais</a>
+                <a href="{% url 'detalhes' espaco.id %}" class="btn btn-outline-secondary">Ver mais</a>
             </div>
         </div>
         {% endfor %}

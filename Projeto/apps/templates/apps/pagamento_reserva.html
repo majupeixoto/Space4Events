@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="center">
-    <form class="login" method="post" action="{% url 'pagamento_reserva' %}">
+    <form class="reservar" method="post" action="{% url 'pagamento_reserva' %}">
         <h1>Pagar Reserva</h1>
         <p>Por favor, forneça as informações de pagamento para completar a reserva.</p>
         {% csrf_token %}
