@@ -1,70 +1,6 @@
 {% extends 'global/base.html' %}
 
 {% block content %}
-<style>
-    .card {
-        background-color: #ffffff;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        margin-bottom: 20px;
-        overflow: hidden;
-        margin: 0 15px 20px;
-    }
-
-    .card-img-top {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-    }
-
-    .card-body {
-        padding: 15px;
-    }
-
-    .card-title {
-        margin: 0;
-        color: #333333;
-        font-size: 18px;
-        font-weight: bold;
-    }
-
-    .card-text {
-        color: #666666;
-        font-size: 14px;
-        margin-top: 10px;
-        margin-bottom: 15px;
-    }
-
-    .btn-outline-secondary {
-        color: #333333;
-        border-color: #333333;
-    }
-
-    .btn-outline-secondary:hover {
-        background-color: #333333;
-        color: white;
-    }
-
-    .text-body-secondary {
-        color: #888888;
-        font-size: 14px;
-    }
-    .row {
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 20px;
-    padding-right: 15px;
-    padding-left: 15px;
-    }
-
-    /* Ajuste a largura máxima conforme necessário para alinhar com o design desejado */
-    .container {
-        max-width: 1200px; /* Ou a largura que melhor se adapte ao seu layout */
-        margin: 0 auto; /* Centraliza o contêiner */
-        padding: 0 15px; /* Adiciona preenchimento nas laterais */
-    }
-
-</style>
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
     {% for espaco in espacos %}
     <div class="col">
@@ -84,7 +20,7 @@
                 <p class="card-text">{{ espaco.descricao }}</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                        <a href="{% url 'detalhes' espaco.id %}" class="btn btn-sm btn-outline-secondary">ver mais</a>
+                        <a href="{% url 'detalhes' espaco.id %}" class="btn ">ver mais</a>
                     </div>
                     <small class="text-body-secondary">{{ espaco.preco_por_noite }}</small>
                 </div>
