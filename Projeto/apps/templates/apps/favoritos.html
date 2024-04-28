@@ -1,8 +1,6 @@
 {% extends 'global/base.html' %}
 
 {% block content %}
-
-<div class="container">
     {% if user.is_authenticated %}
     <h1>Meus Favoritos</h1>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -43,5 +41,4 @@
     <p>Por favor, faça login para ver seus favoritos.</p>
     <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
     {% endif %}
-</div>
 {% endblock %}

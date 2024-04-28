@@ -1,8 +1,6 @@
 {% extends 'global/base.html' %}
 
 {% block content %}
-
-<div class="container">
     <h1>Filtrar Espaços por Cidade</h1>
     <form method="get" action="{% url 'filtrar_espacos_por_cidade' %}" class="mb-3">
         <input type="text" name="cidade" placeholder="Digite a cidade" aria-label="Cidade" class="form-control mb-2">
@@ -24,5 +22,4 @@
     {% else %}
     <p>Nenhum espaço encontrado para a cidade informada.</p>
     {% endif %}
-</div>
 {% endblock %}
