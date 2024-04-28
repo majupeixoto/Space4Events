@@ -21,6 +21,16 @@
     letter-spacing: 1px;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.main-content {
+    flex-grow: 1;
+}
+
+
 /* Estilo para o rodapé */
 .site-footer {
     width: 100%;
@@ -29,6 +39,7 @@
     padding: 3rem 3.5rem;
     margin-top: 30px;
 }
+
 
 /* Estilo para os links do rodapé */
 .footer-link {
