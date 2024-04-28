@@ -191,7 +191,6 @@ def home(request):
     return render(request, 'apps/home.html', {'espacos': espacos})
 
 def login_view(request):
-    title = "Login"
     next_url = request.GET.get('next', '')
     if request.method == 'POST':
         username = request.POST.get('username')
