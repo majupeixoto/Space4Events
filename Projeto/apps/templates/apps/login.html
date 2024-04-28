@@ -7,19 +7,18 @@
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ next }}">
         <h2>{{ title }}</h2>
+        <h1>Login</h1>
 
         <div class="box-user">
-            <input type="text" name="username" required>
-            <label>Nome de usuário</label>
+            <input type="text" name="username" placeholder="Nome de usuário">
         </div>
 
         <div class="box-user">
-            <input type="password" name="password"  required>
-            <label>Senha</label>
+            <input type="password" name="password" placeholder="Senha" required>
         </div>
 
         <div>
-            <p>Não tem cadastro? <a href="{% url 'cadastro' %}" class="forget">Crie sua conta</a>.</p>
+            <p>Não tem cadastro? <a href="{% url 'cadastro' %}" class="forget">Crie sua conta.</a></p>
         </div>
 
         <button type="submit" class="btn_login">Entrar</button>
