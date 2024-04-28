@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 # Create your models here.
 
@@ -52,6 +53,7 @@ class Favorito(models.Model):
 
     def __str__(self):
         return f'{self.usuario.username} - {self.espaco.nome}'
+    
 class Reserva(models.Model):
     espaco_proprietario_nome = models.CharField(max_length=100)
     espaco_nome = models.CharField(max_length=100, default='Nome do Espaço Padrão')
@@ -60,6 +62,16 @@ class Reserva(models.Model):
     data_check_out = models.DateField()
     numero_de_hospedes = models.PositiveIntegerField(default=1)
     espaco = models.ForeignKey(Espaco, on_delete=models.PROTECT)
+
+    @property
+    def status(self):
+        hoje = timezone.now().date()
+        if self.data_check_out < hoje:
+            return "Reserva terminada"
+        elif self.data_check_in <= hoje <= self.data_check_out:
+            return "Reserva em andamento"
+        else:
+            return "Reserva ainda por vir"
 
     @classmethod
     def minhas_reservas(cls, hospede_nome):
