@@ -6,7 +6,6 @@
     <form class="login" method="post">
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ next }}">
-        <h2>{{ title }}</h2>
         <h1>Login</h1>
 
         <div class="box-user">
