@@ -162,7 +162,6 @@ body {
 /* Estilo para o link ativo */
 .nav-link.active {
     font-weight: bold;
-    font-size: 25px;
 }
 
 /* Estilo para o botão de login/logout */

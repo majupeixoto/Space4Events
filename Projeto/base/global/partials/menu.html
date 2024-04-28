@@ -1,5 +1,3 @@
-<!-- MENU -->
-
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'home' %}">Space4Events</a>
@@ -9,25 +7,31 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link " aria-current="page" href="{% url 'cadastrar_espaco' %}">Cadastrar Espaço</a>
-                <a class="nav-link" href="{% url 'favoritos' %}">Favoritos</a>
-                <a class="nav-link" href="{% url 'minhas_reservas' %}">Minhas Reservas</a>
-                <a class="nav-link" href="{% url 'meus_espacos' %}">Meus Espaços</a>
-                <a class="nav-link" href="{% url 'filtrar_espacos_por_cidade' %}">Filtrar Espaços por Cidade</a>
-
+                <!-- Adicionando a classe "active" quando o URL corresponder -->
+                <a class="nav-link {% if request.resolver_match.url_name == 'cadastrar_espaco' %} active {% endif %}" 
+                    aria-current="page" 
+                    href="{% url 'cadastrar_espaco' %}">Cadastrar Espaço</a>
+                
+                <a class="nav-link {% if request.resolver_match.url_name == 'favoritos' %} active {% endif %}" 
+                    href="{% url 'favoritos' %}">Favoritos</a>
+                
+                <a class="nav-link {% if request.resolver_match.url_name == 'minhas_reservas' %} active {% endif %}" 
+                    href="{% url 'minhas_reservas' %}">Minhas Reservas</a>
+                
+                <a class="nav-link {% if request.resolver_match.url_name == 'meus_espacos' %} active {% endif %}" 
+                    href="{% url 'meus_espacos' %}">Meus Espaços</a>
+                
+                <a class="nav-link {% if request.resolver_match.url_name == 'filtrar_espacos_por_cidade' %} active {% endif %}" 
+                    href="{% url 'filtrar_espacos_por_cidade' %}">Filtrar Espaços por Cidade</a>
             </div>
         </div>
 
-        <!-- Movendo a estrutura condicional para fora do bloco if principal -->
-
         {% if user.is_authenticated %}
-        <!-- Adicionando o botão de logout -->
         <form method="POST" action="{% url 'logout' %}">
             {% csrf_token %}
             <button type="submit" class="nav-link logout">Logout</button>
         </form>
         {% else %}
-        <!-- Adicionando o link para a página de login -->
         <a class="nav-link login" href="{% url 'login' %}">Login</a>
         {% endif %}
     </div>
