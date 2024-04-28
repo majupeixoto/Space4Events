@@ -187,128 +187,113 @@
     outline: none;
 }
 
+
+
 .center {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    }
+}
+/*css login*/
+.login {
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
     
-    .login {
-        width: 300px;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: #f9f9f9;
-    }
-
-    .login h2 {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .box-user {
-        margin-bottom: 20px;
-    }
-
-    .box-user input {
-        width: 100%;
-        padding: 10px;
-        margin-top: 5px;
-        border: 1px solid #ccc;
-        border-radius: 3px;
-    }
-
-    .box-user label {
-        font-size: 14px;
-        color: #333;
-    }
-
-    .btn {
-        display: block;
-        width: 100%;
-        padding: 10px;
-        margin-top: 10px;
-        border: none;
-        border-radius: 3px;
-        background-color: #007bff;
-        color: #fff;
-        cursor: pointer;
-    }
-
-    .btn:hover {
-        background-color: #0056b3;
-        color: #fff;
-    }
-
-    .forget {
-        color: #007bff;
-        text-decoration: none;
-    }
-
-    .forget:hover {
-        text-decoration: underline;
-    }
-
-    .center {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        }
-        
-        .login {
-            width: 300px;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
+.login h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
     
-        .login h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+.box-user {
+    margin-bottom: 20px;
+}
     
-        .box-user {
-            margin-bottom: 20px;
-        }
+.box-user input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
     
-        .box-user input {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
+.box-user label {
+    font-size: 14px;
+    color: #333;
+}
+
+.btn_login{
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
     
-        .box-user label {
-            font-size: 14px;
-            color: #333;
-        }
+.btn_login:hover {
+    background-color: #0056b3;
+    color: #fff;
+}
     
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            border: none;
-            border-radius: 3px;
-            background-color: #007bff;
-            color: #fff;
-            cursor: pointer;
-        }
+.forget {
+    color: #007bff;
+    text-decoration: none;
+}
     
-        .btn:hover {
-            background-color: #0056b3;
-            color: #fff;
-        }
-    
-        .forget {
-            color: #007bff;
-            text-decoration: none;
-        }
-    
-        .forget:hover {
-            text-decoration: underline;
-        }
+.forget:hover {
+    text-decoration: underline;
+}
+
+/*css home*/
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+    margin: 0 15px 20px;
+}
+
+.card-img-top {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.card-body {
+padding: 15px;
+}
+
+.card-title {
+    margin: 0;
+    color: #333333;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card-text {
+    color: #666666;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.text-body-secondary {
+    color: #888888;
+    font-size: 14px;
+}
+.row {
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
