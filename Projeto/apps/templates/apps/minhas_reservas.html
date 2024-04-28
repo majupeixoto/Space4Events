@@ -22,17 +22,13 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ reserva.espaco.nome }}</h5>
                     <p class="card-text">
-                        Proprietário: {{ reserva.espaco.proprietario_nome }}
+                        Check in: {{ reserva.data_check_in}}
                         <br>
-                        Preço por Noite: {{ reserva.espaco.preco_por_noite }}
+                        Check out: {{ reserva.data_check_out }}
                         <br>
-                        Preço por Noite: {{ reserva.espaco.preco_por_noite }}
+                        Status: {{ reserva.status }}
                         <br>
-                        Banheiros: {{ reserva.espaco.numero_de_banheiros }}
-                        <br>
-                        Banheiros: {{ reserva.espaco.numero_de_banheiros }}
-                        <br>
-                        Hospedes: {{ reserva.espaco.numero_de_hospedes }}
+                        Localização: {{ reserva.espaco.endereco }}
                     </p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
