@@ -222,12 +222,12 @@ def meus_espacos(request):
 
 @login_required
 def minhas_reservas(request):
-    if request.user.is_anonymous:
-        return redirect('login')
-    else:
-        usuario = request.user
-        reservas = Reserva.objects.filter(hospede_nome=usuario)
-        return render(request, 'apps/minhas_reservas.html', {'reservas': reservas})
+     # Obter todas as reservas do usuário atual
+    usuario = request.user
+    reservas = Reserva.objects.filter(hospede_nome=usuario)
+
+    # Renderizar a template com as reservas do usuário
+    return render(request, 'apps/minhas_reservas.html', {'reservas': reservas})
 
 def profile(request):
     return redirect('home')
