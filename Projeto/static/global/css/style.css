@@ -27,6 +27,7 @@
     color: var(--color-neutral-40); /* Branco */
     background-color: var(--color-neutral-10); /* Cinza escuro */
     padding: 3rem 3.5rem;
+    margin-top: 30px;
 }
 
 /* Estilo para os links do rodapé */
