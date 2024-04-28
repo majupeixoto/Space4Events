@@ -156,6 +156,8 @@
 
 /* Estilo para o botão de login/logout */
 .nav-link.login {
+    top: 20px; /* Posição do topo */
+    right: 20px; /* Posição da direita */
     color: var(--color-neutral-0); /* Preto */
     font-weight: bold;
     font-size: 24px;
@@ -169,10 +171,26 @@
     text-decoration: underline;
 }
 
+.nav-link.logout {
+    top: 20px; /* Posição do topo */
+    right: 20px; /* Posição da direita */
+    color: var(--color-neutral-0); /* Preto */
+    font-weight: bold;
+    font-size: 24px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.nav-link.logout:hover {
+    color: var(--color-neutral-30); /* Cinza claro */
+    text-decoration: underline;
+}
+
 /* Estilo para o botão de hamburguer do menu responsivo */
 .navbar-toggler {
     border: none;
-    background-color: transparent;
+    background-color: var(--color-neutral-0);
 }
 
 .navbar-toggler:focus {
@@ -297,3 +315,56 @@ padding: 15px;
     padding-right: 15px;
     padding-left: 15px;
 }
+
+/* Estilo para o formulário de cadastro de espaço */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--color-neutral-40); /* Branco */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.container h1 {
+    color: var(--color-neutral-0); /* Preto */
+    margin-bottom: 20px;
+}
+
+.container form {
+    margin-top: 20px;
+}
+
+.container form label {
+    color: var(--color-neutral-0); /* Preto */
+    font-weight: bold;
+}
+
+.container form input[type="text"],
+.container form input[type="number"],
+.container form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid var(--color-neutral-30); /* Cinza claro */
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.container form input[type="file"] {
+    margin-top: 10px;
+}
+
+.container form input[type="submit"] {
+    background-color: var(--color-green-3); /* Verde escuro */
+    color: var(--color-neutral-40); /* Branco */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.container form input[type="submit"]:hover {
+    background-color: var(--color-green-2); /* Verde médio */
+}
+
