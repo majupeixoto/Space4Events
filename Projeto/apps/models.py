@@ -41,7 +41,7 @@ class Espaco(models.Model):
             'numero_de_banheiros': self.numero_de_banheiros,
             'numero_de_hospedes': self.numero_de_hospedes,
             'sinal_reserva': self.sinal_reserva,
-            'foto_principal': self.foto_principal.url if self.foto_principal else None
+            'foto_principal_url': self.foto_principal.url if self.foto_principal else None
         }
 
     def __str__(self):

@@ -4,15 +4,15 @@
 
 <div class="container">
     {% if user.is_authenticated %}
-    <h1 style="font-family: Helvetica, sans-serif; font-weight: bold;">Minhas reservas</h1>
+    <h1>Minhas reservas</h1>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {% for reserva in reservas %}
         <div class="col">
-            <div class="card shadow-sm">
+            <div class="card">
                 {% if reserva.espaco.foto_principal %}
-                <img src="{{ reserva.espaco.foto_principal.url }}" class="bd-placeholder-img card-img-top" alt="{{ reserva.espaco.nome }}">
+                <img src="{{ reserva.espaco.foto_principal.url }}" class="card-img-top" alt="{{ reserva.espaco.nome }}">
                 {% else %}
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <svg class="card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                     <title>Placeholder</title>
                     <rect width="100%" height="100%" fill="#55595c"></rect>
                     <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
@@ -22,15 +22,21 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ reserva.espaco.nome }}</h5>
                     <p class="card-text">
-                        Proprietário: {{ reserva.espaco.proprietario_nome }}<br>
-                        Preço por Noite: {{ reserva.espaco.preco_por_noite }}<br>
-                        Quartos: {{ reserva.espaco.numero_de_quartos }}<br>
-                        Banheiros: {{ reserva.espaco.numero_de_banheiros }}<br>
+                        Proprietário: {{ reserva.espaco.proprietario_nome }}
+                        <br>
+                        Preço por Noite: {{ reserva.espaco.preco_por_noite }}
+                        <br>
+                        Preço por Noite: {{ reserva.espaco.preco_por_noite }}
+                        <br>
+                        Banheiros: {{ reserva.espaco.numero_de_banheiros }}
+                        <br>
+                        Banheiros: {{ reserva.espaco.numero_de_banheiros }}
+                        <br>
                         Hospedes: {{ reserva.espaco.numero_de_hospedes }}
                     </p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <a href="{% url 'detalhes' reserva.espaco.id %}" class="btn btn-sm btn-outline-secondary">Ver mais</a>
+                            <a href="{% url 'detalhes' reserva.espaco.id %}" class="btn btn-outline-secondary">Ver mais</a>
                         </div>
                     </div>
                 </div>
