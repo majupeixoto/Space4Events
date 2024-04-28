@@ -24,7 +24,7 @@
         <!-- Adicionando o botão de logout -->
         <form method="POST" action="{% url 'logout' %}">
             {% csrf_token %}
-            <button type="submit" class="nav-link login">Logout</button>
+            <button type="submit" class="nav-link logout">Logout</button>
         </form>
         {% else %}
         <!-- Adicionando o link para a página de login -->
