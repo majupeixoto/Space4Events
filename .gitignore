@@ -25,3 +25,6 @@ staticfiles
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history
+
+# Cypress
+/node_modules
