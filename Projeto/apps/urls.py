@@ -19,4 +19,5 @@ urlpatterns = [
     path('reservar_espaco/<int:espaco_id>', views.criar_reserva, name='reservar_espaco'),
     path('filtrar_espacos_por_cidade/', views.filtrar_espacos_por_cidade, name='filtrar_espacos_por_cidade'),
     path('pagamento_reserva/', views.pagamento_reserva, name='pagamento_reserva'),
+    path('filtrar_espacos_por_data/', views.filtrar_espacos_por_data, name='filtrar_espacos_por_data'),
 ]
