@@ -241,7 +241,7 @@ def profile(request):
 def filtrar_espacos_por_cidade(request):
     cidade_query = request.GET.get('cidade')
     espacos = Espaco.objects.filter(cidade__iexact=cidade_query) if cidade_query else None
-    return render(request, 'apps/filtrar_espacos_por_cidade.html', {'espacos': espacos})
+    return render(request, 'apps/home.html', {'espacos': espacos})
 
 # def pagamento_reserva(request, espaco_id):
     espaco = get_object_or_404(Espaco, id=espaco_id)
