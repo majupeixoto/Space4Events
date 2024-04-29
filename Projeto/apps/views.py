@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import *
+from .models import Espaco, Reserva
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.urls import reverse
+import datetime
+
 
 def cadastro(request):
     if request.method == 'POST':
@@ -242,6 +244,22 @@ def filtrar_espacos_por_cidade(request):
     cidade_query = request.GET.get('cidade')
     espacos = Espaco.objects.filter(cidade__iexact=cidade_query) if cidade_query else None
     return render(request, 'apps/home.html', {'espacos': espacos})
+
+def filtrar_espacos_por_data(request):
+    data_query = request.GET.get('data')
+    data = datetime.datetime.strptime(data_query, '%Y-%m-%d').date() if data_query else None
+
+    if not data:
+        return render(request, 'apps/home.html', {'erro': 'Data inválida'})
+
+    espacos_disponiveis = Espaco.objects.exclude(
+        reserva__data_check_in__lte=data,
+        reserva__data_check_out__gte=data
+    )
+
+    return render(request, 'apps/home.html', {'espacos': espacos_disponiveis})
+
+
 
 # def pagamento_reserva(request, espaco_id):
     espaco = get_object_or_404(Espaco, id=espaco_id)
