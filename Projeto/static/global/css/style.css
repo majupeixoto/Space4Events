@@ -158,8 +158,6 @@ body {
 /* Estilo para a barra de navegação */
 .navbar {
     background-color: var(--color-neutral-10); /* Cinza escuro */
-    padding: 1rem 2rem;
-    height: 15lvh;
 }
 
 /* Estilo para o link ativo */
@@ -168,25 +166,8 @@ body {
 }
 
 /* Estilo para o botão de login/logout */
-.nav-link.login {
-    top: 20px; /* Posição do topo */
-    right: 20px; /* Posição da direita */
-    color: var(--color-neutral-0); /* Preto */
-    font-weight: bold;
-    font-size: 24px;
-    border: none;
-    background: none;
-    cursor: pointer;
-}
-
-.nav-link.login:hover {
-    color: var(--color-neutral-30); /* Cinza claro */
-    text-decoration: underline;
-}
-
+.nav-link.login,
 .nav-link.logout {
-    top: 20px; /* Posição do topo */
-    right: 20px; /* Posição da direita */
     color: var(--color-neutral-0); /* Preto */
     font-weight: bold;
     font-size: 24px;
@@ -195,6 +176,7 @@ body {
     cursor: pointer;
 }
 
+.nav-link.login:hover,
 .nav-link.logout:hover {
     color: var(--color-neutral-30); /* Cinza claro */
     text-decoration: underline;
@@ -217,6 +199,7 @@ body {
 .navbar-toggler-icon:focus {
     outline: none;
 }
+
 
 .center {
     display: flex;
