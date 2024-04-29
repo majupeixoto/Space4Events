@@ -2,9 +2,13 @@
 
 {% block content %}
 
-<form method="get" action="{% url 'filtrar_espacos_por_cidade' %}" class="mb-3">
-    <input type="text" name="cidade" placeholder="Digite a cidade" aria-label="Cidade" class="form-control mb-2">
-    <button type="submit" class="btn btn-primary">Buscar</button>
+<form method="get" action="{% url 'filtrar_espacos_por_cidade' %}" class="mb-3 custom-form">
+    <div class="input-group">
+        <input type="text" name="cidade" placeholder="Digite a cidade" aria-label="Cidade" class="form-control mb-2 custom-input">
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary custom-btn"><i class="fas fa-search"></i> Buscar</button>
+        </div>
+    </div>
 </form>
 
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">

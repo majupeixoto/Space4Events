@@ -408,8 +408,3 @@ padding: 15px;
         padding: 0 20px;
     }
 
-    /* Aplicando a fonte Helvetica para todo o conteúdo */
-    #carouselExampleIndicators,
-    .collums {
-        font-family: Helvetica, sans-serif;
-    }
