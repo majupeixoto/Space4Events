@@ -36,35 +36,40 @@ body {
 
 /* Estilo para o rodapé */
 .site-footer {
-    width: 100%;
     color: var(--color-neutral-40); /* Branco */
     background-color: var(--color-neutral-10); /* Cinza escuro */
     padding: 3rem 3.5rem;
     margin-top: 30px;
 }
 
+#custom_footer {
+    background-color:var(--color-neutral-10) ;
+}
 
-/* Estilo para os links do rodapé */
-.footer-link {
-    text-decoration: none;
+#custom_footer h1{
+    color: var(--color-neutral-40);
 }
 
 /* Conteúdo do rodapé */
 #footer_content {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 30px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+@media (min-width: 768px) {
+    #footer_content {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
 /* Informações de contato no rodapé */
 #footer_contacts {
-    grid-column: span 2;
     margin-bottom: 0.75rem;
 }
 
 /* Links para redes sociais no rodapé */
 #footer_social_media {
-    grid-column: span 2;
     display: flex;
     gap: 2rem;
     margin-top: 1.5rem;
