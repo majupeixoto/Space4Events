@@ -1,6 +1,12 @@
 {% extends 'global/base.html' %}
 
 {% block content %}
+
+<form method="get" action="{% url 'filtrar_espacos_por_cidade' %}" class="mb-3">
+    <input type="text" name="cidade" placeholder="Digite a cidade" aria-label="Cidade" class="form-control mb-2">
+    <button type="submit" class="btn btn-primary">Buscar</button>
+</form>
+
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
     {% for espaco in espacos %}
     <div class="col">
