@@ -26,5 +26,3 @@ staticfiles
 !.vscode/extensions.json 
 .history
 
-# Cypress
-/node_modules
