@@ -179,15 +179,24 @@ body {
 /* Estilo para os links na barra de navegação */
 .nav-link {
     color: #ffffff; /* Cor dos links */
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 20px;
+
 }
 
 /* Estilo para os links na barra de navegação quando estão ativos */
 .nav-link.active {
     color: #ffffff !important; /* Cor dos links ativos */
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 20px;
 }
 
 .nav-link:hover {
     color: #d3d3d3; /* Cor dos links quando hover */
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 /* Estilo para o botão de login/logout */
