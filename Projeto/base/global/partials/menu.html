@@ -1,6 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+<nav id="navbar_do_site" class="navbar navbar-expand-lg">
     <div class="container-fluid mb-3">
-        <a class="navbar-brand" href="{% url 'home' %}">Space4Events</a>
+        <a id="logo" href="{% url 'home' %}">
+            <i class="fa-solid fa-dragon"></i>
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -24,10 +26,12 @@
                 {% if user.is_authenticated %}
                 <form class="d-flex" method="POST" action="{% url 'logout' %}">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-link nav-link">Logout</button>
+                    <button id="sair" type="submit" class="btn btn-link nav-link login-logout">Logout</button>
+                    <i id="icon_bonequinho" class="fa-solid fa-person-walking-arrow-right"></i>
                 </form>
                 {% else %}
-                <a class="nav-link login" href="{% url 'login' %}">Login</a>
+                <a id="entrar" class="nav-link login-logout" href="{% url 'login' %}">Login</a>
+                <i id="icon_entrar" class="fa-solid fa-arrow-right-to-bracket"></i>
                 {% endif %}
             </div>
         </div>
