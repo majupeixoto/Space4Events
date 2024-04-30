@@ -1,5 +1,6 @@
 /* Importando fontes do Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&family=Righteous&family=Silkscreen:wght@400;700&display=swap');
 
 /* Definindo variáveis de cores */
 :root {
@@ -161,19 +162,40 @@ body {
 }
 
 /* Estilo para a barra de navegação */
-.navbar {
-    background-color: var(--color-neutral-10); /* Cinza escuro */
+#navbar_do_site {
+    background: #171717;
+    margin-bottom: 20px;
 }
 
-/* Estilo para o link ativo */
+#logo {
+    font-size: 30px;
+    color: var(--color-neutral-40);
+    margin-right: 30px;
+    margin-left: 30px;
+    margin-top: 10px;
+    font-family: "Silkscreen", sans-serif;
+}
+
+/* Estilo para os links na barra de navegação */
+.nav-link {
+    color: #ffffff; /* Cor dos links */
+}
+
+/* Estilo para os links na barra de navegação quando estão ativos */
 .nav-link.active {
-    font-weight: bold;
+    color: #ffffff !important; /* Cor dos links ativos */
+}
+
+.nav-link:hover {
+    color: #d3d3d3; /* Cor dos links quando hover */
 }
 
 /* Estilo para o botão de login/logout */
-.nav-link.login,
-.nav-link.logout {
-    color: var(--color-neutral-0); /* Preto */
+#entrar,
+#sair,
+#icon_bonequinho
+#icon_entrar {
+    color: #d3d3d3; /* Cor dos botões */
     font-weight: bold;
     font-size: 24px;
     border: none;
@@ -183,14 +205,14 @@ body {
 
 .nav-link.login:hover,
 .nav-link.logout:hover {
-    color: var(--color-neutral-30); /* Cinza claro */
+    color: #bfbfbf; /* Cor dos botões quando hover */
     text-decoration: underline;
 }
 
 /* Estilo para o botão de hamburguer do menu responsivo */
 .navbar-toggler {
     border: none;
-    background-color: var(--color-neutral-0);
+    background-color: #f8f9fa; /* Cor de fundo do botão de hamburguer */
 }
 
 .navbar-toggler:focus {
@@ -198,13 +220,13 @@ body {
 }
 
 .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(255, 255, 255, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    /* Cor do ícone do botão de hamburguer */
 }
 
 .navbar-toggler-icon:focus {
     outline: none;
 }
-
 
 .center {
     display: flex;
