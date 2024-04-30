@@ -452,3 +452,13 @@ padding: 15px;
          }
        }
 
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+
+    .search-container {
+        width: 100%;
+    }
+}
