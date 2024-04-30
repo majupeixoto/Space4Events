@@ -135,7 +135,7 @@ body {
 
 #footer_subscribe p {
     color: var(--color-neutral-30); /* Cinza claro */
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
 }
 
 #input_group {
@@ -149,9 +149,9 @@ body {
 }
 
 #input_group button {
-    background-color: var(--color-neutral-40); /* Branco */
+    background-color: var(--color-neutral-10); /* Branco */
     border: none;
-    color: #fff;
+    color: #5642bd;
     padding: 0.5rem;
     border-radius: 0 4px 4px 0;
     cursor: pointer;
