@@ -2,14 +2,28 @@
 
 {% block content %}
 
-<form method="get" action="{% url 'filtrar_espacos_por_cidade' %}" class="search-container">
-    <div class="input-group">
-        <input type="text" name="cidade" placeholder="Digite a cidade" aria-label="Cidade" class="form-control mb-2 custom-input">
-        <div class="input-group-append">
-            <button type="submit" class="btn btn-primary custom-btn"><i class="fas fa-search"></i> Buscar</button>
-        </div>
+<div class="row">
+    <div class="col-md-6">
+        <form method="get" action="{% url 'filtrar_espacos_por_cidade' %}" class="search-container">
+            <div class="input-group">
+                <input type="text" name="cidade" placeholder="Digite a cidade" aria-label="Cidade" class="form-control mb-2 custom-input">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary custom-btn"><i class="fas fa-search"></i> Buscar</button>
+                </div>
+            </div>
+        </form>
     </div>
-</form>
+    <div class="col-md-6">
+        <form method="get" action="{% url 'filtrar_espacos_por_data' %}" class="search-container">
+            <div class="input-group">
+                <input type="date" id="data" name="data" aria-label="Data" class="form-control mb-2 custom-input" required>
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary custom-btn"><i class="fas fa-calendar-day"></i> Buscar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
     {% for espaco in espacos %}

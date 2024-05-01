@@ -47,31 +47,23 @@
 
         <!-- Conteúdo à direita -->
         <div class="col-md-6">
-            <div class="collums">
-                <h2 style="font-weight: bold; font-size: 50px;">{{ detalhes_do_espaco.nome }}</h2>
-
-                <h5>Descrição:</h5>
-                <p>{{ detalhes_do_espaco.descricao }}</p>
-
-                <h5>Preço por Noite:</h5>
-                <p>R$ {{ detalhes_do_espaco.preco_por_noite }}</p>
-
-                <h5>Endereço:</h5>
-                <p>{{ detalhes_do_espaco.endereco }}, {{ detalhes_do_espaco.cidade }}, {{ detalhes_do_espaco.estado }},
+            <div class="collums text-end"> <!-- Alinhando o conteúdo da direita para a esquerda -->
+                <h2 class="title">{{ detalhes_do_espaco.nome }}</h2>
+                <h5 class="subtitle">Descrição:</h5>
+                <p class="description">{{ detalhes_do_espaco.descricao }}</p>
+                <h5 class="subtitle">Preço por Noite:</h5>
+                <p class="price">R$ {{ detalhes_do_espaco.preco_por_noite }}</p>
+                <h5 class="subtitle">Endereço:</h5>
+                <p class="address">{{ detalhes_do_espaco.endereco }}, {{ detalhes_do_espaco.cidade }}, {{ detalhes_do_espaco.estado }},
                     {{ detalhes_do_espaco.pais }}</p>
-
-                <h5>Número de Quartos:</h5>
+                <h5 class="subtitle">Número de Quartos:</h5>
                 <p>{{ detalhes_do_espaco.numero_de_quartos }}</p>
-
-                <h5>Número de Banheiros:</h5>
+                <h5 class="subtitle">Número de Banheiros:</h5>
                 <p>{{ detalhes_do_espaco.numero_de_banheiros }}</p>
-
-                <h5>Número de Hóspedes:</h5>
+                <h5 class="subtitle">Número de Hóspedes:</h5>
                 <p>{{ detalhes_do_espaco.numero_de_hospedes }}</p>
-
-                <h5>Sinal de Reserva:</h5>
-                <p>R$ {{ detalhes_do_espaco.sinal_reserva }}</p>
-
+                <h5 class="subtitle">Sinal de Reserva:</h5>
+                <p class="reservation-fee">R$ {{ detalhes_do_espaco.sinal_reserva }}</p>
                 <div class="btn-group">
                     {% if user.is_authenticated %}
                         {% if espaco %}
@@ -105,5 +97,3 @@
 </script>
 
 {% endblock %}
-
-
