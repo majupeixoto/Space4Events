@@ -281,3 +281,18 @@ def filtrar_espacos_por_data(request):
     else:
         # Se a solicitação não for do tipo POST, redirecione para uma página de erro.
         return HttpResponse("Método de requisição inválido.")
+
+@login_required
+def cancelar_reserva(request, espaco_id):
+    espaco = get_object_or_404(Espaco, id=espaco_id)
+
+    if request.method == 'POST':
+        usuario = request.user
+        reserva = Reserva.objects.filter(hospede_nome=usuario, espaco_id=espaco_id).first()
+        if not reserva:
+            return render(request, 'detalhes', {'erro': 'Você não reservou esse espaço'})
+        else:
+            reserva.delete()
+            messages.success(request, 'Reserva cancelada com sucesso.')
+            return redirect('minhas_reservas')
+    return redirect('detalhes', espaco_id=espaco_id)
