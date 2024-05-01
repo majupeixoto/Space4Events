@@ -15,6 +15,7 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='apps/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('meus_espacos/', views.meus_espacos, name='meus_espacos'),
+    path('cancelar_reserva/<int:espaco_id>/', views.cancelar_reserva, name='cancelar_reserva'),
     path('minhas_reservas/', views.minhas_reservas, name='minhas_reservas'),
     path('reservar_espaco/<int:espaco_id>', views.criar_reserva, name='reservar_espaco'),
     path('filtrar_espacos_por_cidade/', views.filtrar_espacos_por_cidade, name='filtrar_espacos_por_cidade'),
