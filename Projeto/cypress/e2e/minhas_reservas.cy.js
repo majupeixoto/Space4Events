@@ -15,12 +15,7 @@ describe('minhas_reservas', () => {
         cy.get(':nth-child(1) > .card > .card-body > .d-flex > .btn-group > .btn').click();
         cy.get(':nth-child(17) > .btn').click();
         cy.get('#hospede_nome').type('lua');
-        cy.get('#data_check_in').type('31-11-2023');
-        cy.get('#data_check_out').type('02-12-2024');
-        cy.get('#numero_de_hospedes').type('1');
-        cy.get('.btn_login').click();
-
-
+        cy.get('#data_check_in').type('2024-05-02'); 
     })
 
     it('Reserva em andamento', () => {
