@@ -12,19 +12,23 @@
 
         <div class="box-user">
             <label for="data_check_in">Data de Check-in:</label><br>
-            <input type="date" id="data_check_in" name="data_check_in"><br>
+            <input type="text" id="data_check_in" name="data_check_in" pattern="\d{2}-\d{2}-\d{4}" title="Por favor, insira a data no formato DD-MM-YYYY" required><br>
         </div>
 
         <div class="box-user">
             <label for="data_check_out">Data de Check-out:</label><br>
-            <input type="date" id="data_check_out" name="data_check_out"><br>
+            <input type="text" id="data_check_out" name="data_check_out" pattern="\d{2}-\d{2}-\d{4}" title="Por favor, insira a data no formato DD-MM-YYYY" required><br>
         </div>
 
         <div class="box-user">
-            <input type="number" id="numero_de_hospedes" name="numero_de_hospedes" placeholder="Número de Hóspedes:"><br><br>
+            <input type="number" id="numero_de_hospedes" name="numero_de_hospedes" placeholder="Número de Hóspedes:" min="1" required><br><br>
         </div>
 
         <button id="botao_reservar" type="submit" class="btn_login" value="Reservar">Reservar</button>
+        
+        {% if error_message %}
+        <p>{{ error_message }}</p>
+        {% endif %}
     </form>
 </div>
 {% endblock %}

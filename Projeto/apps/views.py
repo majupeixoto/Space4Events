@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.urls import reverse
-import datetime
+from datetime import datetime
 
 
 def cadastro(request):
@@ -74,10 +74,18 @@ def criar_reserva(request, espaco_id):
         data_check_out = request.POST.get('data_check_out')
         numero_de_hospedes = int(request.POST.get('numero_de_hospedes'))
 
+        if datetime.strptime(data_check_in, '%Y-%m-%d') < datetime.today() or datetime.strptime(data_check_out, '%Y-%m-%d') < datetime.today():
+            return HttpResponse("As datas selecionadas devem ser futuras.", status=400)
+
+        if datetime.strptime(data_check_in, '%Y-%m-%d') >= datetime.strptime(data_check_out, '%Y-%m-%d'):
+            return HttpResponse("A data de check-in deve ser anterior à data de check-out.", status=400)
+
+        if numero_de_hospedes <= 0:
+            return HttpResponse("O número de hóspedes deve ser maior que zero.", status=400)
+
         if espaco.numero_de_hospedes < numero_de_hospedes:
             return HttpResponse("Número de hóspedes excede a capacidade do espaço", status=400)
 
-        # Filtra as reservas conflitantes pelo espaço e datas
         reservas_conflitantes = Reserva.objects.filter(
             espaco=espaco,
             data_check_in__lte=data_check_out,
@@ -87,7 +95,7 @@ def criar_reserva(request, espaco_id):
         if reservas_conflitantes.exists():
             return HttpResponse("Espaço já reservado para as datas solicitadas!", status=400)
 
-        else:# Armazena os detalhes da reserva na sessão
+        else:
             request.session['reserva_details'] = {
                 'espaco_id': espaco_id,
                 'hospede_nome': hospede_nome,
@@ -96,13 +104,11 @@ def criar_reserva(request, espaco_id):
                 'numero_de_hospedes': numero_de_hospedes
             }
         
-        # Redireciona para a página de pagamento
         return redirect('pagamento_reserva')
     
     else:
         espaco = get_object_or_404(Espaco, id=espaco_id)
         return render(request, 'apps/reservar_espaco.html', {'espaco': espaco})
-
 
 @login_required
 def pagamento_reserva(request):
