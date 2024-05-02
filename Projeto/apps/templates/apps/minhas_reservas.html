@@ -34,7 +34,7 @@
                             {% if reserva.status == "Reserva ainda por vir" %}
                             <form action="{% url 'cancelar_reserva' reserva.espaco.id %}" method="post">
                                 {% csrf_token %}
-                                <button type="submit" class="btn btn-danger">Cancelar reserva</button>
+                                <button id="cancelar" type="submit" class="btn btn-danger">Cancelar reserva</button>
                             </form>
                             {% endif %}
                         </div>
