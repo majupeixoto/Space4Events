@@ -44,7 +44,7 @@
                 <p class="card-text">{{ espaco.descricao }}</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                        <a href="{% url 'detalhes' espaco.id %}" class="btn btn-outline-secondary">ver mais</a>
+                        <a id="visualizar_detalhes" href="{% url 'detalhes' espaco.id %}" class="btn btn-outline-secondary">ver mais</a>
                     </div>
                     <small class="text-body-secondary">{{ espaco.preco_por_noite }}</small>
                 </div>
