@@ -48,9 +48,27 @@ describe('minhas_reservas', () => {
     })
 
     it('Reserva ainda por vir', () => {
-        //steps do cenario3
+        cy.visit('/');
+        cy.get('[href="/minhas_reservas/"]').click();
+        cy.get(':nth-child(4) > input').type('lua');
+        cy.get(':nth-child(5) > input').type('123');
+        cy.get('.btn_login').click();
+        cy.get('#logo').click();
+        cy.get('[href="/detalhes/3/"]').click();
+        cy.get(':nth-child(17) > .btn').click();
+        cy.get('#hospede_nome').type('lua');
+        cy.get('#data_check_in').type('2024-09-03'); 
+        cy.get('#data_check_out').type('2024-10-02');
+        cy.get('#numero_de_hospedes').type('1');
+        cy.get('.btn_login').click();
+        cy.get('#numero_cartao').type('909090909090');
+        cy.get('#data_validade').type('03/30');
+        cy.get('#cvv').type('030');
+        cy.get('.btn_login').click();
     })
+})
+
     it('Cancelamento de Reserva', () => {
         //steps do cenario3
     })
-})
+
