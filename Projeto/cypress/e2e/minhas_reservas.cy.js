@@ -69,6 +69,22 @@ describe('minhas_reservas', () => {
 })
 
     it('Cancelamento de Reserva', () => {
-        //steps do cenario3
+        cy.visit('/');
+        cy.get('[href="/minhas_reservas/"]').click();
+        cy.get(':nth-child(4) > input').type('lua');
+        cy.get(':nth-child(5) > input').type('123');
+        cy.get('.btn_login').click();
+        cy.get('#logo').click();
+        cy.get(':nth-child(4) > .card > .card-body > .d-flex > .btn-group > #visualizar_detalhes').click();
+        cy.get(':nth-child(17) > .btn').click();
+        cy.get('#hospede_nome').type('lua');
+        cy.get('#data_check_in').type('2024-05-05'); 
+        cy.get('#data_check_out').type('2024-05-06');
+        cy.get('#numero_de_hospedes').type('1');
+        cy.get('.btn_login').click();
+        cy.get('#numero_cartao').type('909090909090');
+        cy.get('#data_validade').type('03/30');
+        cy.get('#cvv').type('030');
+        cy.get('.btn_login').click();
     })
 
