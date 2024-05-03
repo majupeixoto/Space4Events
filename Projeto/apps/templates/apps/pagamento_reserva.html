@@ -1,29 +1,60 @@
 {% extends 'global/base.html' %}
 
 {% block content %}
-<div class="center">
-    <form class="reservar" method="post" action="{% url 'pagamento_reserva' %}">
-        <h1>Pagar Reserva</h1>
-        <p>Por favor, forneça as informações de pagamento para completar a reserva.</p>
-        {% csrf_token %}
-
-        <div class="box-user">
-            <label for="numero_cartao">Número do Cartão:</label><br>
-            <input type="text" id="numero_cartao" name="numero_cartao" placeholder="Número do Cartão" required pattern="[0-9]{16}"><br><br>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Pagar Reserva</h2>
+                </div>
+                <div class="card-body">
+                    <p class="card-text text-center">Por favor, forneça as informações de pagamento para completar a reserva.</p>
+                    <form class="payment-form" method="post" action="{% url 'pagamento_reserva' %}">
+                        {% csrf_token %}
+                        <div class="form-group" id="credit-card-fields">
+                            <label for="numero_cartao">Número do Cartão:</label>
+                            <input type="text" class="form-control" id="numero_cartao" name="numero_cartao" placeholder="Apenas números" required pattern="[0-9]{16}" maxlength="16">
+                        </div>
+                        
+                        <div class="form-row" id="expiration-cvv-fields">
+                            <div class="form-group col-md-6">
+                                <label for="data_validade">Data de Validade:</label>
+                                <input type="text" class="form-control" id="data_validade" name="data_validade" placeholder="MM/AA" required pattern="(0[1-9]|1[0-2])\/([0-9]{2})" maxlength="5">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="cvv">CVV:</label>
+                                <input type="text" class="form-control" id="cvv" name="cvv" placeholder="CVV" required pattern="[0-9]{3}" maxlength="3">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Pagar</button>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <div class="box-user">
-            <label for="data_validade">Data de Validade:</label><br>
-            <input type="text" id="data_validade" name="data_validade" placeholder="MM/AA" required pattern="(0[1-9]|1[0-2])\/([0-9]{2})"><br><br>
-        </div>
-
-        <div class="box-user">
-            <label for="data_validade">CVV:</label><br>
-            <input type="text" id="cvv" name="cvv" placeholder="CVV" required pattern="[0-9]{3}"><br><br>
-        </div>
-
-        <button type="submit" class="btn_login" value="Pagar">Pagar</button>
-
-    </form>
+    </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('data_validade').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+    
+            var inputValue = e.target.value;
+            if (inputValue.length >= 4) {
+                var formattedDate = inputValue.replace(/(\d{2})(\d{2})/, '$1/$2');
+                e.target.value = formattedDate;
+            }
+        });
+    
+        document.getElementById('cvv').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+    
+        document.getElementById('numero_cartao').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+    });
+</script>
+
 {% endblock %}
