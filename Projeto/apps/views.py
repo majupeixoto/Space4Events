@@ -119,11 +119,18 @@ def criar_reserva(request, espaco_id):
 @login_required
 def pagamento_reserva(request):
     reserva_details = request.session.get('reserva_details')
-    sinal_reserva = None  # Inicializamos sinal_reserva como None para o caso de não haver reserva_details
     if reserva_details:
         espaco_id = reserva_details['espaco_id']
         espaco = get_object_or_404(Espaco, id=espaco_id)
-        sinal_reserva = espaco.sinal_reserva
+        preco_por_noite = espaco.preco_por_noite
+
+        # Calcula a quantidade de dias entre check-in e check-out
+        data_check_in = datetime.strptime(reserva_details['data_check_in'], '%Y-%m-%d')
+        data_check_out = datetime.strptime(reserva_details['data_check_out'], '%Y-%m-%d')
+        numero_de_dias = (data_check_out - data_check_in).days
+
+        # Calcula o valor total a ser pago
+        valor_total = preco_por_noite * numero_de_dias
 
     if request.method == 'POST':
         if reserva_details:
@@ -144,7 +151,7 @@ def pagamento_reserva(request):
                     data_check_in=data_check_in,
                     data_check_out=data_check_out,
                     numero_de_hospedes=numero_de_hospedes,
-                    sinal_reserva=sinal_reserva,
+                    valor_total=valor_total,
                     espaco=espaco,
                 )
                 del request.session['reserva_details']
@@ -152,7 +159,7 @@ def pagamento_reserva(request):
         else:
             return HttpResponse("Detalhes da reserva não encontrados na sessão.")
 
-    return render(request, 'apps/pagamento_reserva.html', {'sinal_reserva': sinal_reserva})
+    return render(request, 'apps/pagamento_reserva.html', {'valor_total': valor_total})
 
 
 def detalhes(request, espaco_id):
