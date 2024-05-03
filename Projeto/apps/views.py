@@ -132,6 +132,16 @@ def pagamento_reserva(request):
         # Calcula o valor total a ser pago
         valor_total = preco_por_noite * numero_de_dias
 
+        # Calcula o número máximo de parcelas permitido com base no valor total
+        max_parcelas = min(18, max(1, int(valor_total / 100)))
+
+        # Define a parcela com base no número máximo de parcelas permitido
+        parcela = request.POST.get('parcela')
+        if parcela in range(1, max_parcelas + 1):
+            parcela_selecionada = parcela
+        else:
+            parcela_selecionada = 1
+
     if request.method == 'POST':
         if reserva_details:
             hospede_nome = reserva_details['hospede_nome']
@@ -142,6 +152,9 @@ def pagamento_reserva(request):
             numero_cartao = request.POST.get('numero_cartao')
             data_validade = request.POST.get('data_validade')
             cvv = request.POST.get('cvv')
+            parcela = request.POST.get('parcela')
+            parcela_selecionada = request.POST.get('parcela', 1)
+            valor_parcelas = valor_total / parcela_selecionada
 
             if numero_cartao and data_validade and cvv:
                 reserva = Reserva.objects.create(
@@ -152,6 +165,8 @@ def pagamento_reserva(request):
                     data_check_out=data_check_out,
                     numero_de_hospedes=numero_de_hospedes,
                     valor_total=valor_total,
+                    parcela=parcela,
+                    valor_parcelas=valor_parcelas,
                     espaco=espaco,
                 )
                 del request.session['reserva_details']
@@ -159,7 +174,7 @@ def pagamento_reserva(request):
         else:
             return HttpResponse("Detalhes da reserva não encontrados na sessão.")
 
-    return render(request, 'apps/pagamento_reserva.html', {'valor_total': valor_total})
+    return render(request, 'apps/pagamento_reserva.html', {'valor_total': valor_total, 'max_parcelas': range(1, max_parcelas + 1), 'parcela_selecionada': parcela_selecionada})
 
 
 def detalhes(request, espaco_id):

@@ -9,7 +9,7 @@
         {% csrf_token %}
         <div class="box-user">
             <label for="numero_cartao">Número do Cartão:</label>
-            <input type="text" class="form-control" id="numero_cartao" name="numero_cartao" placeholder="16 números" required pattern="[0-9]{16}" maxlength="16">
+            <input type="text" class="form-control" id="numero_cartao" name="numero_cartao" placeholder="Apenas números" required pattern="[0-9]{16}" maxlength="16">
         </div>
                         
         <div class="box-user">
@@ -52,3 +52,29 @@
 </script>
 
 {% endblock %}
+
+<!--
+    <form class="payment-form" method="post" action="{% url 'pagamento_reserva' %}">
+                        {% csrf_token %}
+                        <div class="form-group" id="credit-card-fields">
+                            <label for="numero_cartao">Número do Cartão:</label>
+                            <input type="text" class="form-control" id="numero_cartao" name="numero_cartao" placeholder="Apenas números" required pattern="[0-9]{16}" maxlength="16">
+                        </div>
+                        
+                        <div class="form-row" id="expiration-cvv-fields">
+                            <div class="form-group col-md-6">
+                                <label for="data_validade">Data de Validade:</label>
+                                <input type="text" class="form-control" id="data_validade" name="data_validade" placeholder="MM/AA" required pattern="(0[1-9]|1[0-2])\/([0-9]{2})" maxlength="5">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="cvv">CVV:</label>
+                                <input type="text" class="form-control" id="cvv" name="cvv" placeholder="CVV" required pattern="[0-9]{3}" maxlength="3">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="valor_total">Valor do total a pagar:</label>
+                            <p class="reservation-fee">R$ {{ valor_total }}</p>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Pagar</button>
+                    </form>
+-->
