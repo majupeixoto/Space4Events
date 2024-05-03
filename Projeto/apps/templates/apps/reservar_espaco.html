@@ -37,11 +37,18 @@ document.addEventListener('DOMContentLoaded', function () {
     var dateInputs = document.querySelectorAll('input[type="text"][id^="data_check"]');
     dateInputs.forEach(function (input) {
         input.addEventListener('input', function (e) {
-            var inputValue = e.target.value.replace(/\D/g, '');
-            if (inputValue.length >= 8) {
-                var formattedDate = inputValue.replace(/(\d{2})(\d{2})(\d{4})/, '$1-$2-$3');
+            e.target.value = e.target.value.replace(/\D/g, '');
+            if (e.target.value.length >= 8) {
+                var formattedDate = e.target.value.replace(/(\d{2})(\d{2})(\d{4})/, '$1-$2-$3');
                 e.target.value = formattedDate;
             }
+        });
+    });
+
+    var numberInputs = document.querySelectorAll('input[type="number"]');
+    numberInputs.forEach(function (input) {
+        input.addEventListener('input', function (e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
         });
     });
 });
