@@ -27,6 +27,10 @@
                                 <input type="text" class="form-control" id="cvv" name="cvv" placeholder="CVV" required pattern="[0-9]{3}" maxlength="3">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="valor_sinal">Valor do Sinal:</label>
+                            <p class="reservation-fee">R$ {{ sinal_reserva }}</p>
+                        </div>
                         <button type="submit" class="btn btn-primary btn-block">Pagar</button>
                     </form>
                 </div>

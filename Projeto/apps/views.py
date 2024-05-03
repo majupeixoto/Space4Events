@@ -118,11 +118,15 @@ def criar_reserva(request, espaco_id):
 
 @login_required
 def pagamento_reserva(request):
-    if request.method == 'POST':
-        reserva_details = request.session.get('reserva_details')
+    reserva_details = request.session.get('reserva_details')
+    sinal_reserva = None  # Inicializamos sinal_reserva como None para o caso de não haver reserva_details
+    if reserva_details:
+        espaco_id = reserva_details['espaco_id']
+        espaco = get_object_or_404(Espaco, id=espaco_id)
+        sinal_reserva = espaco.sinal_reserva
 
+    if request.method == 'POST':
         if reserva_details:
-            espaco_id = reserva_details['espaco_id']
             hospede_nome = reserva_details['hospede_nome']
             data_check_in = reserva_details['data_check_in']
             data_check_out = reserva_details['data_check_out']
@@ -133,7 +137,6 @@ def pagamento_reserva(request):
             cvv = request.POST.get('cvv')
 
             if numero_cartao and data_validade and cvv:
-                espaco = get_object_or_404(Espaco, id=espaco_id)
                 reserva = Reserva.objects.create(
                     espaco_proprietario_nome=espaco.proprietario_nome,
                     espaco_nome=espaco.nome,
@@ -141,15 +144,16 @@ def pagamento_reserva(request):
                     data_check_in=data_check_in,
                     data_check_out=data_check_out,
                     numero_de_hospedes=numero_de_hospedes,
-                    espaco=espaco
+                    sinal_reserva=sinal_reserva,
+                    espaco=espaco,
                 )
                 del request.session['reserva_details']
-
                 return redirect('minhas_reservas')
         else:
             return HttpResponse("Detalhes da reserva não encontrados na sessão.")
-    else:
-        return render(request, 'apps/pagamento_reserva.html')
+
+    return render(request, 'apps/pagamento_reserva.html', {'sinal_reserva': sinal_reserva})
+
 
 def detalhes(request, espaco_id):
     espaco = get_object_or_404(Espaco, id=espaco_id)
@@ -240,12 +244,6 @@ def minhas_reservas(request):
 def profile(request):
     return redirect('home')
 
-#def selecionar_espaco_para_reserva(request):
-    espacos = Espaco.objects.all()
-    return render(request, 'selecionar_espaco_para_reserva.html', {'espacos': espacos})
-
-# def nome_da_historia(request):
-    # return render(request, 'apps/nome_da_historia.html')
 
 def filtrar_espacos_por_cidade(request):
     cidade_query = request.GET.get('cidade')
