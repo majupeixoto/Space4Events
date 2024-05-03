@@ -1,32 +1,97 @@
 {% extends 'global/base.html' %}
 
 {% block content %}
-<div class="center">
-    <form class="reservar" method="post" action="{% url 'pagamento_reserva' %}">
-        <h1>Pagar Reserva</h1>
-        <p class="card-text text-center">Por favor, forneça as informações de pagamento para completar a reserva.</p>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Pagar Reserva</h2>
+                </div>
+                <div class="card-body">
+                    <p class="card-text text-center">Por favor, forneça as informações de pagamento para completar a reserva.</p>
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="pills-debito-tab" data-bs-toggle="pill" data-bs-target="#pills-debito" type="button" role="tab" aria-controls="pills-debito" aria-selected="true">Débito</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-credito-tab" data-bs-toggle="pill" data-bs-target="#pills-credito" type="button" role="tab" aria-controls="pills-credito" aria-selected="false">Crédito</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-debito" role="tabpanel" aria-labelledby="pills-debito-tab" tabindex="0">
+                            <!-- PAGAMENTO DÉBITO -->
+                            <form class="payment-form" method="post" action="{% url 'pagamento_reserva' %}">
+                                {% csrf_token %}
+                                <div class="form-group" id="credit-card-fields">
+                                    <label for="numero_cartao">Número do Cartão:</label>
+                                    <input type="text" class="form-control" id="numero_cartao" name="numero_cartao" placeholder="Apenas números" required pattern="[0-9]{16}" maxlength="16">
+                                </div>
+                                
+                                <div class="form-row" id="expiration-cvv-fields">
+                                    <div class="form-group col-md-6">
+                                        <label for="data_validade">Data de Validade:</label>
+                                        <input type="text" class="form-control" id="data_validade" name="data_validade" placeholder="MM/AA" required pattern="(0[1-9]|1[0-2])\/([0-9]{2})" maxlength="5">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="cvv">CVV:</label>
+                                        <input type="text" class="form-control" id="cvv" name="cvv" placeholder="CVV" required pattern="[0-9]{3}" maxlength="3">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="valor_total">Valor do total a pagar:</label>
+                                    <p class="reservation-fee">R$ {{ valor_total }}</p>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">Pagar</button>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="pills-credito" role="tabpanel" aria-labelledby="pills-credito-tab" tabindex="0">
+                            <!-- PAGAMENTO CRÉDITO -->
+                            <form class="payment-form" method="post" action="{% url 'pagamento_reserva' %}">
+                                {% csrf_token %}
+                                <div class="form-group" id="credit-card-fields">
+                                    <label for="numero_cartao">Número do Cartão:</label>
+                                    <input type="text" class="form-control" id="numero_cartao" name="numero_cartao" placeholder="Apenas números" required pattern="[0-9]{16}" maxlength="16">
+                                </div>
+                                
+                                <div class="form-row" id="expiration-cvv-fields">
+                                    <div class="form-group col-md-6">
+                                        <label for="data_validade">Data de Validade:</label>
+                                        <input type="text" class="form-control" id="data_validade" name="data_validade" placeholder="MM/AA" required pattern="(0[1-9]|1[0-2])\/([0-9]{2})" maxlength="5">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="cvv">CVV:</label>
+                                        <input type="text" class="form-control" id="cvv" name="cvv" placeholder="CVV" required pattern="[0-9]{3}" maxlength="3">
+                                    </div>
+                                </div>
+                            
+                                <div class="form-group">
+                                    <label for="parcela">Número de Parcelas:</label>
+                                    <select name="parcela" id="parcela">
+                                        {% for i in max_parcelas %}
+                                            {% if i == parcela_selecionada %}
+                                                <option value="{{ i }}" selected>{{ i }}x</option>
+                                            {% else %}
+                                                <option value="{{ i }}">{{ i }}x</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                    <p class="reservation-fee" id="valor_parcelas">{{ parcela_selecionada }}x de R$ {{ valor_parcelas }}</p>
+                                </div>                                                              
 
-        {% csrf_token %}
-        <div class="box-user">
-            <label for="numero_cartao">Número do Cartão:</label>
-            <input type="text" class="form-control" id="numero_cartao" name="numero_cartao" placeholder="Apenas números" required pattern="[0-9]{16}" maxlength="16">
+                                <div class="form-group">
+                                    <label for="valor_total">Valor Total a Pagar:</label>
+                                    <p class="reservation-fee" id="valor_total">R$ {{ valor_total }}</p>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary btn-block">Pagar</button>
+                            </form>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-                        
-        <div class="box-user">
-            <label for="data_validade">Data de Validade:</label>
-            <input type="text" class="form-control" id="data_validade" name="data_validade" placeholder="MM/AA" required pattern="(0[1-9]|1[0-2])\/([0-9]{2})" maxlength="5">
-        </div>
-
-        <div class="box-user">
-            <input type="text" class="form-control" id="cvv" name="cvv" placeholder="CVV" required pattern="[0-9]{3}" maxlength="3">
-        </div>
-        
-        <div class="box-user">
-            <label for="valor_total">Valor do total a pagar:</label>
-            <p class="reservation-fee">R$ {{ valor_total }}</p>
-        </div>
-        <button id="botao_reservar" type="submit" class="btn_login" value="Reservar">Pagar</button>
-    </form>
+    </div>
 </div>
 
 <script>
@@ -52,29 +117,3 @@
 </script>
 
 {% endblock %}
-
-<!--
-    <form class="payment-form" method="post" action="{% url 'pagamento_reserva' %}">
-                        {% csrf_token %}
-                        <div class="form-group" id="credit-card-fields">
-                            <label for="numero_cartao">Número do Cartão:</label>
-                            <input type="text" class="form-control" id="numero_cartao" name="numero_cartao" placeholder="Apenas números" required pattern="[0-9]{16}" maxlength="16">
-                        </div>
-                        
-                        <div class="form-row" id="expiration-cvv-fields">
-                            <div class="form-group col-md-6">
-                                <label for="data_validade">Data de Validade:</label>
-                                <input type="text" class="form-control" id="data_validade" name="data_validade" placeholder="MM/AA" required pattern="(0[1-9]|1[0-2])\/([0-9]{2})" maxlength="5">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="cvv">CVV:</label>
-                                <input type="text" class="form-control" id="cvv" name="cvv" placeholder="CVV" required pattern="[0-9]{3}" maxlength="3">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="valor_total">Valor do total a pagar:</label>
-                            <p class="reservation-fee">R$ {{ valor_total }}</p>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block">Pagar</button>
-                    </form>
--->
