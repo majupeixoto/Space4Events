@@ -74,17 +74,23 @@ def criar_reserva(request, espaco_id):
         data_check_out = request.POST.get('data_check_out')
         numero_de_hospedes = int(request.POST.get('numero_de_hospedes'))
 
-        if datetime.strptime(data_check_in, '%Y-%m-%d') < datetime.today() or datetime.strptime(data_check_out, '%Y-%m-%d') < datetime.today():
-            return HttpResponse("As datas selecionadas devem ser futuras.", status=400)
+        try:
+            data_check_in = datetime.strptime(data_check_in, '%d-%m-%Y').date()
+            data_check_out = datetime.strptime(data_check_out, '%d-%m-%Y').date()
+        except ValueError:
+            return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'Formato de data inválido'})
 
-        if datetime.strptime(data_check_in, '%Y-%m-%d') >= datetime.strptime(data_check_out, '%Y-%m-%d'):
-            return HttpResponse("A data de check-in deve ser anterior à data de check-out.", status=400)
+        if data_check_in < datetime.today().date() or data_check_out < datetime.today().date():
+            return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'As datas selecionadas devem ser futuras.'})
+
+        if data_check_in >= data_check_out:
+            return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'A data de check-in deve ser anterior à data de check-out.'})
 
         if numero_de_hospedes <= 0:
-            return HttpResponse("O número de hóspedes deve ser maior que zero.", status=400)
+            return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'O número de hóspedes deve ser maior que zero.'})
 
         if espaco.numero_de_hospedes < numero_de_hospedes:
-            return HttpResponse("Número de hóspedes excede a capacidade do espaço", status=400)
+            return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'Número de hóspedes excede a capacidade do espaço'})
 
         reservas_conflitantes = Reserva.objects.filter(
             espaco=espaco,
@@ -93,14 +99,14 @@ def criar_reserva(request, espaco_id):
         )
 
         if reservas_conflitantes.exists():
-            return HttpResponse("Espaço já reservado para as datas solicitadas!", status=400)
+            return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'Espaço já reservado para as datas solicitadas!'})
 
         else:
             request.session['reserva_details'] = {
                 'espaco_id': espaco_id,
                 'hospede_nome': hospede_nome,
-                'data_check_in': data_check_in,
-                'data_check_out': data_check_out,
+                'data_check_in': data_check_in.strftime('%Y-%m-%d'),
+                'data_check_out': data_check_out.strftime('%Y-%m-%d'),
                 'numero_de_hospedes': numero_de_hospedes
             }
         

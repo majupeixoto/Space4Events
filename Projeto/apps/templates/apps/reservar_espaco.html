@@ -12,17 +12,17 @@
 
         <div class="box-user">
             <label for="data_check_in">Data de Check-in:</label><br>
-            <input type="text" id="data_check_in" name="data_check_in" pattern="\d{2}-\d{2}-\d{4}" title="Por favor, insira a data no formato DD-MM-YYYY" required><br>
+            <input type="text" id="data_check_in" name="data_check_in" placeholder="DD-MM-YYYY" title="Por favor, insira a data no formato DD-MM-YYYY" required><br>
         </div>
-
+        
         <div class="box-user">
             <label for="data_check_out">Data de Check-out:</label><br>
-            <input type="text" id="data_check_out" name="data_check_out" pattern="\d{2}-\d{2}-\d{4}" title="Por favor, insira a data no formato DD-MM-YYYY" required><br>
+            <input type="text" id="data_check_out" name="data_check_out" placeholder="DD-MM-YYYY" title="Por favor, insira a data no formato DD-MM-YYYY" required><br>
         </div>
-
+        
         <div class="box-user">
             <input type="number" id="numero_de_hospedes" name="numero_de_hospedes" placeholder="Número de Hóspedes:" min="1" required><br><br>
-        </div>
+        </div>        
 
         <button id="botao_reservar" type="submit" class="btn_login" value="Reservar">Reservar</button>
         
@@ -31,4 +31,20 @@
         {% endif %}
     </form>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var dateInputs = document.querySelectorAll('input[type="text"][id^="data_check"]');
+    dateInputs.forEach(function (input) {
+        input.addEventListener('input', function (e) {
+            var inputValue = e.target.value.replace(/\D/g, '');
+            if (inputValue.length >= 8) {
+                var formattedDate = inputValue.replace(/(\d{2})(\d{2})(\d{4})/, '$1-$2-$3');
+                e.target.value = formattedDate;
+            }
+        });
+    });
+});
+</script>
+
 {% endblock %}
