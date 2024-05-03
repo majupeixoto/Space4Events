@@ -119,7 +119,6 @@ def criar_reserva(request, espaco_id):
 @login_required
 def pagamento_reserva(request):
     if request.method == 'POST':
-        # Recupera os detalhes da reserva da sessão
         reserva_details = request.session.get('reserva_details')
 
         if reserva_details:
@@ -144,16 +143,12 @@ def pagamento_reserva(request):
                     numero_de_hospedes=numero_de_hospedes,
                     espaco=espaco
                 )
-                # Limpa os detalhes da reserva da sessão
                 del request.session['reserva_details']
 
-                # Redireciona para a página de sucesso
                 return redirect('minhas_reservas')
         else:
-            # Se os detalhes da reserva não estiverem na sessão, redirecione para uma página de erro
             return HttpResponse("Detalhes da reserva não encontrados na sessão.")
     else:
-        # Se a solicitação não for do tipo POST, redirecione para uma página de erro.
         return render(request, 'apps/pagamento_reserva.html')
 
 def detalhes(request, espaco_id):
