@@ -61,6 +61,7 @@ class Reserva(models.Model):
     data_check_in = models.DateField()
     data_check_out = models.DateField()
     numero_de_hospedes = models.PositiveIntegerField(default=1)
+    valor_total = models.DecimalField(max_digits=10, decimal_places=2)
     espaco = models.ForeignKey(Espaco, on_delete=models.PROTECT)
 
     @property
