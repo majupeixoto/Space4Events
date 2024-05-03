@@ -7,7 +7,7 @@
 
         {% csrf_token %}
         <div class="box-user">
-            <input type="text" id="hospede_nome" name="hospede_nome" placeholder="Nome do Hóspede:"><br>
+            <input type="text" id="hospede_nome" name="hospede_nome" placeholder="Nome do Hóspede:" required pattern="[A-Za-zÀ-ÖØ-öø-ÿ\s]+$"><br>
         </div>
 
         <div class="box-user">
