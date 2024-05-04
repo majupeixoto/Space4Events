@@ -23,7 +23,6 @@ class Espaco(models.Model):
     numero_de_banheiros = models.PositiveIntegerField(default=1)
     numero_de_hospedes = models.PositiveIntegerField(default=1)
     foto_principal = models.ImageField(upload_to='fotos/', null=True, blank=True)
-    sinal_reserva = models.DecimalField(max_digits=6, decimal_places=2, default=0)
 
     @classmethod
     def meus_espacos(cls, proprietario_nome):
@@ -41,7 +40,6 @@ class Espaco(models.Model):
             'numero_de_quartos': self.numero_de_quartos,
             'numero_de_banheiros': self.numero_de_banheiros,
             'numero_de_hospedes': self.numero_de_hospedes,
-            'sinal_reserva': self.sinal_reserva,
             'foto_principal_url': self.foto_principal.url if self.foto_principal else None
         }
 
@@ -62,6 +60,8 @@ class Reserva(models.Model):
     data_check_out = models.DateField()
     numero_de_hospedes = models.PositiveIntegerField(default=1)
     valor_total = models.DecimalField(max_digits=10, decimal_places=2)
+    parcela = models.IntegerField()
+    valor_parcelas = models.DecimalField(max_digits=10, decimal_places=2)
     espaco = models.ForeignKey(Espaco, on_delete=models.PROTECT)
 
     @property
