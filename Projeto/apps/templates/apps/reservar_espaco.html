@@ -40,15 +40,14 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     flatpickr("#data_range", {
         mode: "range",
         dateFormat: "d-m-Y",
         minDate: "today",
-        locale: {
-            rangeSeparator: ' até '
-        }
+        "locale": "pt"  // Define a localização para português
     });
 });
 </script>
