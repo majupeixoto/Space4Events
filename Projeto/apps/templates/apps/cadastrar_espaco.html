@@ -1,97 +1,85 @@
-{% extends "apps/base.html" %}
-{% load static %}
+{% extends 'global/base.html' %}
 
 {% block content %}
-<style>
-    .container {
-        max-width: 600px;
-        margin: 0 auto;
-    }
 
-    h1 {
-        font-size: 24px;
-        margin-bottom: 20px;
-    }
-
-    form {
-        margin-bottom: 20px;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-    }
-
-    input[type="text"],
-    input[type="number"],
-    textarea,
-    input[type="file"] {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-
-    input[type="submit"] {
-        background-color: #007bff;
-        color: #fff;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    input[type="submit"]:hover {
-        background-color: #0056b3;
-    }
-
-    /* Estilo para erros de validação */
-    input:invalid,
-    textarea:invalid {
-        border-color: #dc3545;
-    }
-
-    input[type="text"]:invalid + span,
-    input[type="number"]:invalid + span,
-    textarea:invalid + span,
-    input[type="file"]:invalid + span {
-        color: #dc3545;
-        font-size: 12px;
-    }
-</style>
 <div class="container">
     <h1>Cadastrar Espaço</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {% comment %} <label for="proprietario_nome">Nome do Proprietário:</label><br> {% endcomment %}
-        {% comment %} <input type="text" id="proprietario_nome" name="proprietario_nome"><br> {% endcomment %}
-        <label for="nome">Nome do Espaço:</label><br>
-        <input type="text" id="nome" name="nome"><br>
-        <label for="descricao">Descrição:</label><br>
-        <textarea id="descricao" name="descricao" rows="4" cols="50"></textarea><br>
-        <label for="preco_por_noite">Preço por Noite:</label><br>
-        <input type="number" id="preco_por_noite" name="preco_por_noite"><br>
-        <label for="endereco">Endereço:</label><br>
-        <input type="text" id="endereco" name="endereco"><br>
-        <label for="cidade">Cidade:</label><br>
-        <input type="text" id="cidade" name="cidade"><br>
-        <label for="estado">Estado:</label><br>
-        <input type="text" id="estado" name="estado"><br>
-        <label for="pais">País:</label><br>
-        <input type="text" id="pais" name="pais"><br>
-        <label for="numero_de_quartos">Número de Quartos:</label><br>
-        <input type="number" id="numero_de_quartos" name="numero_de_quartos"><br>
-        <label for="numero_de_banheiros">Número de Banheiros:</label><br>
-        <input type="number" id="numero_de_banheiros" name="numero_de_banheiros"><br>
-        <label for="numero_de_hospedes">Número de Hóspedes:</label><br>
-        <input type="number" id="numero_de_hospedes" name="numero_de_hospedes"><br>
-        <label for="foto_principal">Foto Principal:</label><br>
-        <input type="file" id="foto_principal" name="foto_principal"><br>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="nome">Nome do Espaço:</label>
+                    <input type="text" class="form-control" id="nome" name="nome">
+                </div>
+                <div class="form-group">
+                    <label for="descricao">Descrição:</label>
+                    <textarea class="form-control" id="descricao" name="descricao" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="preco_por_noite">Preço por Noite:</label>
+                    <input type="number" class="form-control" id="preco_por_noite" name="preco_por_noite">
+                </div>
+                <div class="form-group">
+                    <label for="endereco">Endereço:</label>
+                    <input type="text" class="form-control" id="endereco" name="endereco">
+                </div>
+                <div class="form-group">
+                    <label for="cidade">Cidade:</label>
+                    <input type="text" class="form-control" id="cidade" name="cidade">
+                </div>
+                <div class="form-group">
+                    <label for="estado">Estado:</label>
+                    <input type="text" class="form-control" id="estado" name="estado">
+                </div>
+                <div class="form-group">
+                    <label for="pais">País:</label>
+                    <input type="text" class="form-control" id="pais" name="pais">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="numero_de_quartos">Número de Quartos:</label>
+                    <input type="number" class="form-control" id="numero_de_quartos" name="numero_de_quartos">
+                </div>
+                <div class="form-group">
+                    <label for="numero_de_banheiros">Número de Banheiros:</label>
+                    <input type="number" class="form-control" id="numero_de_banheiros" name="numero_de_banheiros">
+                </div>
+                <div class="form-group">
+                    <label for="numero_de_hospedes">Número de Hóspedes:</label>
+                    <input type="number" class="form-control" id="numero_de_hospedes" name="numero_de_hospedes">
+                </div>
+                <div class="form-group">
+                    <label for="foto_principal">Foto Principal:</label>
+                    <input type="file" class="form-control-file" id="foto_principal" name="foto_principal" onchange="previewFile()">
+                    <img src="" alt="Placeholder" id="foto_placeholder" style="display:none; max-width: 100%; margin-top: 10px;">
+                </div>
+            </div>
+        </div>
         <br>
-        <input type="submit" value="Cadastrar">
+        <input type="submit" class="btn btn-primary" value="Cadastrar">
     </form>
 </div>
+
+<script>
+    function previewFile() {
+        var preview = document.querySelector('#foto_placeholder');
+        var file = document.querySelector('input[type=file]').files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            preview.src = reader.result;
+            preview.style.display = 'block';
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "";
+            preview.style.display = 'none';
+        }
+    }
+</script>
+
 {% endblock %}

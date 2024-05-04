@@ -56,18 +56,25 @@ Para mais informações sobre nosso projeto, entre em contato com nossa equipe:
 - [Relato de programação em pares](https://docs.google.com/document/d/1PcKfgogE4qWRXL9YISL22YJB1P-tKE4KTtRZ1IFrNqk/)
 - [Protótipo no Figma](https://www.figma.com/file/6g9unwhO2bWTmB8S6fohp9/Protótipo-de-baixa---aluguel-de-espaços-parra-eventos?type=design&node-id=0-1&mode=design&t=f0NfWiHp1qN8510g-0)
 - [Diagrama de Atividades](https://drive.google.com/drive/folders/1b-1jfi9s1rpmG0BFbpcquMNLnV8OfBfs)
-- **Screencast e uso do sistema - COLOCAR LINK RAFA**
+  
+- Screencast e uso do sistema - [https://drive.google.com/file/d/14dnRwFptK7naG2Nvrwu4XnS-qJz1hGn1/view?usp=drive_link](https://drive.google.com/file/d/14dnRwFptK7naG2Nvrwu4XnS-qJz1hGn1/view?usp=sharing)
 
 - Backlog - Jira
-  ![image](https://github.com/majupeixoto/Space4Events/assets/143026488/76e81683-ca85-409f-8576-b328547a709c)
+  ![image](https://github.com/majupeixoto/Space4Events/assets/142419595/8002f3a6-2c4c-44d5-913c-6506b6373fac)
+
 
 - Quadro - Jira
-  ![image](https://github.com/majupeixoto/Space4Events/assets/143026488/3ab53543-7f72-4869-9b2c-ff46fc6a8488)
-  ![image](https://github.com/majupeixoto/Space4Events/assets/143026488/a75f5556-4657-4f7a-a902-b550b1c4d914)
+  ![image](https://github.com/majupeixoto/Space4Events/assets/142419595/c47f75cc-b61c-48db-982e-2ae7c889da1a)
 
 - Issues/Bug Tracker atualizado
   - Open issues:
-  ![image](https://github.com/majupeixoto/Space4Events/assets/143026488/1c793e48-e46d-4428-b82d-e62b44e4a0f3)
+  ![image](https://github.com/majupeixoto/Space4Events/assets/142419595/0b30cb63-4941-42f5-abae-009fb9676e94)
+
 
   - Closed issues:
-    ![image](https://github.com/majupeixoto/Space4Events/assets/143026488/3241ff19-1c77-4a33-bb98-efef3bb0a9d0)
+    ![image](https://github.com/majupeixoto/Space4Events/assets/142419595/06ff1259-a3f4-49b9-9215-68bc0b980abd)
+    ![image](https://github.com/majupeixoto/Space4Events/assets/142419595/e6f0d3a1-3fec-403a-8dcf-c27cfaca5460)
+
+
+    
+

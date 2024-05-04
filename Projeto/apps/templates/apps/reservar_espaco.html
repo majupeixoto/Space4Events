@@ -1,18 +1,57 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'global/base.html' %}
 
 {% block content %}
-<h1>Reservar Espaço: {{ espaco.nome }}</h1>
-<form method="post">
-    {% csrf_token %}
-    <label for="hospede_nome">Nome do Hóspede:</label><br>
-    <input type="text" id="hospede_nome" name="hospede_nome"><br>
-    <label for="data_check_in">Data de Check-in:</label><br>
-    <input type="date" id="data_check_in" name="data_check_in"><br>
-    <label for="data_check_out">Data de Check-out:</label><br>
-    <input type="date" id="data_check_out" name="data_check_out"><br>
-    <label for="numero_de_hospedes">Número de Hóspedes:</label><br>
-    <input type="number" id="numero_de_hospedes" name="numero_de_hospedes"><br><br>
-    <input type="submit" value="Reservar">
-</form>
+<div class="center">
+    <form class="reservar" method="post">
+        <h1>Reservar Espaço: {{ espaco.nome }}</h1>
+
+        {% csrf_token %}
+        <div class="box-user">
+            <input type="text" id="hospede_nome" name="hospede_nome" placeholder="Nome do Hóspede:" required pattern="[A-Za-zÀ-ÖØ-öø-ÿ\s]+$"><br>
+        </div>
+
+        <div class="box-user">
+            <label for="data_check_in">Data de Check-in:</label><br>
+            <input type="text" id="data_check_in" name="data_check_in" placeholder="DD-MM-AAAA" title="Por favor, insira a data no formato DD-MM-YYYY" required maxlength="10"><br>
+        </div>
+        
+        <div class="box-user">
+            <label for="data_check_out">Data de Check-out:</label><br>
+            <input type="text" id="data_check_out" name="data_check_out" placeholder="DD-MM-AAAA" title="Por favor, insira a data no formato DD-MM-YYYY" required maxlength="10"><br>
+        </div>
+        
+        <div class="box-user">
+            <input type="number" id="numero_de_hospedes" name="numero_de_hospedes" placeholder="Número de Hóspedes:" min="1" required><br><br>
+        </div>        
+
+        <button id="botao_reservar" type="submit" class="btn_login" value="Reservar">Reservar</button>
+        
+        {% if error_message %}
+        <p>{{ error_message }}</p>
+        {% endif %}
+    </form>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var dateInputs = document.querySelectorAll('input[type="text"][id^="data_check"]');
+    dateInputs.forEach(function (input) {
+        input.addEventListener('input', function (e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+            if (e.target.value.length >= 8) {
+                var formattedDate = e.target.value.replace(/(\d{2})(\d{2})(\d{4})/, '$1-$2-$3');
+                e.target.value = formattedDate;
+            }
+        });
+    });
+
+    var numberInputs = document.querySelectorAll('input[type="number"]');
+    numberInputs.forEach(function (input) {
+        input.addEventListener('input', function (e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+    });
+});
+</script>
+
 {% endblock %}

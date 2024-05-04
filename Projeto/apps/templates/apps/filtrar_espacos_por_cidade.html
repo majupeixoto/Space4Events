@@ -1,0 +1,29 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+    <h1>Filtrar Espaços por Cidade</h1>
+    <form method="get" action="{% url 'filtrar_espacos_por_cidade' %}" class="mb-3">
+        <div class="input-group">
+            <input type="text" name="cidade" placeholder="Digite a cidade" aria-label="Cidade" class="form-control mb-2">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Buscar</button>
+            </div>
+        </div>
+    </form>
+
+    {% if espacos %}
+    <div style="width: 100%;">
+        {% for espaco in espacos %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ espaco.nome }}</h5>
+                <p class="card-text">{{ espaco.endereco }}</p>
+                <a href="{% url 'detalhes' espaco.id %}" class="btn btn-outline-secondary">Ver mais</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>Nenhum espaço encontrado para a cidade informada.</p>
+    {% endif %}
+{% endblock %}

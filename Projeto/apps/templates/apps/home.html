@@ -1,83 +1,30 @@
-<!-- Usar as linhas abaixo para puxar o template base.html nos templates adicionais -->
-{% extends 'apps/base.html' %}
-{% load static %}
+{% extends 'global/base.html' %}
 
 {% block content %}
-<style>
-    body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    }
 
-    .card {
-        background-color: #ffffff;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        margin-bottom: 20px;
-        overflow: hidden;
-    }
+<div class="row">
+    <div class="col-md-6">
+        <form method="get" action="{% url 'filtrar_espacos_por_cidade' %}" class="search-container">
+            <div class="input-group">
+                <input type="text" name="cidade" placeholder="Digite a cidade" aria-label="Cidade" class="form-control mb-2 custom-input">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary custom-btn"><i class="fas fa-search"></i> Buscar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <form method="get" action="{% url 'filtrar_espacos_por_data' %}" class="search-container">
+            <div class="input-group">
+                <input type="date" id="data" name="data" aria-label="Data" class="form-control mb-2 custom-input" required>
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary custom-btn"><i class="fas fa-calendar-day"></i> Buscar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
-    .card-img-top {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-    }
-
-    .card-body {
-        padding: 15px;
-    }
-
-    .card-title {
-        margin: 0;
-        color: #333333;
-        font-size: 18px;
-        font-weight: bold;
-    }
-
-    .card-text {
-        color: #666666;
-        font-size: 14px;
-        margin-top: 10px;
-        margin-bottom: 15px;
-    }
-
-    .btn-outline-secondary {
-        color: #333333;
-        border-color: #333333;
-    }
-
-    .btn-outline-secondary:hover {
-        background-color: #333333;
-        color: white;
-    }
-
-    .text-body-secondary {
-        color: #888888;
-        font-size: 14px;
-    }
-    .row {
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 20px;
-    padding-right: 15px;
-    padding-left: 15px;
-    }
-
-    /* Ajuste a largura máxima conforme necessário para alinhar com o design desejado */
-    .container {
-        max-width: 1200px; /* Ou a largura que melhor se adapte ao seu layout */
-        margin: 0 auto; /* Centraliza o contêiner */
-        padding: 0 15px; /* Adiciona preenchimento nas laterais */
-    }
-
-    /* Certifique-se de que os cards tenham um espaçamento consistente entre eles */
-    .card {
-        margin: 0 15px 20px; /* Adiciona margem ao redor dos cards */
-    }
-
-</style>
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
     {% for espaco in espacos %}
     <div class="col">
@@ -97,7 +44,7 @@
                 <p class="card-text">{{ espaco.descricao }}</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                        <a href="{% url 'detalhes' espaco.id %}" class="btn btn-sm btn-outline-secondary">ver mais</a>
+                        <a id="visualizar_detalhes" href="{% url 'detalhes' espaco.id %}" class="btn btn-outline-secondary">ver mais</a>
                     </div>
                     <small class="text-body-secondary">{{ espaco.preco_por_noite }}</small>
                 </div>

@@ -1,71 +1,51 @@
-{% extends "apps/base.html" %}
-{% load static %}
+{% extends 'global/base.html' %}
 
 {% block content %}
-<style>
-    .table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    .table th,
-    .table td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-    }
-
-    .table th {
-        background-color: #bbb9b9d1;
-    }
-
-    .table tbody tr:nth-child(even) {
-        background-color: #f2f2f2;
-    }
-
-    .table img {
-        max-width: 100px;
-        height: auto;
-    }
-</style>
-<div class="container">
-    <h1>Minhas Reservas</h1>
     {% if user.is_authenticated %}
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Nome do Espaço</th>
-                    <th>Proprietário</th>
-                    <th>Data de Check-in</th>
-                    <th>Data de Check-out</th>
-                    <th>Número de Hospedes</th>
-                    <th>Foto Principal</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for reserva in reservas %}
-                    <tr>
-                        <td>{{ forloop.counter }}</td>
-                        <td>{{ reserva.espaco_nome }}</td>
-                        <td>{{ reserva.espaco_proprietario_nome }}</td>
-                        <td>{{ reserva.data_check_in }}</td>
-                        <td>{{ reserva.data_check_out }}</td>
-                        <td>{{ reserva.numero_de_hospedes }}</td>
-                        <td>
-                            {% if reserva.espaco_foto_principal %}
-                                <img src="{{ reserva.espaco_foto_principal.url }}" alt="Foto Principal">
-                            {% else %}
-                                Sem foto disponível
+    <h1>Minhas reservas</h1>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for reserva in reservas %}
+        <div class="col">
+            <div class="card">
+                {% if reserva.espaco.foto_principal %}
+                <img src="{{ reserva.espaco.foto_principal.url }}" class="card-img-top" alt="{{ reserva.espaco.nome }}">
+                {% else %}
+                <svg class="card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <title>Placeholder</title>
+                    <rect width="100%" height="100%" fill="#55595c"></rect>
+                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+                </svg>
+                {% endif %}
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ reserva.espaco.nome }}</h5>
+                    <p class="card-text">
+                        Check in: {{ reserva.data_check_in }}
+                        <br>
+                        Check out: {{ reserva.data_check_out }}
+                        <br>
+                        Status: {{ reserva.status }}
+                        <br>
+                        Localização: {{ reserva.espaco.endereco }}
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a href="{% url 'detalhes' reserva.espaco.id %}" class="btn btn-outline-secondary">Ver mais</a>
+                            {% if reserva.status == "Reserva ainda por vir" %}
+                            <form action="{% url 'cancelar_reserva' reserva.espaco.id %}" method="post">
+                                {% csrf_token %}
+                                <button id="cancelar" type="submit" class="btn btn-danger">Cancelar reserva</button>
+                            </form>
                             {% endif %}
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
     {% else %}
         <p>Por favor, faça login para ver suas reservas.</p>
         <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
     {% endif %}
-</div>
 {% endblock %}

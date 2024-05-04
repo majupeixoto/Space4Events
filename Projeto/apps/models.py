@@ -1,7 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 # Create your models here.
+
+# lembrando: SEMPRE que modificar ou acrescentar uma models a gnt tem q fazer os comandos:
+# python manage.py makemigrations
+# e em seguida:
+# python manage.py migrate
+# python manage.py runserver
 
 class Espaco(models.Model):
     proprietario_nome = models.CharField(max_length=100)
@@ -16,7 +23,6 @@ class Espaco(models.Model):
     numero_de_banheiros = models.PositiveIntegerField(default=1)
     numero_de_hospedes = models.PositiveIntegerField(default=1)
     foto_principal = models.ImageField(upload_to='fotos/', null=True, blank=True)
-    sinal_reserva = models.DecimalField(max_digits=6, decimal_places=2, default=0)
 
     @classmethod
     def meus_espacos(cls, proprietario_nome):
@@ -34,8 +40,7 @@ class Espaco(models.Model):
             'numero_de_quartos': self.numero_de_quartos,
             'numero_de_banheiros': self.numero_de_banheiros,
             'numero_de_hospedes': self.numero_de_hospedes,
-            'sinal_reserva': self.sinal_reserva,
-            'foto_principal': self.foto_principal.url if self.foto_principal else None
+            'foto_principal_url': self.foto_principal.url if self.foto_principal else None
         }
 
     def __str__(self):
@@ -46,6 +51,7 @@ class Favorito(models.Model):
 
     def __str__(self):
         return f'{self.usuario.username} - {self.espaco.nome}'
+    
 class Reserva(models.Model):
     espaco_proprietario_nome = models.CharField(max_length=100)
     espaco_nome = models.CharField(max_length=100, default='Nome do Espaço Padrão')
@@ -53,6 +59,24 @@ class Reserva(models.Model):
     data_check_in = models.DateField()
     data_check_out = models.DateField()
     numero_de_hospedes = models.PositiveIntegerField(default=1)
+    valor_total = models.DecimalField(max_digits=10, decimal_places=2)
+    parcela = models.IntegerField()
+    valor_parcelas = models.DecimalField(max_digits=10, decimal_places=2)
+    espaco = models.ForeignKey(Espaco, on_delete=models.PROTECT)
+
+    @property
+    def status(self):
+        hoje = timezone.now().date()
+        if self.data_check_out < hoje:
+            return "Reserva terminada"
+        elif self.data_check_in <= hoje <= self.data_check_out:
+            return "Reserva em andamento"
+        else:
+            return "Reserva ainda por vir"
+
+    @classmethod
+    def minhas_reservas(cls, hospede_nome):
+        return cls.objects.filter(hospede_nome=hospede_nome)
 
     def __str__(self):
         return f"Reserva de {self.espaco_nome} por {self.hospede_nome}"

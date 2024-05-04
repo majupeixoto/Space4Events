@@ -1,0 +1,473 @@
+/* Importando fontes do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&family=Righteous&family=Silkscreen:wght@400;700&display=swap');
+
+/* Definindo variáveis de cores */
+:root {
+    --color-neutral-0: #0e0c0c; /* Preto */
+    --color-neutral-10: #171717; /* Cinza escuro */
+    --color-neutral-30: #a8a29e; /* Cinza claro */
+    --color-neutral-40: #f5f5f5; /* Branco */
+    --color-green-1: #595E4A;
+    --color-green-2: #7b7d66;
+    --color-green-3: #2e342a;
+}
+
+/* Estilo para o corpo do documento */
+* {
+    font-family: Mulish, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    letter-spacing: 1px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.main-content {
+    flex-grow: 1;
+}
+
+.corpo{
+    flex: 1;
+}
+
+/* Estilo para o rodapé */
+.site-footer {
+    color: var(--color-neutral-40); /* Branco */
+    background-color: var(--color-neutral-10); /* Cinza escuro */
+    padding: 3rem 3.5rem;
+    margin-top: 30px;
+}
+
+#custom_footer {
+    background-color:var(--color-neutral-10) ;
+}
+
+#custom_footer h1{
+    color: var(--color-neutral-40);
+}
+
+/* Conteúdo do rodapé */
+#footer_content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+@media (min-width: 768px) {
+    #footer_content {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Informações de contato no rodapé */
+#footer_contacts {
+    margin-bottom: 0.75rem;
+}
+
+/* Links para redes sociais no rodapé */
+#footer_social_media {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+#footer_social_media .footer-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+    width: 2.5rem;
+    color: var(--color-neutral-40); /* Branco */
+    border-radius: 50%;
+}
+
+#footer_social_media .footer-link:hover {
+    opacity: 0.8;
+}
+
+/* Estilos para os ícones das redes sociais */
+#instagram {
+    background: linear-gradient(#7f37c9, #ff2992, #ff9809);
+}
+
+#facebook {
+    background-color: #4267b3;
+}
+
+#whatsapp {
+    background-color: #25d366;
+}
+
+/* Estilo para as listas no rodapé */
+.footer-list {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-list li h3 {
+    margin-bottom: 1rem;
+    color: var(--color-neutral-40); /* Branco */
+}
+
+.footer-list li a {
+    color: var(--color-neutral-40); /* Branco */
+    text-decoration: none;
+}
+
+.footer-list li a:hover {
+    color: var(--color-neutral-30); /* Cinza claro */
+}
+
+/* Estilo para o formulário de inscrição no rodapé */
+#footer_subscribe {
+    margin-top: 2rem;
+}
+
+#footer_subscribe h3 {
+    margin-bottom: 1rem;
+    color: var(--color-neutral-40); /* Branco */
+}
+
+#footer_subscribe p {
+    color: var(--color-neutral-30); /* Cinza claro */
+    margin-bottom: 3rem;
+}
+
+#input_group {
+    display: flex;
+}
+
+#input_group input[type="email"] {
+    padding: 0.5rem;
+    border: 1px solid var(--color-neutral-30); /* Cinza claro */
+    border-radius: 4px 0 0 4px;
+}
+
+#input_group button {
+    background-color: var(--color-neutral-10); /* Branco */
+    border: none;
+    color: #5642bd;
+    padding: 0.5rem;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+#input_group button:hover {
+    background-color: var(--color-neutral-30); /* Cinza claro */
+}
+
+/* Estilo para a barra de navegação */
+#navbar_do_site {
+    background: #171717;
+    margin-bottom: 20px;
+}
+
+#logo {
+    font-size: 30px;
+    color: var(--color-neutral-40);
+    margin-right: 30px;
+    margin-left: 30px;
+    margin-top: 10px;
+    font-family: "Silkscreen", sans-serif;
+}
+
+/* Estilo para os links na barra de navegação */
+.nav-link {
+    color: #ffffff; /* Cor dos links */
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 20px;
+
+}
+
+/* Estilo para os links na barra de navegação quando estão ativos */
+.nav-link.active {
+    color: #ffffff !important; /* Cor dos links ativos */
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.nav-link:hover {
+    color: #d3d3d3; /* Cor dos links quando hover */
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+/* Estilo para o botão de login/logout */
+#entrar,
+#sair,
+#icon_bonequinho
+#icon_entrar {
+    color: #d3d3d3; /* Cor dos botões */
+    font-weight: bold;
+    font-size: 24px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.nav-link.login:hover,
+.nav-link.logout:hover {
+    color: #bfbfbf; /* Cor dos botões quando hover */
+    text-decoration: underline;
+}
+
+/* Estilo para o botão de hamburguer do menu responsivo */
+.navbar-toggler {
+    border: none;
+    background-color: #f8f9fa; /* Cor de fundo do botão de hamburguer */
+}
+
+.navbar-toggler:focus {
+    outline: none;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    /* Cor do ícone do botão de hamburguer */
+}
+
+.navbar-toggler-icon:focus {
+    outline: none;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/*reservar_espaço*/
+.reservar {
+    width: 500px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+/*css login, cadastrar e reservar*/
+.login {
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+    
+.login h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+    
+.box-user {
+    margin-bottom: 20px;
+}
+    
+.box-user input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+    
+.box-user label {
+    font-size: 14px;
+    color: #333;
+}
+
+.btn_login{
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+    
+.btn_login:hover {
+    background-color: #0056b3;
+    color: #fff;
+}
+    
+.forget {
+    color: #007bff;
+    text-decoration: none;
+}
+    
+.forget:hover {
+    text-decoration: underline;
+}
+
+.corpo h1{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/*css home*/
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+    margin: 0 15px 20px;
+}
+
+.card-img-top {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.card-body {
+padding: 15px;
+}
+
+.card-title {
+    margin: 0;
+    color: #333333;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card-text {
+    color: #666666;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.text-body-secondary {
+    color: #888888;
+    font-size: 14px;
+}
+.row {
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+/* Estilo para o formulário de cadastro de espaço */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: var(--color-neutral-40); /* Branco */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.container h1 {
+    color: var(--color-neutral-0); /* Preto */
+    margin-bottom: 20px;
+}
+
+.container form {
+    margin-top: 20px;
+}
+
+.container form label {
+    color: var(--color-neutral-0); /* Preto */
+    font-weight: bold;
+}
+
+.container form input[type="text"],
+.container form input[type="number"],
+.container form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid var(--color-neutral-30); /* Cinza claro */
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.container form input[type="file"] {
+    margin-top: 10px;
+}
+
+.container form input[type="submit"] {
+    background-color: var(--color-green-3); /* Verde escuro */
+    color: var(--color-neutral-40); /* Branco */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.container form input[type="submit"]:hover {
+    background-color: var(--color-green-2); /* Verde médio */
+}
+
+/*detalhes*/
+    /* Estilizando o conteúdo do carrossel */
+    #carouselExampleIndicators .carousel-item img {
+        object-fit: cover;
+        height: 100%; /* Ajustando a altura das imagens para ocupar todo o espaço disponível */
+        width: 100%;
+    }
+
+    /* Estilizando a área à direita */
+    .collums {
+        padding: 0 20px;
+    }
+
+    .search-container{
+        width: 700px;
+        display: block;
+        margin: 0 auto;
+        margin-top: 20px;
+      }
+      
+      input#search-bar{
+        margin: 0 auto;
+        width: 100%;
+        height: 45px;
+        padding: 0 20px;
+        font-size: 1rem;
+        border: 1px solid #D0CFCE;
+        outline: none;
+        &:focus{
+          border: 1px solid #000000;
+          transition: 0.35s ease;
+          color: #000000;
+          &::-webkit-input-placeholder{
+            transition: opacity 0.45s ease; 
+              opacity: 0;
+           }
+          &::-moz-placeholder {
+            transition: opacity 0.45s ease; 
+              opacity: 0;
+           }
+          &:-ms-placeholder {
+           transition: opacity 0.45s ease; 
+             opacity: 0;
+           }    
+         }
+       }
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+
+    .search-container {
+        width: 100%;
+    }
+}
