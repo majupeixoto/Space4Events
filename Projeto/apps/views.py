@@ -153,7 +153,6 @@ def pagamento_reserva(request):
             data_validade = request.POST.get('data_validade')
             cvv = request.POST.get('cvv')
             parcela = request.POST.get('parcela')
-            parcela_selecionada = request.POST.get('parcela', 1)
             valor_parcelas = valor_total / parcela_selecionada
 
             if numero_cartao and data_validade and cvv:

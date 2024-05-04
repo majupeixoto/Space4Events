@@ -64,19 +64,16 @@
                     <label for="parcela">Número de Parcelas:</label>
                     <select name="parcela" id="parcela">
                         {% for i in max_parcelas %}
-                            {% if i == parcela_selecionada %}
-                            <option value="{{ i }}" selected>{{ i }}x</option>
-                            {% else %}
-                            <option value="{{ i }}">{{ i }}x</option>
-                            {% endif %}
+                            <option value="{{ i }}" id="parcelaSelecionada">{{ i }}x</option>
                         {% endfor %}
                     </select>
-                    <p class="reservation-fee" id="valor_parcelas">{{ parcela_selecionada }}x de R$ {{ valor_parcelas }}</p>
-                </div>                                                              
+                </div>
+                
+                <p class="reservation-fee" id="valor_parcelas">{{ valor_parcelas }}</p>                                                            
 
                 <div class="form-group">
                     <label for="valor_total">Valor Total a Pagar:</label>
-                    <p class="reservation-fee" id="valor_total">R$ {{ valor_total }}</p>
+                    <p class="reservation-fee" id="valor_total" data-valor-total>R$ {{ valor_total }}</p>
                 </div>   
                 <button id="botao_reservar" type="submit" class="btn_login" value="Reservar">Pagar</button>                              
             </form>                            
@@ -104,6 +101,14 @@
         document.getElementById('numero_cartao').addEventListener('input', function(e) {
             e.target.value = e.target.value.replace(/\D/g, '');
         });
+    });
+
+    document.getElementById('parcela').addEventListener('change', function() {
+        console.log("Evento de mudança acionado!"); 
+        var valor_total = parseFloat("{{ valor_total }}");
+        var parcelaSelecionada = parseInt(this.value);
+        var valor_parcelas = (valor_total / parcelaSelecionada).toFixed(2);
+        document.getElementById('valor_parcelas').innerText = parcelaSelecionada + 'x de R$ ' + valor_parcelas;
     });
 </script>
 
