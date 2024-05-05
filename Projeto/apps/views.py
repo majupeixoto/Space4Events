@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.urls import reverse
 import datetime
-
+from datetime import datetime
 
 def cadastro(request):
     if request.method == 'POST':
@@ -272,18 +272,29 @@ def filtrar_espacos_por_cidade(request):
     return render(request, 'apps/home.html', {'espacos': espacos})
 
 def filtrar_espacos_por_data(request):
-    data_query = request.GET.get('data')
-    data = datetime.datetime.strptime(data_query, '%Y-%m-%d').date() if data_query else None
+    checkin_date = request.GET.get('checkin_date')
+    checkout_date = request.GET.get('checkout_date')
 
-    if not data:
-        return render(request, 'apps/home.html', {'erro': 'Data inválida'})
+    if checkin_date and checkout_date:
+        try:
+            checkin_date = datetime.strptime(checkin_date, '%Y-%m-%d').date()
+            checkout_date = datetime.strptime(checkout_date, '%Y-%m-%d').date()
+        except ValueError:
+            return render(request, 'apps/home.html', {'erro': 'Formato de data inválido'})
 
-    espacos_disponiveis = Espaco.objects.exclude(
-        reserva__data_check_in__lte=data,
-        reserva__data_check_out__gte=data
-    )
+        if checkin_date >= checkout_date:
+            return render(request, 'apps/home.html', {'erro': 'A data de check-in deve ser anterior à data de check-out.'})
 
-    return render(request, 'apps/home.html', {'espacos': espacos_disponiveis})
+        espacos_disponiveis = Espaco.objects.exclude(
+            reserva__data_check_in__lte=checkout_date,
+            reserva__data_check_out__gte=checkin_date
+        ).distinct()
+        
+        return render(request, 'apps/home.html', {'espacos': espacos_disponiveis})
+    else:
+        return render(request, 'apps/home.html', {'erro': 'Por favor, forneça ambas as datas de check-in e check-out.'})
+
+
 
 
 
