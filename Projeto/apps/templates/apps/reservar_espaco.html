@@ -3,14 +3,14 @@
 {% block content %}
 <div class="container">
     <div class="row align-items-center"> <!-- Centralizando verticalmente -->
-        <!-- Imaagem a esquerda -->
+        <!-- Imagem a esquerda -->
         <div class="col-md-6">
             <br>
             <img src="{{ espaco.foto_principal.url }}" alt="{{ espaco.nome }}" class="img-fluid mb-4">
             <h2>{{ espaco.nome }}</h2>
             
             <h5>Descrição: {{ espaco.descricao }}</h5>  
-            <h5>Endereço: {{ espaco.endereco }}, {{ espaco.cidade }}, {{ espaco.estado }},{{ espaco.pais }}</h5>
+            <h5>Endereço: {{ espaco.endereco }}, {{ espaco.cidade }}, {{ espaco.estado }}, {{ espaco.pais }}</h5>
         
             <ul>
                 {% if espaco.numero_de_quartos == 1 %}
@@ -47,8 +47,13 @@
                 </div>
 
                 <div class="box-user">
-                    <label for="data_range">Selecionar Datas:</label><br>
-                    <input type="text" id="data_range" name="data_range" placeholder=" Check-in e Check-out" required><br>
+                    <label for="data_check_in">Check-in:</label><br>
+                    <input type="date" id="data_check_in" name="data_check_in" required><br>
+                </div>
+                
+                <div class="box-user">
+                    <label for="data_check_out">Check-out:</label><br>
+                    <input type="date" id="data_check_out" name="data_check_out" required><br>
                 </div>
                 
                 <div class="box-user">
@@ -69,19 +74,4 @@
         </div>
     </div>
 </div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    flatpickr("#data_range", {
-        mode: "range",
-        dateFormat: "d-m-Y",
-        minDate: "today",
-        "locale": "pt"  // Define a localização para português
-    });
-});
-</script>
-
 {% endblock %}
