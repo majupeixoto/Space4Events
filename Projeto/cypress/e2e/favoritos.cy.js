@@ -1,3 +1,5 @@
+// ESSE TESTE VALIDA FAVORITAR, DESFAVORITAR E LISTAR OS FAVORITADOS
+
 describe('test favoritar', () => {
     it('Favoritado com sucesso', () => {
         cy.visit('/');
