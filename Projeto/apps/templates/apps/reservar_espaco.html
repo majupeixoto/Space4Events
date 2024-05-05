@@ -2,10 +2,34 @@
 
 {% block content %}
 <div class="container">
-    <div class="row">
-        <div class="col-md-8">
+    <div class="row align-items-center"> <!-- Centralizando verticalmente -->
+        <!-- Imaagem a esquerda -->
+        <div class="col-md-6">
             <br>
             <img src="{{ espaco.foto_principal.url }}" alt="{{ espaco.nome }}" class="img-fluid mb-4">
+            <h2>{{ espaco.nome }}</h2>
+            
+            <h5>Descrição: {{ espaco.descricao }}</h5>  
+            <h5>Endereço: {{ espaco.endereco }}, {{ espaco.cidade }}, {{ espaco.estado }},{{ espaco.pais }}</h5>
+        
+            <ul>
+                {% if espaco.numero_de_quartos == 1 %}
+                    <li><h5>1 Quarto</h5></li>
+                {% else %}
+                    <li><h5>{{ espaco.numero_de_quartos }} Quartos</h5></li>
+                {% endif %}
+
+                {% if espaco.numero_de_banheiros == 1 %}
+                    <li><h5>1 Banheiro</h5></li>
+                {% else %}
+                    <li><h5>{{ espaco.numero_de_banheiros }} Banheiros</h5></li>
+                {% endif %}
+
+                <li><h5>Número Máximo de Hóspedes: {{ espaco.numero_de_hospedes }}</h5></li>
+            </ul>
+            
+            <h5>Sinal de Reserva: R$0,00</h5>
+            <h5>Preço por Noite: R$ {{ espaco.preco_por_noite }}</h5>
         </div>
         <div class="col-md-4">
             <form class="reservar" method="post">
