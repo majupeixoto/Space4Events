@@ -10,49 +10,49 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="nome">Nome do Espaço:</label>
-                    <input type="text" class="form-control" id="nome" name="nome">
+                    <input type="text" class="form-control" id="nome" name="nome" required>
                 </div>
                 <div class="form-group">
                     <label for="descricao">Descrição:</label>
-                    <textarea class="form-control" id="descricao" name="descricao" rows="4"></textarea>
+                    <textarea class="form-control" id="descricao" name="descricao" rows="4" required></textarea>
                 </div>
                 <div class="form-group">
                     <label for="preco_por_noite">Preço por Noite:</label>
-                    <input type="number" class="form-control" id="preco_por_noite" name="preco_por_noite">
+                    <input type="number" class="form-control" id="preco_por_noite" name="preco_por_noite" required>
                 </div>
                 <div class="form-group">
                     <label for="endereco">Endereço:</label>
-                    <input type="text" class="form-control" id="endereco" name="endereco">
+                    <input type="text" class="form-control" id="endereco" name="endereco" required>
                 </div>
                 <div class="form-group">
                     <label for="cidade">Cidade:</label>
-                    <input type="text" class="form-control" id="cidade" name="cidade">
+                    <input type="text" class="form-control" id="cidade" name="cidade" required>
                 </div>
                 <div class="form-group">
                     <label for="estado">Estado:</label>
-                    <input type="text" class="form-control" id="estado" name="estado">
+                    <input type="text" class="form-control" id="estado" name="estado" required>
                 </div>
                 <div class="form-group">
                     <label for="pais">País:</label>
-                    <input type="text" class="form-control" id="pais" name="pais">
+                    <input type="text" class="form-control" id="pais" name="pais" required>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="numero_de_quartos">Número de Quartos:</label>
-                    <input type="number" class="form-control" id="numero_de_quartos" name="numero_de_quartos">
+                    <input type="number" class="form-control" id="numero_de_quartos" name="numero_de_quartos" required>
                 </div>
                 <div class="form-group">
                     <label for="numero_de_banheiros">Número de Banheiros:</label>
-                    <input type="number" class="form-control" id="numero_de_banheiros" name="numero_de_banheiros">
+                    <input type="number" class="form-control" id="numero_de_banheiros" name="numero_de_banheiros" required>
                 </div>
                 <div class="form-group">
                     <label for="numero_de_hospedes">Número de Hóspedes:</label>
-                    <input type="number" class="form-control" id="numero_de_hospedes" name="numero_de_hospedes">
+                    <input type="number" class="form-control" id="numero_de_hospedes" name="numero_de_hospedes" required>
                 </div>
                 <div class="form-group">
                     <label for="foto_principal">Foto Principal:</label>
-                    <input type="file" class="form-control-file" id="foto_principal" name="foto_principal" onchange="previewFile()">
+                    <input type="file" class="form-control-file" id="foto_principal" name="foto_principal" onchange="previewFile()" required>
                     <img src="" alt="Placeholder" id="foto_placeholder" style="display:none; max-width: 100%; margin-top: 10px;">
                 </div>
             </div>
