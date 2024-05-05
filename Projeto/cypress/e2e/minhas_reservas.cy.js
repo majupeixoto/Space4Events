@@ -6,8 +6,9 @@ it('Cancelamento de Reserva', () => {
     cy.get('.btn_login').click();
     cy.get('#logo').click();
     cy.get(':nth-child(4) > .card > .card-body > .d-flex > .btn-group > #visualizar_detalhes').click();
-    cy.get(':nth-child(17) > .btn').click();
+    cy.get(':nth-child(8) > .btn').click();
     cy.get('#hospede_nome').type('lua');
+    cy.get('#cpf').type('66666666666')
     cy.get('#data_check_in').type('2024-05-05'); 
     cy.get('#data_check_out').type('2024-05-06');
     cy.get('#numero_de_hospedes').type('1');
@@ -34,7 +35,7 @@ describe('minhas_reservas', () => {
         cy.get(':nth-child(5) > input').type('123');
         cy.get('.btn_login').click();
         cy.get(':nth-child(2) > .card > .card-body > .d-flex > .btn-group > .btn').click();
-        cy.get(':nth-child(17) > .btn').click();
+        cy.get(':nth-child(8) > .btn').click()
         cy.get('#hospede_nome').type('lua');
         cy.get('#data_check_in').type('2024-04-30'); 
         cy.get('#data_check_out').type('2024-05-01');
@@ -44,7 +45,7 @@ describe('minhas_reservas', () => {
         cy.get('#data_validade').type('02/05');
         cy.get('#cvv').type('123');
         cy.get('.btn_login').click();
-     
+
     })
 
     it('Reserva em andamento', () => {
@@ -88,6 +89,3 @@ describe('minhas_reservas', () => {
         cy.get('.btn_login').click();
     })
 })
-
-    
-
