@@ -17,12 +17,12 @@
                 <div class="carousel-inner">
                     {% if detalhes_do_espaco.foto_principal_url %}
                     <div class="carousel-item active">
-                        <img src="{{ detalhes_do_espaco.foto_principal_url }}" class="d-block w-100 espaco-imagem"
+                        <img src="{{ detalhes_do_espaco.foto_principal_url }}" class="d-block w-100"
                             alt="{{ detalhes_do_espaco.nome }}">
                     </div>
                     {% else %}
                     <div class="carousel-item active">
-                        <svg class="bd-placeholder-img d-block w-100 espaco-imagem" width="100%" height="500"
+                        <svg class="bd-placeholder-img d-block w-100" width="100%" height="500"
                             xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
                             preserveAspectRatio="xMidYMid slice" focusable="false">
                             <title>Placeholder</title>
@@ -73,16 +73,13 @@
             
             <div class="btn-group">
                 {% if user.is_authenticated %}
-                    {% if espaco_favorito %}
-                        <a href="{% url 'favoritar' espaco.id %}" id="desfavoritar" class="btn btn-lg btn-outline-secondary btn-desfavoritar">Desfavoritar</a>
-                    {% else %}
-                        <a href="{% url 'favoritar' espaco.id %}" id="favoritar" class="btn btn-lg btn-outline-secondary btn-favoritar">Favoritar</a>
+                    {% if espaco %}
+                        <a href="{% url 'favoritar' espaco.id %}" class="btn btn-lg btn-outline-secondary">Favoritar</a>
                     {% endif %}
                 {% else %}
                     <a href="{% url 'login' %}" class="btn btn-lg btn-outline-secondary">Favoritar</a>
                 {% endif %}
             </div>
-            
             <div class="btn-group">
                 {% if user.is_authenticated %}
                     {% if espaco %}
@@ -96,21 +93,13 @@
     </div>
 </div>
 
+<!-- JavaScript para controlar o carrossel -->
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var favoritarBtn = document.querySelector('.btn-favoritar');
-
-        if (favoritarBtn) {
-            favoritarBtn.addEventListener('click', function(event) {
-                event.preventDefault();
-                if (favoritarBtn.textContent.trim() === 'Favoritar') {
-                    favoritarBtn.textContent = 'Desfavoritar';
-                } else {
-                    favoritarBtn.textContent = 'Favoritar';
-                }
-            });
-        }
-    });
+    // Inicia o carrossel do Bootstrap
+    var myCarousel = document.querySelector('#carouselExampleIndicators')
+    //var carousel = new bootstrap.Carousel(myCarousel, {
+       // interval: false
+    //})
 </script>
 
 {% endblock %}
