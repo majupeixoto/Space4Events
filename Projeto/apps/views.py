@@ -78,8 +78,8 @@ def criar_reserva(request, espaco_id):
             return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'Por favor, preencha as datas de check-in e check-out.'})
 
         try:
-            data_check_in = datetime.strptime(data_check_in, '%d-%m-%Y').date()
-            data_check_out = datetime.strptime(data_check_out, '%d-%m-%Y').date()
+            data_check_in = datetime.strptime(data_check_in, '%Y-%m-%d').date()
+            data_check_out = datetime.strptime(data_check_out, '%Y-%m-%d').date()
         except ValueError:
             return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'Formato de data inválido. Use o formato dd-mm-aaaa.'})
 
@@ -117,6 +117,7 @@ def criar_reserva(request, espaco_id):
     
     else:
         return render(request, 'apps/reservar_espaco.html', {'espaco': espaco})
+
 
 @login_required
 def pagamento_reserva(request):
