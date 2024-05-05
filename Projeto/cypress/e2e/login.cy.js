@@ -5,5 +5,6 @@ describe('test Login', () => {
         cy.get(':nth-child(4) > input').type('b')
         cy.get(':nth-child(5) > input').type('123')
         cy.get('.btn_login').click()
+        cy.url().should('include', '')
     })
 })
