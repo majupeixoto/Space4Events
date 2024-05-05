@@ -74,13 +74,17 @@ def criar_reserva(request, espaco_id):
         data_check_out = request.POST.get('data_check_out')
         numero_de_hospedes = int(request.POST.get('numero_de_hospedes'))
 
+        if not data_check_in or not data_check_out:
+            return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'Por favor, preencha as datas de check-in e check-out.'})
+
         try:
             data_check_in = datetime.strptime(data_check_in, '%d-%m-%Y').date()
             data_check_out = datetime.strptime(data_check_out, '%d-%m-%Y').date()
         except ValueError:
-            return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'Formato de data inválido'})
+            return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'Formato de data inválido. Use o formato dd-mm-aaaa.'})
 
-        if data_check_in < datetime.today().date() or data_check_out < datetime.today().date():
+        today_date = datetime.today().date()
+        if data_check_in < today_date or data_check_out < today_date:
             return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'As datas selecionadas devem ser futuras.'})
 
         if data_check_in >= data_check_out:
@@ -101,19 +105,17 @@ def criar_reserva(request, espaco_id):
         if reservas_conflitantes.exists():
             return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'Espaço já reservado para as datas solicitadas!'})
 
-        else:
-            request.session['reserva_details'] = {
-                'espaco_id': espaco_id,
-                'hospede_nome': hospede_nome,
-                'data_check_in': data_check_in.strftime('%Y-%m-%d'),
-                'data_check_out': data_check_out.strftime('%Y-%m-%d'),
-                'numero_de_hospedes': numero_de_hospedes
-            }
+        request.session['reserva_details'] = {
+            'espaco_id': espaco_id,
+            'hospede_nome': hospede_nome,
+            'data_check_in': data_check_in.strftime('%Y-%m-%d'),
+            'data_check_out': data_check_out.strftime('%Y-%m-%d'),
+            'numero_de_hospedes': numero_de_hospedes
+        }
         
         return redirect('pagamento_reserva')
     
     else:
-        espaco = get_object_or_404(Espaco, id=espaco_id)
         return render(request, 'apps/reservar_espaco.html', {'espaco': espaco})
 
 @login_required
