@@ -48,20 +48,20 @@
         <!-- Conteúdo à direita -->
         <div class="col-md-6">
             <h2>{{ detalhes_do_espaco.nome }}</h2>
-        
+            
             <h5>Descrição: {{ detalhes_do_espaco.descricao }}</h5>  
-                
+            
             <h5>Preço por Noite: R$ {{ detalhes_do_espaco.preco_por_noite }}</h5>
-
+        
             <h5>Endereço: {{ detalhes_do_espaco.endereco }}, {{ detalhes_do_espaco.cidade }}, {{ detalhes_do_espaco.estado }},{{ detalhes_do_espaco.pais }}</h5>
-
+        
             <h5>Número de Quartos: {{ detalhes_do_espaco.numero_de_quartos }}</h5>
-
+        
             <h5>Número de Banheiros: {{ detalhes_do_espaco.numero_de_banheiros }}</h5>
-
+        
             <h5>Número de Hóspedes: {{ detalhes_do_espaco.numero_de_hospedes }}</h5>
-
-            <h5>Sinal de Reserva: R$ {{ detalhes_do_espaco.sinal_reserva }}</h5>
+        
+            <h5>Sinal de Reserva: R$0,00</h5>
 
             <div class="btn-group">
                 {% if user.is_authenticated %}
