@@ -16,7 +16,8 @@
     <div class="col-md-6">
         <form method="get" action="{% url 'filtrar_espacos_por_data' %}" class="search-container">
             <div class="input-group">
-                <input type="date" id="data" name="data" aria-label="Data" class="form-control mb-2 custom-input" required>
+                <input type="date" id="checkin_date" name="checkin_date" aria-label="Data de Check-in" class="form-control mb-2 custom-input" required>
+                <input type="date" id="checkout_date" name="checkout_date" aria-label="Data de Check-out" class="form-control mb-2 custom-input" required>
                 <div class="input-group-append">
                     <button type="submit" class="btn btn-primary custom-btn"><i class="fas fa-calendar-day"></i> Buscar</button>
                 </div>
@@ -32,11 +33,10 @@
             {% if espaco.foto_principal %}
             <img src="{{ espaco.foto_principal.url }}" class="bd-placeholder-img card-img-top" alt="{{ espaco.nome }}">
             {% else %}
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
-                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                 <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef"
-                    dy=".3em">Thumbnail</text>
+                <rect width="100%" height="100%" fill="#55595c"></rect>
+                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
             </svg>
             {% endif %}
             <div class="card-body">
@@ -44,7 +44,7 @@
                 <p class="card-text">{{ espaco.descricao }}</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                        <a id="visualizar_detalhes" href="{% url 'detalhes' espaco.id %}" class="btn btn-outline-secondary">ver mais</a>
+                        <a id="visualizar_detalhes" href="{% url 'detalhes' espaco.id %}" class="btn btn-outline-secondary">Ver mais</a>
                     </div>
                     <small class="text-body-secondary">{{ espaco.preco_por_noite }}</small>
                 </div>
