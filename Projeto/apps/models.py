@@ -63,6 +63,7 @@ class Reserva(models.Model):
     parcela = models.IntegerField()
     valor_parcelas = models.DecimalField(max_digits=10, decimal_places=2)
     espaco = models.ForeignKey(Espaco, on_delete=models.PROTECT)
+    avaliacao = models.CharField(max_length=255, blank=True, null=True)
 
     @property
     def status(self):
@@ -77,6 +78,10 @@ class Reserva(models.Model):
     @classmethod
     def minhas_reservas(cls, hospede_nome):
         return cls.objects.filter(hospede_nome=hospede_nome)
+
+    def __str__(self):
+        return f"Reserva de {self.espaco_nome} por {self.hospede_nome}"
+
 
     def __str__(self):
         return f"Reserva de {self.espaco_nome} por {self.hospede_nome}"
