@@ -181,14 +181,7 @@ def pagamento_reserva(request):
 def detalhes(request, espaco_id):
     espaco = get_object_or_404(Espaco, id=espaco_id)
     detalhes_do_espaco = espaco.detalhes()
-
-    # Verifica se o espaço é favorito para o usuário autenticado
-    if request.user.is_authenticated:
-        espaco_favorito = Favorito.objects.filter(usuario=request.user, espaco=espaco).exists()
-    else:
-        espaco_favorito = False
-
-    return render(request, 'apps/detalhes.html', {'espaco': espaco, 'detalhes_do_espaco': detalhes_do_espaco, 'espaco_favorito': espaco_favorito})
+    return render(request, 'apps/detalhes.html', {'espaco': espaco, 'detalhes_do_espaco': detalhes_do_espaco})
 
 
 @login_required
