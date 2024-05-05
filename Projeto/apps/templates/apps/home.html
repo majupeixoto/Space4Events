@@ -31,11 +31,12 @@
     <div class="col">
         <div class="card shadow-sm">
             {% if espaco.foto_principal %}
-            <img src="{{ espaco.foto_principal.url }}" class="bd-placeholder-img card-img-top" alt="{{ espaco.nome }}">
+            <img src="{{ espaco.foto_principal.url }}" class="card-img-top espaco-imagem" alt="{{ espaco.nome }}">
             {% else %}
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <!-- fallback image if none exists -->
+            <svg class="card-img-top espaco-imagem" width="100%" height="370" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                 <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c"></rect>
+                <rect width="100%" height="150%" fill="#55595c"></rect>
                 <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
             </svg>
             {% endif %}
