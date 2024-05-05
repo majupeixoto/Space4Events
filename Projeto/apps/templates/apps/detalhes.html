@@ -73,8 +73,10 @@
             
             <div class="btn-group">
                 {% if user.is_authenticated %}
-                    {% if espaco %}
-                        <a href="{% url 'favoritar' espaco.id %}" class="btn btn-lg btn-outline-secondary">Favoritar</a>
+                    {% if espaco_favorito %}
+                        <a href="{% url 'favoritar' espaco.id %}" id="desfavoritar" class="btn btn-lg btn-outline-secondary btn-desfavoritar">Desfavoritar</a>
+                    {% else %}
+                        <a href="{% url 'favoritar' espaco.id %}" id="favoritar" class="btn btn-lg btn-outline-secondary btn-favoritar">Favoritar</a>
                     {% endif %}
                 {% else %}
                     <a href="{% url 'login' %}" class="btn btn-lg btn-outline-secondary">Favoritar</a>
@@ -93,13 +95,17 @@
     </div>
 </div>
 
-<!-- JavaScript para controlar o carrossel -->
-<script>
-    // Inicia o carrossel do Bootstrap
-    var myCarousel = document.querySelector('#carouselExampleIndicators')
-    //var carousel = new bootstrap.Carousel(myCarousel, {
-       // interval: false
-    //})
-</script>
-
 {% endblock %}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var favoritarBtn = document.querySelector('.btn-desfavoritar');
+
+        if (favoritarBtn) {
+            favoritarBtn.addEventListener('click', function(event) {
+                event.preventDefault();
+                favoritarBtn.textContent = 'Favoritar';
+            });
+        }
+    });
+</script>
