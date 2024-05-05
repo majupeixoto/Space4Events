@@ -1,11 +1,71 @@
 {% extends 'global/base.html' %}
 
 {% block content %}
-    <h1>Avaliar Reserva</h1>
+
+<style>
+    .avaliacao{
+        display: flex;
+        justify-content: center; /* Centraliza os elementos horizontalmente */
+    }
+    .star-icon{
+        list-style-type: none;
+        border: 1px solid #fff;
+        cursor: pointer;
+        color: #0e0c00;
+        font-size: 40px; /* alterar o tamanho das estrelas */
+    }
+    .star-icon::before{
+        content: "\2605";
+    }
+    .star-icon.ativo ~ .star-icon::before{
+        content: "\2606";
+    }
+    .avaliacao:hover .star-icon::before{
+        content: "\2605";
+    }
+    .star-icon:hover ~ .star-icon::before{
+        content: "\2606";
+    }
+    .avaliacao-container {
+        background-color: #f2f2f2;
+        padding: 20px;
+        border-radius: 5px;
+        margin: 20px auto;
+        max-width: 500px;
+    }
+</style>
+
+<h1>Avaliar Reserva</h1>
+<div class="avaliacao-container">
     <form method="post">
         {% csrf_token %}
-        <label for="avaliacao">Avaliação:</label><br>
-        <textarea id="avaliacao" name="avaliacao" rows="4" cols="50"></textarea><br><br>
-        <input type="submit" value="Avaliar">
+        <ul class="avaliacao">
+            <li class="star-icon ativo" data-avaliacao="1"></li>
+            <li class="star-icon" data-avaliacao="2"></li>
+            <li class="star-icon" data-avaliacao="3"></li>
+            <li class="star-icon" data-avaliacao="4"></li>
+            <li class="star-icon" data-avaliacao="5"></li>
+        </ul>
+        <input type="hidden" id="avaliacao" name="avaliacao">
+        <div class="form-group">
+            <label for="avaliacao_texto">Deixe sua avaliação:</label>
+            <textarea class="form-control" id="avaliacao_texto" name="avaliacao_texto" rows="3"></textarea>
+        </div>
+        <button id="avaliar" type="submit" class="btn btn-outline-secondary">Avalie!</button>
     </form>
+</div>
+<script>
+    var stars = document.querySelectorAll('.star-icon');
+              
+    document.addEventListener('click', function(e){
+        var classStar = e.target.classList;
+        if(!classStar.contains('ativo')){
+            stars.forEach(function(star){
+                star.classList.remove('ativo');
+            });
+            classStar.add('ativo');
+            document.getElementById('avaliacao').value = e.target.getAttribute('data-avaliacao');
+        }
+    });
+</script>
 {% endblock %}
