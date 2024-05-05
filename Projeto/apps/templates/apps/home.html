@@ -37,7 +37,7 @@
             <svg class="card-img-top espaco-imagem" width="100%" height="370" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                 <title>Placeholder</title>
                 <rect width="100%" height="150%" fill="#55595c"></rect>
-                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Espaço</text>
             </svg>
             {% endif %}
             <div class="card-body">
@@ -47,7 +47,7 @@
                     <div class="btn-group">
                         <a id="visualizar_detalhes" href="{% url 'detalhes' espaco.id %}" class="btn btn-outline-secondary">Ver mais</a>
                     </div>
-                    <small class="text-body-secondary">{{ espaco.preco_por_noite }}</small>
+                    <small class="text-body-secondary">R${{ espaco.preco_por_noite }}</small>
                 </div>
             </div>
         </div>
