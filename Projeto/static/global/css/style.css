@@ -481,3 +481,10 @@ padding: 15px;
         width: 100%;
     }
 }
+/*DEIXANDO OS BOTOES DE CREDITO E DEBITO VISÍVEIS QUANDO NÃO PRESSIONADOS*/
+
+#pills-credito-tab:not(.active), #pills-debito-tab:not(.active) {
+    background-color: #f8f9fa;      /* Cor de fundo mais clara */
+    color: #007bff;                 /* Cor do texto para destacar */
+    border: 1px solid #007bff;      /* Borda para se destacar */
+}
