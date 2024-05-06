@@ -32,7 +32,7 @@ it('Credito', () => {
     cy.get(':nth-child(5) > #email').type('lua@123.com');
     cy.get('#password').type('123');
     cy.get('.btn_login').click();
-    cy.get(':nth-child(2) > .card > .card-body > .d-flex > .btn-group > #visualizar_detalhes').click();
+    cy.get(':nth-child(3) > .card > .card-body > .d-flex > .btn-group > #visualizar_detalhes').click();
     cy.get(':nth-child(7) > .btn').click();
     cy.get('#hospede_nome').type('lua');
     cy.get('#cpf').type('188.510.226-28');
