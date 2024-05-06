@@ -46,6 +46,7 @@ it('Credito', () => {
     cy.get(':nth-child(2) > #cvv').type('123');
     cy.get('.payment-form > #botao_reservar').click();
     cy.get('.active').click();
+    cy.get('.col').should('exist')
 })
 
 
@@ -73,6 +74,7 @@ it('Cancelamento de Reserva', () => {
     cy.get('.payment-form > #botao_reservar').click();
     cy.get('.active').click();
     cy.get('#cancelar').click();
+    cy.get('.col').should('not.exist')
 })
 
 
