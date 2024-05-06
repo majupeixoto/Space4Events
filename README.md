@@ -77,4 +77,5 @@ Para mais informações sobre nosso projeto, entre em contato com nossa equipe:
 
 ## Entrega 3
 
+- [Diagrama de Atividades](https://drive.google.com/file/d/1yCl4ty8RP9hbWDHTEt4LSok_hKZd1vpg/view?usp=drive_link)
 - Screencast CI/CD - [https://drive.google.com/drive/folders/1b-1jfi9s1rpmG0BFbpcquMNLnV8OfBfs](https://drive.google.com/drive/folders/1b-1jfi9s1rpmG0BFbpcquMNLnV8OfBfs)
