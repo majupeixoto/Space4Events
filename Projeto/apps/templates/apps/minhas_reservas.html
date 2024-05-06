@@ -38,6 +38,16 @@
                             </form>
                             {% endif %}
                         </div>
+                        
+                        {% if reserva.status == "Reserva terminada" %}
+                        <div>
+                            <form action="{% url 'avaliar_reserva' reserva.id %}" method="post">                                
+                                {% csrf_token %}
+                                <a href="{% url 'avaliar_reserva' reserva.id %}" class="btn btn-outline-secondary">Avaliar!</a>
+                            </form>
+                        </div>
+                        {% endif %}
+                        
                     </div>
                 </div>
             </div>
