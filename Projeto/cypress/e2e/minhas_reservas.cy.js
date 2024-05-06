@@ -24,13 +24,21 @@ it('Reserva ainda por vir', () => {
     cy.get(':nth-child(1) > #data_validade').type('02/25');
     cy.get(':nth-child(2) > #cvv').type('123');
     cy.get('.payment-form > #botao_reservar').click();
-    cy.get('.active').click();  
+    cy.get('.active').click();
+    cy.get('.col').should('exist')
 })
 
 it('Cancelamento de Reserva', () => {
     cy.visit('/');
     cy.get('#entrar').click();
-    cy.get(':nth-child(4) > input').type('lua')
+    cy.get('.forget').click();
+    cy.get('#username').type('lua');
+    cy.get('#name').type('lua');
+    cy.get(':nth-child(5) > #email').type('lua@123.com');
+    cy.get('#password').type('123');
+    cy.get('.btn_login').click();
+    cy.get('p > a').click();
+    cy.get(':nth-child(4) > input').type('lua');
     cy.get(':nth-child(5) > input').type('123');
     cy.get('.btn_login').click();
     cy.get(':nth-child(1) > .card > .card-body > .d-flex > .btn-group > #visualizar_detalhes').click();
@@ -47,7 +55,8 @@ it('Cancelamento de Reserva', () => {
     cy.get(':nth-child(2) > #cvv').type('123');
     cy.get('.payment-form > #botao_reservar').click();
     cy.get('.active').click();
-    cy.get(':nth-child(3) > .card > .card-body > .d-flex > .btn-group > form > #cancelar').click();
+    cy.get(':nth-child(2) > .card > .card-body > .d-flex > .btn-group > form > #cancelar').click();
+    cy.get('.corpo > .row > :nth-child(2)').should('not.exist')
 })
 
 
