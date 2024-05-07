@@ -136,7 +136,3 @@ it('Cancelamento de Reserva', () => {
     cy.get('#cancelar').click();
     cy.get('.col').should('not.exist')
 })
-
-
-
-    
