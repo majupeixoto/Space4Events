@@ -6,8 +6,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.urls import reverse
+import datetime
 from datetime import datetime
-
 
 def cadastro(request):
     if request.method == 'POST':
@@ -74,13 +74,17 @@ def criar_reserva(request, espaco_id):
         data_check_out = request.POST.get('data_check_out')
         numero_de_hospedes = int(request.POST.get('numero_de_hospedes'))
 
-        try:
-            data_check_in = datetime.strptime(data_check_in, '%d-%m-%Y').date()
-            data_check_out = datetime.strptime(data_check_out, '%d-%m-%Y').date()
-        except ValueError:
-            return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'Formato de data inválido'})
+        if not data_check_in or not data_check_out:
+            return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'Por favor, preencha as datas de check-in e check-out.'})
 
-        if data_check_in < datetime.today().date() or data_check_out < datetime.today().date():
+        try:
+            data_check_in = datetime.strptime(data_check_in, '%Y-%m-%d').date()
+            data_check_out = datetime.strptime(data_check_out, '%Y-%m-%d').date()
+        except ValueError:
+            return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'Formato de data inválido. Use o formato dd-mm-aaaa.'})
+
+        today_date = datetime.today().date()
+        if data_check_in < today_date or data_check_out < today_date:
             return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'As datas selecionadas devem ser futuras.'})
 
         if data_check_in >= data_check_out:
@@ -101,20 +105,19 @@ def criar_reserva(request, espaco_id):
         if reservas_conflitantes.exists():
             return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'Espaço já reservado para as datas solicitadas!'})
 
-        else:
-            request.session['reserva_details'] = {
-                'espaco_id': espaco_id,
-                'hospede_nome': hospede_nome,
-                'data_check_in': data_check_in.strftime('%Y-%m-%d'),
-                'data_check_out': data_check_out.strftime('%Y-%m-%d'),
-                'numero_de_hospedes': numero_de_hospedes
-            }
+        request.session['reserva_details'] = {
+            'espaco_id': espaco_id,
+            'hospede_nome': hospede_nome,
+            'data_check_in': data_check_in.strftime('%Y-%m-%d'),
+            'data_check_out': data_check_out.strftime('%Y-%m-%d'),
+            'numero_de_hospedes': numero_de_hospedes
+        }
         
         return redirect('pagamento_reserva')
     
     else:
-        espaco = get_object_or_404(Espaco, id=espaco_id)
         return render(request, 'apps/reservar_espaco.html', {'espaco': espaco})
+
 
 @login_required
 def pagamento_reserva(request):
@@ -179,7 +182,14 @@ def pagamento_reserva(request):
 def detalhes(request, espaco_id):
     espaco = get_object_or_404(Espaco, id=espaco_id)
     detalhes_do_espaco = espaco.detalhes()
-    return render(request, 'apps/detalhes.html', {'espaco': espaco, 'detalhes_do_espaco': detalhes_do_espaco})
+
+    # Verifica se o espaço é favorito para o usuário autenticado
+    if request.user.is_authenticated:
+        espaco_favorito = Favorito.objects.filter(usuario=request.user, espaco=espaco).exists()
+    else:
+        espaco_favorito = False
+
+    return render(request, 'apps/detalhes.html', {'espaco': espaco, 'detalhes_do_espaco': detalhes_do_espaco, 'espaco_favorito': espaco_favorito})
 
 
 @login_required
@@ -272,18 +282,29 @@ def filtrar_espacos_por_cidade(request):
     return render(request, 'apps/home.html', {'espacos': espacos})
 
 def filtrar_espacos_por_data(request):
-    data_query = request.GET.get('data')
-    data = datetime.datetime.strptime(data_query, '%Y-%m-%d').date() if data_query else None
+    checkin_date = request.GET.get('checkin_date')
+    checkout_date = request.GET.get('checkout_date')
 
-    if not data:
-        return render(request, 'apps/home.html', {'erro': 'Data inválida'})
+    if checkin_date and checkout_date:
+        try:
+            checkin_date = datetime.strptime(checkin_date, '%Y-%m-%d').date()
+            checkout_date = datetime.strptime(checkout_date, '%Y-%m-%d').date()
+        except ValueError:
+            return render(request, 'apps/home.html', {'erro': 'Formato de data inválido'})
 
-    espacos_disponiveis = Espaco.objects.exclude(
-        reserva__data_check_in__lte=data,
-        reserva__data_check_out__gte=data
-    )
+        if checkin_date >= checkout_date:
+            return render(request, 'apps/home.html', {'erro': 'A data de check-in deve ser anterior à data de check-out.'})
 
-    return render(request, 'apps/home.html', {'espacos': espacos_disponiveis})
+        espacos_disponiveis = Espaco.objects.exclude(
+            reserva__data_check_in__lte=checkout_date,
+            reserva__data_check_out__gte=checkin_date
+        ).distinct()
+        
+        return render(request, 'apps/home.html', {'espacos': espacos_disponiveis})
+    else:
+        return render(request, 'apps/home.html', {'erro': 'Por favor, forneça ambas as datas de check-in e check-out.'})
+
+
 
 
 
@@ -322,3 +343,24 @@ def cancelar_reserva(request, espaco_id):
             messages.success(request, 'Reserva cancelada com sucesso.')
             return redirect('minhas_reservas')
     return redirect('detalhes', espaco_id=espaco_id)
+
+@login_required
+def avaliar_reserva(request, reserva_id):
+    reserva = get_object_or_404(Reserva, id=reserva_id)
+
+    # Verifica se a reserva pertence ao usuário autenticado
+    if reserva.hospede_nome != request.user.username:
+        return HttpResponse("Você não tem permissão para avaliar esta reserva.")
+    
+    # Verifica se a reserva está no estado correto para ser avaliada
+    if reserva.status != "Reserva terminada":
+        return HttpResponse("Esta reserva não está terminada.")
+
+    if request.method == 'POST':
+        avaliacao = request.POST.get('avaliacao')  # Verifique se o nome do campo no formulário HTML é 'avaliacao'
+        reserva.avaliacao = avaliacao
+        reserva.save()
+        messages.success(request, 'Avaliação enviada com sucesso!')
+        return redirect('minhas_reservas')
+
+    return render(request, 'apps/avaliar_reserva.html', {'reserva': reserva})

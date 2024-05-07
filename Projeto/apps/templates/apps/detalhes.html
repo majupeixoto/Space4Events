@@ -48,25 +48,34 @@
         <!-- Conteúdo à direita -->
         <div class="col-md-6">
             <h2>{{ detalhes_do_espaco.nome }}</h2>
-        
+            
             <h5>Descrição: {{ detalhes_do_espaco.descricao }}</h5>  
-                
-            <h5>Preço por Noite: R$ {{ detalhes_do_espaco.preco_por_noite }}</h5>
-
             <h5>Endereço: {{ detalhes_do_espaco.endereco }}, {{ detalhes_do_espaco.cidade }}, {{ detalhes_do_espaco.estado }},{{ detalhes_do_espaco.pais }}</h5>
+        
+            <ul>
+                {% if detalhes_do_espaco.numero_de_quartos == 1 %}
+                    <li><h5>1 Quarto</h5></li>
+                {% else %}
+                    <li><h5>{{ detalhes_do_espaco.numero_de_quartos }} Quartos</h5></li>
+                {% endif %}
 
-            <h5>Número de Quartos: {{ detalhes_do_espaco.numero_de_quartos }}</h5>
+                {% if detalhes_do_espaco.numero_de_banheiros == 1 %}
+                    <li><h5>1 Banheiro</h5></li>
+                {% else %}
+                    <li><h5>{{ detalhes_do_espaco.numero_de_banheiros }} Banheiros</h5></li>
+                {% endif %}
 
-            <h5>Número de Banheiros: {{ detalhes_do_espaco.numero_de_banheiros }}</h5>
+                <li><h5>Número Máximo de Hóspedes: {{ detalhes_do_espaco.numero_de_hospedes }}</h5></li>
+            </ul>
 
-            <h5>Número de Hóspedes: {{ detalhes_do_espaco.numero_de_hospedes }}</h5>
-
-            <h5>Sinal de Reserva: R$ {{ detalhes_do_espaco.sinal_reserva }}</h5>
-
+            <h5>Preço por Noite: R$ {{ detalhes_do_espaco.preco_por_noite }}</h5>
+            
             <div class="btn-group">
                 {% if user.is_authenticated %}
-                    {% if espaco %}
-                        <a href="{% url 'favoritar' espaco.id %}" class="btn btn-lg btn-outline-secondary">Favoritar</a>
+                    {% if espaco_favorito %}
+                        <a href="{% url 'favoritar' espaco.id %}" id="desfavoritar" class="btn btn-lg btn-outline-secondary btn-desfavoritar">Desfavoritar</a>
+                    {% else %}
+                        <a href="{% url 'favoritar' espaco.id %}" id="favoritar" class="btn btn-lg btn-outline-secondary btn-favoritar">Favoritar</a>
                     {% endif %}
                 {% else %}
                     <a href="{% url 'login' %}" class="btn btn-lg btn-outline-secondary">Favoritar</a>
@@ -85,13 +94,17 @@
     </div>
 </div>
 
-<!-- JavaScript para controlar o carrossel -->
-<script>
-    // Inicia o carrossel do Bootstrap
-    var myCarousel = document.querySelector('#carouselExampleIndicators')
-    //var carousel = new bootstrap.Carousel(myCarousel, {
-       // interval: false
-    //})
-</script>
-
 {% endblock %}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var favoritarBtn = document.querySelector('.btn-desfavoritar');
+
+        if (favoritarBtn) {
+            favoritarBtn.addEventListener('click', function(event) {
+                event.preventDefault();
+                favoritarBtn.textContent = 'Favoritar';
+            });
+        }
+    });
+</script>

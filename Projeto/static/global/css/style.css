@@ -13,6 +13,16 @@
     --color-green-3: #2e342a;
 }
 
+.espaco-imagem {
+    width: 100%;  /* A imagem preenche 100% da largura do card */
+    height: 200px;  /* Altura fixa para todas as imagens */
+    object-fit: cover;  /* Garante que a imagem cubra a área designada sem ser distorcida */
+    border-radius: 4px;  /* Bordas arredondadas para a imagem */
+}
+
+
+
+
 /* Estilo para o corpo do documento */
 * {
     font-family: Mulish, sans-serif;
@@ -470,4 +480,11 @@ padding: 15px;
     .search-container {
         width: 100%;
     }
+}
+/*DEIXANDO OS BOTOES DE CREDITO E DEBITO VISÍVEIS QUANDO NÃO PRESSIONADOS*/
+
+#pills-credito-tab:not(.active), #pills-debito-tab:not(.active) {
+    background-color: #f8f9fa;      /* Cor de fundo mais clara */
+    color: #007bff;                 /* Cor do texto para destacar */
+    border: 1px solid #007bff;      /* Borda para se destacar */
 }

@@ -1,12 +1,13 @@
 {% extends 'global/base.html' %}
 
 {% block content %}
+
 <div class="center">
     <form class="reservar" method="post">
     <h1>Pagar Reserva</h1>
             <p class="card-text text-center">Por favor, forneça as informações de pagamento para completar a reserva.</p>
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                 <li class="nav-item" role="presentation">
+                <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="pills-debito-tab" data-bs-toggle="pill" data-bs-target="#pills-debito" type="button" role="tab" aria-controls="pills-debito" aria-selected="true">Débito</button>
                 </li>
                 <li class="nav-item" role="presentation">
@@ -20,9 +21,9 @@
                 {% csrf_token %}
                 <div class="box-user">
                     <label for="numero_cartao">Número do Cartão:</label>
-                    <input type="text" class="form-control" id="numero_cartao" name="numero_cartao" placeholder="Apenas números" required pattern="[0-9]{16}" maxlength="16">
+                    <input type="text" class="form-control" id="numero_cartao" name="numero_cartao" placeholder="Apenas números" required pattern="[0-9]{16}" title="Por favor, digite 16 números" maxlength="16">
                 </div>
-                                                
+
                 <div class="box-user">
                     <label for="data_validade">Data de Validade:</label>
                     <input type="text" class="form-control" id="data_validade" name="data_validade" placeholder="MM/AA" required pattern="(0[1-9]|1[0-2])\/([0-9]{2})" maxlength="5">
@@ -46,9 +47,9 @@
                 {% csrf_token %}
                 <div class="box-user">
                     <label for="numero_cartao">Número do Cartão:</label>
-                    <input type="text" class="form-control" id="numero_cartao" name="numero_cartao" placeholder="Apenas números" required pattern="[0-9]{16}" maxlength="16">
+                    <input type="text" class="form-control" id="numero_cartao" name="numero_cartao" placeholder="Apenas números" required pattern="[0-9]{16}" title="Por favor, digite 16 números" maxlength="16">
                 </div>
-                                    
+
                 <div class="form-row" id="expiration-cvv-fields">
                     <div class="box-user">
                         <label for="data_validade">Data de Validade:</label>

@@ -1,57 +1,81 @@
 {% extends 'global/base.html' %}
 
 {% block content %}
-<div class="center">
-    <form class="reservar" method="post">
-        <h1>Reservar Espaço: {{ espaco.nome }}</h1>
-
-        {% csrf_token %}
-        <div class="box-user">
-            <input type="text" id="hospede_nome" name="hospede_nome" placeholder="Nome do Hóspede:" required pattern="[A-Za-zÀ-ÖØ-öø-ÿ\s]+$"><br>
-        </div>
-
-        <div class="box-user">
-            <label for="data_check_in">Data de Check-in:</label><br>
-            <input type="text" id="data_check_in" name="data_check_in" placeholder="DD-MM-AAAA" title="Por favor, insira a data no formato DD-MM-YYYY" required maxlength="10"><br>
-        </div>
+<div class="container">
+    <div class="row align-items-center"> <!-- Centralizando verticalmente -->
+        <!-- Imagem a esquerda -->
+        <div class="col-md-6">
+            <br>
+            {% if espaco.foto_principal %}
+                <img src="{{ espaco.foto_principal.url }}" alt="{{ espaco.nome }}" class="img-fluid mb-4">
+            {% else %}
+                <p>Nenhuma foto disponível</p>
+            {% endif %}
+            <h2>{{ espaco.nome }}</h2>
+            
+            <h5>Descrição: {{ espaco.descricao }}</h5>  
+            <h5>Endereço: {{ espaco.endereco }}, {{ espaco.cidade }}, {{ espaco.estado }}, {{ espaco.pais }}</h5>
         
-        <div class="box-user">
-            <label for="data_check_out">Data de Check-out:</label><br>
-            <input type="text" id="data_check_out" name="data_check_out" placeholder="DD-MM-AAAA" title="Por favor, insira a data no formato DD-MM-YYYY" required maxlength="10"><br>
-        </div>
-        
-        <div class="box-user">
-            <input type="number" id="numero_de_hospedes" name="numero_de_hospedes" placeholder="Número de Hóspedes:" min="1" required><br><br>
-        </div>        
+            <ul>
+                {% if espaco.numero_de_quartos == 1 %}
+                    <li><h5>1 Quarto</h5></li>
+                {% else %}
+                    <li><h5>{{ espaco.numero_de_quartos }} Quartos</h5></li>
+                {% endif %}
 
-        <button id="botao_reservar" type="submit" class="btn_login" value="Reservar">Reservar</button>
-        
-        {% if error_message %}
-        <p>{{ error_message }}</p>
-        {% endif %}
-    </form>
+                {% if espaco.numero_de_banheiros == 1 %}
+                    <li><h5>1 Banheiro</h5></li>
+                {% else %}
+                    <li><h5>{{ espaco.numero_de_banheiros }} Banheiros</h5></li>
+                {% endif %}
+
+                <li><h5>Número Máximo de Hóspedes: {{ espaco.numero_de_hospedes }}</h5></li>
+            </ul>
+            
+            <h5>Sinal de Reserva: R$0,00</h5>
+            <h5>Preço por Noite: R$ {{ espaco.preco_por_noite }}</h5>
+        </div>
+        <div class="col-md-4">
+            <form class="reservar" method="post">
+                {% csrf_token %}
+                <h1>Reservar Espaço: {{ espaco.nome }}</h1>
+
+                <div class="box-user">
+                    <label for="hospede_nome">Nome do hóspede:</label><br>
+                    <input type="text" id="hospede_nome" name="hospede_nome" placeholder="Nome Completo" required pattern="[A-Za-zÀ-ÖØ-öø-ÿ\s]+$"><br>
+                </div>
+
+                <div class="box-user">
+                    <label for="cpf">CPF:</label><br>
+                    <input type="text" id="cpf" name="cpf" placeholder="Digite seu CPF" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="Digite um CPF no formato: 000.000.000-00" required><br>
+                </div>
+
+                <div class="box-user">
+                    <label for="data_check_in">Check-in:</label><br>
+                    <input type="date" id="data_check_in" name="data_check_in" required><br>
+                </div>
+                
+                <div class="box-user">
+                    <label for="data_check_out">Check-out:</label><br>
+                    <input type="date" id="data_check_out" name="data_check_out" required><br>
+                </div>
+                
+                <div class="box-user">
+                    <input type="number" id="numero_de_hospedes" name="numero_de_hospedes" placeholder="Número de Hóspedes" min="1" required><br><br>
+                </div>
+
+                <div class="box-user">
+                    <label for="additional_info">Informações Adicionais:</label><br>
+                    <textarea id="additional_info" name="additional_info" placeholder="Qualquer informação adicional que deseje fornecer."></textarea><br>
+                </div>
+
+                <button type="submit" class="btn_login">Reservar</button>
+                
+                {% if error_message %}
+                    <p>{{ error_message }}</p>
+                {% endif %}
+            </form>
+        </div>
+    </div>
 </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    var dateInputs = document.querySelectorAll('input[type="text"][id^="data_check"]');
-    dateInputs.forEach(function (input) {
-        input.addEventListener('input', function (e) {
-            e.target.value = e.target.value.replace(/\D/g, '');
-            if (e.target.value.length >= 8) {
-                var formattedDate = e.target.value.replace(/(\d{2})(\d{2})(\d{4})/, '$1-$2-$3');
-                e.target.value = formattedDate;
-            }
-        });
-    });
-
-    var numberInputs = document.querySelectorAll('input[type="number"]');
-    numberInputs.forEach(function (input) {
-        input.addEventListener('input', function (e) {
-            e.target.value = e.target.value.replace(/\D/g, '');
-        });
-    });
-});
-</script>
-
 {% endblock %}

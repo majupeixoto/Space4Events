@@ -31,13 +31,21 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
                             <a href="{% url 'detalhes' reserva.espaco.id %}" class="btn btn-outline-secondary">Ver mais</a>
-                            {% if reserva.status == "Reserva ainda por vir" %}
                             <form action="{% url 'cancelar_reserva' reserva.espaco.id %}" method="post">
                                 {% csrf_token %}
                                 <button id="cancelar" type="submit" class="btn btn-danger">Cancelar reserva</button>
                             </form>
-                            {% endif %}
                         </div>
+
+                        {% if reserva.status == "Reserva terminada" %}
+                        <div>
+                            <form action="{% url 'avaliar_reserva' reserva.id %}" method="post">                                
+                                {% csrf_token %}
+                                <a href="{% url 'avaliar_reserva' reserva.id %}" class="btn btn-outline-secondary">Avaliar!</a>
+                            </form>
+                        </div>
+                        {% endif %}
+
                     </div>
                 </div>
             </div>
