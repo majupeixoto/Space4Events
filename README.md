@@ -80,3 +80,13 @@ Para mais informações sobre nosso projeto, entre em contato com nossa equipe:
 - [Diagrama de Atividades](https://drive.google.com/file/d/1yCl4ty8RP9hbWDHTEt4LSok_hKZd1vpg/view?usp=drive_link)
 - Screencast CI/CD - [https://drive.google.com/drive/folders/1b-1jfi9s1rpmG0BFbpcquMNLnV8OfBfs](https://drive.google.com/drive/folders/1b-1jfi9s1rpmG0BFbpcquMNLnV8OfBfs)
 - Screencast Prótipo de baixa fidelidade - [https://drive.google.com/drive/folders/1oOZ6VU1sJJ4tKEmOfkgL_KFjwW3EC4a5?usp=sharing).
+
+ - Backlog do Jira:
+ 
+    ![image](https://github.com/majupeixoto/Space4Events/assets/149490954/e32e89b6-318f-4c9c-982f-783a18ea38d9)
+
+  - Quadro do Jira:
+    
+  ![image](https://github.com/majupeixoto/Space4Events/assets/149490954/d0f5e6b1-9c3c-4001-970f-c063b0715377)
+
+
