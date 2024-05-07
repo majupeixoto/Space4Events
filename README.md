@@ -89,4 +89,8 @@ Para mais informações sobre nosso projeto, entre em contato com nossa equipe:
     
   ![image](https://github.com/majupeixoto/Space4Events/assets/149490954/d0f5e6b1-9c3c-4001-970f-c063b0715377)
 
+- Open Issues:
+![Captura de tela 2024-05-06 233515](https://github.com/majupeixoto/Space4Events/assets/149490954/297d0d14-f19c-44f4-8e73-430ad4d8f522
 
+- Closed Issues:
+![Captura de tela 2024-05-06 233534](https://github.com/majupeixoto/Space4Events/assets/149490954/1ad4e902-882f-48ff-84bb-7128481d94fe)
