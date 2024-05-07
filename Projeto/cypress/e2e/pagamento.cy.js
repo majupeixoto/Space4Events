@@ -31,7 +31,7 @@ describe('pagamento reserva', () => {
         cy.get('.btn_login').click();
         cy.get('#visualizar_detalhes').click();
         cy.get(':nth-child(7) > .btn').click();
-        cy.get('#hospede_nome').type('Ana Silva Mendes');
+        cy.get('#hospede_nome').type('ana');
         cy.get('#cpf').type('111.222.333-44');
         cy.get('#data_check_in').type('2024-09-21');
         cy.get('#data_check_out').type('2024-09-24');
@@ -43,9 +43,7 @@ describe('pagamento reserva', () => {
         cy.get(':nth-child(3) > #data_validade').type('0928');
         cy.get(':nth-child(4) > #cvv').type('111');
         cy.get('#pills-debito > #botao_reservar').click();
-
-
-        //cy.get('.row > :nth-child(2) > :nth-child(3)').invoke('text').should("match", /João Pessoa/);
+        cy.get('.col').should('exist')
     })
 
 })
