@@ -158,6 +158,9 @@ def pagamento_reserva(request):
             parcela = request.POST.get('parcela')
             valor_parcelas = valor_total / parcela_selecionada
 
+            if parcela is None:
+                parcela = 1
+
             if numero_cartao and data_validade and cvv:
                 reserva = Reserva.objects.create(
                     espaco_proprietario_nome=espaco.proprietario_nome,
@@ -305,30 +308,6 @@ def filtrar_espacos_por_data(request):
         return render(request, 'apps/home.html', {'erro': 'Por favor, forneça ambas as datas de check-in e check-out.'})
 
 
-
-
-
-# def pagamento_reserva(request, espaco_id):
-    espaco = get_object_or_404(Espaco, id=espaco_id)
-    
-    if request.method == 'POST' or request.method == 'GET':
-        usuario = request.user
-
-        numero_cartao = request.POST.get('numero_cartao')
-        data_validade = request.POST.get('data_validade')
-        cvv = request.POST.get('cvv')
-
-        if len(numero_cartao) >= 12 and '/' in data_validade and len(cvv) == 3:
-            # Lógica de pagamento simulado
-            messages.success(request, "Pagamento do sinal efetuado com sucesso!")
-            return render(request, 'apps/pagamento_reserva.html')
-        else:
-            messages.error(request, "Falha no pagamento. Verifique os detalhes do seu cartão.")
-            return render(request, 'apps/pagamento_reserva.html', {'espaco': espaco})
-    else:
-        # Se a solicitação não for do tipo POST, redirecione para uma página de erro.
-        return HttpResponse("Método de requisição inválido.")
-
 @login_required
 def cancelar_reserva(request, espaco_id):
     espaco = get_object_or_404(Espaco, id=espaco_id)
@@ -344,7 +323,7 @@ def cancelar_reserva(request, espaco_id):
             return redirect('minhas_reservas')
     return redirect('detalhes', espaco_id=espaco_id)
 
-@login_required
+"""@login_required
 def avaliar_reserva(request, reserva_id):
     reserva = get_object_or_404(Reserva, id=reserva_id)
 
@@ -363,4 +342,4 @@ def avaliar_reserva(request, reserva_id):
         messages.success(request, 'Avaliação enviada com sucesso!')
         return redirect('minhas_reservas')
 
-    return render(request, 'apps/avaliar_reserva.html', {'reserva': reserva})
+    return render(request, 'apps/avaliar_reserva.html', {'reserva': reserva})"""
