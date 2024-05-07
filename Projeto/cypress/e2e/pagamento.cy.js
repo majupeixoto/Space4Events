@@ -28,10 +28,6 @@ describe('scrum 27', () => {
         cy.get(':nth-child(5) > #email').type('ana@123.com');
         cy.get('#password').type('123');
         cy.get('.btn_login').click();
-        cy.get('p > a').click();
-        cy.get(':nth-child(4) > input').type('ana');
-        cy.get(':nth-child(5) > input').type('123');
-        cy.get('.btn_login').click();
         cy.get('#visualizar_detalhes').click();
         cy.get(':nth-child(7) > .btn').click();
         
