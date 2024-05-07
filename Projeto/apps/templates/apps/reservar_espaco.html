@@ -6,7 +6,11 @@
         <!-- Imagem a esquerda -->
         <div class="col-md-6">
             <br>
-            <img src="{{ espaco.foto_principal.url }}" alt="{{ espaco.nome }}" class="img-fluid mb-4">
+            {% if espaco.foto_principal %}
+                <img src="{{ espaco.foto_principal.url }}" alt="{{ espaco.nome }}" class="img-fluid mb-4">
+            {% else %}
+                <p>Nenhuma foto disponível</p>
+            {% endif %}
             <h2>{{ espaco.nome }}</h2>
             
             <h5>Descrição: {{ espaco.descricao }}</h5>  
