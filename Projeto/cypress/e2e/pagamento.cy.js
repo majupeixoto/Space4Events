@@ -8,10 +8,6 @@ describe('scrum 27', () => {
         cy.get(':nth-child(5) > #email').type('thi@123.com');
         cy.get('#password').type('123');
         cy.get('.btn_login').click();
-        cy.get('p > a').click();
-        cy.get(':nth-child(4) > input').type('thi');
-        cy.get(':nth-child(5) > input').type('123');
-        cy.get('.btn_login').click();
         cy.get('[aria-current="page"]').click();
         cy.get('#nome').type('Red House');
         cy.get('#descricao').type('Casa com otima área de lazer.');
@@ -24,7 +20,6 @@ describe('scrum 27', () => {
         cy.get('#numero_de_banheiros').type('2');
         cy.get('#numero_de_hospedes').type('9');
         cy.get('.container > form > .btn').click();
-        cy.get('#logo > .fa-solid').click();
         cy.get('#sair').click();
         cy.get('#entrar').click();
         cy.get('.forget').click();
