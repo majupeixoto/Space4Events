@@ -7,10 +7,7 @@ describe('scrum 27', () => {
         cy.get('#name').type('rob');
         cy.get(':nth-child(5) > #email').type('rob@123.com');
         cy.get('#password').type('123');
-        cy.get('.btn_login').click();
-        cy.get('p > a').click();
-        cy.get(':nth-child(4) > input').type('rob');
-        cy.get(':nth-child(5) > input').type('123');
+        cy.wait(3000);
         cy.get('.btn_login').click();
         cy.get('[aria-current="page"]').click();
         cy.get('#nome').type('Casa da Praia');
@@ -23,10 +20,13 @@ describe('scrum 27', () => {
         cy.get('#numero_de_quartos').type('3');
         cy.get('#numero_de_banheiros').type('2');
         cy.get('#numero_de_hospedes').type('9');
+        cy.wait(3000);
         cy.get('.container > form > .btn').click();
         cy.get('#logo > .fa-solid').click();
         cy.get(':nth-child(1) > .search-container > .input-group > .form-control').type('João Pessoa');
+        cy.wait(3000);
         cy.get(':nth-child(1) > .search-container > .input-group > .input-group-append > .btn').click();
+        cy.wait(3000);
         cy.get(':nth-child(1) > .card > .card-body > .d-flex > .btn-group > .btn').click();
         cy.get('.row > :nth-child(2) > :nth-child(3)').invoke('text').should("match", /João Pessoa/);
     })
@@ -37,9 +37,12 @@ describe('scrum 27', () => {
         cy.get('.btn_login').click();
         cy.get(':nth-child(4) > input').type('rob');
         cy.get(':nth-child(5) > input').type('123');
+        cy.wait(3000);
         cy.get('.btn_login').click();
         cy.get(':nth-child(1) > .search-container > .input-group > .form-control').type('Recife');
+        cy.wait(3000);
         cy.get(':nth-child(1) > .search-container > .input-group > .input-group-append > .btn').click();
+        cy.wait(3000);
         cy.get('row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3').should('not.exist');
     })
     
