@@ -6,6 +6,7 @@ it('Debito', () => {
     cy.get('#name').type('pedro');
     cy.get(':nth-child(5) > #email').type('pedro@123.com');
     cy.get('#password').type('123');
+    cy.wait(5000);
     cy.get('.btn_login').click();
     cy.get('[aria-current="page"]').click();
     cy.get('#nome').type('Chácara das Flores');
@@ -41,6 +42,7 @@ it('Debito', () => {
     cy.get(':nth-child(4) > #cvv').type('123');
     cy.get('#pills-debito > #botao_reservar').click();
     cy.get('.active').click();
+    cy.get('.col').should('exist')
 
 })
 it('Credito', () => {
