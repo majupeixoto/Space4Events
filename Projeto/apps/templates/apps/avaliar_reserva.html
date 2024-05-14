@@ -36,26 +36,28 @@
 </style>
 
 <h1>Avaliar Reserva</h1>
-<div class="avaliacao-container">
-    <form method="post">
-        {% csrf_token %}
+<form method="post" id="avaliacaoForm">
+    {% csrf_token %}
+    <div class="avaliacao-container">
         <ul class="avaliacao">
-            <li class="star-icon ativo" data-avaliacao="1"></li>
+            <li class="star-icon" data-avaliacao="1"></li>
             <li class="star-icon" data-avaliacao="2"></li>
             <li class="star-icon" data-avaliacao="3"></li>
             <li class="star-icon" data-avaliacao="4"></li>
             <li class="star-icon" data-avaliacao="5"></li>
         </ul>
-        <input type="hidden" id="avaliacao" name="avaliacao"> <!-- Corrigido o nome do campo -->
+        <input type="hidden" id="avaliacao" name="avaliacao">
         <div class="form-group">
             <label for="comentario_avaliacao">Comentário:</label>
             <textarea class="form-control" id="comentario_avaliacao" name="comentario_avaliacao" rows="3"></textarea>
         </div>
         <button id="avaliar" type="submit" class="btn btn-outline-secondary">Avalie!</button>
-    </form>
-</div>
+    </div>
+</form>
+
 <script>
     var stars = document.querySelectorAll('.star-icon');
+    var avaliacaoInput = document.getElementById('avaliacao');
               
     document.addEventListener('click', function(e){
         var classStar = e.target.classList;
@@ -64,8 +66,16 @@
                 star.classList.remove('ativo');
             });
             classStar.add('ativo');
-            document.getElementById('avaliacao').value = e.target.getAttribute('data-avaliacao');
+            avaliacaoInput.value = e.target.getAttribute('data-avaliacao');
+        }
+    });
+
+    document.getElementById('avaliacaoForm').addEventListener('submit', function(e) {
+        if (!avaliacaoInput.value) {
+            e.preventDefault();
+            alert('Por favor, selecione uma avaliação.');
         }
     });
 </script>
+
 {% endblock %}

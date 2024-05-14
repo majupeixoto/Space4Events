@@ -86,7 +86,6 @@ class Reserva(models.Model):
     avaliacao = models.IntegerField(blank=True, null=True)
     comentario_avaliacao = models.TextField(blank=True, null=True)
 
-
     @property
     def status(self):
         hoje = timezone.now().date()
@@ -105,6 +104,4 @@ class Reserva(models.Model):
         return f"Reserva de {self.espaco_nome} por {self.hospede_nome}"
 
 
-    def __str__(self):
-        return f"Reserva de {self.espaco_nome} por {self.hospede_nome}"
 
