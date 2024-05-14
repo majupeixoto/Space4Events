@@ -21,6 +21,7 @@ urlpatterns = [
     path('listar_espacos/', views.listar_espacos, name='listar_espacos'),
     path('login/', auth_views.LoginView.as_view(template_name='apps/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('meu_perfil/', views.meu_perfil, name='meu_perfil'),
     path('meus_espacos/', views.meus_espacos, name='meus_espacos'),
     path('minhas_reservas/', views.minhas_reservas, name='minhas_reservas'),
     path('pagamento_reserva/', views.pagamento_reserva, name='pagamento_reserva'),
