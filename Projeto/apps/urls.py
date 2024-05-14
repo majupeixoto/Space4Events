@@ -10,6 +10,7 @@ urlpatterns = [
     path('cadastrar_espaco/', views.cadastrar_espaco, name='cadastrar_espaco'),
     path('detalhes/<int:espaco_id>/', views.detalhes, name='detalhes'),
     path('favoritos/', views.lista_favoritos, name='favoritos'),
+    path('editar_espaco/<int:espaco_id>/', views.editar_espaco, name='editar_espaco'),
     path('favoritar/<int:espaco_id>', views.favoritar, name='favoritar'),
     path('listar_espacos/', views.listar_espacos, name='listar_espacos'),
     path('login/', auth_views.LoginView.as_view(template_name='apps/login.html'), name='login'),
