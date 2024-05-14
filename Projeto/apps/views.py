@@ -311,6 +311,10 @@ def logout(request):
     return redirect(home)
 
 @login_required
+def meu_perfil(request):
+    return render(request, 'apps/meu_perfil.html')
+
+@login_required
 def meus_espacos(request):
     if request.user.is_authenticated:
         usuario = request.user
