@@ -199,6 +199,17 @@ def espacos_proprietario(request, proprietario_nome):
     return render(request, 'apps/espacos_proprietario.html', {'espacos': espacos, 'proprietario_nome': proprietario_nome})
 
 @login_required
+def excluir_espaco(request, espaco_id):
+    espaco = get_object_or_404(Espaco, id=espaco_id)
+    
+    if request.method == "POST":
+        espaco.delete()
+        messages.success(request, "Espaço excluído com sucesso!")
+        return redirect('meus_espacos')
+    
+    return render(request, 'apps/excluir_espaco_confirmacao.html', {'espaco': espaco})
+
+@login_required
 def favoritar(request, espaco_id):
     espaco = get_object_or_404(Espaco, id=espaco_id)
     

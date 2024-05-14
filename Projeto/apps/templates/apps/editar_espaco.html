@@ -60,6 +60,11 @@
         <br>
         <input type="submit" class="btn btn-primary" value="Salvar">
     </form>
+    <br>
+    <form method="post" action="{% url 'excluir_espaco' espaco.id %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Excluir Espaço</button>
+    </form>
 </div>
 
 <script>
