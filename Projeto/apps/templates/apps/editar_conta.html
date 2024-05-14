@@ -1,0 +1,35 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Editar Conta</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="first_name">Primeiro Nome:</label>
+            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ request.user.first_name }}" required>
+        </div>
+        <div class="form-group">
+            <label for="last_name">Último Nome:</label>
+            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ request.user.last_name }}" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{ request.user.email }}" required>
+        </div>
+        <div class="form-group">
+            <label for="senha_atual">Senha Atual:</label>
+            <input type="password" class="form-control" id="senha_atual" name="senha_atual">
+        </div>
+        <div class="form-group">
+            <label for="nova_senha">Nova Senha:</label>
+            <input type="password" class="form-control" id="nova_senha" name="nova_senha">
+        </div>
+        <div class="form-group">
+            <label for="nova_senha_confirmacao">Confirme a Nova Senha:</label>
+            <input type="password" class="form-control" id="nova_senha_confirmacao" name="nova_senha_confirmacao">
+        </div>
+        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+    </form>
+</div>
+{% endblock %}
