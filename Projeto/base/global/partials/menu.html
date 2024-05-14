@@ -26,10 +26,10 @@
                 {% if user.is_authenticated %}
                     <form class="d-flex" method="POST" action="{% url 'logout' %}">
                         {% csrf_token %}
-                        <button id="sair" type="submit" class="btn btn-link nav-link login-logout">Logout</button>
+                        <button id="sair" type="submit" class="btn btn-link nav-link login-logout">Sair</button>
                     </form>
                 {% elif request.resolver_match.url_name != 'login' %}
-                    <a id="entrar" class="nav-link login-logout" href="{% url 'login' %}">Login</a>
+                    <a id="entrar" class="nav-link login-logout" href="{% url 'login' %}">Entrar</a>
                 {% endif %}
             </div>
         </div>
