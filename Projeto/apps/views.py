@@ -192,7 +192,7 @@ def detalhes(request, espaco_id):
     else:
         espaco_favorito = False
 
-    return render(request, 'apps/detalhes.html', {'espaco': espaco, 'detalhes_do_espaco': detalhes_do_espaco, 'espaco_favorito': espaco_favorito})
+    return render(request, 'apps/detalhes.html', {'espaco': espaco, 'detalhes_do_espaco': detalhes_do_espaco, 'espaco_favorito': espaco_favorito, 'proprietario_nome': espaco.proprietario_nome})
 
 
 @login_required
