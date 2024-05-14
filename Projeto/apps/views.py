@@ -402,18 +402,26 @@ def avaliar_reserva(request, reserva_id):
 
     if request.method == 'POST':
         avaliacao = request.POST.get('avaliacao')
-        comentario_avaliacao = request.POST.get('avaliacao_texto')
+        comentario_avaliacao = request.POST.get('comentario_avaliacao')
+
+        print("Dados recebidos do formulário:")
+        print(request.POST)
 
         # Verifica se avaliacao é um número
-        try:
+        if avaliacao.strip() and avaliacao.isdigit():  # Verifica se a avaliação é um número inteiro e não está vazia
             avaliacao = int(avaliacao)
-        except ValueError:
-            avaliacao = None
-
-        if avaliacao is not None:
-            reserva.avaliacao = avaliacao
-            reserva.comentario_avaliacao = comentario_avaliacao
-            reserva.save()
-            return redirect('minhas_reservas')
+            # Verifica se a avaliação está entre 1 e 5
+            if 1 <= avaliacao <= 5:
+                reserva.avaliacao = avaliacao
+                reserva.comentario_avaliacao = comentario_avaliacao
+                reserva.save()
+                print("Avaliação:", avaliacao)
+                print("Comentário de avaliação:", comentario_avaliacao)
+                print("Avaliação e comentário de avaliação salvos no banco de dados.")
+                return redirect('minhas_reservas')
+            else:
+                print("Avaliação fora do intervalo permitido (1-5).")
+        else:
+            print("Avaliação não é um número inteiro ou está vazia.")
 
     return render(request, 'apps/avaliar_reserva.html', {'reserva': reserva})
