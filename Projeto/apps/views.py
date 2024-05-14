@@ -194,6 +194,9 @@ def detalhes(request, espaco_id):
 
     return render(request, 'apps/detalhes.html', {'espaco': espaco, 'detalhes_do_espaco': detalhes_do_espaco, 'espaco_favorito': espaco_favorito, 'proprietario_nome': espaco.proprietario_nome})
 
+def espacos_proprietario(request, proprietario_nome):
+    espacos = Espaco.objects.filter(proprietario_nome=proprietario_nome)
+    return render(request, 'apps/espacos_proprietario.html', {'espacos': espacos, 'proprietario_nome': proprietario_nome})
 
 @login_required
 def favoritar(request, espaco_id):
@@ -232,10 +235,6 @@ def lista_favoritos(request):
 def listar_espacos(request):
     espacos = Espaco.objects.all()
     return render(request, 'apps/listar_espacos.html', {'espacos': espacos})
-
-def home(request):
-    espacos = Espaco.objects.all()
-    return render(request, 'apps/home.html', {'espacos': espacos})
 
 def login_view(request):
     next_url = request.GET.get('next', '')
