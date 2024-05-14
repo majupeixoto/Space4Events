@@ -1,0 +1,37 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+    <h1>Espaços de {{ proprietario_nome }}</h1>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for espaco in espacos %}
+        <div class="col">
+            <div class="card shadow-sm">
+                {% if espaco.foto_principal %}
+                <img src="{{ espaco.foto_principal.url }}" class="card-img-top" alt="{{ espaco.nome }}">
+                {% else %}
+                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <title>Placeholder</title>
+                    <rect width="100%" height="100%" fill="#55595c"></rect>
+                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+                </svg>
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ espaco.nome }}</h5>
+                    <p class="card-text">{{ espaco.descricao }}</p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Preço por Noite:</strong> {{ espaco.preco_por_noite }}</li>
+                        <li class="list-group-item"><strong>Endereço:</strong> {{ espaco.endereco }}</li>
+                        <li class="list-group-item"><strong>Cidade:</strong> {{ espaco.cidade }}</li>
+                        <li class="list-group-item"><strong>Estado:</strong> {{ espaco.estado }}</li>
+                        <li class="list-group-item"><strong>País:</strong> {{ espaco.pais }}</li>
+                        <li class="list-group-item"><strong>Número de Quartos:</strong> {{ espaco.numero_de_quartos }}</li>
+                        <li class="list-group-item"><strong>Número de Banheiros:</strong> {{ espaco.numero_de_banheiros }}</li>
+                        <li class="list-group-item"><strong>Número de Hóspedes:</strong> {{ espaco.numero_de_hospedes }}</li>
+                    </ul>
+                    <a href="{% url 'detalhes' espaco.id %}" class="btn btn-outline-secondary">Ver mais</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
