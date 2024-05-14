@@ -208,7 +208,7 @@ def excluir_conta(request):
         user.delete()
         messages.success(request, 'Sua conta foi excluída com sucesso!')
         return redirect('home')
-    return render(request, 'apps/excluir_conta_confirmacao.html')
+    return render(request, 'apps/excluir_conta.html')
 
 def espacos_proprietario(request, proprietario_nome):
     espacos = Espaco.objects.filter(proprietario_nome=proprietario_nome)
