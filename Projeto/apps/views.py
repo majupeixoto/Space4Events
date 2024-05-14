@@ -343,3 +343,30 @@ def avaliar_reserva(request, reserva_id):
         return redirect('minhas_reservas')
 
     return render(request, 'apps/avaliar_reserva.html', {'reserva': reserva})"""
+
+def editar_espaco(request, espaco_id):
+    espaco = get_object_or_404(Espaco, id=espaco_id)
+
+    if request.method == 'POST':
+        # Obtém os dados do formulário POST
+        nome = request.POST.get('nome')
+        descricao = request.POST.get('descricao')
+        preco_por_noite = request.POST.get('preco_por_noite')
+        endereco = request.POST.get('endereco')
+        cidade = request.POST.get('cidade')
+        estado = request.POST.get('estado')
+        pais = request.POST.get('pais')
+        numero_de_quartos = request.POST.get('numero_de_quartos')
+        numero_de_banheiros = request.POST.get('numero_de_banheiros')
+        numero_de_hospedes = request.POST.get('numero_de_hospedes')
+        foto_principal = request.FILES.get('foto_principal')
+
+        # Atualiza os dados do espaço chamando o método atualizar_dados
+        espaco.atualizar_dados(nome, descricao, preco_por_noite, endereco, cidade, estado, pais,
+                            numero_de_quartos, numero_de_banheiros, numero_de_hospedes, foto_principal)
+
+        # Redireciona para a página de detalhes do espaço
+        return redirect('detalhes', espaco_id=espaco.id)
+    else:
+        # Renderiza o formulário de edição com os dados atuais do espaço
+        return render(request, 'apps/editar_espaco.html', {'espaco': espaco})
