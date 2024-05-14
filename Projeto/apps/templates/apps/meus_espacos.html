@@ -29,6 +29,7 @@
                         <li class="list-group-item"><strong>Número de Hóspedes:</strong> {{ espaco.numero_de_hospedes }}</li>
                     </ul>
                     <a href="{% url 'detalhes' espaco.id %}" class="btn btn-outline-secondary">Ver mais</a>
+                    <a href="{% url 'editar_espaco' espaco.id %}" class="btn btn-outline-primary">Editar</a> <!-- Botão de editar -->
                 </div>
             </div>
         </div>
