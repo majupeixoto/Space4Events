@@ -343,3 +343,8 @@ def avaliar_reserva(request, reserva_id):
         return redirect('minhas_reservas')
 
     return render(request, 'apps/avaliar_reserva.html', {'reserva': reserva})"""
+
+def editar_espaco(request, espaco_id):
+    espaco = get_object_or_404(Espaco, id=espaco_id)
+    ...
+    return render(request, 'apps/editar_espaco.html')
