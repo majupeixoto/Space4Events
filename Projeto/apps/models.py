@@ -42,6 +42,24 @@ class Espaco(models.Model):
             'numero_de_hospedes': self.numero_de_hospedes,
             'foto_principal_url': self.foto_principal.url if self.foto_principal else None
         }
+    
+    def atualizar_dados(self, nome, descricao, preco_por_noite, endereco, cidade, estado, pais,
+                        numero_de_quartos, numero_de_banheiros, numero_de_hospedes, foto_principal):
+        # Atualiza os campos do objeto Espaco
+        self.nome = nome
+        self.descricao = descricao
+        self.preco_por_noite = preco_por_noite
+        self.endereco = endereco
+        self.cidade = cidade
+        self.estado = estado
+        self.pais = pais
+        self.numero_de_quartos = numero_de_quartos
+        self.numero_de_banheiros = numero_de_banheiros
+        self.numero_de_hospedes = numero_de_hospedes
+        self.foto_principal = foto_principal
+
+        # Salva as alterações no banco de dados
+        self.save()
 
     def __str__(self):
         return self.nome
