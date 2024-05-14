@@ -5,9 +5,11 @@ from django.utils import timezone
 # Create your models here.
 
 # lembrando: SEMPRE que modificar ou acrescentar uma models a gnt tem q fazer os comandos:
-# python manage.py makemigrations
+# python 
+#   manage.py makemigrations
 # e em seguida:
-# python manage.py migrate
+# python 
+#   manage.py migrate
 # python manage.py runserver
 
 class Espaco(models.Model):
@@ -81,7 +83,8 @@ class Reserva(models.Model):
     parcela = models.IntegerField(null=True, blank=True)
     valor_parcelas = models.DecimalField(max_digits=10, decimal_places=2)
     espaco = models.ForeignKey(Espaco, on_delete=models.PROTECT)
-    avaliacao = models.CharField(max_length=255, blank=True, null=True)
+    avaliacao = models.IntegerField(blank=True, null=True)
+    comentario_avaliacao = models.TextField(blank=True, null=True)
 
 
     @property

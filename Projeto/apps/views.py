@@ -397,23 +397,23 @@ def pagamento_reserva(request):
 def profile(request):
     return redirect('home')
 
-"""@login_required
 def avaliar_reserva(request, reserva_id):
-    reserva = get_object_or_404(Reserva, id=reserva_id)
-
-    # Verifica se a reserva pertence ao usuário autenticado
-    if reserva.hospede_nome != request.user.username:
-        return HttpResponse("Você não tem permissão para avaliar esta reserva.")
-    
-    # Verifica se a reserva está no estado correto para ser avaliada
-    if reserva.status != "Reserva terminada":
-        return HttpResponse("Esta reserva não está terminada.")
+    reserva = get_object_or_404(Reserva, pk=reserva_id)
 
     if request.method == 'POST':
-        avaliacao = request.POST.get('avaliacao')  # Verifique se o nome do campo no formulário HTML é 'avaliacao'
-        reserva.avaliacao = avaliacao
-        reserva.save()
-        messages.success(request, 'Avaliação enviada com sucesso!')
-        return redirect('minhas_reservas')
+        avaliacao = request.POST.get('avaliacao')
+        comentario_avaliacao = request.POST.get('avaliacao_texto')
 
-    return render(request, 'apps/avaliar_reserva.html', {'reserva': reserva})"""
+        # Verifica se avaliacao é um número
+        try:
+            avaliacao = int(avaliacao)
+        except ValueError:
+            avaliacao = None
+
+        if avaliacao is not None:
+            reserva.avaliacao = avaliacao
+            reserva.comentario_avaliacao = comentario_avaliacao
+            reserva.save()
+            return redirect('minhas_reservas')
+
+    return render(request, 'apps/avaliar_reserva.html', {'reserva': reserva})
