@@ -5,9 +5,11 @@ from django.utils import timezone
 # Create your models here.
 
 # lembrando: SEMPRE que modificar ou acrescentar uma models a gnt tem q fazer os comandos:
-# python manage.py makemigrations
+# python 
+#   manage.py makemigrations
 # e em seguida:
-# python manage.py migrate
+# python 
+#   manage.py migrate
 # python manage.py runserver
 
 class Espaco(models.Model):
@@ -42,6 +44,24 @@ class Espaco(models.Model):
             'numero_de_hospedes': self.numero_de_hospedes,
             'foto_principal_url': self.foto_principal.url if self.foto_principal else None
         }
+    
+    def atualizar_dados(self, nome, descricao, preco_por_noite, endereco, cidade, estado, pais,
+                        numero_de_quartos, numero_de_banheiros, numero_de_hospedes, foto_principal):
+        # Atualiza os campos do objeto Espaco
+        self.nome = nome
+        self.descricao = descricao
+        self.preco_por_noite = preco_por_noite
+        self.endereco = endereco
+        self.cidade = cidade
+        self.estado = estado
+        self.pais = pais
+        self.numero_de_quartos = numero_de_quartos
+        self.numero_de_banheiros = numero_de_banheiros
+        self.numero_de_hospedes = numero_de_hospedes
+        self.foto_principal = foto_principal
+
+        # Salva as alterações no banco de dados
+        self.save()
 
     def __str__(self):
         return self.nome
@@ -63,8 +83,8 @@ class Reserva(models.Model):
     parcela = models.IntegerField(null=True, blank=True)
     valor_parcelas = models.DecimalField(max_digits=10, decimal_places=2)
     espaco = models.ForeignKey(Espaco, on_delete=models.PROTECT)
-    avaliacao = models.CharField(max_length=255, blank=True, null=True)
-
+    avaliacao = models.IntegerField(blank=True, null=True)
+    comentario_avaliacao = models.TextField(blank=True, null=True)
 
     @property
     def status(self):
@@ -84,6 +104,4 @@ class Reserva(models.Model):
         return f"Reserva de {self.espaco_nome} por {self.hospede_nome}"
 
 
-    def __str__(self):
-        return f"Reserva de {self.espaco_nome} por {self.hospede_nome}"
 

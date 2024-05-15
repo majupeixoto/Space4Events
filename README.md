@@ -78,5 +78,24 @@ Para mais informações sobre nosso projeto, entre em contato com nossa equipe:
 ## Entrega 3
 
 - [Diagrama de Atividades](https://drive.google.com/file/d/1yCl4ty8RP9hbWDHTEt4LSok_hKZd1vpg/view?usp=drive_link)
+- Screencast e uso do sistema - [https://drive.google.com/file/d/1bZSfuOrHdbeBPeGbSXtY91Q60JI5-GPS/view?usp=drive_link)
+- Screencast testes automatizados - [https://drive.google.com/file/d/18M3SGr6rKiboLU39FD6vVoy2az-N3ACE/view?usp=drive_link)
 - Screencast CI/CD - [https://drive.google.com/drive/folders/1b-1jfi9s1rpmG0BFbpcquMNLnV8OfBfs](https://drive.google.com/drive/folders/1b-1jfi9s1rpmG0BFbpcquMNLnV8OfBfs)
 - Screencast Prótipo de baixa fidelidade - [https://drive.google.com/drive/folders/1oOZ6VU1sJJ4tKEmOfkgL_KFjwW3EC4a5?usp=sharing).
+  
+
+ - Backlog do Jira:
+ 
+    ![image](https://github.com/majupeixoto/Space4Events/assets/149490954/e32e89b6-318f-4c9c-982f-783a18ea38d9)
+
+  - Quadro do Jira:
+    
+  ![image](https://github.com/majupeixoto/Space4Events/assets/149490954/d0f5e6b1-9c3c-4001-970f-c063b0715377)
+
+- Open Issues:
+![Captura de tela 2024-05-06 233515](https://github.com/majupeixoto/Space4Events/assets/149490954/297d0d14-f19c-44f4-8e73-430ad4d8f522
+
+- Closed Issues:
+![Captura de tela 2024-05-07 074039](https://github.com/majupeixoto/Space4Events/assets/149490954/a4f6e1ae-b535-4e44-9246-f218c7740f0d)
+![Captura de tela 2024-05-07 074052](https://github.com/majupeixoto/Space4Events/assets/149490954/c2309250-7369-41b5-8f18-350dd39f3982)
+

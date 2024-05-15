@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="container mt-5">
-    <div class="row align-items-center"> <!-- Centralizando verticalmente -->
+    <div class="row align-items-center">
         <!-- Carrossel à esquerda -->
         <div class="col-md-6">
             <div id="carouselExampleIndicators" class="carousel slide">
@@ -45,10 +45,9 @@
             </div>
         </div>
 
-        <!-- Conteúdo à direita -->
         <div class="col-md-6">
             <h2>{{ detalhes_do_espaco.nome }}</h2>
-            
+            <h5>Proprietário: <a href="{% url 'espacos_proprietario' espaco.proprietario_nome %}">{{ espaco.proprietario_nome }}</a></h5>
             <h5>Descrição: {{ detalhes_do_espaco.descricao }}</h5>  
             <h5>Endereço: {{ detalhes_do_espaco.endereco }}, {{ detalhes_do_espaco.cidade }}, {{ detalhes_do_espaco.estado }},{{ detalhes_do_espaco.pais }}</h5>
         

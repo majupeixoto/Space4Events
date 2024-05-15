@@ -1,7 +1,7 @@
 {% extends 'global/base.html' %}
 
 {% block content %}
-    <h1>Meus Espaços</h1>
+    <h1>Espaços de {{ proprietario_nome }}</h1>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {% for espaco in espacos %}
         <div class="col">
@@ -29,8 +29,6 @@
                         <li class="list-group-item"><strong>Número de Hóspedes:</strong> {{ espaco.numero_de_hospedes }}</li>
                     </ul>
                     <a href="{% url 'detalhes' espaco.id %}" class="btn btn-outline-secondary">Ver mais</a>
-                    <a href="{% url 'editar_espaco' espaco.id %}" class="btn btn-outline-primary">Editar</a>
-                    <a href="{% url 'excluir_espaco' espaco.id %}" class="btn btn-danger">Excluir</a>
                 </div>
             </div>
         </div>

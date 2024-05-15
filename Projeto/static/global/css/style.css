@@ -20,9 +20,6 @@
     border-radius: 4px;  /* Bordas arredondadas para a imagem */
 }
 
-
-
-
 /* Estilo para o corpo do documento */
 * {
     font-family: Mulish, sans-serif;
@@ -77,40 +74,6 @@ body {
 /* Informações de contato no rodapé */
 #footer_contacts {
     margin-bottom: 0.75rem;
-}
-
-/* Links para redes sociais no rodapé */
-#footer_social_media {
-    display: flex;
-    gap: 2rem;
-    margin-top: 1.5rem;
-}
-
-#footer_social_media .footer-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 2.5rem;
-    width: 2.5rem;
-    color: var(--color-neutral-40); /* Branco */
-    border-radius: 50%;
-}
-
-#footer_social_media .footer-link:hover {
-    opacity: 0.8;
-}
-
-/* Estilos para os ícones das redes sociais */
-#instagram {
-    background: linear-gradient(#7f37c9, #ff2992, #ff9809);
-}
-
-#facebook {
-    background-color: #4267b3;
-}
-
-#whatsapp {
-    background-color: #25d366;
 }
 
 /* Estilo para as listas no rodapé */
@@ -487,4 +450,34 @@ padding: 15px;
     background-color: #f8f9fa;      /* Cor de fundo mais clara */
     color: #007bff;                 /* Cor do texto para destacar */
     border: 1px solid #007bff;      /* Borda para se destacar */
+}
+.avaliacao{
+    display: flex;
+    justify-content: center; /* Centraliza os elementos horizontalmente */
+}
+.star-icon{
+    list-style-type: none;
+    border: 1px solid #fff;
+    cursor: pointer;
+    color: #0e0c00;
+    font-size: 40px; /* alterar o tamanho das estrelas */
+}
+.star-icon::before{
+    content: "\2605";
+}
+.star-icon.ativo ~ .star-icon::before{
+    content: "\2606";
+}
+.avaliacao:hover .star-icon::before{
+    content: "\2605";
+}
+.star-icon:hover ~ .star-icon::before{
+    content: "\2606";
+}
+.avaliacao-container {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20px auto;
+    max-width: 500px;
 }
