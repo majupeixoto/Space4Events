@@ -93,6 +93,24 @@
     </div>
 </div>
 
+<div class="container mt-5">
+    <h3>Avaliações dos Usuários</h3>
+    <hr>
+    {% if avaliacoes %}
+        <ul>
+            {% for reserva in avaliacoes %}
+                <li>
+                    <strong>Hóspede:</strong> {{ reserva.hospede_nome }}<br>
+                    <strong>Avaliação:</strong> {{ reserva.avaliacao }}<br>
+                    <strong>Comentário:</strong> {{ reserva.comentario_avaliacao|default:"Sem comentário" }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nenhuma avaliação encontrada para este espaço.</p>
+    {% endif %}
+</div>
+
 {% endblock %}
 
 <script>
