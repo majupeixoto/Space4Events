@@ -98,9 +98,9 @@
             <div class="btn-group">
                 {% if user.is_authenticated %}
                     {% if espaco_favorito %}
-                        <a href="{% url 'favoritar' espaco.id %}" id="desfavoritar" class="btn btn-lg btn-outline-secondary btn-desfavoritar">Desfavoritar</a>
+                        <a href="{% url 'favoritar' espaco.id %}" id="desfavoritar" class="btn btn-lg btn-outline-secondary btn-desfavoritar" data-bs-toggle="popover" data-bs-content="Remover da lista de favoritos"><i class="fa-solid fa-heart"></i></a>
                     {% else %}
-                        <a href="{% url 'favoritar' espaco.id %}" id="favoritar" class="btn btn-lg btn-outline-secondary btn-favoritar">Favoritar</a>
+                        <a href="{% url 'favoritar' espaco.id %}" id="favoritar" class="btn btn-lg btn-outline-secondary btn-favoritar" data-bs-toggle="popover" data-bs-content="Adicionar à lista de favoritos"><i class="fa-regular fa-heart"></i></a>
                     {% endif %}
                 {% else %}
                     <a href="{% url 'login' %}" class="btn btn-lg btn-outline-secondary">Favoritar</a>
@@ -142,19 +142,30 @@
     
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Renderizar estrelas
-            document.querySelectorAll('.rating').forEach(function(element) {
-                var rating = parseInt(element.getAttribute('data-rating'));
-                element.innerHTML = renderStars(rating);
+            // Inicializar popovers
+            var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+            var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+                return new bootstrap.Popover(popoverTriggerEl)
             });
-    
-            // Adicionar evento de clique ao botão de desfavoritar
-            var favoritarBtn = document.querySelector('.btn-desfavoritar');
+            
+            // Adicionar evento de clique ao botão de favoritar
+            var favoritarBtn = document.querySelector('.btn-favoritar');
             if (favoritarBtn) {
                 favoritarBtn.addEventListener('click', function(event) {
                     event.preventDefault();
-                    favoritarBtn.textContent = 'Favoritar';
+                    favoritarBtn.setAttribute('data-bs-content', 'O espaço foi adicionado à sua página de favoritos!');
+                });
+            }
+            
+            // Adicionar evento de clique ao botão de desfavoritar
+            var desfavoritarBtn = document.querySelector('.btn-desfavoritar');
+            if (desfavoritarBtn) {
+                desfavoritarBtn.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    desfavoritarBtn.setAttribute('data-bs-content', 'O espaço foi removido da sua página de favoritos!');
                 });
             }
         });
     </script>
+    
+
