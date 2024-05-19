@@ -49,7 +49,7 @@
             <h2>{{ detalhes_do_espaco.nome }}</h2>
             <h5>Proprietário: <a href="{% url 'espacos_proprietario' espaco.proprietario_nome %}">{{ espaco.proprietario_nome }}</a></h5>
             <h5>Descrição: {{ detalhes_do_espaco.descricao }}</h5>  
-            <h5>Endereço: {{ detalhes_do_espaco.endereco }}, {{ detalhes_do_espaco.cidade }}, {{ detalhes_do_espaco.estado }},{{ detalhes_do_espaco.pais }}</h5>
+            <h5>Endereço: {{ detalhes_do_espaco.endereco }}, {{ detalhes_do_espaco.cidade }}, {{ detalhes_do_espaco.estado }}, {{ detalhes_do_espaco.pais }}</h5>
         
             <ul>
                 {% if detalhes_do_espaco.numero_de_quartos == 1 %}

@@ -81,7 +81,7 @@ class Reserva(models.Model):
     numero_de_hospedes = models.PositiveIntegerField(default=1)
     valor_total = models.DecimalField(max_digits=10, decimal_places=2)
     parcela = models.IntegerField(null=True, blank=True)
-    valor_parcelas = models.DecimalField(max_digits=10, decimal_places=2)
+    valor_parcelas = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     espaco = models.ForeignKey(Espaco, on_delete=models.PROTECT)
     avaliacao = models.IntegerField(blank=True, null=True)
     comentario_avaliacao = models.TextField(blank=True, null=True)
@@ -99,6 +99,10 @@ class Reserva(models.Model):
     @classmethod
     def minhas_reservas(cls, hospede_nome):
         return cls.objects.filter(hospede_nome=hospede_nome)
+
+    @classmethod
+    def avaliacoes_por_espaco(cls, espaco_id):
+        return cls.objects.filter(espaco_id=espaco_id).exclude(avaliacao__isnull=True)
 
     def __str__(self):
         return f"Reserva de {self.espaco_nome} por {self.hospede_nome}"
