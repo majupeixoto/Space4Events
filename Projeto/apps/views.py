@@ -142,7 +142,16 @@ def detalhes(request, espaco_id):
     else:
         espaco_favorito = False
 
-    return render(request, 'apps/detalhes.html', {'espaco': espaco, 'detalhes_do_espaco': detalhes_do_espaco, 'espaco_favorito': espaco_favorito, 'proprietario_nome': espaco.proprietario_nome})
+    # Recupera as avaliações para o espaço
+    avaliacoes = Reserva.objects.filter(espaco=espaco).exclude(avaliacao__isnull=True)
+
+    return render(request, 'apps/detalhes.html', {
+        'espaco': espaco,
+        'detalhes_do_espaco': detalhes_do_espaco,
+        'espaco_favorito': espaco_favorito,
+        'avaliacoes': avaliacoes,
+        'proprietario_nome': espaco.proprietario_nome
+    })
 
 @login_required
 def editar_conta(request):
@@ -425,3 +434,12 @@ def avaliar_reserva(request, reserva_id):
             print("Avaliação não é um número inteiro ou está vazia.")
 
     return render(request, 'apps/avaliar_reserva.html', {'reserva': reserva})
+
+def avaliacoes_espaco(request, espaco_id):
+    espaco = get_object_or_404(Espaco, pk=espaco_id)
+    avaliacoes = Reserva.avaliacoes_por_espaco(espaco_id)
+    context = {
+        'espaco': espaco,
+        'avaliacoes': avaliacoes,
+    }
+    return render(request, 'avaliacoes_espaco.html', context)
