@@ -4,7 +4,7 @@
 
 <div class="container">
     <h1>Cadastrar Espaço</h1>
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
         {% csrf_token %}
         <div class="row">
             <div class="col-md-6">
@@ -18,7 +18,7 @@
                 </div>
                 <div class="form-group">
                     <label for="preco_por_noite">Preço por Noite:</label>
-                    <input type="number" class="form-control" id="preco_por_noite" name="preco_por_noite" required>
+                    <input type="number" class="form-control" id="preco_por_noite" name="preco_por_noite" required min="0">
                 </div>
                 <div class="form-group">
                     <label for="endereco">Endereço:</label>
@@ -40,15 +40,15 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="numero_de_quartos">Número de Quartos:</label>
-                    <input type="number" class="form-control" id="numero_de_quartos" name="numero_de_quartos" required>
+                    <input type="number" class="form-control" id="numero_de_quartos" name="numero_de_quartos" required min="0">
                 </div>
                 <div class="form-group">
                     <label for="numero_de_banheiros">Número de Banheiros:</label>
-                    <input type="number" class="form-control" id="numero_de_banheiros" name="numero_de_banheiros" required>
+                    <input type="number" class="form-control" id="numero_de_banheiros" name="numero_de_banheiros" required min="0">
                 </div>
                 <div class="form-group">
                     <label for="numero_de_hospedes">Número de Hóspedes:</label>
-                    <input type="number" class="form-control" id="numero_de_hospedes" name="numero_de_hospedes" required>
+                    <input type="number" class="form-control" id="numero_de_hospedes" name="numero_de_hospedes" required min="0">
                 </div>
                 <div class="form-group">
                     <label for="foto_principal">Foto Principal:</label>
@@ -79,6 +79,20 @@
             preview.src = "";
             preview.style.display = 'none';
         }
+    }
+
+    function validateForm() {
+        let precoPorNoite = document.getElementById('preco_por_noite').value;
+        let numeroDeQuartos = document.getElementById('numero_de_quartos').value;
+        let numeroDeBanheiros = document.getElementById('numero_de_banheiros').value;
+        let numeroDeHospedes = document.getElementById('numero_de_hospedes').value;
+
+        if (precoPorNoite < 0 || numeroDeQuartos < 0 || numeroDeBanheiros < 0 || numeroDeHospedes < 0) {
+            alert('Os valores não podem ser negativos.');
+            return false;
+        }
+
+        return true;
     }
 </script>
 
