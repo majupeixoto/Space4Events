@@ -34,15 +34,19 @@ def cadastrar_espaco(request):
         proprietario_nome = request.POST.get('proprietario_nome', request.user.username)
         nome = request.POST['nome']
         descricao = request.POST['descricao']
-        preco_por_noite = request.POST['preco_por_noite']
+        preco_por_noite = int(request.POST['preco_por_noite'])
         endereco = request.POST['endereco']
         cidade = request.POST['cidade']
         estado = request.POST['estado']
         pais = request.POST['pais']
-        numero_de_quartos = request.POST['numero_de_quartos']
-        numero_de_banheiros = request.POST['numero_de_banheiros']
-        numero_de_hospedes = request.POST['numero_de_hospedes']
+        numero_de_quartos = int(request.POST['numero_de_quartos'])
+        numero_de_banheiros = int(request.POST['numero_de_banheiros'])
+        numero_de_hospedes = int(request.POST['numero_de_hospedes'])
         foto_principal = request.FILES.get('foto_principal', None)
+
+        if preco_por_noite < 0 or numero_de_quartos < 0 or numero_de_banheiros < 0 or numero_de_hospedes < 0:
+            messages.error(request, 'Os valores numéricos não podem ser negativos.')
+            return render(request, 'apps/cadastrar_espaco.html')
 
         novo_espaco = Espaco(
             proprietario_nome=proprietario_nome,
@@ -66,7 +70,7 @@ def cadastrar_espaco(request):
 
 @login_required
 def cancelar_reserva(request, espaco_id):
-    espaco = get_object_or_404(Espaco, id=espaco_id)
+    espaco = get_object_or_404(Espaco, id=espaco_id) # não seria "reserva" no lugar de "espaco" aqui?
 
     if request.method == 'POST':
         usuario = request.user
