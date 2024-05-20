@@ -516,19 +516,7 @@ padding: 15px;
     margin-top: 10px; /* Espaçamento entre a avaliação e o comentário */
 }
 
-/* Estilizando a mensagem de nenhum avaliação encontrada */
-#avaliacoes_dos_usuarios p {
-    font-style: italic;
-    color: #666;
-}
-
-.nav-link .fa-user {
-    font-size: 24px; /* Ajuste o tamanho do ícone conforme necessário */
-    color: #ffffff; /* Cor do ícone */
-    margin-top: 7px;
-    margin-right: 10px; /* Espaçamento à direita do ícone */
-}
-
-.nav-link .fa-user:hover {
-    color: #d3d3d3; /* Cor do ícone ao passar o mouse */
+.rating{
+    font-size: 40px;
+    margin-bottom: 20px;
 }
