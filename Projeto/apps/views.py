@@ -11,6 +11,8 @@ from datetime import datetime
 import datetime
 from django.db.models import Func, Value
 from django.db.models.functions import Lower
+from datetime import datetime
+
 
 def remover_acentos(txt):
     return ''.join(c for c in unicodedata.normalize('NFD', txt) if unicodedata.category(c) != 'Mn')
@@ -300,8 +302,8 @@ def filtrar_espacos_por_data(request):
             reserva__data_check_in__lte=checkout_date,
             reserva__data_check_out__gte=checkin_date
         ).distinct()
-        
-        return render(request, 'apps/home.html', {'espacos': espacos_disponiveis})
+
+        return render(request, 'apps/filtrar_espacos_por_data.html', {'espacos': espacos_disponiveis})
     else:
         return render(request, 'apps/home.html', {'erro': 'Por favor, forneça ambas as datas de check-in e check-out.'})
 
