@@ -25,7 +25,7 @@
             <div class="navbar-nav ms-auto">
                 {% if user.is_authenticated %}
                     <a class="nav-link {% if request.resolver_match.url_name == 'meu_perfil' %} active {% endif %}" 
-                        href="{% url 'meu_perfil' %}">Conta</a>
+                        href="{% url 'meu_perfil' %}"><i class="fas fa-user"></i></a>
                     <form class="d-flex" method="POST" action="{% url 'logout' %}">
                         {% csrf_token %}
                         <button id="sair" type="submit" class="btn btn-link nav-link login-logout">Sair</button>
