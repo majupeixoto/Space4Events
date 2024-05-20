@@ -24,7 +24,9 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('updateReservaStatus', (reservaId, status) => {
-    cy.exec(`python manage.py update_reserva_status ${reservaId} "${status}"`);
-  });
+
+Cypress.Commands.add('updateReservationDates', (reservaId, checkIn, checkOut) => {
+  cy.exec(`python manage.py update_reserva_dates ${reservaId} ${checkIn} ${checkOut}`);
+});
+
   
