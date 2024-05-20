@@ -1,3 +1,4 @@
+import unicodedata
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Espaco, Reserva, Favorito
 from django.http import HttpResponse, HttpResponseRedirect
@@ -6,8 +7,16 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.urls import reverse
-import datetime
 from datetime import datetime
+import datetime
+from django.db.models import Func, Value
+from django.db.models.functions import Lower
+
+def remover_acentos(txt):
+    return ''.join(c for c in unicodedata.normalize('NFD', txt) if unicodedata.category(c) != 'Mn')
+
+class Unaccent(Func):
+    function = 'unaccent'
 
 def cadastro(request):
     if request.method == 'POST':
@@ -257,8 +266,21 @@ def favoritar(request, espaco_id):
 
 def filtrar_espacos_por_cidade(request):
     cidade_query = request.GET.get('cidade')
-    espacos = Espaco.objects.filter(cidade__iexact=cidade_query) if cidade_query else None
-    return render(request, 'apps/home.html', {'espacos': espacos})
+    print(f"Query original: {cidade_query}")  # Depuração: Verifique a consulta original
+    if cidade_query:
+        cidade_query_normalizada = remover_acentos(cidade_query.lower())
+        print(f"Query normalizada: {cidade_query_normalizada}")  # Depuração: Verifique a consulta normalizada
+        espacos = Espaco.objects.all()
+        espacos_filtrados = [
+            espaco for espaco in espacos 
+            if cidade_query_normalizada in remover_acentos(espaco.cidade.lower())
+        ]
+        print(f"Espaços encontrados: {espacos_filtrados}")  # Depuração: Verifique os espaços encontrados
+    else:
+        espacos_filtrados = []
+
+    return render(request, 'apps/filtrar_espacos_por_cidade.html', {'espacos': espacos_filtrados})
+
 
 def filtrar_espacos_por_data(request):
     checkin_date = request.GET.get('checkin_date')
