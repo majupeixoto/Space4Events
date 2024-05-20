@@ -31,7 +31,7 @@ it('Debito', () => {
     cy.get('#password').type('123');
     cy.get('.btn_login').click();
     cy.get('#visualizar_detalhes').click();
-    cy.get(':nth-child(7) > .btn').click();
+    cy.get(':nth-child(8) > .btn').click();
     cy.get('#hospede_nome').type('ricardo');
     cy.get('#cpf').type('188.510.226-28');
     cy.get('#data_check_in').type('2024-08-30'); 
@@ -79,7 +79,7 @@ it('Credito', () => {
     cy.get('#password').type('123');
     cy.get('.btn_login').click();
     cy.get(':nth-child(2) > .card > .card-body > .d-flex > .btn-group > #visualizar_detalhes').click();
-    cy.get(':nth-child(7) > .btn').click();
+    cy.get(':nth-child(8) > .btn').click();
     cy.get('#hospede_nome').type('lua');
     cy.get('#cpf').type('188.510.226-28');
     cy.get('#data_check_in').type('2024-08-30'); 
@@ -131,7 +131,7 @@ it('Cancelamento de Reserva', () => {
     cy.wait(3000);
     cy.get('.btn_login').click();
     cy.get(':nth-child(3) > .card > .card-body > .d-flex > .btn-group > #visualizar_detalhes').click();
-    cy.get(':nth-child(7) > .btn').click();
+    cy.get(':nth-child(8) > .btn').click();
     cy.get('#hospede_nome').type('mari');
     cy.get('#cpf').type('188.510.226-28');
     cy.get('#data_check_in').type('2024-08-30'); 
