@@ -17,12 +17,12 @@ class Command(BaseCommand):
         check_out = kwargs['check_out']
 
         try:
-            reserva = Reserva.objects.get(id=reserva_id)
+            reserva = Reserva.objects.get(id=reserva.id)
             reserva.data_check_in = check_in
             reserva.data_check_out = check_out
             reserva.save()
-            self.stdout.write(self.style.SUCCESS(f'Successfully updated reserva {reserva_id} check-in to {check_in} and check-out to {check_out}'))
+            self.stdout.write(self.style.SUCCESS(f'Successfully updated reserva {reserva.id} check-in to {check_in} and check-out to {check_out}'))
         except Reserva.DoesNotExist:
-            self.stdout.write(self.style.ERROR(f'Reserva with id {reserva_id} does not exist'))
+            self.stdout.write(self.style.ERROR(f'Reserva with id {reserva.id} does not exist'))
         except Exception as e:
             self.stdout.write(self.style.ERROR(f'An error occurred: {e}'))
