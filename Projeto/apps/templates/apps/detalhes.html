@@ -8,23 +8,22 @@
         let stars = '';
         for (let i = 0; i < 5; i++) {
             if (i < rating) {
-                stars += '<img src="{% static "media/fotos/favorito(1).png" %}" alt="Estrela preenchida">';
+                stars += '★'; // Filled star
             } else {
-                stars += '<img src="{% static "media/fotos/favorito.png" %}" alt="Estrela vazia">';
+                stars += '☆'; // Empty star
             }
         }
         return stars;
     }
 
     window.onload = function() {
-    var ratingElements = document.getElementsByClassName('rating');
-    for (var i = 0; i < ratingElements.length; i++) {
-        var ratingElement = ratingElements[i];
-        var rating = ratingElement.getAttribute('data-rating');
-        ratingElement.innerHTML = renderStars(rating);
+        var ratingElements = document.getElementsByClassName('rating');
+        for (var i = 0; i < ratingElements.length; i++) {
+            var ratingElement = ratingElements[i];
+            var rating = ratingElement.getAttribute('data-rating');
+            ratingElement.innerHTML = renderStars(rating);
+        }
     }
-}
-
 </script>
 
 <div class="container mt-5">
@@ -138,34 +137,32 @@
     {% endif %}
 </div>
 
-    {% endblock %}
+{% endblock %}
     
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Inicializar popovers
-            var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-            var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-                return new bootstrap.Popover(popoverTriggerEl)
-            });
-            
-            // Adicionar evento de clique ao botão de favoritar
-            var favoritarBtn = document.querySelector('.btn-favoritar');
-            if (favoritarBtn) {
-                favoritarBtn.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    favoritarBtn.setAttribute('data-bs-content', 'O espaço foi adicionado à sua página de favoritos!');
-                });
-            }
-            
-            // Adicionar evento de clique ao botão de desfavoritar
-            var desfavoritarBtn = document.querySelector('.btn-desfavoritar');
-            if (desfavoritarBtn) {
-                desfavoritarBtn.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    desfavoritarBtn.setAttribute('data-bs-content', 'O espaço foi removido da sua página de favoritos!');
-                });
-            }
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Inicializar popovers
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+            return new bootstrap.Popover(popoverTriggerEl)
         });
-    </script>
-    
-
+        
+        // Adicionar evento de clique ao botão de favoritar
+        var favoritarBtn = document.querySelector('.btn-favoritar');
+        if (favoritarBtn) {
+            favoritarBtn.addEventListener('click', function(event) {
+                event.preventDefault();
+                favoritarBtn.setAttribute('data-bs-content', 'O espaço foi adicionado à sua página de favoritos!');
+            });
+        }
+        
+        // Adicionar evento de clique ao botão de desfavoritar
+        var desfavoritarBtn = document.querySelector('.btn-desfavoritar');
+        if (desfavoritarBtn) {
+            desfavoritarBtn.addEventListener('click', function(event) {
+                event.preventDefault();
+                desfavoritarBtn.setAttribute('data-bs-content', 'O espaço foi removido da sua página de favoritos!');
+            });
+        }
+    });
+</script>
