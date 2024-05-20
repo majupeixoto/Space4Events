@@ -1,3 +1,4 @@
+import unicodedata
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Espaco, Reserva, Favorito
 from django.http import HttpResponse, HttpResponseRedirect
@@ -6,8 +7,18 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.urls import reverse
-import datetime
 from datetime import datetime
+import datetime
+from django.db.models import Func, Value
+from django.db.models.functions import Lower
+from datetime import datetime
+
+
+def remover_acentos(txt):
+    return ''.join(c for c in unicodedata.normalize('NFD', txt) if unicodedata.category(c) != 'Mn')
+
+class Unaccent(Func):
+    function = 'unaccent'
 
 def cadastro(request):
     if request.method == 'POST':
@@ -146,7 +157,16 @@ def detalhes(request, espaco_id):
     else:
         espaco_favorito = False
 
-    return render(request, 'apps/detalhes.html', {'espaco': espaco, 'detalhes_do_espaco': detalhes_do_espaco, 'espaco_favorito': espaco_favorito, 'proprietario_nome': espaco.proprietario_nome})
+    # Recupera as avaliações para o espaço
+    avaliacoes = Reserva.objects.filter(espaco=espaco).exclude(avaliacao__isnull=True)
+
+    return render(request, 'apps/detalhes.html', {
+        'espaco': espaco,
+        'detalhes_do_espaco': detalhes_do_espaco,
+        'espaco_favorito': espaco_favorito,
+        'avaliacoes': avaliacoes,
+        'proprietario_nome': espaco.proprietario_nome
+    })
 
 @login_required
 def editar_conta(request):
@@ -252,8 +272,21 @@ def favoritar(request, espaco_id):
 
 def filtrar_espacos_por_cidade(request):
     cidade_query = request.GET.get('cidade')
-    espacos = Espaco.objects.filter(cidade__iexact=cidade_query) if cidade_query else None
-    return render(request, 'apps/home.html', {'espacos': espacos})
+    print(f"Query original: {cidade_query}")  # Depuração: Verifique a consulta original
+    if cidade_query:
+        cidade_query_normalizada = remover_acentos(cidade_query.lower())
+        print(f"Query normalizada: {cidade_query_normalizada}")  # Depuração: Verifique a consulta normalizada
+        espacos = Espaco.objects.all()
+        espacos_filtrados = [
+            espaco for espaco in espacos 
+            if cidade_query_normalizada in remover_acentos(espaco.cidade.lower())
+        ]
+        print(f"Espaços encontrados: {espacos_filtrados}")  # Depuração: Verifique os espaços encontrados
+    else:
+        espacos_filtrados = []
+
+    return render(request, 'apps/filtrar_espacos_por_cidade.html', {'espacos': espacos_filtrados})
+
 
 def filtrar_espacos_por_data(request):
     checkin_date = request.GET.get('checkin_date')
@@ -273,8 +306,8 @@ def filtrar_espacos_por_data(request):
             reserva__data_check_in__lte=checkout_date,
             reserva__data_check_out__gte=checkin_date
         ).distinct()
-        
-        return render(request, 'apps/home.html', {'espacos': espacos_disponiveis})
+
+        return render(request, 'apps/filtrar_espacos_por_data.html', {'espacos': espacos_disponiveis})
     else:
         return render(request, 'apps/home.html', {'erro': 'Por favor, forneça ambas as datas de check-in e check-out.'})
 
@@ -429,3 +462,12 @@ def avaliar_reserva(request, reserva_id):
             print("Avaliação não é um número inteiro ou está vazia.")
 
     return render(request, 'apps/avaliar_reserva.html', {'reserva': reserva})
+
+def avaliacoes_espaco(request, espaco_id):
+    espaco = get_object_or_404(Espaco, pk=espaco_id)
+    avaliacoes = Reserva.avaliacoes_por_espaco(espaco_id)
+    context = {
+        'espaco': espaco,
+        'avaliacoes': avaliacoes,
+    }
+    return render(request, 'avaliacoes_espaco.html', context)
