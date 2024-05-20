@@ -1,6 +1,7 @@
 {% extends 'global/base.html' %}
 
 {% block content %}
+    <h1>Filtrar Espaços por Cidade</h1>
     <div class="row">
         <div class="col-md-6">
             <form method="get" action="{% url 'filtrar_espacos_por_cidade' %}" class="search-container">
@@ -8,6 +9,17 @@
                     <input type="text" name="cidade" placeholder="Digite a cidade" aria-label="Cidade" class="form-control mb-2 custom-input">
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-primary custom-btn"><i class="fas fa-search"></i> Buscar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <form method="get" action="{% url 'filtrar_espacos_por_data' %}" class="search-container">
+                <div class="input-group">
+                    <input type="date" id="checkin_date" name="checkin_date" aria-label="Data de Check-in" class="form-control mb-2 custom-input" required>
+                    <input type="date" id="checkout_date" name="checkout_date" aria-label="Data de Check-out" class="form-control mb-2 custom-input" required>
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary custom-btn"><i class="fas fa-calendar-day"></i> Buscar</button>
                     </div>
                 </div>
             </form>
