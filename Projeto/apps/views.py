@@ -1,4 +1,5 @@
 import unicodedata
+import os
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Espaco, Reserva, Favorito
 from django.http import HttpResponse, HttpResponseRedirect
@@ -6,11 +7,11 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.urls import reverse
 from datetime import datetime
 import datetime
-from django.db.models import Func, Value
-from django.db.models.functions import Lower
+from django.db.models import Func
 from datetime import datetime
 
 
@@ -58,6 +59,13 @@ def cadastrar_espaco(request):
         if preco_por_noite < 0 or numero_de_quartos < 0 or numero_de_banheiros < 0 or numero_de_hospedes < 0:
             messages.error(request, 'Os valores numéricos não podem ser negativos.')
             return render(request, 'apps/cadastrar_espaco.html')
+        
+        if foto_principal:
+            ext = os.path.splitext(foto_principal.name)[1]
+            valid_extensions = ['.jpg', '.jpeg', '.png', '.gif']
+            if ext.lower() not in valid_extensions:
+                messages.error(request, 'Por favor, envie um arquivo de imagem válido (jpg, jpeg, png, gif).')
+                return render(request, 'apps/cadastrar_espaco.html')
 
         novo_espaco = Espaco(
             proprietario_nome=proprietario_nome,
