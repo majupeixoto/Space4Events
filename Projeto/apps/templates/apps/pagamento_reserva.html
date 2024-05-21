@@ -80,6 +80,8 @@
             </form>                            
         </div>
     </form>
+    <!-- Botão Voltar -->
+    <button onclick="window.history.back()" class="btn btn-secondary mt-3">Voltar</button>
 </div>
 
 
@@ -102,14 +104,14 @@
         document.getElementById('numero_cartao').addEventListener('input', function(e) {
             e.target.value = e.target.value.replace(/\D/g, '');
         });
-    });
 
-    document.getElementById('parcela').addEventListener('change', function() {
-        console.log("Evento de mudança acionado!"); 
-        var valor_total = parseFloat("{{ valor_total }}");
-        var parcelaSelecionada = parseInt(this.value);
-        var valor_parcelas = (valor_total / parcelaSelecionada).toFixed(2);
-        document.getElementById('valor_parcelas').innerText = parcelaSelecionada + 'x de R$ ' + valor_parcelas;
+        document.getElementById('parcela').addEventListener('change', function() {
+            console.log("Evento de mudança acionado!"); 
+            var valor_total = parseFloat("{{ valor_total }}");
+            var parcelaSelecionada = parseInt(this.value);
+            var valor_parcelas = (valor_total / parcelaSelecionada).toFixed(2);
+            document.getElementById('valor_parcelas').innerText = parcelaSelecionada + 'x de R$ ' + valor_parcelas;
+        });
     });
 </script>
 
