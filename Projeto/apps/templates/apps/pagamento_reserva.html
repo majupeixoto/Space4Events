@@ -20,17 +20,17 @@
             <form class="reservar" method="post" action="{% url 'pagamento_reserva' %}">
                 {% csrf_token %}
                 <div class="box-user">
-                    <label for="numero_cartao">Número do Cartão:</label>
-                    <input type="text" class="form-control" id="numero_cartao" name="numero_cartao" placeholder="Apenas números" required pattern="[0-9]{16}" title="Por favor, digite 16 números" maxlength="16">
+                    <label for="numero_cartao_debito">Número do Cartão:</label>
+                    <input type="text" class="form-control" id="numero_cartao_debito" name="numero_cartao" placeholder="Apenas números" required pattern="[0-9]{16}" title="Por favor, digite 16 números" maxlength="16">
                 </div>
 
                 <div class="box-user">
-                    <label for="data_validade">Data de Validade:</label>
-                    <input type="text" class="form-control" id="data_validade" name="data_validade" placeholder="MM/AA" required pattern="(0[1-9]|1[0-2])\/([0-9]{2})" maxlength="5">
+                    <label for="data_validade_debito">Data de Validade:</label>
+                    <input type="text" class="form-control" id="data_validade_debito" name="data_validade" placeholder="MM/AA" required pattern="(0[1-9]|1[0-2])\/([0-9]{2})" maxlength="5">
                 </div>
 
                 <div class="box-user">
-                    <input type="text" class="form-control" id="cvv" name="cvv" placeholder="CVV" required pattern="[0-9]{3}" maxlength="3">
+                    <input type="text" class="form-control" id="cvv_debito" name="cvv" placeholder="CVV" required pattern="[0-9]{3}" maxlength="3">
                 </div>
 
                 <div class="box-user">
@@ -46,18 +46,18 @@
             <form class="payment-form" method="post" action="{% url 'pagamento_reserva' %}">
                 {% csrf_token %}
                 <div class="box-user">
-                    <label for="numero_cartao">Número do Cartão:</label>
-                    <input type="text" class="form-control" id="numero_cartao" name="numero_cartao" placeholder="Apenas números" required pattern="[0-9]{16}" title="Por favor, digite 16 números" maxlength="16">
+                    <label for="numero_cartao_credito">Número do Cartão:</label>
+                    <input type="text" class="form-control" id="numero_cartao_credito" name="numero_cartao" placeholder="Apenas números" required pattern="[0-9]{16}" title="Por favor, digite 16 números" maxlength="16">
                 </div>
 
                 <div class="form-row" id="expiration-cvv-fields">
                     <div class="box-user">
-                        <label for="data_validade">Data de Validade:</label>
-                        <input type="text" class="form-control" id="data_validade" name="data_validade" placeholder="MM/AA" required pattern="(0[1-9]|1[0-2])\/([0-9]{2})" maxlength="5">
+                        <label for="data_validade_credito">Data de Validade:</label>
+                        <input type="text" class="form-control" id="data_validade_credito" name="data_validade" placeholder="MM/AA" required pattern="(0[1-9]|1[0-2])\/([0-9]{2})" maxlength="5">
                     </div>
 
                     <div class="box-user">
-                        <input type="text" class="form-control" id="cvv" name="cvv" placeholder="CVV" required pattern="[0-9]{3}" maxlength="3">
+                        <input type="text" class="form-control" id="cvv_credito" name="cvv" placeholder="CVV" required pattern="[0-9]{3}" maxlength="3">
                     </div>
                 </div>
                                 
@@ -87,26 +87,39 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        document.getElementById('data_validade').addEventListener('input', function(e) {
-            e.target.value = e.target.value.replace(/\D/g, '');
-    
-            var inputValue = e.target.value;
-            if (inputValue.length >= 4) {
-                var formattedDate = inputValue.replace(/(\d{2})(\d{2})/, '$1/$2');
-                e.target.value = formattedDate;
-            }
-        });
-    
-        document.getElementById('cvv').addEventListener('input', function(e) {
-            e.target.value = e.target.value.replace(/\D/g, '');
-        });
-    
-        document.getElementById('numero_cartao').addEventListener('input', function(e) {
-            e.target.value = e.target.value.replace(/\D/g, '');
-        });
+        function formatExpiryDate(input) {
+            input.addEventListener('input', function(e) {
+                e.target.value = e.target.value.replace(/\D/g, '');
+        
+                var inputValue = e.target.value;
+                if (inputValue.length >= 4) {
+                    var formattedDate = inputValue.replace(/(\d{2})(\d{2})/, '$1/$2');
+                    e.target.value = formattedDate;
+                }
+            });
+        }
+
+        formatExpiryDate(document.getElementById('data_validade_debito'));
+        formatExpiryDate(document.getElementById('data_validade_credito'));
+
+        function formatCVV(input) {
+            input.addEventListener('input', function(e) {
+                e.target.value = e.target.value.replace(/\D/g, '');
+            });
+        }
+
+        function formatCardNumber(input) {
+            input.addEventListener('input', function(e) {
+                e.target.value = e.target.value.replace(/\D/g, '');
+            });
+        }
+
+        formatCVV(document.getElementById('cvv_debito'));
+        formatCardNumber(document.getElementById('numero_cartao_debito'));
+        formatCVV(document.getElementById('cvv_credito'));
+        formatCardNumber(document.getElementById('numero_cartao_credito'));
 
         document.getElementById('parcela').addEventListener('change', function() {
-            console.log("Evento de mudança acionado!"); 
             var valor_total = parseFloat("{{ valor_total }}");
             var parcelaSelecionada = parseInt(this.value);
             var valor_parcelas = (valor_total / parcelaSelecionada).toFixed(2);
