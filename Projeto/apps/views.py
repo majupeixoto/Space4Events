@@ -106,7 +106,6 @@ def cancelar_reserva(request, espaco_id):
 def criar_reserva(request, espaco_id):
     espaco = get_object_or_404(Espaco, id=espaco_id)
     if request.method == 'POST':
-        hospede_nome = request.POST.get('hospede_nome')
         data_check_in = request.POST.get('data_check_in')
         data_check_out = request.POST.get('data_check_out')
         numero_de_hospedes = int(request.POST.get('numero_de_hospedes'))
