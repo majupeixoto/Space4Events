@@ -143,7 +143,6 @@ def criar_reserva(request, espaco_id):
 
         request.session['reserva_details'] = {
             'espaco_id': espaco_id,
-            'hospede_nome': hospede_nome,
             'data_check_in': data_check_in.strftime('%Y-%m-%d'),
             'data_check_out': data_check_out.strftime('%Y-%m-%d'),
             'numero_de_hospedes': numero_de_hospedes
