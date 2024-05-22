@@ -132,26 +132,30 @@ def criar_reserva(request, espaco_id):
         if espaco.numero_de_hospedes < numero_de_hospedes:
             return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'Número de hóspedes excede a capacidade do espaço'})
 
-        reservas_conflitantes = Reserva.objects.filter(
+        # Calcula a quantidade de dias entre check-in e check-out
+        numero_de_dias = (data_check_out - data_check_in).days
+
+        # Calcula o valor total a ser pago
+        valor_total = espaco.preco_por_noite * numero_de_dias
+
+        # Salva a reserva com o valor total calculado
+        reserva = Reserva.objects.create(
+            espaco_proprietario_nome=espaco.proprietario_nome,
+            espaco_nome=espaco.nome,
+            hospede_nome=request.user,
+            data_check_in=data_check_in,
+            data_check_out=data_check_out,
+            numero_de_hospedes=numero_de_hospedes,
+            valor_total=valor_total,
             espaco=espaco,
-            data_check_in__lte=data_check_out,
-            data_check_out__gte=data_check_in
         )
 
-        if reservas_conflitantes.exists():
-            return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'Espaço já reservado para as datas solicitadas!'})
-
-        request.session['reserva_details'] = {
-            'espaco_id': espaco_id,
-            'data_check_in': data_check_in.strftime('%Y-%m-%d'),
-            'data_check_out': data_check_out.strftime('%Y-%m-%d'),
-            'numero_de_hospedes': numero_de_hospedes
-        }
-        
-        return redirect('pagamento_reserva')
+        return redirect('minhas_reservas')
     
     else:
         return render(request, 'apps/reservar_espaco.html', {'espaco': espaco})
+
+
 
 def detalhes(request, espaco_id):
     espaco = get_object_or_404(Espaco, id=espaco_id)
