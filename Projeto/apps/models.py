@@ -5,11 +5,9 @@ from django.utils import timezone
 # Create your models here.
 
 # lembrando: SEMPRE que modificar ou acrescentar uma models a gnt tem q fazer os comandos:
-# python 
-#   manage.py makemigrations
+# python manage.py makemigrations
 # e em seguida:
-# python 
-#   manage.py migrate
+# python manage.py migrate
 # python manage.py runserver
 
 class Espaco(models.Model):
@@ -75,6 +73,7 @@ class Favorito(models.Model):
 class Reserva(models.Model):
     espaco_proprietario_nome = models.CharField(max_length=100)
     espaco_nome = models.CharField(max_length=100, default='Nome do Espaço Padrão')
+    hospede_nome = models.CharField(max_length=100)
     data_check_in = models.DateField()
     data_check_out = models.DateField()
     numero_de_hospedes = models.PositiveIntegerField(default=1)
