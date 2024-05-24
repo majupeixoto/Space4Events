@@ -32,7 +32,6 @@
                 <li><h5>Número Máximo de Hóspedes: {{ espaco.numero_de_hospedes }}</h5></li>
             </ul>
             
-            <h5>Sinal de Reserva: R$0,00</h5>
             <h5>Preço por Noite: R$ {{ espaco.preco_por_noite }}</h5>
         </div>
         <div class="col-md-4">
@@ -41,21 +40,17 @@
                 <h1>Reservar Espaço: {{ espaco.nome }}</h1>
 
                 <div class="box-user">
-                    <label for="cpf">CPF:</label><br>
-                    <input type="text" id="cpf" name="cpf" placeholder="XXX.XXX.XXX-XX" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="Digite um CPF no formato: 000.000.000-00" required><br>
-                </div>
-
-                <div class="box-user">
-                    <label for="data_check_in">Check-in:</label><br>
+                    <label for="data_check_in"><strong>*</strong>Check-in:</label><br>
                     <input type="date" id="data_check_in" name="data_check_in" required><br>
                 </div>
                 
                 <div class="box-user">
-                    <label for="data_check_out">Check-out:</label><br>
+                    <label for="data_check_out"><strong>*</strong>Check-out:</label><br>
                     <input type="date" id="data_check_out" name="data_check_out" required><br>
                 </div>
                 
                 <div class="box-user">
+                    <label for="data_check_out"><strong>*</strong>Número de Hóspedes:</label><br>
                     <input type="number" id="numero_de_hospedes" name="numero_de_hospedes" placeholder="Número de Hóspedes" min="1" required><br>
                 </div>
 
