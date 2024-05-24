@@ -105,11 +105,13 @@ def cancelar_reserva(request, espaco_id):
 @login_required
 def criar_reserva(request, espaco_id):
     espaco = get_object_or_404(Espaco, id=espaco_id)
+    
     if request.method == 'POST':
         data_check_in = request.POST.get('data_check_in')
         data_check_out = request.POST.get('data_check_out')
         numero_de_hospedes = int(request.POST.get('numero_de_hospedes'))
 
+        # Validações...
         if not data_check_in or not data_check_out:
             return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'Por favor, preencha as datas de check-in e check-out.'})
 
@@ -117,7 +119,7 @@ def criar_reserva(request, espaco_id):
             data_check_in = datetime.strptime(data_check_in, '%Y-%m-%d').date()
             data_check_out = datetime.strptime(data_check_out, '%Y-%m-%d').date()
         except ValueError:
-            return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'Formato de data inválido. Use o formato dd-mm-aaaa.'})
+            return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'Formato de data inválido. Use o formato aaaa-mm-dd.'})
 
         today_date = datetime.today().date()
         if data_check_in < today_date or data_check_out < today_date:
@@ -132,30 +134,27 @@ def criar_reserva(request, espaco_id):
         if espaco.numero_de_hospedes < numero_de_hospedes:
             return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'Número de hóspedes excede a capacidade do espaço'})
 
-        # Calcula a quantidade de dias entre check-in e check-out
-        numero_de_dias = (data_check_out - data_check_in).days
-
-        # Calcula o valor total a ser pago
-        valor_total = espaco.preco_por_noite * numero_de_dias
-
-        # Salva a reserva com o valor total calculado
-        reserva = Reserva.objects.create(
-            espaco_proprietario_nome=espaco.proprietario_nome,
-            espaco_nome=espaco.nome,
-            hospede_nome=request.user,
-            data_check_in=data_check_in,
-            data_check_out=data_check_out,
-            numero_de_hospedes=numero_de_hospedes,
-            valor_total=valor_total,
+        # Verificar se há conflitos de reservas
+        reservas_conflitantes = Reserva.objects.filter(
             espaco=espaco,
+            data_check_out__gt=data_check_in,
+            data_check_in__lt=data_check_out
         )
 
-        return redirect('minhas_reservas')
+        if reservas_conflitantes.exists():
+            return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'Espaço já reservado para as datas solicitadas!'})
+
+        # Salva os detalhes da reserva na sessão
+        request.session['reserva_details'] = {
+            'espaco_id': espaco.id,
+            'data_check_in': data_check_in.strftime('%Y-%m-%d'),
+            'data_check_out': data_check_out.strftime('%Y-%m-%d'),
+            'numero_de_hospedes': numero_de_hospedes
+        }
+
+        return redirect('pagamento_reserva')
     
-    else:
-        return render(request, 'apps/reservar_espaco.html', {'espaco': espaco})
-
-
+    return render(request, 'apps/reservar_espaco.html', {'espaco': espaco})
 
 def detalhes(request, espaco_id):
     espaco = get_object_or_404(Espaco, id=espaco_id)
@@ -400,44 +399,42 @@ def pagamento_reserva(request):
 
         # Define a parcela com base no número máximo de parcelas permitido
         parcela = request.POST.get('parcela')
-        if parcela in range(1, max_parcelas + 1):
-            parcela_selecionada = parcela
+        if parcela and parcela.isdigit() and int(parcela) in range(1, max_parcelas + 1):
+            parcela_selecionada = int(parcela)
         else:
             parcela_selecionada = 1
 
+    else:
+        return HttpResponse("Detalhes da reserva não encontrados na sessão.")
+
     if request.method == 'POST':
-        if reserva_details:
-            hospede_nome = reserva_details['hospede_nome']
+        numero_cartao = request.POST.get('numero_cartao')
+        data_validade = request.POST.get('data_validade')
+        cvv = request.POST.get('cvv')
+
+        if numero_cartao and data_validade and cvv:
+            hospede_nome = request.user.username
             data_check_in = reserva_details['data_check_in']
             data_check_out = reserva_details['data_check_out']
             numero_de_hospedes = reserva_details['numero_de_hospedes']
-
-            numero_cartao = request.POST.get('numero_cartao')
-            data_validade = request.POST.get('data_validade')
-            cvv = request.POST.get('cvv')
-            parcela = request.POST.get('parcela')
             valor_parcelas = valor_total / parcela_selecionada
 
-            if parcela is None:
-                parcela = 1
-
-            if numero_cartao and data_validade and cvv:
-                reserva = Reserva.objects.create(
-                    espaco_proprietario_nome=espaco.proprietario_nome,
-                    espaco_nome=espaco.nome,
-                    hospede_nome=hospede_nome,
-                    data_check_in=data_check_in,
-                    data_check_out=data_check_out,
-                    numero_de_hospedes=numero_de_hospedes,
-                    valor_total=valor_total,
-                    parcela=parcela,
-                    valor_parcelas=valor_parcelas,
-                    espaco=espaco,
-                )
-                del request.session['reserva_details']
-                return redirect('minhas_reservas')
+            reserva = Reserva.objects.create(
+                espaco_proprietario_nome=espaco.proprietario_nome,
+                espaco_nome=espaco.nome,
+                hospede_nome=hospede_nome,
+                data_check_in=data_check_in,
+                data_check_out=data_check_out,
+                numero_de_hospedes=numero_de_hospedes,
+                valor_total=valor_total,
+                parcela=parcela_selecionada,
+                valor_parcelas=valor_parcelas,
+                espaco=espaco,
+            )
+            del request.session['reserva_details']
+            return redirect('minhas_reservas')
         else:
-            return HttpResponse("Detalhes da reserva não encontrados na sessão.")
+            return render(request, 'apps/pagamento_reserva.html', {'valor_total': valor_total, 'max_parcelas': range(1, max_parcelas + 1), 'parcela_selecionada': parcela_selecionada, 'error_message': 'Por favor, preencha todos os campos do cartão.'})
 
     return render(request, 'apps/pagamento_reserva.html', {'valor_total': valor_total, 'max_parcelas': range(1, max_parcelas + 1), 'parcela_selecionada': parcela_selecionada})
 
