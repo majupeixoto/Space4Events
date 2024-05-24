@@ -32,7 +32,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
                             {% if reserva.status == "Reserva ainda por vir" %}
-                            <form action="{% url 'confirmar_cancelamento' reserva.id %}" method="get" style="display: inline;">
+                            <form action="{% url 'cancelar_reserva' reserva.espaco.id %}" method="post" style="display: inline;">
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-danger">Cancelar reserva</button>
                             </form>
