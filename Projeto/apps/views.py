@@ -106,6 +106,11 @@ def cancelar_reserva(request, espaco_id):
 def criar_reserva(request, espaco_id):
     espaco = get_object_or_404(Espaco, id=espaco_id)
     
+    # Verificar se o usuário é o proprietário do espaço
+    if espaco.proprietario_nome == request.user.username:
+        messages.error(request, 'Você não pode reservar seu próprio espaço.')
+        return redirect('detalhes', espaco_id=espaco_id)
+    
     if request.method == 'POST':
         data_check_in = request.POST.get('data_check_in')
         data_check_out = request.POST.get('data_check_out')
