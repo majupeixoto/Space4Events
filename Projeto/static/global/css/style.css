@@ -300,12 +300,12 @@ body {
 
 .card-img-top {
     width: 100%;
-    height: auto;
-    object-fit: cover;
+    height: 200px; /* Altura fixa para todas as imagens */
+    object-fit: cover; /* Garante que a imagem cubra a área designada sem ser distorcida */
 }
 
 .card-body {
-padding: 15px;
+    padding: 15px;
 }
 
 .card-title {
@@ -320,6 +320,11 @@ padding: 15px;
     font-size: 14px;
     margin-top: 10px;
     margin-bottom: 15px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Número de linhas a serem exibidas */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .text-body-secondary {
