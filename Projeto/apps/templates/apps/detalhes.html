@@ -102,7 +102,7 @@
                         <a href="{% url 'favoritar' espaco.id %}" id="favoritar" class="btn btn-lg btn-outline-secondary btn-favoritar" data-bs-toggle="popover" data-bs-content="Adicionar à lista de favoritos"><i class="fa-regular fa-heart"></i></a>
                     {% endif %}
                 {% else %}
-                    <a href="{% url 'login' %}" class="btn btn-lg btn-outline-secondary">Favoritar</a>
+                    <a href="{% url 'login' %}" class="btn btn-lg btn-outline-secondary btn-favoritar" data-bs-toggle="popover" data-bs-content="Faça login para adicionar aos favoritos"><i class="fa-regular fa-heart"></i></a>
                 {% endif %}
             </div>
             <div class="btn-group">
@@ -152,7 +152,8 @@
         if (favoritarBtn) {
             favoritarBtn.addEventListener('click', function(event) {
                 event.preventDefault();
-                favoritarBtn.setAttribute('data-bs-content', 'O espaço foi adicionado à sua página de favoritos!');
+                favoritarBtn.setAttribute('data-bs-content', 'Faça login para adicionar aos favoritos');
+                window.location.href = "{% url 'login' %}";
             });
         }
         
