@@ -41,4 +41,16 @@
         </div>
         {% endfor %}
     </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (window.history && window.history.pushState) {
+            window.history.pushState(null, null, window.location.href);
+            window.onpopstate = function () {
+                window.location.replace("{% url 'home' %}");
+            };
+        }
+    });
+</script>
+
 {% endblock %}
