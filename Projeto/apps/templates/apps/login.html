@@ -2,25 +2,60 @@
 
 {% block content %}
 
-<div class="center">
-    <form class="login" method="post">
-        {% csrf_token %}
-        <input type="hidden" name="next" value="{{ next }}">
-        <h1>Login</h1>
-
-        <div class="box-user">
-            <input type="text" name="username" placeholder="Nome de usuário">
+<div class="parent">
+    <div class="div1">
+        <!-- Carrossel de fotos -->
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="URL_DA_IMAGEM_1" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="URL_DA_IMAGEM_2" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="URL_DA_IMAGEM_3" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
+    </div>
+    <div class="div2">
+        <!-- Formulário de login -->
+        <div class="center">
+            <form class="login" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}">
+                <h1>Login</h1>
 
-        <div class="box-user">
-            <input type="password" name="password" placeholder="Senha" required>
+                <div class="box-user">
+                    <input type="text" name="username" placeholder="Nome de usuário">
+                </div>
+
+                <div class="box-user">
+                    <input type="password" name="password" placeholder="Senha" required>
+                </div>
+
+                <div>
+                    <p>Não tem cadastro?<br><a href="{% url 'cadastro' %}" class="forget">Crie sua conta.</a></p>
+                </div>
+
+                <button type="submit" class="btn_login">Entrar</button>
+            </form>
         </div>
-
-        <div>
-            <p>Não tem cadastro?<br><a href="{% url 'cadastro' %}" class="forget">Crie sua conta.</a></p>
-        </div>
-
-        <button type="submit" class="btn_login">Entrar</button>
-    </form>
+    </div>
 </div>
+
 {% endblock content %}
