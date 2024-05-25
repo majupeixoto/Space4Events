@@ -437,7 +437,6 @@ def pagamento_reserva(request):
             return render(request, 'apps/pagamento_reserva.html', {'valor_total': valor_total, 'max_parcelas': range(1, max_parcelas + 1), 'parcela_selecionada': parcela_selecionada, 'error_message': 'Por favor, preencha todos os campos do cartão.'})
 
     return render(request, 'apps/pagamento_reserva.html', {'valor_total': valor_total, 'max_parcelas': range(1, max_parcelas + 1), 'parcela_selecionada': parcela_selecionada})
-
 def profile(request):
     return redirect('home')
 
