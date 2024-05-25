@@ -13,6 +13,8 @@ from datetime import datetime
 import datetime
 from django.db.models import Func
 from datetime import datetime
+from .models import Carrossel
+
 
 
 def remover_acentos(txt):
@@ -352,8 +354,17 @@ def login_view(request):
             login(request, user)
             return redirect(next_url or 'home')
         else:
-            return render(request, 'apps/login.html', {"erro": "Usuário não encontrado"})
-    return render(request, 'apps/login.html', {'next': next_url})
+            return render(request, 'apps/login.html', {
+                "erro": "Usuário não encontrado",
+                'next': next_url,
+                'carrossel_imagens': Carrossel.objects.all()
+            })
+    
+    carrossel_imagens = Carrossel.objects.all()
+    return render(request, 'apps/login.html', {
+        'next': next_url,
+        'carrossel_imagens': carrossel_imagens
+    })
 
 def logout(request):
     logout(request)

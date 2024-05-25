@@ -105,5 +105,10 @@ class Reserva(models.Model):
     def __str__(self):
         return f"Reserva de {self.espaco_nome} por {self.hospede_nome}"
 
+class Carrossel(models.Model):
+    imagem = models.ImageField(upload_to='carrossel_imagens/')
+    descricao = models.CharField(max_length=255, blank=True, null=True)
 
+    def __str__(self):
+        return f"Imagem do carrossel: {self.descricao if self.descricao else 'Sem descrição'}"
 

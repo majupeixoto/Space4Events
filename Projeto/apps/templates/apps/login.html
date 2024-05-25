@@ -1,26 +1,21 @@
 {% extends 'global/base.html' %}
 
 {% block content %}
-
 <div class="parent">
     <div class="div1">
         <!-- Carrossel de fotos -->
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                {% for imagem in carrossel_imagens %}
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}" aria-current="true" aria-label="Slide {{ forloop.counter }}"></button>
+                {% endfor %}
             </div>
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="URL_DA_IMAGEM_1" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="URL_DA_IMAGEM_2" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="URL_DA_IMAGEM_3" class="d-block w-100" alt="...">
-                </div>
+                {% for imagem in carrossel_imagens %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <img src="{{ imagem.imagem.url }}" class="d-block w-100" alt="{{ imagem.descricao }}">
+                    </div>
+                {% endfor %}
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -41,7 +36,7 @@
                 <h1>Login</h1>
 
                 <div class="box-user">
-                    <input type="text" name="username" placeholder="Nome de usuário">
+                    <input type="text" name="username" placeholder="Nome de usuário" required>
                 </div>
 
                 <div class="box-user">
@@ -57,5 +52,4 @@
         </div>
     </div>
 </div>
-
 {% endblock content %}
