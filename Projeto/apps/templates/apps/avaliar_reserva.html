@@ -7,7 +7,7 @@
     {% csrf_token %}
     <div class="avaliacao-container">
         <ul class="avaliacao">
-            <li class="star-icon ativo" data-avaliacao="1"></li>
+            <li class="star-icon" data-avaliacao="1"></li>
             <li class="star-icon" data-avaliacao="2"></li>
             <li class="star-icon" data-avaliacao="3"></li>
             <li class="star-icon" data-avaliacao="4"></li>
@@ -25,16 +25,15 @@
 <script>
     var stars = document.querySelectorAll('.star-icon');
     var avaliacaoInput = document.getElementById('avaliacao');
-              
-    document.addEventListener('click', function(e){
-        var classStar = e.target.classList;
-        if(!classStar.contains('ativo')){
-            stars.forEach(function(star){
-                star.classList.remove('ativo');
+
+    stars.forEach(function(star) {
+        star.addEventListener('click', function() {
+            stars.forEach(function(s) {
+                s.classList.remove('ativo');
             });
-            classStar.add('ativo');
-            avaliacaoInput.value = e.target.getAttribute('data-avaliacao');
-        }
+            this.classList.add('ativo');
+            avaliacaoInput.value = this.getAttribute('data-avaliacao');
+        });
     });
 
     document.getElementById('avaliacaoForm').addEventListener('submit', function(e) {
