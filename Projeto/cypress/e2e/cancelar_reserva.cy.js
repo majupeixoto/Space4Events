@@ -50,10 +50,9 @@ describe('scrum 31', () => {
         cy.get('#cvv_debito').type('123');
         cy.get('#pills-debito > #botao_reservar').click();
         cy.wait(3000);
-        cy.get('.btn-group > form > .btn').click();
+        cy.get('.card-body > form > .btn').click();
         cy.wait(3000);
         cy.get('row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3').should('not.exist');
-
-
     })
+    
 })
