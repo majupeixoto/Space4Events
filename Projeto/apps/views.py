@@ -493,3 +493,36 @@ def avaliacoes_espaco(request, espaco_id):
         'avaliacoes': avaliacoes,
     }
     return render(request, 'avaliacoes_espaco.html', context)
+
+
+#api para mudar data de check in e check out no banco de dados
+
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+import json
+from .models import Reserva
+
+@csrf_exempt
+def update_reservation_dates(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            reserva_id = data.get('reserva_id')
+            new_check_in = data.get('new_check_in')
+            new_check_out = data.get('new_check_out')
+
+            if not reserva_id or not new_check_in or not new_check_out:
+                return JsonResponse({'status': 'error', 'message': 'Dados incompletos'}, status=400)
+
+            reserva = Reserva.objects.get(id=reserva_id)
+            reserva.data_check_in = datetime.strptime(new_check_in, '%Y-%m-%d').date()
+            reserva.data_check_out = datetime.strptime(new_check_out, '%Y-%m-%d').date()
+            reserva.save()
+
+            return JsonResponse({'status': 'success', 'message': 'Datas atualizadas com sucesso'})
+        except Reserva.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'Reserva não encontrada'}, status=404)
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Método não permitido'}, status=405)
