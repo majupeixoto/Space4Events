@@ -321,7 +321,7 @@ body {
     margin-top: 10px;
     margin-bottom: 15px;
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* Número de linhas a serem exibidas */
+    -webkit-line-clamp: 5; /* Número de linhas a serem exibidas */
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
