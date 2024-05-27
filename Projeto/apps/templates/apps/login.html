@@ -1,55 +1,26 @@
 {% extends 'global/base.html' %}
 
 {% block content %}
-<div class="parent">
-    <div class="div1">
-        <!-- Carrossel de fotos -->
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                {% for imagem in carrossel_imagens %}
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}" aria-current="true" aria-label="Slide {{ forloop.counter }}"></button>
-                {% endfor %}
-            </div>
-            <div class="carousel-inner">
-                {% for imagem in carrossel_imagens %}
-                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                        <img src="{{ imagem.imagem.url }}" class="d-block w-100" alt="{{ imagem.descricao }}">
-                    </div>
-                {% endfor %}
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+
+<div class="center">
+    <form class="login" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        <h1>Login</h1>
+
+        <div class="box-user">
+            <input type="text" name="username" placeholder="Nome de usuário">
         </div>
-    </div>
-    <div class="div2">
-        <!-- Formulário de login -->
-        <div class="center">
-            <form class="login" method="post">
-                {% csrf_token %}
-                <input type="hidden" name="next" value="{{ next }}">
-                <h1>Login</h1>
 
-                <div class="box-user">
-                    <input type="text" name="username" placeholder="Nome de usuário" required>
-                </div>
-
-                <div class="box-user">
-                    <input type="password" name="password" placeholder="Senha" required>
-                </div>
-
-                <div>
-                    <p>Não tem cadastro?<br><a href="{% url 'cadastro' %}" class="forget">Crie sua conta.</a></p>
-                </div>
-
-                <button type="submit" class="btn_login">Entrar</button>
-            </form>
+        <div class="box-user">
+            <input type="password" name="password" placeholder="Senha" required>
         </div>
-    </div>
+
+        <div>
+            <p>Não tem cadastro?<br><a href="{% url 'cadastro' %}" class="forget">Crie sua conta.</a></p>
+        </div>
+
+        <button type="submit" class="btn_login">Entrar</button>
+    </form>
 </div>
 {% endblock content %}
