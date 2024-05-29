@@ -211,7 +211,7 @@ def editar_conta(request):
 
         user.save()
         messages.success(request, 'Sua conta foi atualizada com sucesso!')
-        return redirect('editar_conta')
+        return redirect('meu_perfil')  # Modificado para redirecionar para 'meu_perfil'
     return render(request, 'apps/editar_conta.html')
 
 def editar_espaco(request, espaco_id):
