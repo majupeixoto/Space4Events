@@ -30,4 +30,6 @@ urlpatterns = [
     path('avaliar_reserva/<int:reserva_id>/', views.avaliar_reserva, name='avaliar_reserva'),
     path('espacos/<int:espaco_id>/avaliacoes/', views.avaliacoes_espaco, name='avaliacoes_espaco'),
     path('api/update-reservation-dates/', views.update_reservation_dates, name='update_reservation_dates'),
+    path('conta/editar/', views.editar_conta, name='editar_conta'),
+    path('meu_perfil/', views.meu_perfil, name='meu_perfil'),
     ]
