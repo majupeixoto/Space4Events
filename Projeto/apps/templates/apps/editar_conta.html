@@ -1,7 +1,7 @@
 {% extends 'global/base.html' %}
 
 {% block content %}
-<div class="container">
+<div class="container" style="border: 2px solid black; padding: 20px; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 800px; margin: 0 auto; background-color: #fff;">
     <h1>Editar Conta</h1>
     <form method="post" action="{% url 'editar_conta' %}">
         {% csrf_token %}
