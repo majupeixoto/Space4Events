@@ -155,7 +155,6 @@ body {
     margin-left: 10px;
     margin-right: 10px;
     font-size: 20px;
-
 }
 
 /* Estilo para os links na barra de navegação quando estão ativos */
@@ -175,7 +174,7 @@ body {
 /* Estilo para o botão de login/logout */
 #entrar,
 #sair,
-#icon_bonequinho
+#icon_bonequinho,
 #icon_entrar {
     color: #d3d3d3; /* Cor dos botões */
     font-weight: bold;
@@ -448,7 +447,126 @@ body {
     .search-container {
         width: 100%;
     }
+
+    .card {
+        margin: 0 10px 20px;
+    }
+
+    .card-title {
+        font-size: 16px;
+    }
+
+    .card-text {
+        font-size: 12px;
+    }
+
+    .btn_login {
+        font-size: 14px;
+    }
+
+    .login {
+        width: 90%;
+    }
+
+    .reservar {
+        width: 90%;
+    }
+
+    #footer_content {
+        grid-template-columns: 1fr;
+    }
+
+    .navbar-toggler {
+        background-color: #171717;
+    }
+
+    #logo {
+        font-size: 24px;
+    }
+
+    .nav-link {
+        font-size: 16px;
+    }
+
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    .parent {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+
+    .div1, .div2 {
+        grid-area: auto;
+        height: auto;
+    }
 }
+
+@media (max-width: 480px) {
+    .container {
+        width: 95%;
+    }
+
+    .search-container {
+        width: 100%;
+    }
+
+    .card {
+        margin: 0 5px 20px;
+    }
+
+    .card-title {
+        font-size: 14px;
+    }
+
+    .card-text {
+        font-size: 10px;
+    }
+
+    .btn_login {
+        font-size: 12px;
+    }
+
+    .login {
+        width: 95%;
+    }
+
+    .reservar {
+        width: 95%;
+    }
+
+    #footer_content {
+        grid-template-columns: 1fr;
+    }
+
+    .navbar-toggler {
+        background-color: #171717;
+    }
+
+    #logo {
+        font-size: 20px;
+    }
+
+    .nav-link {
+        font-size: 14px;
+    }
+
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    .parent {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+
+    .div1, .div2 {
+        grid-area: auto;
+        height: auto;
+    }
+}
+
 /*DEIXANDO OS BOTOES DE CREDITO E DEBITO VISÍVEIS QUANDO NÃO PRESSIONADOS*/
 
 #pills-credito-tab:not(.active), #pills-debito-tab:not(.active) {
@@ -490,7 +608,8 @@ body {
 /* Estilizando a lista de avaliações */
 
 #avaliacoes_dos_usuarios ul {
-    list-style-type: none;
+    list-style-type
+    : none;
     padding: 0;
 }
 
@@ -562,3 +681,67 @@ body {
     height: 100%;
 }
 
+/* Responsividade adicional para telas maiores */
+@media (min-width: 1024px) {
+    .container {
+        width: 70%;
+    }
+
+    .search-container {
+        width: 80%;
+    }
+
+    .card {
+        margin: 0 20px 20px;
+    }
+
+    .card-title {
+        font-size: 20px;
+    }
+
+    .card-text {
+        font-size: 16px;
+    }
+
+    .btn_login {
+        font-size: 18px;
+    }
+
+    .login {
+        width: 400px;
+    }
+
+    .reservar {
+        width: 600px;
+    }
+
+    #footer_content {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .navbar-toggler {
+        background-color: #171717;
+    }
+
+    #logo {
+        font-size: 32px;
+    }
+
+    .nav-link {
+        font-size: 22px;
+    }
+
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    .parent {
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+    }
+
+    .div1, .div2 {
+        grid-area: auto;
+        height: auto;
+    }
+}
