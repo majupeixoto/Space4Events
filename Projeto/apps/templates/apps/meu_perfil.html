@@ -1,7 +1,7 @@
 {% extends 'global/base.html' %}
 
 {% block content %}
-<div class="container mt-5" style="background-color: #d1d1d1; padding: 20px; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 600px; margin: 0 auto;">
+<div class="container mt-5" style="border: 2px solid #000000; padding: 20px; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 600px; margin: 0 auto; background-color: transparent;">
     <h1>Meu Perfil</h1>
     <p><strong>Nome:</strong> {{ user.first_name }} {{ user.last_name }}</p>
     <p><strong>Email:</strong> {{ user.email }}</p>
