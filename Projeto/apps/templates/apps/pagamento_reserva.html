@@ -48,8 +48,8 @@
             </form>
         </div>
 
-        <div class="tab-pane fade" id="pills-credito" role="tabpanel" aria-labelledby="pills-credito-tab" tabindex="0">
         <!-- PAGAMENTO CRÉDITO -->
+        <div class="tab-pane fade" id="pills-credito" role="tabpanel" aria-labelledby="pills-credito-tab" tabindex="0">
             <form class="payment-form" method="post" action="{% url 'pagamento_reserva' %}">
                 {% csrf_token %}
 
