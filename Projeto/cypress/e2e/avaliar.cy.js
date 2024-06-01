@@ -1,6 +1,6 @@
 // cypress/e2e/avaliacao.cy.js
 
-const reservaId = 53;
+const reservaId = 57;
 
 const checkInDate = '2024-08-30';
 const checkOutDate = '2024-09-01';
@@ -18,7 +18,6 @@ describe('Testa a Avaliação de uma Reserva', () => {
       cy.get('#name').type('pedro');
       cy.get(':nth-child(5) > #email').type('pedro@123.com');
       cy.get('#password').type('123');
-      cy.wait(3000);
       cy.get('.btn_login').click();
       cy.get('[aria-current="page"]').click();
       cy.get('#nome').type('Chácara das Flores');
@@ -31,11 +30,9 @@ describe('Testa a Avaliação de uma Reserva', () => {
       cy.get('#numero_de_quartos').type('4');
       cy.get('#numero_de_banheiros').type('3');
       cy.get('#numero_de_hospedes').type('8');
-      cy.wait(3000);
       cy.get('.container > form > .btn').click();
       cy.get('#sair').click();
       cy.get('[href="/minhas_reservas/"]').click();
-      cy.wait(3000);
       cy.get('.forget').click();
       cy.get('#username').type('ricardo');
       cy.get('#name').type('ricardo');
@@ -47,7 +44,6 @@ describe('Testa a Avaliação de uma Reserva', () => {
       cy.get('#data_check_in').type(checkInDate); 
       cy.get('#data_check_out').type(checkOutDate);
       cy.get('#numero_de_hospedes').type('1');
-      cy.wait(3000);
       cy.get('.btn_login').click();
       cy.get('#pills-debito-tab').click();
       cy.get('#pills-debito > :nth-child(2) > #cpf').type('188.510.226-28');
@@ -68,14 +64,14 @@ describe('Testa a Avaliação de uma Reserva', () => {
 
     cy.reload();
 
-    cy.get('#avaliar').click();
-
+    cy.get('[href="/avaliar_reserva/57/"]').click();
     cy.get('[data-avaliacao="4"]').click();
     cy.get('#comentario_avaliacao').type('Overall, my experience with the reservation platform was positive. The system is intuitive and user-friendly, making it easy to manage reservations and property listings. With some minor improvements in wait times, UI feedback, and error handling, the platform could offer an even better user experience.');
-    cy.get('#avaliar')
+    cy.get('#avaliar').click();
     cy.get('.fa-solid').click();
     cy.get('#visualizar_detalhes').click();
-    
+    cy.get('.rating').should('have.attr', 'data-rating', '4');
+
     });
   
    
