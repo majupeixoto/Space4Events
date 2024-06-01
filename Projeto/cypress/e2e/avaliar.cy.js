@@ -1,5 +1,10 @@
 // cypress/e2e/avaliacao.cy.js
 
+// Tutorial para realizar o teste:
+// 1º. Verificar qual o id da reserva no banco de dados
+// Caso o id seja N, reservaId deve ser n + 1
+// 2º. Alterar a linha 73 para ter o mesmo id que reservaId
+
 const reservaId = 57;
 
 const checkInDate = '2024-08-30';
@@ -14,9 +19,9 @@ describe('Testa a Avaliação de uma Reserva', () => {
       cy.visit('/');
       cy.get('[href="/minhas_reservas/"]').click();
       cy.get('.forget').click();
-      cy.get('#username').type('pedro');
-      cy.get('#name').type('pedro');
-      cy.get(':nth-child(5) > #email').type('pedro@123.com');
+      cy.get('#username').type('carlos');
+      cy.get('#name').type('carlos');
+      cy.get(':nth-child(5) > #email').type('carlos@123.com');
       cy.get('#password').type('123');
       cy.get('.btn_login').click();
       cy.get('[aria-current="page"]').click();
@@ -34,9 +39,9 @@ describe('Testa a Avaliação de uma Reserva', () => {
       cy.get('#sair').click();
       cy.get('[href="/minhas_reservas/"]').click();
       cy.get('.forget').click();
-      cy.get('#username').type('ricardo');
-      cy.get('#name').type('ricardo');
-      cy.get(':nth-child(5) > #email').type('ricardo@123.com');
+      cy.get('#username').type('carolina');
+      cy.get('#name').type('carolina');
+      cy.get(':nth-child(5) > #email').type('carolina@123.com');
       cy.get('#password').type('123');
       cy.get('.btn_login').click();
       cy.get('#visualizar_detalhes').click();
@@ -65,7 +70,7 @@ describe('Testa a Avaliação de uma Reserva', () => {
     cy.reload();
 
     cy.get('[href="/avaliar_reserva/57/"]').click();
-    cy.get('[data-avaliacao="4"]').click();
+    cy.get('[data-avaliacao="4"]').click(); // para alterar quantas estrelas da avaliação
     cy.get('#comentario_avaliacao').type('Overall, my experience with the reservation platform was positive. The system is intuitive and user-friendly, making it easy to manage reservations and property listings. With some minor improvements in wait times, UI feedback, and error handling, the platform could offer an even better user experience.');
     cy.get('#avaliar').click();
     cy.get('.fa-solid').click();
