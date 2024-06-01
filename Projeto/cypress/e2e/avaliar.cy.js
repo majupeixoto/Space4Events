@@ -2,8 +2,8 @@
 
 // Tutorial para realizar o teste:
 // 1º. Verificar qual o id da reserva no banco de dados
-// Caso o id seja N, reservaId deve ser n + 1
-// 2º. Alterar a linha 73 para ter o mesmo id que reservaId
+// Caso o id seja "n", reservaId deve ser "n + 1"
+// 2º. Alterar a linha 72 para ter o mesmo id que reservaId
 
 const reservaId = 57;
 
