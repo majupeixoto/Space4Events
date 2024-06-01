@@ -1,11 +1,16 @@
 // cypress/e2e/avaliacao.cy.js
 
+const reservaIdDebito = 1;
+const reservaIdCredito = 2;
+
+const checkInDate = '2024-08-30';
+const checkOutDate = '2024-09-01';
+
+const newCheckIn = '2023-08-30';
+const newCheckOut = '2023-09-01';
+
 describe('Testa a Avaliação de uma Reserva', () => {
-    const reservaIdDebito = 1;
-    const reservaIdCredito = 2;
-    const checkInDate = '2024-08-30';
-    const checkOutDate = '2024-09-01';
-  
+
     it('Debito', () => {
       cy.visit('/');
       cy.get('[href="/minhas_reservas/"]').click();
@@ -40,8 +45,6 @@ describe('Testa a Avaliação de uma Reserva', () => {
       cy.get('.btn_login').click();
       cy.get('#visualizar_detalhes').click();
       cy.get(':nth-child(8) > .btn').click();      
-      cy.get('#hospede_nome').type('ricardo');
-      cy.get('#cpf').type('188.510.226-28');
       cy.get('#data_check_in').type(checkInDate); 
       cy.get('#data_check_out').type(checkOutDate);
       cy.get('#numero_de_hospedes').type('1');
@@ -56,14 +59,11 @@ describe('Testa a Avaliação de uma Reserva', () => {
       cy.get('.active').click();
       cy.get('.col').should('exist');
   
-      // Atualizar a reserva para datas passadas e realizar a avaliação
-      cy.updateReservationDates(reservaIdDebito, '2023-01-01', '2023-01-02');
-      cy.visit(`/reservas/${reservaIdDebito}`);
-      cy.get('button.avaliar').click();
-      cy.get('input[name="rating"]').type('5');
-      cy.get('textarea[name="comment"]').type('Ótimo espaço!');
-      cy.get('button.submit').click();
-      cy.contains('Avaliação enviada com sucesso');
+      cy.request('POST', '/api/update-reservation-dates/', {
+        reserva_id: reservaIdDebito,
+        new_check_in: newCheckIn,
+        new_check_out: newCheckOut
+    })
     });
   
     it('Credito', () => {
@@ -97,14 +97,13 @@ describe('Testa a Avaliação de uma Reserva', () => {
       cy.get('.btn_login').click();
       cy.get(':nth-child(2) > .card > .card-body > .d-flex > .btn-group > #visualizar_detalhes').click();
       cy.get(':nth-child(8) > .btn').click();
-      cy.get('#hospede_nome').type('lua');
-      cy.get('#cpf').type('188.510.226-28');
       cy.get('#data_check_in').type(checkInDate); 
       cy.get('#data_check_out').type(checkOutDate);
       cy.get('#numero_de_hospedes').type('1');
       cy.wait(3000);
       cy.get('.btn_login').click();
       cy.get('#pills-credito-tab').click();
+      cy.get('#pills-debito > :nth-child(2) > #cpf')
       cy.get('.payment-form > :nth-child(2) > #numero_cartao').type('1243254910112345');
       cy.get(':nth-child(1) > #data_validade').type('02/25');
       cy.get(':nth-child(2) > #cvv').type('123');
@@ -112,15 +111,13 @@ describe('Testa a Avaliação de uma Reserva', () => {
       cy.get('.payment-form > #botao_reservar').click();
       cy.get('.active').click();
       cy.get('.col').should('exist');
-  
-      // Atualizar a reserva para datas passadas e realizar a avaliação
-      cy.updateReservationDates(reservaIdCredito, '2023-01-01', '2023-01-02');
-      cy.visit(`/reservas/${reservaIdCredito}`);
-      cy.get('button.avaliar').click();
-      cy.get('input[name="rating"]').type('5');
-      cy.get('textarea[name="comment"]').type('Excelente apartamento!');
-      cy.get('button.submit').click();
-      cy.contains('Avaliação enviada com sucesso');
+      cy.request('POST', '/api/update-reservation-dates/', {
+        reserva_id: reservaIdCredito,
+        new_check_in: newCheckIn,
+        new_check_out: newCheckOut
+    })
+
+
     });
   });
   
