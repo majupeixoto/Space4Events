@@ -81,8 +81,13 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get('.rating').should('have.attr', 'data-rating', '4');
     });
 
+<<<<<<< HEAD
     
   
+=======
+
+
+>>>>>>> 942d8122f948143b3daac72baff08326f8b5c4e0
     it('Avaliar apenas com avaliação', () => {
         cy.visit('/');
         cy.get('[href="/minhas_reservas/"]').click();
@@ -223,7 +228,11 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get('[aria-current="page"]').click();
         cy.get('#nome').type('Hotel Casas Amarelas');
         cy.get('#descricao').type('Casas amarela confortáveis na praia, ideal para casais em viagens românticas ou famílias pequenas.');
+<<<<<<< HEAD
         cy.get('#preco_por_noite').type('500,00');
+=======
+        cy.get('#preco_por_noite').type('500');
+>>>>>>> 942d8122f948143b3daac72baff08326f8b5c4e0
         cy.get('#endereco').type('Praia dos Caranguejos');
         cy.get('#cidade').type('Fernando de Noronha');
         cy.get('#estado').type('Pernambuco');
