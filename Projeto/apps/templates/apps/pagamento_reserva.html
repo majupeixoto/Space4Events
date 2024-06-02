@@ -17,8 +17,15 @@
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-debito" role="tabpanel" aria-labelledby="pills-debito-tab" tabindex="0">
             <!-- PAGAMENTO DÉBITO -->
+            
             <form class="reservar" method="post" action="{% url 'pagamento_reserva' %}">
                 {% csrf_token %}
+
+                <div class="box-user">
+                    <label for="cpf">CPF:</label><br>
+                    <input type="text" id="cpf" name="cpf" placeholder="XXX.XXX.XXX-XX" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="Digite um CPF no formato: 000.000.000-00" required><br>
+                </div> 
+
                 <div class="box-user">
                     <label for="numero_cartao_debito">Número do Cartão:</label>
                     <input type="text" class="form-control" id="numero_cartao_debito" name="numero_cartao" placeholder="Apenas números" required pattern="[0-9]{16}" title="Por favor, digite 16 números" maxlength="16">
@@ -41,10 +48,16 @@
             </form>
         </div>
 
-        <div class="tab-pane fade" id="pills-credito" role="tabpanel" aria-labelledby="pills-credito-tab" tabindex="0">
         <!-- PAGAMENTO CRÉDITO -->
+        <div class="tab-pane fade" id="pills-credito" role="tabpanel" aria-labelledby="pills-credito-tab" tabindex="0">
             <form class="payment-form" method="post" action="{% url 'pagamento_reserva' %}">
                 {% csrf_token %}
+
+                <div class="box-user">
+                    <label for="cpf">CPF:</label><br>
+                    <input type="text" id="cpf" name="cpf" placeholder="XXX.XXX.XXX-XX" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="Digite um CPF no formato: 000.000.000-00" required><br>
+                </div>
+
                 <div class="box-user">
                     <label for="numero_cartao_credito">Número do Cartão:</label>
                     <input type="text" class="form-control" id="numero_cartao_credito" name="numero_cartao" placeholder="Apenas números" required pattern="[0-9]{16}" title="Por favor, digite 16 números" maxlength="16">

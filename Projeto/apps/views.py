@@ -13,6 +13,8 @@ from datetime import datetime
 import datetime
 from django.db.models import Func
 from datetime import datetime
+from .models import Carrossel
+
 
 
 def remover_acentos(txt):
@@ -105,12 +107,18 @@ def cancelar_reserva(request, espaco_id):
 @login_required
 def criar_reserva(request, espaco_id):
     espaco = get_object_or_404(Espaco, id=espaco_id)
+    
+    # Verificar se o usuário é o proprietário do espaço
+    if espaco.proprietario_nome == request.user.username:
+        messages.error(request, 'Você não pode reservar seu próprio espaço.')
+        return redirect('detalhes', espaco_id=espaco_id)
+    
     if request.method == 'POST':
-        hospede_nome = request.POST.get('hospede_nome')
         data_check_in = request.POST.get('data_check_in')
         data_check_out = request.POST.get('data_check_out')
         numero_de_hospedes = int(request.POST.get('numero_de_hospedes'))
 
+        # Validações...
         if not data_check_in or not data_check_out:
             return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'Por favor, preencha as datas de check-in e check-out.'})
 
@@ -118,7 +126,7 @@ def criar_reserva(request, espaco_id):
             data_check_in = datetime.strptime(data_check_in, '%Y-%m-%d').date()
             data_check_out = datetime.strptime(data_check_out, '%Y-%m-%d').date()
         except ValueError:
-            return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'Formato de data inválido. Use o formato dd-mm-aaaa.'})
+            return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'Formato de data inválido. Use o formato aaaa-mm-dd.'})
 
         today_date = datetime.today().date()
         if data_check_in < today_date or data_check_out < today_date:
@@ -133,27 +141,27 @@ def criar_reserva(request, espaco_id):
         if espaco.numero_de_hospedes < numero_de_hospedes:
             return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'Número de hóspedes excede a capacidade do espaço'})
 
+        # Verificar se há conflitos de reservas
         reservas_conflitantes = Reserva.objects.filter(
             espaco=espaco,
-            data_check_in__lte=data_check_out,
-            data_check_out__gte=data_check_in
+            data_check_out__gt=data_check_in,
+            data_check_in__lt=data_check_out
         )
 
         if reservas_conflitantes.exists():
             return render(request, 'apps/reservar_espaco.html', {'espaco': espaco, 'error_message': 'Espaço já reservado para as datas solicitadas!'})
 
+        # Salva os detalhes da reserva na sessão
         request.session['reserva_details'] = {
-            'espaco_id': espaco_id,
-            'hospede_nome': hospede_nome,
+            'espaco_id': espaco.id,
             'data_check_in': data_check_in.strftime('%Y-%m-%d'),
             'data_check_out': data_check_out.strftime('%Y-%m-%d'),
             'numero_de_hospedes': numero_de_hospedes
         }
-        
+
         return redirect('pagamento_reserva')
     
-    else:
-        return render(request, 'apps/reservar_espaco.html', {'espaco': espaco})
+    return render(request, 'apps/reservar_espaco.html', {'espaco': espaco})
 
 def detalhes(request, espaco_id):
     espaco = get_object_or_404(Espaco, id=espaco_id)
@@ -203,7 +211,7 @@ def editar_conta(request):
 
         user.save()
         messages.success(request, 'Sua conta foi atualizada com sucesso!')
-        return redirect('editar_conta')
+        return redirect('meu_perfil')  # Modificado para redirecionar para 'meu_perfil'
     return render(request, 'apps/editar_conta.html')
 
 def editar_espaco(request, espaco_id):
@@ -346,8 +354,17 @@ def login_view(request):
             login(request, user)
             return redirect(next_url or 'home')
         else:
-            return render(request, 'apps/login.html', {"erro": "Usuário não encontrado"})
-    return render(request, 'apps/login.html', {'next': next_url})
+            return render(request, 'apps/login.html', {
+                "erro": "Usuário não encontrado",
+                'next': next_url,
+                'carrossel_imagens': Carrossel.objects.all()
+            })
+    
+    carrossel_imagens = Carrossel.objects.all()
+    return render(request, 'apps/login.html', {
+        'next': next_url,
+        'carrossel_imagens': carrossel_imagens
+    })
 
 def logout(request):
     logout(request)
@@ -398,47 +415,44 @@ def pagamento_reserva(request):
 
         # Define a parcela com base no número máximo de parcelas permitido
         parcela = request.POST.get('parcela')
-        if parcela in range(1, max_parcelas + 1):
-            parcela_selecionada = parcela
+        if parcela and parcela.isdigit() and int(parcela) in range(1, max_parcelas + 1):
+            parcela_selecionada = int(parcela)
         else:
             parcela_selecionada = 1
 
+    else:
+        return HttpResponse("Detalhes da reserva não encontrados na sessão.")
+
     if request.method == 'POST':
-        if reserva_details:
-            hospede_nome = reserva_details['hospede_nome']
+        numero_cartao = request.POST.get('numero_cartao')
+        data_validade = request.POST.get('data_validade')
+        cvv = request.POST.get('cvv')
+
+        if numero_cartao and data_validade and cvv:
+            hospede_nome = request.user.username
             data_check_in = reserva_details['data_check_in']
             data_check_out = reserva_details['data_check_out']
             numero_de_hospedes = reserva_details['numero_de_hospedes']
-
-            numero_cartao = request.POST.get('numero_cartao')
-            data_validade = request.POST.get('data_validade')
-            cvv = request.POST.get('cvv')
-            parcela = request.POST.get('parcela')
             valor_parcelas = valor_total / parcela_selecionada
 
-            if parcela is None:
-                parcela = 1
-
-            if numero_cartao and data_validade and cvv:
-                reserva = Reserva.objects.create(
-                    espaco_proprietario_nome=espaco.proprietario_nome,
-                    espaco_nome=espaco.nome,
-                    hospede_nome=hospede_nome,
-                    data_check_in=data_check_in,
-                    data_check_out=data_check_out,
-                    numero_de_hospedes=numero_de_hospedes,
-                    valor_total=valor_total,
-                    parcela=parcela,
-                    valor_parcelas=valor_parcelas,
-                    espaco=espaco,
-                )
-                del request.session['reserva_details']
-                return redirect('minhas_reservas')
+            reserva = Reserva.objects.create(
+                espaco_proprietario_nome=espaco.proprietario_nome,
+                espaco_nome=espaco.nome,
+                hospede_nome=hospede_nome,
+                data_check_in=data_check_in,
+                data_check_out=data_check_out,
+                numero_de_hospedes=numero_de_hospedes,
+                valor_total=valor_total,
+                parcela=parcela_selecionada,
+                valor_parcelas=valor_parcelas,
+                espaco=espaco,
+            )
+            del request.session['reserva_details']
+            return redirect('minhas_reservas')
         else:
-            return HttpResponse("Detalhes da reserva não encontrados na sessão.")
+            return render(request, 'apps/pagamento_reserva.html', {'valor_total': valor_total, 'max_parcelas': range(1, max_parcelas + 1), 'parcela_selecionada': parcela_selecionada, 'error_message': 'Por favor, preencha todos os campos do cartão.'})
 
     return render(request, 'apps/pagamento_reserva.html', {'valor_total': valor_total, 'max_parcelas': range(1, max_parcelas + 1), 'parcela_selecionada': parcela_selecionada})
-
 def profile(request):
     return redirect('home')
 
@@ -479,3 +493,36 @@ def avaliacoes_espaco(request, espaco_id):
         'avaliacoes': avaliacoes,
     }
     return render(request, 'avaliacoes_espaco.html', context)
+
+
+#api para mudar data de check in e check out no banco de dados
+
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+import json
+from .models import Reserva
+
+@csrf_exempt
+def update_reservation_dates(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            reserva_id = data.get('reserva_id')
+            new_check_in = data.get('new_check_in')
+            new_check_out = data.get('new_check_out')
+
+            if not reserva_id or not new_check_in or not new_check_out:
+                return JsonResponse({'status': 'error', 'message': 'Dados incompletos'}, status=400)
+
+            reserva = Reserva.objects.get(id=reserva_id)
+            reserva.data_check_in = datetime.strptime(new_check_in, '%Y-%m-%d').date()
+            reserva.data_check_out = datetime.strptime(new_check_out, '%Y-%m-%d').date()
+            reserva.save()
+
+            return JsonResponse({'status': 'success', 'message': 'Datas atualizadas com sucesso'})
+        except Reserva.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'Reserva não encontrada'}, status=404)
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Método não permitido'}, status=405)
