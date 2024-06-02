@@ -29,7 +29,7 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get('[aria-current="page"]').click();
         cy.get('#nome').type('Chácara das Flores');
         cy.get('#descricao').type('Localizada no coração da natureza, esta chácara encanta com seus jardins floridos e áreas de lazer ao ar livre, ideal para casamentos e eventos ao ar livre.');
-        cy.get('#preco_por_noite').type('150,00');
+        cy.get('#preco_por_noite').type('150');
         cy.get('#endereco').type('Estrada das Flores, 456');
         cy.get('#cidade').type('Campinas');
         cy.get('#estado').type('São Paulo');
@@ -108,7 +108,7 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get('[aria-current="page"]').click();
         cy.get('#nome').type('Apartamento Central');
         cy.get('#descricao').type('Apartamento no centro da Moderno e sofisticado apartamento no centro da cidade, ideal para estadias urbanas com acesso fácil às principais atrações e negócios locais.');
-        cy.get('#preco_por_noite').type('100,00');
+        cy.get('#preco_por_noite').type('100');
         cy.get('#endereco').type('Av. Gen. Monteiro de Barros, 638');
         cy.get('#cidade').type('Guarujá');
         cy.get('#estado').type('Rio de Janeiro');
@@ -159,7 +159,7 @@ describe('Testa a Avaliação de uma Reserva', () => {
     });
 
 
-  
+
     it('Tentar avaliar apenas com comentário', () => {
         cy.visit('/');
         cy.get('[href="/minhas_reservas/"]').click();
@@ -170,11 +170,11 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get('#password').type('123');
         cy.get('.btn_login').click();
         cy.get('[aria-current="page"]').click();
-        cy.get('#nome').type('Casa Porto de Galinhas');
-        cy.get('#descricao').type('Localizado na beira da praia em Porto de galinhas. Perfeito para famílias grandes e grupos de amigos.');
-        cy.get('#preco_por_noite').type('500,00');
+        cy.get('#nome').type('Casa de Campo');
+        cy.get('#descricao').type('Localizado no interior. Perfeito para famílias grandes e grupos de amigos.');
+        cy.get('#preco_por_noite').type('500');
         cy.get('#endereco').type('Estrada das Conchas, 465');
-        cy.get('#cidade').type('Porto de Galinhas');
+        cy.get('#cidade').type('Aldeia');
         cy.get('#estado').type('Pernambuco');
         cy.get('#pais').type('Brasil');
         cy.get('#numero_de_quartos').type('4');
@@ -215,7 +215,7 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.reload();
     
         cy.get('[href="/avaliar_reserva/77/"]').click();
-        cy.get('#comentario_avaliacao').type('Minha estadia na Casa Porto de Galinhas foi simplesmente maravilhosa! A casa é encantadora, com uma vista deslumbrante para o mar. Os quartos são espaçosos e bem decorados, proporcionando conforto e relaxamento');
+        cy.get('#comentario_avaliacao').type('Minha estadia na Casa de Campo foi simplesmente maravilhosa! A casa é encantadora, com uma vista deslumbrante. Os quartos são espaçosos e bem decorados, proporcionando conforto e relaxamento');
         cy.get('#avaliar').click();
         cy.on('window:alert', (str) => {
             expect(str).to.equal('Por favor, selecione uma avaliação.');
