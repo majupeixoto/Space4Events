@@ -8,6 +8,7 @@
 const reservaId = 75;
 const reservaId_2 = reservaId + 1;
 const reservaId_3 = reservaId + 2;
+const reservaId_4 = reservaId + 3;
 
 const checkInDate = '2024-08-30';
 const checkOutDate = '2024-09-01';
@@ -80,21 +81,7 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get('.rating').should('have.attr', 'data-rating', '4');
     });
 
-    it('Editar Avaliação', () => {
-        cy.visit('/');
-        cy.get('#entrar').click();
-        cy.get(':nth-child(4) > input').type('carolina');
-        cy.get(':nth-child(5) > input').type('123');
-        cy.get('.btn_login').click();
-        cy.get('[href="/minhas_reservas/"]').click();
-        cy.get('[href="/avaliar_reserva/75/"]').click();
-        cy.get('[data-avaliacao="1"]').click(); // para alterar quantas estrelas da avaliação
-        cy.get('#comentario_avaliacao').type('O D I E I !');
-        cy.get('#avaliar').click();
-        cy.get('.fa-solid').click();
-        cy.get('#visualizar_detalhes').click();
-        cy.get('.rating').should('have.attr', 'data-rating', '1');
-    });
+    
   
     it('Avaliar apenas com avaliação', () => {
         cy.visit('/');
@@ -220,5 +207,77 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.on('window:alert', (str) => {
             expect(str).to.equal('Por favor, selecione uma avaliação.');
         });
+    });
+
+
+
+    it('Editar Avaliação', () => {
+        cy.visit('/');
+        cy.get('[href="/minhas_reservas/"]').click();
+        cy.get('.forget').click();
+        cy.get('#username').type('Nanda');
+        cy.get('#name').type('Nanda');
+        cy.get(':nth-child(5) > #email').type('nanda@123.com');
+        cy.get('#password').type('123');
+        cy.get('.btn_login').click();
+        cy.get('[aria-current="page"]').click();
+        cy.get('#nome').type('Hotel Casas Amarelas');
+        cy.get('#descricao').type('Casas amarela confortáveis na praia, ideal para casais em viagens românticas ou famílias pequenas.');
+        cy.get('#preco_por_noite').type('500,00');
+        cy.get('#endereco').type('Praia dos Caranguejos');
+        cy.get('#cidade').type('Fernando de Noronha');
+        cy.get('#estado').type('Pernambuco');
+        cy.get('#pais').type('Brasil');
+        cy.get('#numero_de_quartos').type('4');
+        cy.get('#numero_de_banheiros').type('3');
+        cy.get('#numero_de_hospedes').type('8');
+        cy.get('.container > form > .btn').click();
+        cy.get('#sair').click();
+        cy.get('[href="/minhas_reservas/"]').click();
+        cy.get('.forget').click();
+        cy.get('#username').type('Camila');
+        cy.get('#name').type('Camila');
+        cy.get(':nth-child(5) > #email').type('camila@123.com');
+        cy.get('#password').type('123');
+        cy.get('.btn_login').click();
+        cy.get(':nth-child(4) > .card > .card-body > .d-flex > .btn-group > #visualizar_detalhes').click();
+        cy.get(':nth-child(8) > .btn').click();      
+        cy.get('#data_check_in').type(checkInDate); 
+        cy.get('#data_check_out').type(checkOutDate);
+        cy.get('#numero_de_hospedes').type('1');
+        cy.get('.btn_login').click();
+        cy.get('#pills-debito-tab').click();
+        cy.get('#pills-debito > :nth-child(2) > #cpf').type('188.510.226-28');
+        cy.get('#numero_cartao_debito').type('1243254910112345');
+        cy.get('#data_validade_debito').type('02/25');
+        cy.get('#cvv_debito').type('123');
+        cy.get('#pills-debito > #botao_reservar').click();
+        cy.get('.active').click();
+    
+        cy.request('POST', '/api/update-reservation-dates/', {
+            reserva_id: reservaId_4,
+            new_check_in: newCheckIn,
+            new_check_out: newCheckOut
+        }).then((response) => {
+            expect(response.status).to.eq(200);
+            expect(response.body.status).to.eq('success');
+        });
+    
+        cy.reload();
+        cy.get('[href="/avaliar_reserva/75/"]').click();
+        cy.get('[data-avaliacao="4"]').click(); // para alterar quantas estrelas da avaliação
+        cy.get('#comentario_avaliacao').type('A Praia dos Caranguejos em Fernando de Noronha é um verdadeiro paraíso! Suas águas cristalinas, areias douradas e formações rochosas únicas criam um cenário deslumbrante. É o lugar perfeito para relaxar, mergulhar e apreciar a beleza natural dessa ilha incrível.');
+        cy.get('#avaliar').click();
+        cy.get('.fa-solid').click();
+        cy.get('#visualizar_detalhes').click();
+        cy.get('.rating').should('have.attr', 'data-rating', '4');
+        cy.get('[href="/minhas_reservas/"]').click();
+        cy.get('[href="/avaliar_reserva/75/"]').click();
+        cy.get('[data-avaliacao="1"]').click(); // para alterar quantas estrelas da avaliação
+        cy.get('#comentario_avaliacao').type('O D I E I !');
+        cy.get('#avaliar').click();
+        cy.get('.fa-solid').click();
+        cy.get('#visualizar_detalhes').click();
+        cy.get('.rating').should('have.attr', 'data-rating', '1');
     });
 });
