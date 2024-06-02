@@ -8,7 +8,6 @@
 const reservaId = 75;
 const reservaId_2 = reservaId + 1;
 const reservaId_3 = reservaId + 2;
-const reservaId_4 = reservaId + 3;
 
 const checkInDate = '2024-08-30';
 const checkOutDate = '2024-09-01';
@@ -30,7 +29,7 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get('[aria-current="page"]').click();
         cy.get('#nome').type('Chácara das Flores');
         cy.get('#descricao').type('Localizada no coração da natureza, esta chácara encanta com seus jardins floridos e áreas de lazer ao ar livre, ideal para casamentos e eventos ao ar livre.');
-        cy.get('#preco_por_noite').type('150');
+        cy.get('#preco_por_noite').type('150,00');
         cy.get('#endereco').type('Estrada das Flores, 456');
         cy.get('#cidade').type('Campinas');
         cy.get('#estado').type('São Paulo');
@@ -81,13 +80,22 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get('.rating').should('have.attr', 'data-rating', '4');
     });
 
-<<<<<<< HEAD
-    
+    it('Editar Avaliação Existente', () => {
+        cy.visit('/');
+        cy.get('#entrar').click();
+        cy.get(':nth-child(4) > input').type('carolina');
+        cy.get(':nth-child(5) > input').type('123');
+        cy.get('.btn_login').click();
+        cy.get('[href="/minhas_reservas/"]').click();
+        cy.get('[href="/avaliar_reserva/75/"]').click();
+        cy.get('[data-avaliacao="1"]').click(); // para alterar quantas estrelas da avaliação
+        cy.get('#comentario_avaliacao').type('O D I E I !');
+        cy.get('#avaliar').click();
+        cy.get('.fa-solid').click();
+        cy.get('#visualizar_detalhes').click();
+        cy.get('.rating').should('have.attr', 'data-rating', '1');
+    });
   
-=======
-
-
->>>>>>> 942d8122f948143b3daac72baff08326f8b5c4e0
     it('Avaliar apenas com avaliação', () => {
         cy.visit('/');
         cy.get('[href="/minhas_reservas/"]').click();
@@ -100,7 +108,7 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get('[aria-current="page"]').click();
         cy.get('#nome').type('Apartamento Central');
         cy.get('#descricao').type('Apartamento no centro da Moderno e sofisticado apartamento no centro da cidade, ideal para estadias urbanas com acesso fácil às principais atrações e negócios locais.');
-        cy.get('#preco_por_noite').type('100');
+        cy.get('#preco_por_noite').type('100,00');
         cy.get('#endereco').type('Av. Gen. Monteiro de Barros, 638');
         cy.get('#cidade').type('Guarujá');
         cy.get('#estado').type('Rio de Janeiro');
@@ -151,7 +159,7 @@ describe('Testa a Avaliação de uma Reserva', () => {
     });
 
 
-
+  
     it('Tentar avaliar apenas com comentário', () => {
         cy.visit('/');
         cy.get('[href="/minhas_reservas/"]').click();
@@ -162,11 +170,11 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get('#password').type('123');
         cy.get('.btn_login').click();
         cy.get('[aria-current="page"]').click();
-        cy.get('#nome').type('Casa de Campo');
-        cy.get('#descricao').type('Localizado no interior. Perfeito para famílias grandes e grupos de amigos.');
-        cy.get('#preco_por_noite').type('500');
+        cy.get('#nome').type('Casa Porto de Galinhas');
+        cy.get('#descricao').type('Localizado na beira da praia em Porto de galinhas. Perfeito para famílias grandes e grupos de amigos.');
+        cy.get('#preco_por_noite').type('500,00');
         cy.get('#endereco').type('Estrada das Conchas, 465');
-        cy.get('#cidade').type('Aldeia');
+        cy.get('#cidade').type('Porto de Galinhas');
         cy.get('#estado').type('Pernambuco');
         cy.get('#pais').type('Brasil');
         cy.get('#numero_de_quartos').type('4');
@@ -207,86 +215,10 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.reload();
     
         cy.get('[href="/avaliar_reserva/77/"]').click();
-        cy.get('#comentario_avaliacao').type('Minha estadia na Casa de Campo foi simplesmente maravilhosa! A casa é encantadora, com uma vista deslumbrante. Os quartos são espaçosos e bem decorados, proporcionando conforto e relaxamento');
+        cy.get('#comentario_avaliacao').type('Minha estadia na Casa Porto de Galinhas foi simplesmente maravilhosa! A casa é encantadora, com uma vista deslumbrante para o mar. Os quartos são espaçosos e bem decorados, proporcionando conforto e relaxamento');
         cy.get('#avaliar').click();
         cy.on('window:alert', (str) => {
             expect(str).to.equal('Por favor, selecione uma avaliação.');
         });
-    });
-
-
-
-    it('Editar Avaliação', () => {
-        cy.visit('/');
-        cy.get('[href="/minhas_reservas/"]').click();
-        cy.get('.forget').click();
-        cy.get('#username').type('Nanda');
-        cy.get('#name').type('Nanda');
-        cy.get(':nth-child(5) > #email').type('nanda@123.com');
-        cy.get('#password').type('123');
-        cy.get('.btn_login').click();
-        cy.get('[aria-current="page"]').click();
-        cy.get('#nome').type('Hotel Casas Amarelas');
-        cy.get('#descricao').type('Casas amarela confortáveis na praia, ideal para casais em viagens românticas ou famílias pequenas.');
-<<<<<<< HEAD
-        cy.get('#preco_por_noite').type('500,00');
-=======
-        cy.get('#preco_por_noite').type('500');
->>>>>>> 942d8122f948143b3daac72baff08326f8b5c4e0
-        cy.get('#endereco').type('Praia dos Caranguejos');
-        cy.get('#cidade').type('Fernando de Noronha');
-        cy.get('#estado').type('Pernambuco');
-        cy.get('#pais').type('Brasil');
-        cy.get('#numero_de_quartos').type('4');
-        cy.get('#numero_de_banheiros').type('3');
-        cy.get('#numero_de_hospedes').type('8');
-        cy.get('.container > form > .btn').click();
-        cy.get('#sair').click();
-        cy.get('[href="/minhas_reservas/"]').click();
-        cy.get('.forget').click();
-        cy.get('#username').type('Camila');
-        cy.get('#name').type('Camila');
-        cy.get(':nth-child(5) > #email').type('camila@123.com');
-        cy.get('#password').type('123');
-        cy.get('.btn_login').click();
-        cy.get(':nth-child(4) > .card > .card-body > .d-flex > .btn-group > #visualizar_detalhes').click();
-        cy.get(':nth-child(8) > .btn').click();      
-        cy.get('#data_check_in').type(checkInDate); 
-        cy.get('#data_check_out').type(checkOutDate);
-        cy.get('#numero_de_hospedes').type('1');
-        cy.get('.btn_login').click();
-        cy.get('#pills-debito-tab').click();
-        cy.get('#pills-debito > :nth-child(2) > #cpf').type('188.510.226-28');
-        cy.get('#numero_cartao_debito').type('1243254910112345');
-        cy.get('#data_validade_debito').type('02/25');
-        cy.get('#cvv_debito').type('123');
-        cy.get('#pills-debito > #botao_reservar').click();
-        cy.get('.active').click();
-    
-        cy.request('POST', '/api/update-reservation-dates/', {
-            reserva_id: reservaId_4,
-            new_check_in: newCheckIn,
-            new_check_out: newCheckOut
-        }).then((response) => {
-            expect(response.status).to.eq(200);
-            expect(response.body.status).to.eq('success');
-        });
-    
-        cy.reload();
-        cy.get('[href="/avaliar_reserva/75/"]').click();
-        cy.get('[data-avaliacao="4"]').click(); // para alterar quantas estrelas da avaliação
-        cy.get('#comentario_avaliacao').type('A Praia dos Caranguejos em Fernando de Noronha é um verdadeiro paraíso! Suas águas cristalinas, areias douradas e formações rochosas únicas criam um cenário deslumbrante. É o lugar perfeito para relaxar, mergulhar e apreciar a beleza natural dessa ilha incrível.');
-        cy.get('#avaliar').click();
-        cy.get('.fa-solid').click();
-        cy.get('#visualizar_detalhes').click();
-        cy.get('.rating').should('have.attr', 'data-rating', '4');
-        cy.get('[href="/minhas_reservas/"]').click();
-        cy.get('[href="/avaliar_reserva/75/"]').click();
-        cy.get('[data-avaliacao="1"]').click(); // para alterar quantas estrelas da avaliação
-        cy.get('#comentario_avaliacao').type('O D I E I !');
-        cy.get('#avaliar').click();
-        cy.get('.fa-solid').click();
-        cy.get('#visualizar_detalhes').click();
-        cy.get('.rating').should('have.attr', 'data-rating', '1');
     });
 });
