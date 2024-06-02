@@ -10,12 +10,19 @@ describe('test cadastro', () => {
         cy.get('.btn_login').click()
         cy.url().should('include', '')
     })
-    it('Login com sucesso', () => {
+    it('Editar Perfil', () => {
         cy.visit('/');
         cy.get('.ms-auto > .nav-link').click()
         cy.get(':nth-child(4) > input').type('malu')
         cy.get(':nth-child(5) > input').type('123')
         cy.get('.btn_login').click()
-        cy.url().should('include', '')
+        cy.get('.ms-auto > a.nav-link').click();
+        cy.get('.btn-primary').click();
+        cy.get('#first_name').clear();
+        cy.get('#first_name').type('novo');
+        cy.get('#last_name').type('nome');
+        cy.get('#editar').click();
+        cy.get('p').should('contain.html', '<strong>Nome:</strong> novo nome');
+
     })
 })
