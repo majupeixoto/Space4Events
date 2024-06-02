@@ -5,9 +5,9 @@
 // Caso o id seja "n", reservaId deve ser "n + 1"
 // 2º. Alterar a linha 72 para ter o mesmo id que reservaId
 
-const reservaId = 68;
-const reservaId_2 = reservaId + 3;
-const reservaId_3 = reservaId + 4;
+const reservaId = 69
+const reservaId_2 = reservaId + 1;
+const reservaId_3 = reservaId + 2;
 
 const checkInDate = '2024-08-30';
 const checkOutDate = '2024-09-01';
@@ -71,7 +71,7 @@ describe('Testa a Avaliação de uma Reserva', () => {
     
         cy.reload();
     
-        cy.get('[href="/avaliar_reserva/62/"]').click();
+        cy.get('[href="/avaliar_reserva/69/"]').click();
         cy.get('[data-avaliacao="4"]').click(); // para alterar quantas estrelas da avaliação
         cy.get('#comentario_avaliacao').type('Minha experiência na Chácara das Flores foi verdadeiramente especial. A casa é encantadora, com uma atmosfera acolhedora e rústica. A localização cercada por natureza proporcionou momentos de paz e tranquilidade. A equipe foi muito atenciosa e prestativa, garantindo que tudo estivesse perfeito durante a nossa estadia. Recomendo a todos que desejam uma escapada relaxante e autêntica');
         cy.get('#avaliar').click();
@@ -134,11 +134,11 @@ describe('Testa a Avaliação de uma Reserva', () => {
     
         cy.reload();
     
-        cy.get('[href="/avaliar_reserva/63/"]').click();
+        cy.get('[href="/avaliar_reserva/70/"]').click();
         cy.get('[data-avaliacao="5"]').click(); // para alterar quantas estrelas da avaliação
         cy.get('#avaliar').click();
         cy.get('.fa-solid').click();
-        cy.get('#visualizar_detalhes').click();
+        cy.get(':nth-child(2) > .card > .card-body > .d-flex > .btn-group > #visualizar_detalhes').click();
         cy.get('.rating').should('have.attr', 'data-rating', '5');
     });
   
@@ -196,7 +196,7 @@ describe('Testa a Avaliação de uma Reserva', () => {
     
         cy.reload();
     
-        cy.get('[href="/avaliar_reserva/63/"]').click();
+        cy.get('[href="/avaliar_reserva/71/"]').click();
         cy.get('#comentario_avaliacao').type('Minha estadia na Casa Porto de Galinhas foi simplesmente maravilhosa! A casa é encantadora, com uma vista deslumbrante para o mar. Os quartos são espaçosos e bem decorados, proporcionando conforto e relaxamento');
         cy.get('#avaliar').click();
         cy.on('window:alert', (str) => {
