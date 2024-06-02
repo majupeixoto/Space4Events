@@ -19,8 +19,14 @@ describe('test cadastro', () => {
         cy.get('.ms-auto > a.nav-link').click();
         cy.get('.btn-primary').click();
         cy.get('#first_name').clear();
-        cy.get('#first_name').type('novo');
-        cy.get('#last_name').type('nome');
+        cy.get('#first_name').type('Novo');
+        cy.get('#last_name').clear();
+        cy.get('#last_name').type('Nome');
+        cy.get('#email').clear();
+        cy.get('#email').type('malu2@gmail.com');
+        cy.get('#senha_atual').type('123');
+        cy.get('#nova_senha').type('1234');
+        cy.get('#nova_senha_confirmacao').type('1234');
         cy.get('#editar').click();
         cy.get('p').should('contain.html', '<strong>Nome:</strong> novo nome');
     })
