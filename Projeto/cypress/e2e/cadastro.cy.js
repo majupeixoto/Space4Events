@@ -16,6 +16,11 @@ describe('test cadastro', () => {
         cy.get(':nth-child(4) > input').type('malu')
         cy.get(':nth-child(5) > input').type('123')
         cy.get('.btn_login').click()
-        cy.url().should('include', '')
+        // cy.url().should('include', '')
+    })
+    it('Editar perfil', () => {
+        cy.get('.ms-auto > a.nav-link')
+        cy.get('.btn-primary')
+        cy.get('#last_name').type('Novo')
     })
 })
