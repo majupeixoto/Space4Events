@@ -28,7 +28,7 @@ describe('scrum 27', () => {
         cy.get(':nth-child(1) > .search-container > .input-group > .input-group-append > .btn').click();
         cy.wait(3000);
         cy.get(':nth-child(1) > .card > .card-body > .d-flex > .btn-group > .btn').click();
-        cy.get('.row > :nth-child(2) > :nth-child(3)').invoke('text').should("match", /João Pessoa/);
+        cy.get('.row > :nth-child(2) > :nth-child(4)').invoke('text').should("match", /João Pessoa/);
     })
 
     it('filtrar recife', () => {
