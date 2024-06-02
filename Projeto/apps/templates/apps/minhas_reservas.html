@@ -30,11 +30,15 @@
                     {% if reserva.status == "Reserva ainda por vir" %}
                         <form action="{% url 'cancelar_reserva' reserva.espaco.id %}" method="post" style="display: inline;">
                             {% csrf_token %}
-                                <button type="submit" class="btn btn-danger">Cancelar reserva</button>
+                            <button type="submit" class="btn btn-danger">Cancelar reserva</button>
                         </form>
                     {% endif %}
                     {% if reserva.status == "Reserva terminada" %}
-                        <a href="{% url 'avaliar_reserva' reserva.id %}" class="btn btn-outline-secondary">Avaliar! ★★★★★</a>
+                        <a href="{% url 'avaliar_reserva' reserva.id %}" 
+                           class="btn btn-outline-secondary avaliar-btn" 
+                           data-avaliacao="{{ reserva.avaliacao }}">
+                            Avaliar! ★★★★★
+                        </a>
                     {% endif %}
                 </div>
             </div>
@@ -44,12 +48,20 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        // Handle back button navigation
         if (window.history && window.history.pushState) {
             window.history.pushState(null, null, window.location.href);
             window.onpopstate = function () {
                 window.location.replace("{% url 'home' %}");
             };
         }
+
+        // Update button text based on evaluation status
+        document.querySelectorAll('.avaliar-btn').forEach(function(button) {
+            if (button.dataset.avaliacao && button.dataset.avaliacao !== "0") {
+                button.textContent = "Editar Avaliação! ★★★★★";
+            }
+        });
     });
 </script>
 
