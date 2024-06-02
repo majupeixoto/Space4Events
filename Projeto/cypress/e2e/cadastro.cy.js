@@ -23,6 +23,5 @@ describe('test cadastro', () => {
         cy.get('#last_name').type('nome');
         cy.get('#editar').click();
         cy.get('p').should('contain.html', '<strong>Nome:</strong> novo nome');
-
     })
 })
