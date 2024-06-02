@@ -5,9 +5,9 @@
 // Caso o id seja "n", reservaId deve ser "n + 1"
 // 2º. Alterar a linha 72 para ter o mesmo id que reservaId
 
-const reservaId = 62;
-const reservaId_2 = reservaId + 1;
-const reservaId_3 = reservaId + 2;
+const reservaId = 68;
+const reservaId_2 = reservaId + 3;
+const reservaId_3 = reservaId + 4;
 
 const checkInDate = '2024-08-30';
 const checkOutDate = '2024-09-01';
@@ -73,7 +73,7 @@ describe('Testa a Avaliação de uma Reserva', () => {
     
         cy.get('[href="/avaliar_reserva/62/"]').click();
         cy.get('[data-avaliacao="4"]').click(); // para alterar quantas estrelas da avaliação
-        cy.get('#comentario_avaliacao').type('Overall, my experience with the reservation platform was positive. The system is intuitive and user-friendly, making it easy to manage reservations and property listings. With some minor improvements in wait times, UI feedback, and error handling, the platform could offer an even better user experience.');
+        cy.get('#comentario_avaliacao').type('Minha experiência na Chácara das Flores foi verdadeiramente especial. A casa é encantadora, com uma atmosfera acolhedora e rústica. A localização cercada por natureza proporcionou momentos de paz e tranquilidade. A equipe foi muito atenciosa e prestativa, garantindo que tudo estivesse perfeito durante a nossa estadia. Recomendo a todos que desejam uma escapada relaxante e autêntica');
         cy.get('#avaliar').click();
         cy.get('.fa-solid').click();
         cy.get('#visualizar_detalhes').click();
@@ -90,12 +90,12 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get('#password').type('123');
         cy.get('.btn_login').click();
         cy.get('[aria-current="page"]').click();
-        cy.get('#nome').type('Chácara das Flores');
-        cy.get('#descricao').type('Localizada no coração da natureza, esta chácara encanta com seus jardins floridos e áreas de lazer ao ar livre, ideal para casamentos e eventos ao ar livre.');
-        cy.get('#preco_por_noite').type('150,00');
-        cy.get('#endereco').type('Estrada das Flores, 456');
-        cy.get('#cidade').type('Campinas');
-        cy.get('#estado').type('São Paulo');
+        cy.get('#nome').type('Apartamento Central');
+        cy.get('#descricao').type('Apartamento no centro da Moderno e sofisticado apartamento no centro da cidade, ideal para estadias urbanas com acesso fácil às principais atrações e negócios locais.');
+        cy.get('#preco_por_noite').type('100,00');
+        cy.get('#endereco').type('Av. Gen. Monteiro de Barros, 638');
+        cy.get('#cidade').type('Guarujá');
+        cy.get('#estado').type('Rio de Janeiro');
         cy.get('#pais').type('Brasil');
         cy.get('#numero_de_quartos').type('4');
         cy.get('#numero_de_banheiros').type('3');
@@ -109,7 +109,7 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get(':nth-child(5) > #email').type('ines@123.com');
         cy.get('#password').type('123');
         cy.get('.btn_login').click();
-        cy.get('#visualizar_detalhes').click();
+        cy.get(':nth-child(2) > .card > .card-body > .d-flex > .btn-group > #visualizar_detalhes').click();
         cy.get(':nth-child(8) > .btn').click();      
         cy.get('#data_check_in').type(checkInDate); 
         cy.get('#data_check_out').type(checkOutDate);
@@ -152,12 +152,12 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get('#password').type('123');
         cy.get('.btn_login').click();
         cy.get('[aria-current="page"]').click();
-        cy.get('#nome').type('Chácara das Flores');
-        cy.get('#descricao').type('Localizada no coração da natureza, esta chácara encanta com seus jardins floridos e áreas de lazer ao ar livre, ideal para casamentos e eventos ao ar livre.');
-        cy.get('#preco_por_noite').type('150,00');
-        cy.get('#endereco').type('Estrada das Flores, 456');
-        cy.get('#cidade').type('Campinas');
-        cy.get('#estado').type('São Paulo');
+        cy.get('#nome').type('Casa Porto de Galinhas');
+        cy.get('#descricao').type('Localizado na beira da praia em Porto de galinhas. Perfeito para famílias grandes e grupos de amigos.');
+        cy.get('#preco_por_noite').type('500,00');
+        cy.get('#endereco').type('Estrada das Conchas, 465');
+        cy.get('#cidade').type('Porto de Galinhas');
+        cy.get('#estado').type('Pernambuco');
         cy.get('#pais').type('Brasil');
         cy.get('#numero_de_quartos').type('4');
         cy.get('#numero_de_banheiros').type('3');
@@ -171,7 +171,7 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get(':nth-child(5) > #email').type('janaina@123.com');
         cy.get('#password').type('123');
         cy.get('.btn_login').click();
-        cy.get('#visualizar_detalhes').click();
+        cy.get(':nth-child(3) > .card > .card-body > .d-flex > .btn-group > #visualizar_detalhes').click();
         cy.get(':nth-child(8) > .btn').click();      
         cy.get('#data_check_in').type(checkInDate); 
         cy.get('#data_check_out').type(checkOutDate);
@@ -197,7 +197,7 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.reload();
     
         cy.get('[href="/avaliar_reserva/63/"]').click();
-        cy.get('#comentario_avaliacao').type('Overall, my experience with the reservation platform was positive. The system is intuitive and user-friendly, making it easy to manage reservations and property listings. With some minor improvements in wait times, UI feedback, and error handling, the platform could offer an even better user experience.');
+        cy.get('#comentario_avaliacao').type('Minha estadia na Casa Porto de Galinhas foi simplesmente maravilhosa! A casa é encantadora, com uma vista deslumbrante para o mar. Os quartos são espaçosos e bem decorados, proporcionando conforto e relaxamento');
         cy.get('#avaliar').click();
         cy.on('window:alert', (str) => {
             expect(str).to.equal('Por favor, selecione uma avaliação.');
