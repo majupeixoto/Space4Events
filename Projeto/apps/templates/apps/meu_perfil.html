@@ -1,11 +1,13 @@
 {% extends 'global/base.html' %}
 
 {% block content %}
-<div class="container mt-5">
+<div class="container mt-5" style="border: 2px solid #000000; padding: 20px; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 600px; margin: 0 auto; background-color: transparent;">
     <h1>Meu Perfil</h1>
     <p><strong>Nome:</strong> {{ user.first_name }} {{ user.last_name }}</p>
     <p><strong>Email:</strong> {{ user.email }}</p>
-    <a href="{% url 'editar_conta' %}" class="btn btn-primary">Editar Perfil</a>
-    <a href="{% url 'excluir_conta' %}" class="btn btn-danger">Excluir Conta</a>
+    <div class="button-group" style="display: flex; justify-content: space-between; margin-top: 20px;">
+        <a href="{% url 'editar_conta' %}" class="btn btn-primary" style="flex-grow: 1; margin-right: 10px;">Editar Perfil</a>
+        <a href="{% url 'excluir_conta' %}" class="btn btn-danger" style="flex-grow: 1;">Excluir Conta</a>
+    </div>
 </div>
 {% endblock %}

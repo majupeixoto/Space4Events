@@ -18,16 +18,6 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ espaco.nome }}</h5>
                     <p class="card-text">{{ espaco.descricao }}</p>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><strong>Preço por Noite:</strong> {{ espaco.preco_por_noite }}</li>
-                        <li class="list-group-item"><strong>Endereço:</strong> {{ espaco.endereco }}</li>
-                        <li class="list-group-item"><strong>Cidade:</strong> {{ espaco.cidade }}</li>
-                        <li class="list-group-item"><strong>Estado:</strong> {{ espaco.estado }}</li>
-                        <li class="list-group-item"><strong>País:</strong> {{ espaco.pais }}</li>
-                        <li class="list-group-item"><strong>Número de Quartos:</strong> {{ espaco.numero_de_quartos }}</li>
-                        <li class="list-group-item"><strong>Número de Banheiros:</strong> {{ espaco.numero_de_banheiros }}</li>
-                        <li class="list-group-item"><strong>Número de Hóspedes:</strong> {{ espaco.numero_de_hospedes }}</li>
-                    </ul>
                     <a href="{% url 'detalhes' espaco.id %}" class="btn btn-outline-secondary">Ver mais</a>
                     <a href="{% url 'editar_espaco' espaco.id %}" class="btn btn-outline-primary">Editar</a>
                     <a href="{% url 'excluir_espaco' espaco.id %}" class="btn btn-danger">Excluir</a>
