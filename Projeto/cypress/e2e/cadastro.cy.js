@@ -31,6 +31,6 @@ describe('test cadastro', () => {
         cy.get('#nova_senha').type('1234');
         cy.get('#nova_senha_confirmacao').type('1234');
         cy.get('#editar').click();
-        cy.get('p').should('contain.html', '<strong>Nome:</strong> novo nome');
+        cy.get('p').should('contain.html', '<strong>Nome:</strong> Novo Nome');
     })
 })
