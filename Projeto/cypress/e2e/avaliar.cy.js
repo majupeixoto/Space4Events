@@ -172,7 +172,7 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get('[aria-current="page"]').click();
         cy.get('#nome').type('Casa Porto de Galinhas');
         cy.get('#descricao').type('Localizado na beira da praia em Porto de galinhas. Perfeito para famílias grandes e grupos de amigos.');
-        cy.get('#preco_por_noite').type('500,00');
+        cy.get('#preco_por_noite').type('500');
         cy.get('#endereco').type('Estrada das Conchas, 465');
         cy.get('#cidade').type('Porto de Galinhas');
         cy.get('#estado').type('Pernambuco');
