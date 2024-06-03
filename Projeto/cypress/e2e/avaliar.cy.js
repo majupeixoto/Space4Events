@@ -25,6 +25,7 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get('#name').type('carlos');
         cy.get(':nth-child(5) > #email').type('carlos@123.com');
         cy.get('#password').type('123');
+        cy.wait(3000);
         cy.get('.btn_login').click();
         cy.get('[aria-current="page"]').click();
         cy.get('#nome').type('Chácara das Flores');
@@ -37,7 +38,8 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get('#numero_de_quartos').type('4');
         cy.get('#numero_de_banheiros').type('3');
         cy.get('#numero_de_hospedes').type('8');
-        cy.get('#foto_principal').attachFile('imgs/chale_Floresta.jpg');
+        cy.get('#foto_principal').attachFile('imgs/casa_das_flores.jpg');
+        cy.wait(3000);
         cy.get('.container > form > .btn').click();
         cy.get('#sair').click();
         cy.get('[href="/minhas_reservas/"]').click();
@@ -46,18 +48,21 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get('#name').type('carolina');
         cy.get(':nth-child(5) > #email').type('carolina@123.com');
         cy.get('#password').type('123');
+        cy.wait(3000);
         cy.get('.btn_login').click();
         cy.get('#visualizar_detalhes').click();
         cy.get(':nth-child(8) > .btn').click();      
         cy.get('#data_check_in').type(checkInDate); 
         cy.get('#data_check_out').type(checkOutDate);
         cy.get('#numero_de_hospedes').type('1');
+        cy.wait(3000);
         cy.get('.btn_login').click();
         cy.get('#pills-debito-tab').click();
         cy.get('#pills-debito > :nth-child(2) > #cpf').type('188.510.226-28');
         cy.get('#numero_cartao_debito').type('1243254910112345');
         cy.get('#data_validade_debito').type('02/25');
         cy.get('#cvv_debito').type('123');
+        cy.wait(3000);
         cy.get('#pills-debito > #botao_reservar').click();
         cy.get('.active').click();
     
@@ -75,6 +80,7 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get('[href="/avaliar_reserva/75/"]').click();
         cy.get('[data-avaliacao="4"]').click(); // para alterar quantas estrelas da avaliação
         cy.get('#comentario_avaliacao').type('Minha experiência na Chácara das Flores foi verdadeiramente especial. A casa é encantadora, com uma atmosfera acolhedora e rústica. A localização cercada por natureza proporcionou momentos de paz e tranquilidade. A equipe foi muito atenciosa e prestativa, garantindo que tudo estivesse perfeito durante a nossa estadia. Recomendo a todos que desejam uma escapada relaxante e autêntica');
+        cy.wait(3000);
         cy.get('#avaliar').click();
         cy.get('.fa-solid').click();
         cy.get('#visualizar_detalhes').click();
@@ -105,6 +111,7 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get('#name').type('jonas');
         cy.get(':nth-child(5) > #email').type('jonas@123.com');
         cy.get('#password').type('123');
+        cy.wait(3000);
         cy.get('.btn_login').click();
         cy.get('[aria-current="page"]').click();
         cy.get('#nome').type('Apartamento Central');
@@ -117,7 +124,8 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get('#numero_de_quartos').type('4');
         cy.get('#numero_de_banheiros').type('3');
         cy.get('#numero_de_hospedes').type('8');
-        cy.get('#foto_principal').attachFile('imgs/apto_edificioMaria.jpg');
+        cy.get('#foto_principal').attachFile('imgs/apartamento_central.jpg');
+        cy.wait(3000);
         cy.get('.container > form > .btn').click();
         cy.get('#sair').click();
         cy.get('[href="/minhas_reservas/"]').click();
@@ -126,18 +134,21 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get('#name').type('ines');
         cy.get(':nth-child(5) > #email').type('ines@123.com');
         cy.get('#password').type('123');
+        cy.wait(3000);
         cy.get('.btn_login').click();
         cy.get(':nth-child(2) > .card > .card-body > .d-flex > .btn-group > #visualizar_detalhes').click();
         cy.get(':nth-child(8) > .btn').click();      
         cy.get('#data_check_in').type(checkInDate); 
         cy.get('#data_check_out').type(checkOutDate);
         cy.get('#numero_de_hospedes').type('1');
+        cy.wait(3000);
         cy.get('.btn_login').click();
         cy.get('#pills-debito-tab').click();
         cy.get('#pills-debito > :nth-child(2) > #cpf').type('188.510.226-28');
         cy.get('#numero_cartao_debito').type('1243254910112345');
         cy.get('#data_validade_debito').type('02/25');
         cy.get('#cvv_debito').type('123');
+        cy.wait(3000);
         cy.get('#pills-debito > #botao_reservar').click();
         cy.get('.active').click();
     
@@ -154,6 +165,7 @@ describe('Testa a Avaliação de uma Reserva', () => {
     
         cy.get('[href="/avaliar_reserva/76/"]').click();
         cy.get('[data-avaliacao="5"]').click(); // para alterar quantas estrelas da avaliação
+        cy.wait(3000);
         cy.get('#avaliar').click();
         cy.get('.fa-solid').click();
         cy.get(':nth-child(2) > .card > .card-body > .d-flex > .btn-group > #visualizar_detalhes').click();
@@ -170,19 +182,21 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get('#name').type('josue');
         cy.get(':nth-child(5) > #email').type('josue@123.com');
         cy.get('#password').type('123');
+        cy.wait(3000);
         cy.get('.btn_login').click();
         cy.get('[aria-current="page"]').click();
-        cy.get('#nome').type('Casa Porto de Galinhas');
-        cy.get('#descricao').type('Localizado na beira da praia em Porto de galinhas. Perfeito para famílias grandes e grupos de amigos.');
+        cy.get('#nome').type('Casa Muro Alto');
+        cy.get('#descricao').type('Localizado na beira da praia em Muro Alto. Perfeito para famílias grandes e grupos de amigos.');
         cy.get('#preco_por_noite').type('500');
-        cy.get('#endereco').type('Estrada das Conchas, 465');
-        cy.get('#cidade').type('Porto de Galinhas');
+        cy.get('#endereco').type('Estrada das Rochas, 465');
+        cy.get('#cidade').type('Muro Alto');
         cy.get('#estado').type('Pernambuco');
         cy.get('#pais').type('Brasil');
         cy.get('#numero_de_quartos').type('4');
         cy.get('#numero_de_banheiros').type('3');
         cy.get('#numero_de_hospedes').type('8');
-        cy.get('#foto_principal').attachFile('imgs/casa_portoDeGalinhas.jpg');
+        cy.get('#foto_principal').attachFile('imgs/casa_muro_alto.jpg');
+        cy.wait(3000);
         cy.get('.container > form > .btn').click();
         cy.get('#sair').click();
         cy.get('[href="/minhas_reservas/"]').click();
@@ -191,12 +205,14 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get('#name').type('janaina');
         cy.get(':nth-child(5) > #email').type('janaina@123.com');
         cy.get('#password').type('123');
+        cy.wait(3000);
         cy.get('.btn_login').click();
         cy.get(':nth-child(3) > .card > .card-body > .d-flex > .btn-group > #visualizar_detalhes').click();
         cy.get(':nth-child(8) > .btn').click();      
         cy.get('#data_check_in').type(checkInDate); 
         cy.get('#data_check_out').type(checkOutDate);
         cy.get('#numero_de_hospedes').type('1');
+        cy.wait(3000);
         cy.get('.btn_login').click();
         cy.get('#pills-debito-tab').click();
         cy.get('#pills-debito > :nth-child(2) > #cpf').type('188.510.226-28');
@@ -219,6 +235,7 @@ describe('Testa a Avaliação de uma Reserva', () => {
     
         cy.get('[href="/avaliar_reserva/77/"]').click();
         cy.get('#comentario_avaliacao').type('Minha estadia na Casa Porto de Galinhas foi simplesmente maravilhosa! A casa é encantadora, com uma vista deslumbrante para o mar. Os quartos são espaçosos e bem decorados, proporcionando conforto e relaxamento');
+        cy.wait(3000);
         cy.get('#avaliar').click();
         cy.on('window:alert', (str) => {
             expect(str).to.equal('Por favor, selecione uma avaliação.');
