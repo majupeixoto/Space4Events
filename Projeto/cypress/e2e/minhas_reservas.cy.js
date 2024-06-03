@@ -7,6 +7,7 @@ describe('Reservar espaços', () =>{
         cy.get('#name').type('Pedro Paulo');
         cy.get(':nth-child(5) > #email').type('pedro@123.com');
         cy.get('#password').type('123');
+        cy.wait(3000);
         cy.get('.btn_login').click();
         cy.get('[aria-current="page"]').click();
         cy.get('#nome').type('Casa Porto de Galinhas');
@@ -20,6 +21,7 @@ describe('Reservar espaços', () =>{
         cy.get('#numero_de_banheiros').type('4');
         cy.get('#numero_de_hospedes').type('15');
         cy.get('#foto_principal').attachFile('imgs/casa_portoDeGalinhas.jpg');
+        cy.wait(3000);
         cy.get('.container > form > .btn').click();
         cy.get('#sair').click();
         cy.get('[href="/minhas_reservas/"]').click();
@@ -34,12 +36,14 @@ describe('Reservar espaços', () =>{
         cy.get('#data_check_in').type('2024-08-30'); 
         cy.get('#data_check_out').type('2024-09-01');
         cy.get('#numero_de_hospedes').type('1');
+        cy.wait(3000);
         cy.get('.btn_login').click();
         cy.get('#pills-debito-tab').click();
         cy.get('#pills-debito > :nth-child(2) > #cpf').type('188.510.226-28');
         cy.get('#numero_cartao_debito').type('1243254910112345');
         cy.get('#data_validade_debito').type('02/25');
         cy.get('#cvv_debito').type('123');
+        cy.wait(3000);
         cy.get('#pills-debito > #botao_reservar').click();
         cy.get('.active').click();
         cy.get('.col').should('exist')
@@ -53,6 +57,7 @@ describe('Reservar espaços', () =>{
         cy.get('#name').type('Larissa Silva');
         cy.get(':nth-child(5) > #email').type('lara@123.com');
         cy.get('#password').type('123');
+        cy.wait(3000);
         cy.get('.btn_login').click();
         cy.get('[aria-current="page"]').click();
         cy.get('#nome').type('Apartamento Edifício Maria');
@@ -66,6 +71,7 @@ describe('Reservar espaços', () =>{
         cy.get('#numero_de_banheiros').type('1');
         cy.get('#numero_de_hospedes').type('4');
         cy.get('#foto_principal').attachFile('imgs/apto_edificioMaria.jpg');
+        cy.wait(3000);
         cy.get('.container > form > .btn').click();
         cy.get('#sair').click();
         cy.get('[href="/minhas_reservas/"]').click();
@@ -117,6 +123,7 @@ describe('Reservar espaços', () =>{
         cy.get('#numero_de_banheiros').type('2');
         cy.get('#numero_de_hospedes').type('6');
         cy.get('#foto_principal').attachFile('imgs/casa_noLago.jpg');
+        cy.wait(3000);
         cy.get('.container > form > .btn').click();
         cy.get('#sair').click();
         cy.get('[href="/minhas_reservas/"]').click();
@@ -131,6 +138,7 @@ describe('Reservar espaços', () =>{
         cy.get('#data_check_in').type('2024-08-30'); 
         cy.get('#data_check_out').type('2024-09-01');
         cy.get('#numero_de_hospedes').type('1');
+        cy.wait(3000);
         cy.get('.btn_login').click();
         cy.get('#pills-credito-tab').click();
         cy.get('.payment-form > :nth-child(2) > #cpf').type('188.510.226-28')
