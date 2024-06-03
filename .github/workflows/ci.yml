@@ -39,6 +39,12 @@ jobs:
         cd Projeto
         python manage.py migrate
 
+    - name: Start Django server
+      run: |
+        cd Projeto
+        nohup python manage.py runserver 0.0.0.0:8000 &
+        sleep 5  # Aguarde um tempo para garantir que o servidor inicialize
+
     - name: Run Django tests
       run: |
         cd Projeto
