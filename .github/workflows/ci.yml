@@ -14,10 +14,10 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3  # Atualizado para v3
+      uses: actions/checkout@v3  # Atualizado para v3 que usa Node.js 20
 
     - name: Set up Python
-      uses: actions/setup-python@v4  # Atualizado para v4
+      uses: actions/setup-python@v4  # Atualizado para v4 que usa Node.js 20
       with:
         python-version: '3.9'
 
@@ -40,9 +40,9 @@ jobs:
       shell: cmd
 
     - name: Set up Node.js
-      uses: actions/setup-node@v3  # Atualizado para v3
+      uses: actions/setup-node@v3  # Atualizado para v3 que usa Node.js 20
       with:
-        node-version: '20'  # Atualizado para Node.js 20
+        node-version: '20'
 
     - name: Install Cypress
       run: |
