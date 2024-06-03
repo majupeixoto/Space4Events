@@ -46,6 +46,6 @@ describe('test favoritar', () => {
         cy.get(':nth-child(1) > .card > .card-body > .btn').click();
         cy.get('#desfavoritar').click();
         cy.get('[href="/favoritos/"]').click();
-        cy.get('.corpo > .row > :nth-child(1)').should('not.exist');
+        cy.get('.corpo > .row > :nth-child(0)').should('not.exist');
     })
 })
