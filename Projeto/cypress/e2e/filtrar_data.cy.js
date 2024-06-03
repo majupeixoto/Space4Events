@@ -20,7 +20,7 @@ describe('Teste de filtrar por data', () => {
         cy.get('#numero_de_quartos').type('4');
         cy.get('#numero_de_banheiros').type('5');
         cy.get('#numero_de_hospedes').type('10');
-        cy.get('#foto_principal').attachFile('imgs/chale_alagoas.jpg');
+        cy.get('#foto_principal').attachFile('imgs/casa_das_flores.jpg');
         cy.wait(1000);
         cy.get('.container > form > .btn').click();
         cy.get('#sair').click();
@@ -74,7 +74,7 @@ describe('Teste de filtrar por data', () => {
         cy.get('#numero_de_quartos').type('4');
         cy.get('#numero_de_banheiros').type('5');
         cy.get('#numero_de_hospedes').type('10');
-        cy.get('#foto_principal').attachFile('imgs/casa_no_campo.jpg');
+        cy.get('#foto_principal').attachFile('imgs/chale_Floresta.jpg');
         cy.wait(1000);
         cy.get('.container > form > .btn').click();
         cy.get('#sair').click();

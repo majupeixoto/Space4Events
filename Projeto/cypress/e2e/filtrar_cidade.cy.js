@@ -20,7 +20,7 @@ describe('Teste de filtrar por cidade', () => {
         cy.get('#numero_de_quartos').type('3');
         cy.get('#numero_de_banheiros').type('2');
         cy.get('#numero_de_hospedes').type('9');
-        cy.get('#foto_principal').attachFile('imgs/casa_na_praia.jpg');
+        cy.get('#foto_principal').attachFile('imgs/casa_fernando_de_noranha.jpg');
         cy.wait(3000);
         cy.get('.container > form > .btn').click();
         cy.get('#sair').click();
