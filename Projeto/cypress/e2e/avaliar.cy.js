@@ -37,6 +37,7 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get('#numero_de_quartos').type('4');
         cy.get('#numero_de_banheiros').type('3');
         cy.get('#numero_de_hospedes').type('8');
+        cy.get('#foto_principal').attachFile('imgs/chale_Floresta.jpg');
         cy.get('.container > form > .btn').click();
         cy.get('#sair').click();
         cy.get('[href="/minhas_reservas/"]').click();
@@ -116,6 +117,7 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get('#numero_de_quartos').type('4');
         cy.get('#numero_de_banheiros').type('3');
         cy.get('#numero_de_hospedes').type('8');
+        cy.get('#foto_principal').attachFile('imgs/apto_edificioMaria.jpg');
         cy.get('.container > form > .btn').click();
         cy.get('#sair').click();
         cy.get('[href="/minhas_reservas/"]').click();
@@ -180,6 +182,7 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get('#numero_de_quartos').type('4');
         cy.get('#numero_de_banheiros').type('3');
         cy.get('#numero_de_hospedes').type('8');
+        cy.get('#foto_principal').attachFile('imgs/casa_portoDeGalinhas.jpg');
         cy.get('.container > form > .btn').click();
         cy.get('#sair').click();
         cy.get('[href="/minhas_reservas/"]').click();
