@@ -1,6 +1,6 @@
 // ESSE TESTE VALIDA FAVORITAR, DESFAVORITAR E LISTAR OS FAVORITADOS
 
-describe('test favoritar', () => {
+describe('Teste de Favoritar', () => {
     it('Favoritado com sucesso', () => {
         cy.visit('/');
         cy.get('[href="/favoritos/"]').click();

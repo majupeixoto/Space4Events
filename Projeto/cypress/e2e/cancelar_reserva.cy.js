@@ -1,4 +1,4 @@
-describe('scrum 31', () => {
+describe('Teste de Cancelar Reserva', () => {
     it('Cancelar reserva', () => {
         cy.visit('/');
         cy.wait(1000);

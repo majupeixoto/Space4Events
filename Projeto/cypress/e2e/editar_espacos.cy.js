@@ -1,4 +1,4 @@
-describe('editar espaco', () => {
+describe('Teste de Editar Espaco', () => {
     it('Editar espaço', () => {
         cy.visit('/');
         cy.get('[href="/meus_espacos/"]').click();

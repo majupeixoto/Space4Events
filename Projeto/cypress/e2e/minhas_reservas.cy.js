@@ -1,4 +1,4 @@
-describe('Reservar espaços', () =>{
+describe(' Teste de Reservar espaços', () =>{
     it('Debito', () => {
         cy.visit('/');
         cy.get('[href="/minhas_reservas/"]').click();

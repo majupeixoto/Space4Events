@@ -1,4 +1,4 @@
-describe('excluir espaco', () => {
+describe('Teste de Excluir Espaco', () => {
     it('Desistir de Excluir', () => {
         cy.visit('/');
         cy.get('[href="/minhas_reservas/"]').click();
