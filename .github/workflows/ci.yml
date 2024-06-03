@@ -52,20 +52,21 @@ jobs:
       with:
         node-version: '20'
 
-    - name: Cache Cypress binary
+    - name: Cache Node modules
       uses: actions/cache@v3
       with:
         path: |
           ~/.npm
-          C:\\Users\\runneradmin\\AppData\\Local\\Cypress\\Cache
-        key: ${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}
+          ~/.cache/Cypress
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/Projeto/package.json') }}
         restore-keys: |
-          ${{ runner.os }}-cypress-
+          ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          ${{ runner.os }}-node-
 
     - name: Install Cypress and npm dependencies
       run: |
         cd Projeto
-        npm install
+        npm ci
         npx cypress install
       shell: cmd
 
