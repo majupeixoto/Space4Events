@@ -24,18 +24,18 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r Space4Events\Projeto\requirements.txt
+        pip install -r Projeto\\requirements.txt
       shell: cmd
 
     - name: Run Django migrations
       run: |
-        cd Space4Events\Projeto
+        cd Projeto
         python manage.py migrate
       shell: cmd
 
     - name: Run Django tests
       run: |
-        cd Space4Events\Projeto
+        cd Projeto
         python manage.py test
       shell: cmd
 
@@ -46,12 +46,12 @@ jobs:
 
     - name: Install Cypress
       run: |
-        cd Space4Events\Projeto
+        cd Projeto
         npm install
       shell: cmd
 
     - name: Run Cypress tests
       run: |
-        cd Space4Events\Projeto
-        npx cypress run --config integrationFolder=Space4Events/Projeto/cypress/e2e
+        cd Projeto
+        npx cypress run --config integrationFolder=Projeto/cypress/e2e
       shell: cmd
