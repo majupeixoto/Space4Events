@@ -25,29 +25,29 @@ jobs:
       uses: actions/cache@v3
       with:
         path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/Projeto/requirements.txt') }}
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/Space4Events/Projeto/requirements.txt') }}
         restore-keys: |
           ${{ runner.os }}-pip-
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r Projeto/requirements.txt
+        pip install -r Space4Events/Projeto/requirements.txt
 
     - name: Run Django migrations
       run: |
-        cd Projeto
+        cd Space4Events/Projeto
         python manage.py migrate
 
     - name: Start Django server
       run: |
-        cd Projeto
+        cd Space4Events/Projeto
         nohup python manage.py runserver 0.0.0.0:8000 &
-        sleep 5  # Aguarde um tempo para garantir que o servidor inicialize
+        sleep 10  # Aumente o tempo de espera se necessário para garantir que o servidor inicialize
 
     - name: Run Django tests
       run: |
-        cd Projeto
+        cd Space4Events/Projeto
         python manage.py test
 
     - name: Set up Node.js
@@ -61,13 +61,13 @@ jobs:
         path: |
           ~/.npm
           ~/.cache/Cypress
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        key: ${{ runner.os }}-node-${{ hashFiles('**/Space4Events/Projeto/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
 
     - name: Install Cypress and npm dependencies
       run: |
-        cd Projeto
+        cd Space4Events/Projeto
         npm ci
         npx cypress install
 
@@ -77,5 +77,5 @@ jobs:
 
     - name: Run Cypress tests
       run: |
-        cd Projeto
+        cd Space4Events/Projeto
         npx cypress run
