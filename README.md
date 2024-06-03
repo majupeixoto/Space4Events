@@ -101,5 +101,6 @@ Para mais informações sobre nosso projeto, entre em contato com nossa equipe:
 
 ## Entrega 4
 
+- Apresentação Final - [slides](https://docs.google.com/presentation/d/1wCHOMV3Haer5FF8v3wXuhehJVVXkRR4Ydrxw69RtJ38/edit?usp=sharing)
 - Screencast Prótipo de baixa fidelidade - [[https://drive.google.com/file/d/1zbcTcseHUc__3D0JyzovopNPHBa9H4_b/view?usp=drive_link](https://drive.google.com/file/d/13-ZxU6pd7ng1E3Yfoajf8-dW3Zgtnkpp/view?usp=sharing))
 
