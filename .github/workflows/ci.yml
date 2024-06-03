@@ -48,6 +48,7 @@ jobs:
       run: |
         cd Projeto
         npm install
+        npx cypress install
       shell: cmd
 
     - name: Run Cypress tests
