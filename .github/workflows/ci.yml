@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest  # Mudança para Linux
 
     steps:
     - name: Checkout code
@@ -32,35 +32,31 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r Projeto\\requirements.txt
-      shell: cmd
+        pip install -r Projeto/requirements.txt
 
     - name: Run Django migrations
       run: |
         cd Projeto
         python manage.py migrate
-      shell: cmd
 
     - name: Run Django tests
       run: |
         cd Projeto
         python manage.py test
-      shell: cmd
 
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '20'
 
-    - name: Cache Node modules
+    - name: Cache Node modules and Cypress binary
       uses: actions/cache@v3
       with:
         path: |
           ~/.npm
           ~/.cache/Cypress
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/Projeto/package.json') }}
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
-          ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           ${{ runner.os }}-node-
 
     - name: Install Cypress and npm dependencies
@@ -68,15 +64,12 @@ jobs:
         cd Projeto
         npm ci
         npx cypress install
-      shell: cmd
 
     - name: Verify Cypress binary
       run: |
         npx cypress verify
-      shell: cmd
 
     - name: Run Cypress tests
       run: |
         cd Projeto
         npx cypress run --config integrationFolder=Projeto/cypress/e2e
-      shell: cmd
