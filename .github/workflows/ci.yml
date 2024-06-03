@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest  # Mudança para Linux
+    runs-on: ubuntu-latest  # Usando Linux
 
     steps:
     - name: Checkout code
@@ -72,4 +72,4 @@ jobs:
     - name: Run Cypress tests
       run: |
         cd Projeto
-        npx cypress run --config integrationFolder=Projeto/cypress/e2e
+        npx cypress run
