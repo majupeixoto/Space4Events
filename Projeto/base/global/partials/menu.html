@@ -2,7 +2,6 @@
     <div class="container-fluid mb-3">
         <a id="logo" href="{% url 'home' %}">
             <i class="fa-solid fa-dragon"></i>
-            <!-- <i class="fa-duotone fa-house" style="--fa-primary-color: #20511f; --fa-secondary-color: #20511f;"></i> -->
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,6 +24,8 @@
             </div>
             <div class="navbar-nav ms-auto">
                 {% if user.is_authenticated %}
+                    <a class="nav-link {% if request.resolver_match.url_name == 'meu_perfil' %} active {% endif %}" 
+                        href="{% url 'meu_perfil' %}"><i class="fas fa-user"></i></a>
                     <form class="d-flex" method="POST" action="{% url 'logout' %}">
                         {% csrf_token %}
                         <button id="sair" type="submit" class="btn btn-link nav-link login-logout">Sair</button>

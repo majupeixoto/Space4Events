@@ -1,8 +1,7 @@
 {% extends 'global/base.html' %}
 
 {% block content %}
-    {% if user.is_authenticated %}
-    <h1>Minhas reservas</h1>
+<h1>Minhas reservas</h1>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {% for reserva in reservas %}
         <div class="col">
@@ -16,49 +15,54 @@
                     <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
                 </svg>
                 {% endif %}
-
                 <div class="card-body">
                     <h5 class="card-title">{{ reserva.espaco.nome }}</h5>
                     <p class="card-text">
-                        Check in: {{ reserva.data_check_in }}
+                        <strong>Check in:</strong> {{ reserva.data_check_in }}
                         <br>
-                        Check out: {{ reserva.data_check_out }}
+                        <strong>Check out:</strong> {{ reserva.data_check_out }}
                         <br>
-                        Status: {{ reserva.status }}
+                        <strong>Status:</strong> {{ reserva.status }}
                         <br>
-                        Localização: {{ reserva.espaco.endereco }}
+                        <strong>Localização:</strong> {{ reserva.espaco.endereco }}
                     </p>
-
-                    {% if reserva.status == "Reserva por vir" %}
-
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <a href="{% url 'detalhes' reserva.espaco.id %}" class="btn btn-outline-secondary">Ver mais</a>
-                            <form action="{% url 'cancelar_reserva' reserva.espaco.id %}" method="post">
-                                {% csrf_token %}
-                                <button id="cancelar" type="submit" class="btn btn-danger">Cancelar reserva</button>
-                            </form>
-                        </div>
-                    
+                    <a href="{% url 'detalhes' reserva.espaco.id %}" class="btn btn-outline-secondary">Ver mais</a>
+                    {% if reserva.status == "Reserva ainda por vir" %}
+                        <form action="{% url 'cancelar_reserva' reserva.espaco.id %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Cancelar reserva</button>
+                        </form>
                     {% endif %}
-
-                        {% if reserva.status == "Reserva terminada" %}
-                        <div>
-                            <form action="{% url 'avaliar_reserva' reserva.id %}" method="post">                                
-                                {% csrf_token %}
-                                <a href="{% url 'avaliar_reserva' reserva.id %}" class="btn btn-outline-secondary">Avaliar!</a>
-                            </form>
-                        </div>
-                        {% endif %}
-
-                    </div>
+                    {% if reserva.status == "Reserva terminada" %}
+                        <a href="{% url 'avaliar_reserva' reserva.id %}" 
+                           class="btn btn-outline-secondary avaliar-btn" 
+                           data-avaliacao="{{ reserva.avaliacao }}">
+                            Avaliar! ★★★★★
+                        </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
-    {% else %}
-        <p>Por favor, faça login para ver suas reservas.</p>
-        <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
-    {% endif %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Handle back button navigation
+        if (window.history && window.history.pushState) {
+            window.history.pushState(null, null, window.location.href);
+            window.onpopstate = function () {
+                window.location.replace("{% url 'home' %}");
+            };
+        }
+
+        // Update button text based on evaluation status
+        document.querySelectorAll('.avaliar-btn').forEach(function(button) {
+            if (button.dataset.avaliacao && button.dataset.avaliacao !== "0") {
+                button.textContent = "Editar Avaliação! ★★★★★";
+            }
+        });
+    });
+</script>
+
 {% endblock %}

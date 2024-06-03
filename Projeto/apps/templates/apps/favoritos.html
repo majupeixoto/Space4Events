@@ -19,19 +19,9 @@
 
                 <div class="card-body">
                     <h5 class="card-title">{{ favorito.espaco.nome }}</h5>
-                    <p class="card-text">
-                        <strong>Proprietário:</strong> {{ favorito.espaco.proprietario_nome }}
-                        <br>
-                        <strong>Preço por Noite:</strong> {{ favorito.espaco.preco_por_noite }}
-                        <br>
-                        <strong>Quartos:</strong> {{ favorito.espaco.numero_de_quartos }}
-                        <br>
-                        <strong>Banheiros:</strong> {{ favorito.espaco.numero_de_banheiros }}
-                        <br>
-                        <strong>Hospedes:</strong> {{ favorito.espaco.numero_de_hospedes }}
-                    </p>
+                    <p class="card-text">{{ favorito.espaco.descricao }}</p>
                     <a href="{% url 'detalhes' favorito.espaco.id %}" class="btn btn-outline-secondary">Ver mais</a>
-                    {% comment %} <a href="{% url 'favoritar' espaco.id %}" id="desfavoritar" class="btn btn-outline-secondary btn-desfavoritar">Desfavoritar</a> {% endcomment %}
+                    <a href="{% url 'favoritar' favorito.espaco.id %}" id="desfavoritar" class="btn btn-danger btn-desfavoritar">Desfavoritar</a>
                 </div>
             </div>
         </div>

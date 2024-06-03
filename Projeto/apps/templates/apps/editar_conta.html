@@ -1,9 +1,9 @@
 {% extends 'global/base.html' %}
 
 {% block content %}
-<div class="container">
+<div class="container" style="border: 2px solid black; padding: 20px; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 800px; margin: 0 auto; background-color: #fff;">
     <h1>Editar Conta</h1>
-    <form method="post">
+    <form method="post" action="{% url 'editar_conta' %}">
         {% csrf_token %}
         <div class="form-group">
             <label for="first_name">Primeiro Nome:</label>
@@ -29,7 +29,8 @@
             <label for="nova_senha_confirmacao">Confirme a Nova Senha:</label>
             <input type="password" class="form-control" id="nova_senha_confirmacao" name="nova_senha_confirmacao">
         </div>
-        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+        <br>
+        <button id="editar" type="submit" class="btn btn-primary">Salvar Alterações</button>
     </form>
 </div>
 {% endblock %}

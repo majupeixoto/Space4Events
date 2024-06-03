@@ -1,5 +1,5 @@
 describe('editar espaco', () => {
-    it('Cadastrar espaço', () => {
+    it('Editar espaço', () => {
         cy.visit('/');
         cy.get('[href="/meus_espacos/"]').click();
         cy.get('.forget').click();
@@ -25,14 +25,6 @@ describe('editar espaco', () => {
         cy.wait(3000);
         cy.get('[href="/meus_espacos/"]').click();
         cy.get('.col').should('exist');
-    })
-    it('Editar espaço', () => {
-        cy.visit('/');
-        cy.get('[href="/meus_espacos/"]').click();
-        cy.get(':nth-child(4) > input').type('marilu')
-        cy.get(':nth-child(5) > input').type('123')
-        cy.get('.btn_login').click()
-        cy.get('[href="/meus_espacos/"]').click();
         cy.get('.btn-outline-primary').click();
         cy.get('#nome').clear();
         cy.get('#nome').type('Casa Tradicional');

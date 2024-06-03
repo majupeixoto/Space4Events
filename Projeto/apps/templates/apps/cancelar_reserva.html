@@ -1,0 +1,12 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Tem certeza que deseja cancelar a reserva para o espaço "{{ reserva.espaco.nome }}"?</h2>
+    <form method="post" action="{% url 'executar_cancelamento' reserva.id %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Sim, cancelar reserva</button>
+        <a href="{% url 'minhas_reservas' %}" class="btn btn-secondary">Voltar</a>
+    </form>
+</div>
+{% endblock %}

@@ -5,11 +5,9 @@ from django.utils import timezone
 # Create your models here.
 
 # lembrando: SEMPRE que modificar ou acrescentar uma models a gnt tem q fazer os comandos:
-# python 
-#   manage.py makemigrations
+# python manage.py makemigrations
 # e em seguida:
-# python 
-#   manage.py migrate
+# python manage.py migrate
 # python manage.py runserver
 
 class Espaco(models.Model):
@@ -81,7 +79,7 @@ class Reserva(models.Model):
     numero_de_hospedes = models.PositiveIntegerField(default=1)
     valor_total = models.DecimalField(max_digits=10, decimal_places=2)
     parcela = models.IntegerField(null=True, blank=True)
-    valor_parcelas = models.DecimalField(max_digits=10, decimal_places=2)
+    valor_parcelas = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     espaco = models.ForeignKey(Espaco, on_delete=models.PROTECT)
     avaliacao = models.IntegerField(blank=True, null=True)
     comentario_avaliacao = models.TextField(blank=True, null=True)
@@ -100,8 +98,17 @@ class Reserva(models.Model):
     def minhas_reservas(cls, hospede_nome):
         return cls.objects.filter(hospede_nome=hospede_nome)
 
+    @classmethod
+    def avaliacoes_por_espaco(cls, espaco_id):
+        return cls.objects.filter(espaco_id=espaco_id).exclude(avaliacao__isnull=True)
+
     def __str__(self):
         return f"Reserva de {self.espaco_nome} por {self.hospede_nome}"
 
+class Carrossel(models.Model):
+    imagem = models.ImageField(upload_to='carrossel_imagens/')
+    descricao = models.CharField(max_length=255, blank=True, null=True)
 
+    def __str__(self):
+        return f"Imagem do carrossel: {self.descricao if self.descricao else 'Sem descrição'}"
 
