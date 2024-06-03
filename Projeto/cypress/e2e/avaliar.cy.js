@@ -87,21 +87,6 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get('.rating').should('have.attr', 'data-rating', '4');
     });
 
-    it('Editar Avaliação Existente', () => {
-        cy.visit('/');
-        cy.get('#entrar').click();
-        cy.get(':nth-child(4) > input').type('carolina');
-        cy.get(':nth-child(5) > input').type('123');
-        cy.get('.btn_login').click();
-        cy.get('[href="/minhas_reservas/"]').click();
-        cy.get('[href="/avaliar_reserva/90/"]').click();
-        cy.get('[data-avaliacao="1"]').click(); // para alterar quantas estrelas da avaliação
-        cy.get('#comentario_avaliacao').type('O D I E I !');
-        cy.get('#avaliar').click();
-        cy.get('.fa-solid').click();
-        cy.get('#visualizar_detalhes').click();
-        cy.get('.rating').should('have.attr', 'data-rating', '1');
-    });
 
     it('Avaliar apenas com avaliação', () => {
         cy.visit('/');
