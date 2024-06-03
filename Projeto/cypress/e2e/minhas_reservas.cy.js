@@ -75,7 +75,7 @@ describe('Reservar espaços', () =>{
         cy.get(':nth-child(5) > #email').type('lua@123.com');
         cy.get('#password').type('123');
         cy.get('.btn_login').click();
-        cy.get(':nth-child(3) > .card > .card-body > .d-flex > .btn-group > #visualizar_detalhes').click();
+        cy.get(':nth-child(2) > .card > .card-body > .d-flex > .btn-group > #visualizar_detalhes').click();
         cy.get(':nth-child(8) > .btn').click();
         cy.get('#data_check_in').type('2024-08-30'); 
         cy.get('#data_check_out').type('2024-09-01');
@@ -126,7 +126,7 @@ describe('Reservar espaços', () =>{
         cy.get(':nth-child(5) > #email').type('mari@123.com');
         cy.get('#password').type('123');
         cy.get('.btn_login').click();
-        cy.get(':nth-child(4) > .card > .card-body > .d-flex > .btn-group > #visualizar_detalhes').click();
+        cy.get(':nth-child(3) > .card > .card-body > .d-flex > .btn-group > #visualizar_detalhes').click();
         cy.get(':nth-child(8) > .btn').click();
         cy.get('#data_check_in').type('2024-08-30'); 
         cy.get('#data_check_out').type('2024-09-01');
