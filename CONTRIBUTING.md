@@ -20,7 +20,6 @@ Todos os tipos de contribuições são encorajados e valorizados. Veja o [Índic
 - [Melhorando a Documentação](#melhorando-a-documentação)
 - [Guia de Estilo](#guia-de-estilo)
 - [Mensagens de Commit](#mensagens-de-commit)
-- [Junte-se ao Time do Projeto](#junte-se-ao-time-do-projeto)
 
 ## Tenho uma Pergunta
 
@@ -81,7 +80,7 @@ Esta seção orienta você a enviar uma sugestão de melhoria para o Space4event
 #### Antes de Enviar uma Sugestão de Melhoria
 
 - Certifique-se de que você está usando a versão mais recente.
-- Leia a [documentação](https://docs.our-cool-project.io/) cuidadosamente e descubra se a funcionalidade já está coberta, talvez por uma configuração individual.
+- Leia a [documentação](https://github.com/majupeixoto/Space4Events#aluguel-de-espa%C3%A7os) cuidadosamente e descubra se a funcionalidade já está coberta, talvez por uma configuração individual.
 - Realize uma [busca](https://github.com/majupeixoto/Space4Events.git/issues) para ver se a melhoria já foi sugerida. Se foi, adicione um comentário à issue existente em vez de abrir uma nova.
 - Descubra se sua ideia se encaixa no escopo e nos objetivos do projeto. Cabe a você fazer um caso forte para convencer os desenvolvedores do projeto sobre os méritos deste recurso. Lembre-se de que queremos recursos que serão úteis para a maioria dos nossos usuários e não apenas para um pequeno subconjunto. Se você está apenas direcionando uma minoria de usuários, considere escrever uma biblioteca de complemento/plugin.
 
@@ -94,33 +93,5 @@ Sugestões de melhorias são rastreadas como [issues do GitHub](https://github.c
 - **Descreva o comportamento atual** e **explique qual comportamento você esperava ver em vez disso** e por quê. Neste ponto, você também pode dizer quais alternativas não funcionam para você.
 - Você pode querer **incluir capturas de tela e GIFs animados** que ajudem a demonstrar os passos ou apontar a parte à qual a sugestão está relacionada. Você pode usar [esta ferramenta](https://www.cockos.com/licecap/) para gravar GIFs no macOS e Windows, e [esta ferramenta](https://github.com/colinkeenan/silentcast) ou [esta ferramenta](https://github.com/GNOME/byzanz) no Linux. <!-- isso deve ser incluído apenas se o projeto tiver uma GUI -->
 - **Explique por que essa melhoria seria útil** para a maioria dos usuários do Space4events. Você também pode querer apontar outros projetos que resolveram isso melhor e que poderiam servir de inspiração.
-
-### Sua Primeira Contribuição de Código
-
-<!-- TODO
-incluir configuração de ambiente, IDE e instruções típicas de início?
-
--->
-
-### Melhorando a Documentação
-
-<!-- TODO
-Atualizando, melhorando e corrigindo a documentação
-
--->
-
-## Guia de Estilo
-
-### Mensagens de Commit
-
-<!-- TODO
-
--->
-
-## Junte-se ao Time do Projeto
-
-<!-- TODO -->
-
-## Atribuição
 
 Este guia é baseado no **contributing-gen**. [Faça o seu próprio](https://github.com/bttger/contributing-gen)!
