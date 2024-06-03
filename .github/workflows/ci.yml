@@ -14,12 +14,12 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3  # Atualizado para v3 que usa Node.js 20
+      uses: actions/checkout@v3
 
     - name: Set up Python
-      uses: actions/setup-python@v4  # Atualizado para v4 que usa Node.js 20
+      uses: actions/setup-python@v4
       with:
-        python-version: '3.10'  # Atualizado para Python 3.10
+        python-version: '3.10'
 
     - name: Cache pip
       uses: actions/cache@v3
@@ -48,25 +48,30 @@ jobs:
       shell: cmd
 
     - name: Set up Node.js
-      uses: actions/setup-node@v3  # Atualizado para v3 que usa Node.js 20
+      uses: actions/setup-node@v3
       with:
         node-version: '20'
 
-    - name: Cache Node modules
+    - name: Cache Cypress binary
       uses: actions/cache@v3
       with:
         path: |
           ~/.npm
-          ~/.cache/Cypress
-        key: ${{ runner.os }}-node-${{ hashFiles('**/Projeto/package-lock.json') }}
+          C:\\Users\\runneradmin\\AppData\\Local\\Cypress\\Cache
+        key: ${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
-          ${{ runner.os }}-node-
+          ${{ runner.os }}-cypress-
 
     - name: Install Cypress and npm dependencies
       run: |
         cd Projeto
         npm install
         npx cypress install
+      shell: cmd
+
+    - name: Verify Cypress binary
+      run: |
+        npx cypress verify
       shell: cmd
 
     - name: Run Cypress tests
