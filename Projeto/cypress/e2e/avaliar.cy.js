@@ -95,7 +95,7 @@ describe('Testa a Avaliação de uma Reserva', () => {
         cy.get('#visualizar_detalhes').click();
         cy.get('.rating').should('have.attr', 'data-rating', '1');
     });
-  
+
     it('Avaliar apenas com avaliação', () => {
         cy.visit('/');
         cy.get('[href="/minhas_reservas/"]').click();
@@ -159,7 +159,7 @@ describe('Testa a Avaliação de uma Reserva', () => {
     });
 
 
-  
+
     it('Tentar avaliar apenas com comentário', () => {
         cy.visit('/');
         cy.get('[href="/minhas_reservas/"]').click();

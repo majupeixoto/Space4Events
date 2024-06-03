@@ -19,6 +19,7 @@ describe('Reservar espaços', () =>{
         cy.get('#numero_de_quartos').type('6');
         cy.get('#numero_de_banheiros').type('4');
         cy.get('#numero_de_hospedes').type('15');
+        cy.get('#foto_principal').attachFile('imgs/casa_portoDeGalinhas.jpg');
         cy.get('.container > form > .btn').click();
         cy.get('#sair').click();
         cy.get('[href="/minhas_reservas/"]').click();
@@ -64,6 +65,7 @@ describe('Reservar espaços', () =>{
         cy.get('#numero_de_quartos').type('2');
         cy.get('#numero_de_banheiros').type('1');
         cy.get('#numero_de_hospedes').type('4');
+        cy.get('#foto_principal').attachFile('imgs/apto_edificioMaria.jpg');
         cy.get('.container > form > .btn').click();
         cy.get('#sair').click();
         cy.get('[href="/minhas_reservas/"]').click();
@@ -114,6 +116,7 @@ describe('Reservar espaços', () =>{
         cy.get('#numero_de_quartos').type('3');
         cy.get('#numero_de_banheiros').type('2');
         cy.get('#numero_de_hospedes').type('6');
+        cy.get('#foto_principal').attachFile('imgs/casa_noLago.jpg');
         cy.get('.container > form > .btn').click();
         cy.get('#sair').click();
         cy.get('[href="/minhas_reservas/"]').click();
