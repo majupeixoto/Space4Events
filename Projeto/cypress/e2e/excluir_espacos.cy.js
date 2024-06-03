@@ -1,5 +1,5 @@
 describe('excluir espaco', () => {
-    it('excluir_desistir', () => {
+    it('Desistir de Excluir', () => {
         cy.visit('/');
         cy.get('[href="/minhas_reservas/"]').click();
         cy.get('.forget').click();
@@ -21,13 +21,14 @@ describe('excluir espaco', () => {
         cy.get('#numero_de_banheiros').type('2');
         cy.get('#numero_de_hospedes').type('6');
         cy.get('#foto_principal').attachFile('imgs/apartamento_boa_viagem.jpg');
+        cy.wait(3000);
         cy.get('.container > form > .btn').click();
-        cy.get('.payment-form > #botao_reservar').click();
-        cy.get('.active').click();
-        cy.get('.card-body > form > .btn').click();
-        cy.get('.col').should('not.exist')
+        cy.get('[href="/meus_espacos/"]').click();
+        cy.get('.btn-danger').click();
+        cy.get('.btn-secondary').click();
+        cy.get('.col').should('exist')
     })
-    it('excluir_definitivo', () => {
+    it('Excluir definitivamente', () => {
         cy.visit('/');
         cy.get('[href="/minhas_reservas/"]').click();
         cy.get('.forget').click();
@@ -49,10 +50,11 @@ describe('excluir espaco', () => {
         cy.get('#numero_de_banheiros').type('2');
         cy.get('#numero_de_hospedes').type('6');
         cy.get('#foto_principal').attachFile('imgs/casa_fernando_de_noranha.jpg');
+        cy.wait(3000);
         cy.get('.container > form > .btn').click();
-        cy.get('.payment-form > #botao_reservar').click();
-        cy.get('.active').click();
-        cy.get('.card-body > form > .btn').click();
+        cy.get('[href="/meus_espacos/"]').click();
+        cy.get('.btn-danger').click();
+        cy.get('.btn-danger').click();
         cy.get('.col').should('not.exist')
     })
 })
