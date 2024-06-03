@@ -57,7 +57,12 @@ Um bom relatório de bug não deve deixar os outros precisando te procurar para 
 
 #### Como Enviar um Bom Relatório de Bug?
 
-> Você nunca deve relatar problemas de segurança, vulnerabilidades ou bugs que incluam informações sensíveis no rastreador de issues, ou em qualquer outro lugar público. Em vez disso, bugs sensíveis devem ser enviados por email para prcr@cesar.school.
+> Você nunca deve relatar problemas de segurança, vulnerabilidades ou bugs que incluam informações sensíveis no rastreador de issues, ou em qualquer outro lugar público. Em vez disso, bugs sensíveis devem ser enviados por email para Gabriel Ken - gkci@cesar.school
+Luana Falcão - llmaf@cesar.school
+Maju Peixoto - mjpo@cesar.school
+Paulo Ricardo - prcr@cesar.school
+Rafaela Vidal - rbv2@cesar.school
+Thaís Aguiar - thcba@cesar.school
 <!-- Você pode adicionar uma chave PGP para permitir que as mensagens sejam enviadas criptografadas também. -->
 
 Usamos issues do GitHub para rastrear bugs e erros. Se você encontrar um problema com o projeto:
