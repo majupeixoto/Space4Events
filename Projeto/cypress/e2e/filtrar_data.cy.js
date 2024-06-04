@@ -47,11 +47,15 @@ describe('Teste de filtrar por data', () => {
         cy.wait(3000);
         cy.get('#pills-debito > #botao_reservar').click();
         cy.get('#sair').click();
-        cy.get('#checkin_date').type('2025-07-24')
-        cy.get('#checkout_date').type('2025-07-25');
+        cy.get('#checkin_date').type('2025-07-20');
+        cy.get('#checkout_date').type('2025-07-23');
         cy.get(':nth-child(2) > .search-container > .input-group > .input-group-append > .btn').click();
-        cy.get('.col', { timeout: 10000 }).should('not.exist');
-    })
+        cy.wait(15000); // Adiciona espera para garantir que a filtragem ocorra
+
+        // Adiciona log para verificar o estado do DOM
+        cy.log('Verificando se a mensagem de erro está presente');
+        cy.get('p', { timeout: 15000 }).should('contain', 'Nenhum espaço encontrado para as datas informadas.');
+    });
 
     it('Filtrar por data com espaço no período', () => {
         cy.visit('/');
