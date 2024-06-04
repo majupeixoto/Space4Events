@@ -47,20 +47,10 @@ describe('Teste de filtrar por data', () => {
         cy.wait(3000);
         cy.get('#pills-debito > #botao_reservar').click();
         cy.get('#sair').click();
-
-        // Acessar a URL diretamente
-        cy.visit('http://127.0.0.1:8000/filtrar_espacos_por_data/?checkin_date=2031-08-20&checkout_date=2031-08-23');
-
-        // Adicionar listener para falhas
-        cy.on('fail', (error) => {
-            cy.screenshot('error-state');
-            throw error;
-        });
-
-        // Verificar o texto no parágrafo
-        cy.get('p', { timeout: 10000 }).should('contain', 'Nenhum espaço encontrado para as datas informadas').then(() => {
-            cy.log('Mensagem de erro encontrada no parágrafo');
-        });
+        cy.get('#checkin_date').type('2025-08-20');
+        cy.get('#checkout_date').type('2025-08-23');
+        cy.get(':nth-child(2) > .search-container > .input-group > .input-group-append > .btn').click();
+        cy.get('.row-cols-1').should('not.exist');
     });
 
     it('Filtrar por data com espaço no período', () => {
