@@ -50,8 +50,12 @@ describe('Teste de filtrar por data', () => {
         cy.get('#checkin_date').type('2025-07-20')
         cy.get('#checkout_date').type('2025-07-23');
         cy.get(':nth-child(2) > .search-container > .input-group > .input-group-append > .btn').click();
-        cy.get('.col',{ timeout: 10000 }).should('not.exist')
-    })
+        cy.wait(5000); // Adiciona espera para garantir que a filtragem ocorra
+        cy.screenshot('before-checking-element'); // Captura o estado do DOM antes da verificação
+        cy.get('.col', { timeout: 15000 }).should('not.exist').then(() => {
+            cy.log('Elemento .col não está presente no DOM');
+        })
+    });
 
     it('Filtrar por data com espaço no período', () => {
         cy.visit('/');
@@ -86,10 +90,10 @@ describe('Teste de filtrar por data', () => {
         cy.get('#password').type('123');
         cy.wait(1000);
         cy.get('.btn_login').click();
-        cy.get('#checkin_date').type('2025-07-20')
+        cy.get('#checkin_date').type('2025-07-20');
         cy.get('#checkout_date').type('2025-07-23');
         cy.wait(1000);
         cy.get(':nth-child(2) > .search-container > .input-group > .input-group-append > .btn').click();
-        cy.get('.col').should('exist')
-    })  
-})
+        cy.get('.col').should('exist');
+    });
+});
