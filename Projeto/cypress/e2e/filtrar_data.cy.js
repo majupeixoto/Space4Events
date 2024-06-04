@@ -34,8 +34,8 @@ describe('Teste de filtrar por data', () => {
         cy.get('.btn_login').click();
         cy.get('#visualizar_detalhes').click();
         cy.get(':nth-child(8) > .btn').click();
-        cy.get('#data_check_in').type('2031-07-20');
-        cy.get('#data_check_out').type('2031-07-23');
+        cy.get('#data_check_in').type('2024-07-20');
+        cy.get('#data_check_out').type('2034-07-23');
         cy.get('#numero_de_hospedes').type('4');
         cy.wait(3000);
         cy.get('.btn_login').click();
@@ -49,7 +49,7 @@ describe('Teste de filtrar por data', () => {
         cy.get('#sair').click();
 
         // Acessar a URL diretamente
-        cy.visit('http://127.0.0.1:8000/filtrar_espacos_por_data/?checkin_date=2025-07-20&checkout_date=2025-07-23');
+        cy.visit('http://127.0.0.1:8000/filtrar_espacos_por_data/?checkin_date=2031-07-20&checkout_date=2031-07-23');
 
         // Adicionar listener para falhas
         cy.on('fail', (error) => {
