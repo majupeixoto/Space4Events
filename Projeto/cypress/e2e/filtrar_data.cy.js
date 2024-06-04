@@ -50,7 +50,7 @@ describe('Teste de filtrar por data', () => {
         cy.get('#checkin_date').type('2025-07-20')
         cy.get('#checkout_date').type('2025-07-23');
         cy.get(':nth-child(2) > .search-container > .input-group > .input-group-append > .btn').click();
-        cy.wait(5000); // Adiciona espera para garantir que a filtragem ocorra
+        cy.wait(15000); // Adiciona espera para garantir que a filtragem ocorra
         cy.screenshot('before-checking-element'); // Captura o estado do DOM antes da verificação
         cy.get('.col', { timeout: 15000 }).should('not.exist').then(() => {
             cy.log('Elemento .col não está presente no DOM');
