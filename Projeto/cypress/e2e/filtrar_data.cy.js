@@ -96,5 +96,5 @@ describe('Teste de filtrar por data', () => {
         cy.wait(1000);
         cy.get(':nth-child(2) > .search-container > .input-group > .input-group-append > .btn').click();
         cy.get('.col').should('exist');
-    });
-});
+    })  
+})
