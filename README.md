@@ -105,3 +105,4 @@ Para mais informações sobre nosso projeto, entre em contato com nossa equipe:
 - Screencast Prótipo de baixa fidelidade - [[https://drive.google.com/file/d/1zbcTcseHUc__3D0JyzovopNPHBa9H4_b/view?usp=drive_link](https://drive.google.com/file/d/13-ZxU6pd7ng1E3Yfoajf8-dW3Zgtnkpp/view?usp=sharing))
 - [Diagrama de atividades](https://drive.google.com/file/d/1vVlETlFGa0Rxss7YJNwy97MLfcoeZW4h/view?usp=drive_link)
 - [Screencast CI/CD](https://drive.google.com/file/d/1cv8aqlLNfStVFeRRdOBDDw5kBnAYcydC/view?usp=sharing)
+- [Screencast Testes Cypress](https://drive.google.com/file/d/1_Ziu3aCgRs46jMtDK4oaHyy0c4Xd4g95/view?usp=sharing)
