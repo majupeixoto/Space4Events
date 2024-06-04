@@ -101,6 +101,12 @@ Para mais informações sobre nosso projeto, entre em contato com nossa equipe:
 
 ## Entrega 4
 
+- Backlog Jira:
+  ![Captura de tela 2024-06-04 012020](https://github.com/majupeixoto/Space4Events/assets/149490954/76054449-1e2c-4a92-b176-34e48d1b5c07)
+
+- Quadro do Jira:
+    ![Captura de tela 2024-06-04 012008](https://github.com/majupeixoto/Space4Events/assets/149490954/a44b3d29-26c6-484c-9a33-eff1bab50967)
+
 - Apresentação Final - [slides](https://docs.google.com/presentation/d/1wCHOMV3Haer5FF8v3wXuhehJVVXkRR4Ydrxw69RtJ38/edit?usp=sharing)
 - Screencast Prótipo de baixa fidelidade - [[https://drive.google.com/file/d/1zbcTcseHUc__3D0JyzovopNPHBa9H4_b/view?usp=drive_link](https://drive.google.com/file/d/13-ZxU6pd7ng1E3Yfoajf8-dW3Zgtnkpp/view?usp=sharing))
 - [Diagrama de atividades](https://drive.google.com/file/d/1vVlETlFGa0Rxss7YJNwy97MLfcoeZW4h/view?usp=drive_link)
