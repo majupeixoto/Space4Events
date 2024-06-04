@@ -51,8 +51,16 @@ describe('Teste de filtrar por data', () => {
         // Acessar a URL diretamente
         cy.visit('http://127.0.0.1:8000/filtrar_espacos_por_data/?checkin_date=2025-07-20&checkout_date=2025-07-23');
 
-        // Verificar se o parágrafo contém o texto esperado
-        cy.get('p').should('contain', 'Nenhum espaço encontrado para as datas informadas');
+        // Adicionar listener para falhas
+        cy.on('fail', (error) => {
+            cy.screenshot('error-state');
+            throw error;
+        });
+
+        // Verificar o texto no parágrafo
+        cy.get('p', { timeout: 10000 }).should('contain', 'Nenhum espaço encontrado para as datas informadas').then(() => {
+            cy.log('Mensagem de erro encontrada no parágrafo');
+        });
     });
 
     it('Filtrar por data com espaço no período', () => {
