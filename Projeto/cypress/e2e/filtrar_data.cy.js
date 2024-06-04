@@ -48,12 +48,11 @@ describe('Teste de filtrar por data', () => {
         cy.get('#pills-debito > #botao_reservar').click();
         cy.get('#sair').click();
 
-        cy.request('http://127.0.0.1:8000/filtrar_espacos_por_data/?checkin_date=2025-07-20&checkout_date=2025-07-23')
-            .then((response) => {
-                expect(response.status).to.eq(200);
-                cy.log('Resposta:', response.body);
-                expect(response.body).to.contain('Nenhum espaço encontrado para as datas informadas');
-            });
+        // Acessar a URL diretamente
+        cy.visit('http://127.0.0.1:8000/filtrar_espacos_por_data/?checkin_date=2025-07-20&checkout_date=2025-07-23');
+
+        // Verificar se o parágrafo contém o texto esperado
+        cy.get('p').should('contain', 'Nenhum espaço encontrado para as datas informadas');
     });
 
     it('Filtrar por data com espaço no período', () => {
