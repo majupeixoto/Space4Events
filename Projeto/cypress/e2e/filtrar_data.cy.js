@@ -49,7 +49,7 @@ describe('Teste de filtrar por data', () => {
         cy.get('#sair').click();
 
         // Acessar a URL diretamente
-        cy.visit('http://127.0.0.1:8000/filtrar_espacos_por_data/?checkin_date=2031-07-20&checkout_date=2031-07-23');
+        cy.visit('http://127.0.0.1:8000/filtrar_espacos_por_data/?checkin_date=2031-08-20&checkout_date=2031-08-23');
 
         // Adicionar listener para falhas
         cy.on('fail', (error) => {
