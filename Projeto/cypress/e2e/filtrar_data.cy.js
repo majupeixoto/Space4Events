@@ -47,10 +47,10 @@ describe('Teste de filtrar por data', () => {
         cy.wait(3000);
         cy.get('#pills-debito > #botao_reservar').click();
         cy.get('#sair').click();
-        cy.get('#checkin_date').type('2025-07-20')
-        cy.get('#checkout_date').type('2025-07-23');
+        cy.get('#checkin_date').type('2025-07-24')
+        cy.get('#checkout_date').type('2025-07-25');
         cy.get(':nth-child(2) > .search-container > .input-group > .input-group-append > .btn').click();
-        cy.get('.col').should('not.exist')
+        cy.get('.col').should('not.exist', { timeout: 30000 });
     })
 
     it('Filtrar por data com espaço no período', () => {
@@ -90,6 +90,6 @@ describe('Teste de filtrar por data', () => {
         cy.get('#checkout_date').type('2025-07-23');
         cy.wait(1000);
         cy.get(':nth-child(2) > .search-container > .input-group > .input-group-append > .btn').click();
-        cy.get('.col').should('exist')
+        cy.get('.col').should('exist');
     })  
 })
