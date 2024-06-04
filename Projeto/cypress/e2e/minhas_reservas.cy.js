@@ -38,7 +38,7 @@ describe(' Teste de Reservar espaços', () =>{
         cy.get('#numero_de_hospedes').type('1');
         cy.wait(3000);
         cy.get('.btn_login').click();
-        cy.get('#pills-debito-tab').click();
+        cy.get('#pills-debito-tab').should('be.visible').click(); // Certifique-se de que a aba está visível
         cy.get('#pills-debito > :nth-child(2) > #cpf').type('188.510.226-28');
         cy.get('#numero_cartao_debito').type('1243254910112345');
         cy.get('#data_validade_debito').type('02/25');
@@ -46,8 +46,7 @@ describe(' Teste de Reservar espaços', () =>{
         cy.wait(3000);
         cy.get('#pills-debito > #botao_reservar').click();
         cy.get('.active').click();
-        cy.get('.col').should('exist')
-    
+        cy.get('.col').should('exist');
     })
     it('Credito', () => {
         cy.visit('/');
