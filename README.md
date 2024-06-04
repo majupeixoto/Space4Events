@@ -115,3 +115,4 @@ Para mais informações sobre nosso projeto, entre em contato com nossa equipe:
 - [Diagrama de atividades](https://drive.google.com/file/d/1vVlETlFGa0Rxss7YJNwy97MLfcoeZW4h/view?usp=drive_link)
 - [Screencast CI/CD](https://drive.google.com/file/d/1cv8aqlLNfStVFeRRdOBDDw5kBnAYcydC/view?usp=sharing)
 - [Screencast Testes Cypress](https://drive.google.com/file/d/1_Ziu3aCgRs46jMtDK4oaHyy0c4Xd4g95/view?usp=sharing)
+- [Screencast Azure] (https://drive.google.com/file/d/1V3OF_DPVliTdOlPE4J0Wuon7o0iP0RJX/view?usp=sharing)
