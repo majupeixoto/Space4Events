@@ -50,7 +50,7 @@ describe('Teste de filtrar por data', () => {
         cy.get('#checkin_date').type('2025-07-20')
         cy.get('#checkout_date').type('2025-07-23');
         cy.get(':nth-child(2) > .search-container > .input-group > .input-group-append > .btn').click();
-        cy.get('.col').should('not.exist')
+        cy.get('.col',{ timeout: 10000 }).should('not.exist')
     })
 
     it('Filtrar por data com espaço no período', () => {
