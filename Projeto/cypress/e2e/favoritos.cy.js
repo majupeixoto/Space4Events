@@ -1,6 +1,6 @@
 // ESSE TESTE VALIDA FAVORITAR, DESFAVORITAR E LISTAR OS FAVORITADOS
 
-describe('test favoritar', () => {
+describe('Teste de Favoritar', () => {
     it('Favoritado com sucesso', () => {
         cy.visit('/');
         cy.get('[href="/favoritos/"]').click();
@@ -69,7 +69,6 @@ describe('test favoritar', () => {
         cy.get(':nth-child(2) > .card > .card-body > .d-flex > .btn-group > #visualizar_detalhes').click();
         cy.get('#favoritar').click();
         cy.get('[href="/favoritos/"]').click();
-        cy.get(':nth-child(1) > .card > .card-body > .btn').click();
         cy.get('#desfavoritar').click();
         cy.get('[href="/favoritos/"]').click();
         cy.get('.corpo > .row > :nth-child(0)').should('not.exist');

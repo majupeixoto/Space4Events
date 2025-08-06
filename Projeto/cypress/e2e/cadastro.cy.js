@@ -1,4 +1,4 @@
-describe('test cadastro', () => {
+describe('Teste de Cadastro', () => {
     it('Cadastro com sucesso', () => {
         cy.visit('/');
         cy.get('.ms-auto > .nav-link').click()
